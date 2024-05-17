@@ -1,0 +1,1 @@
+{"version":1,"defects":{"Tests\\Feature\\UserTest::testAddUsers":8,"Tests\\Feature\\ImageTest::testInsertImage":7,"Tests\\Feature\\UserDetailTest::testOneToOne":8},"times":{"Tests\\Feature\\UserTest::testAddUsers":0.023,"Tests\\Feature\\ImageTest::testInsertImage":0.025,"Tests\\Feature\\UserDetailTest::testOneToOne":0.158}}

@@ -17,16 +17,13 @@ class UserDetailTest extends TestCase
         $this->seed([UserSeeder::class, ImageSeeder::class, UserDetailSeeder::class]);
 
         $user_detail = UserDetail::first();
-        self::assertEquals('ali', $user_detail->name);
+        self::assertNotNull($user_detail);
 
         $user = $user_detail->user;
-        self::assertEquals('ali', $user->username);
+        self::assertEquals('hasanhusain', $user->username);
 
         $image = $user_detail->image;
-        self::assertEquals('www.google.com/ali.png', $image->location);
-
-        $password = decrypt($user_detail->password);
-        self::assertEquals('aliali123', $password);
+        self::assertEquals('www.google.com/hasanhusain.png', $image->location);
 
     }
 }

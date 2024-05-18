@@ -13,6 +13,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+use App\Models\User;
+
+
 Route::get('/', function () {
     return view('welcome');
+});
+
+//Route::get('/login', [\App\Http\Controllers\LoginController::class, 'login']);
+
+Route::controller(\App\Http\Controllers\LoginController::class)->group(function () {
+    Route::get('/login', 'login')->name('login');;
+    Route::post('/login', 'doLogin');
+});
+
+Route::controller(\App\Http\Controllers\RegisterController::class)->group(function () {
+   Route::get('/register', 'register');
+   Route::post('/register', 'doRegister');
+});
+
+Route::controller(\App\Http\Controllers\DashboardController::class)->group(function () {
+   Route::get('/home', 'home');
 });

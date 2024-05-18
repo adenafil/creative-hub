@@ -14,14 +14,11 @@ return new class extends Migration
         Schema::create('user_details', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable(false)->unique();
-            $table->string('email')->unique();
-            $table->string('password')->nullable(false);
-            $table->string('name');
             $table->text('bio')->nullable(true);
             $table->string('title')->nullable(true);
             $table->unsignedBigInteger('image_id');
             $table->timestamps();
-            $table->foreign('user_id')->on('users')->references('id');
+            $table->foreign('user_id')->on('user')->references('id');
             $table->foreign('image_id')->on('images')->references('id');
         });
     }

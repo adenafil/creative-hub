@@ -15,15 +15,10 @@ class UserDetailSeeder extends Seeder
      */
     public function run(): void
     {
-        $user = User::where('username', 'ali')->first();
+        $user = User::where('username', 'hasanhusain')->first();
         $image = Image::query()->first();
-
-
         $user_details = new UserDetail();
         $user_details->user_id = $user->id;
-        $user_details->email = 'ali@gmail.com';
-        $user_details->password = encrypt('aliali123');
-        $user_details->name = 'ali';
         $user_details->image_id = $image->id;
         $user_details->save();
 

@@ -14,7 +14,7 @@ class ImageSeeder extends Seeder
     public function run(): void
     {
         $image = new Image();
-        $image->location = 'www.google.com/ali.png';
+        $image->location = 'www.google.com/hasanhusain.png';
         $image->save();
     }
 }

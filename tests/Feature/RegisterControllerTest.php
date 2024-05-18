@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Session;
 use Tests\TestCase;
 
 class RegisterControllerTest extends TestCase
@@ -17,5 +18,7 @@ class RegisterControllerTest extends TestCase
             'password' => 'hasanhusain',
             'password_confirmation' => 'hasanhusain'
         ])->assertRedirect('/home');
+
+        var_dump(Session::exists('username'));
     }
 }

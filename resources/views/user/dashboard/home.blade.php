@@ -9,5 +9,11 @@
 </head>
 <body>
     <h1>Hello {{$username}}</h1>
+
+    <form action="/logout" method="post">
+        @csrf
+        <button type="submit">Log out</button>
+    </form>
+
 </body>
 </html>

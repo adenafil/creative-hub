@@ -6,6 +6,8 @@ use App\Http\Requests\RegistrationRequest;
 use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
 
 class RegisterController extends Controller
 {
@@ -22,6 +24,7 @@ class RegisterController extends Controller
         $user = $this->userService->register($request->validated());
 
         Auth::login($user);
+        Session::put('username', $request->input('username'));
 
         return redirect()->intended('/home');
     }

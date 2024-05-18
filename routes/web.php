@@ -22,16 +22,30 @@ Route::get('/', function () {
 
 //Route::get('/login', [\App\Http\Controllers\LoginController::class, 'login']);
 
-Route::controller(\App\Http\Controllers\LoginController::class)->group(function () {
-    Route::get('/login', 'login')->name('login');;
-    Route::post('/login', 'doLogin');
+Route::middleware(\App\Http\Middleware\GuestMiddleware::class)->group(function () {
+    Route::controller(\App\Http\Controllers\LoginController::class)->group(function () {
+        Route::get('/login', 'login')->name('login');;
+        Route::post('/login', 'doLogin');
+    });
+
+
+    Route::controller(\App\Http\Controllers\RegisterController::class)->group(function () {
+        Route::get('/register', 'register');
+        Route::post('/register', 'doRegister');
+    });
+
+
 });
 
-Route::controller(\App\Http\Controllers\RegisterController::class)->group(function () {
-   Route::get('/register', 'register');
-   Route::post('/register', 'doRegister');
-});
 
-Route::controller(\App\Http\Controllers\DashboardController::class)->group(function () {
-   Route::get('/home', 'home');
+Route::middleware(\App\Http\Middleware\LoginMiddleware::class)->group(function () {
+
+    Route::controller(\App\Http\Controllers\LogoutController::class)->group(function () {
+        Route::post('/logout','doLogout');
+    });
+
+
+    Route::controller(\App\Http\Controllers\DashboardController::class)->group(function () {
+        Route::get('/home', 'home');
+    });
 });

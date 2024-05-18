@@ -36,5 +36,10 @@
 
     <input type="submit" value="register">
 </form>
+<form action="/login" method="get">
+    @csrf
+    <input type="submit" value="login">
+</form>
+
 </body>
 </html>

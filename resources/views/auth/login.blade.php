@@ -24,5 +24,10 @@
     <br>
     <input type="submit" value="login">
 </form>
+<form action="/register" method="get">
+    @csrf
+    <input type="submit" value="register">
+</form>
+
 </body>
 </html>

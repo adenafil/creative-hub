@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LoginRequest;
 use App\Services\UserService;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -26,7 +28,9 @@ class LoginController extends Controller
 
     public function doLogin(LoginRequest $request): Response | RedirectResponse
     {
+
         if ($this->userService->login(data: $request->validated())) {
+            Session::put('username', $request->input('username'));
             return redirect('/home');
         }
 

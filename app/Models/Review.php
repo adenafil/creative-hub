@@ -7,27 +7,22 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Product extends Model
+class Review extends Model
 {
     use HasFactory;
-    protected $table = "products";
+    protected $table = "reviews";
     protected $keyType = "int";
     public $incrementing = true;
     public $timestamps = true;
 
-    public function category(): BelongsTo
-    {
-        return $this->belongsTo(Category::class, "category_id", "id");
-    }
-
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, "seller_id", "id");
+        return $this->belongsTo(User::class, "user_id", "id");
     }
 
-    public function reviews(): HasMany
+    public function product(): BelongsTo
     {
-        return $this->hasMany(Review::class, "user_id", "id");
+        return $this->belongsTo(Product::class, "product_id", "id");
     }
 
 }

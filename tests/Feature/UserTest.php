@@ -2,7 +2,10 @@
 
 namespace Tests\Feature;
 
+use App\Models\Product;
 use App\Models\User;
+use Database\Seeders\CategorySeeder;
+use Database\Seeders\ProductSeeder;
 use Database\Seeders\UserDetailSeeder;
 use Database\Seeders\UserSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -31,5 +34,19 @@ class UserTest extends TestCase
 
         $userDetails = $user->user_detail->first();
         self::assertEquals("UI UX", $userDetails->title);
+    }
+
+    public function testOneToManyProducts()
+    {
+        $this->seed([UserSeeder::class, UserDetailSeeder::class, CategorySeeder::class, ProductSeeder::class]);
+        $user = User::query()->where('username', 'hasanhusain')->first();
+        $products = $user->products;
+
+        self::assertNotNull($products);
+        self::assertEquals("Font Hasan Husain", $products[0]->title);
+
+        $category = $products[0]->category;
+        self::assertNotNull($category);
+        self::assertEquals("font", $category->name);
     }
 }

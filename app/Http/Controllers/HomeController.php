@@ -16,8 +16,10 @@ class HomeController extends Controller
         $this->productService = $productService;
     }
 
-    public function index(): Response
+    public function index(Request $request): Response
     {
+//        $request->get('')
+
         $dataHome = $this->productService->getDataHome( 8);
         return \response()->view('home.index', compact('dataHome'), 200);
     }

@@ -2,6 +2,8 @@
 
 namespace Tests\Feature;
 
+use App\Models\Product;
+use App\Models\User;
 use App\services\ProductService;
 use Database\Seeders\CategorySeeder;
 use Database\Seeders\ProductSeeder;
@@ -11,6 +13,7 @@ use Database\Seeders\UserSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use function Symfony\Component\Translation\t;
 
 class ProductServiceTest extends TestCase
 {
@@ -34,5 +37,35 @@ class ProductServiceTest extends TestCase
         self::assertNotNull($data);
         self::assertNotNull([$data['newProducts']]);
         self::assertNotNull([$data['reviews']]);
+    }
+
+    public function testPagination()
+    {
+        $this->seed([
+            UserSeeder::class,
+            UserDetailSeeder::class,
+            CategorySeeder::class,
+            ProductSeeder::class,
+            ReviewSeeder::class,
+        ]);
+
+        var_dump(User::query()->where('name', 'hasanhusain')->first()->id);
+
+        $products = $this->productService->getProductByUser(User::query()->where('name', 'hasanhusain')->first()->id);
+        var_dump($products);
+        $this->assertNotNull($products);
+
+        foreach ($products as $product) {
+            // Memastikan data produk dapat diakses
+            $this->assertNotNull($product->title);
+            var_dump($product->title);
+        }
+
+//        // Memanggil links() untuk mendapatkan tautan "Next" dan "Previous"
+//        $links = $products->links();
+//        $this->assertNotEmpty($links); // Memastikan tautan tidak kosong
+//
+//        // Memastikan bahwa tautan "Next" dan "Previous" berfungsi
+//        // Tidak perlu melakukan iterasi ulang jika hanya untuk memeriksa tautan
     }
 }

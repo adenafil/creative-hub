@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\User;
 use Database\Seeders\CategorySeeder;
 use Database\Seeders\ProductSeeder;
+use Database\Seeders\ReviewSeeder;
 use Database\Seeders\UserDetailSeeder;
 use Database\Seeders\UserSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -38,7 +39,7 @@ class UserTest extends TestCase
 
     public function testOneToManyProducts()
     {
-        $this->seed([UserSeeder::class, UserDetailSeeder::class, CategorySeeder::class, ProductSeeder::class]);
+        $this->seed([UserSeeder::class, UserDetailSeeder::class, CategorySeeder::class, ProductSeeder::class, ReviewSeeder::class]);
         $user = User::query()->where('username', 'hasanhusain')->first();
         $products = $user->products;
 
@@ -48,5 +49,8 @@ class UserTest extends TestCase
         $category = $products[0]->category;
         self::assertNotNull($category);
         self::assertEquals("font", $category->name);
+
+        $reviews = $user->reviews;
+        var_dump($reviews);
     }
 }

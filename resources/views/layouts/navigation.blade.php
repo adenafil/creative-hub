@@ -38,6 +38,10 @@
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+                            <div class="img-profile w-8 h-8 mr-2">
+                                <img src="https://pics.craiyon.com/2023-09-21/6bbd9836c65b452c8b96147f9414e2cd.webp" alt="" class="rounded-full object-cover">
+                            </div>
+
                             <div>{{ Auth::user()->name }}</div>
 
                             <div class="ms-1">
@@ -85,13 +89,27 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('product.index')" :active="request()->routeIs('product.index')">
+                {{ __('My Products') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('product.order.index')" :active="request()->routeIs('product.order.index')">
+                {{ __('My Orders') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('transaction.index')" :active="request()->routeIs('transaction.index')">
+                {{ __('My Transactions') }}
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
-            <div class="px-4">
-                <div class="font-medium text-base text-gray-800 dark:text-gray-200">{{ Auth::user()->name }}</div>
-                <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+            <div class="px-4 flex items-center">
+                <div class="img-profile w-8 h-8 mr-2">
+                    <img src="https://pics.craiyon.com/2023-09-21/6bbd9836c65b452c8b96147f9414e2cd.webp" alt="" class="rounded-full object-cover">
+                </div>
+                <div class="user-details">
+                    <div class="font-medium text-base text-gray-800 dark:text-gray-200">{{ Auth::user()->name }}</div>
+                    <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+                </div>
             </div>
 
             <div class="mt-3 space-y-1">

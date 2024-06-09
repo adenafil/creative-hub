@@ -13,58 +13,34 @@ use Illuminate\Contracts\Pagination\CursorPaginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Ramsey\Uuid\Nonstandard\Uuid;
 
 class ProductServiceImpl implements ProductService
 {
 
     function getDataHome(int $length)
     {
-        $dataProducts = [];
         $products = Product::query()->latest()->limit($length)->get();
 
-        foreach ($products as $product) {
-            $dataProducts[] = [
-                "id" =>$product->id,
-                "title" => $product->title,
-                "category_name" => $product->category->name,
-                "seller_name" => $product->user->username,
-                "url_photo_product" => $product->image_product_url,
-                "url_photo_seller" => $product->user->user_detail->image_url,
-                "price" => $product->price,
-            ];
-        }
-
         $reviews = Review::query()->latest()->limit($length - 3)->get();
-        $dataComments = [];
-        foreach ($reviews as $review) {
-            $dataComments[] = [
-                "id" => $review->id,
-                "name" => $review->user->name,
-                "title" => $review->user->user_detail->title,
-                "image_url" => $review->user->user_detail->image_url,
-                "star" => $review->star,
-                "comment" => $review->comments,
-            ];
-        }
-
-
         return [
-            "newProducts" => $dataProducts,
-            "reviews" => $dataComments,
+            "newProducts" => $products,
+            "reviews" => $reviews,
         ];
     }
 
     function addProduct($data)
     {
         // Generate unique names for files
-        $coverName = 'cover_' . time() . '.' . $data['cover']->getClientOriginalExtension();
-        $assetName = 'asset_' . time() . '.' . $data['file']->getClientOriginalExtension();
+
+        $coverName =  Uuid::uuid5(Uuid::NAMESPACE_DNS, time() . "cover_") . $data['cover']->getClientOriginalExtension();
+        $assetName = Uuid::uuid5(Uuid::NAMESPACE_DNS, time() . "asset_") . '.' . $data['path_file']->getClientOriginalExtension();
 
         // Store files with custom names
         $cover = $data['cover']->storeAs("/product/pictures/" . Auth::user()->id , $coverName, 'local');
-        $asset = $data['file']->storeAs('/product/assets/' . Auth::user()->id, $assetName, 'local');
+        $asset = $data['path_file']->storeAs('/product/assets/' . Auth::user()->id, $assetName, 'local');
 
-        if (!$data['file']->getClientOriginalExtension() == 'zip') {
+        if (!$data['path_file']->getClientOriginalExtension() == 'zip') {
             return false;
         }
 
@@ -72,7 +48,7 @@ class ProductServiceImpl implements ProductService
         $product->title = $data['name'];
         $product->price = $data['price'];
         $product->description = $data['about'];
-        $product->category_id = Category::query()->where('name', $data['category'])->first()->id;
+        $product->category_id = Category::query()->where('name', $data['category_id'])->first()->id;
         $product->image_product_url = Auth::user()->id . "/" . $coverName;
         $product->asset_product_url = Auth::user()->id . "/" . $assetName;
         $product->seller_id = Auth::user()->id;
@@ -80,16 +56,6 @@ class ProductServiceImpl implements ProductService
 
         return true;
 
-//        return $assetName;
-
-//        return [
-//            'name' => $data['name'],
-//            'price' => $data['price'],
-//            'about' => $data['about'],
-//            'category' => $data['category'],
-//            'image_path' => $coverName,
-//            'archive_path' => $assetName,
-//        ];
     }
 
     public function downloadProduct()
@@ -97,35 +63,14 @@ class ProductServiceImpl implements ProductService
 
     }
 
-//    public function getProductByUser(int $userId): CursorPaginator
-//    {
-////        $products = Product::query()->where("seller_id", $userId)->orderBy('id')->cursorPaginate(5);
-////        return $products;
-////          return Product::query()->where('seller_id', $userId)->orderBy('id')->cursorPaginate(5, [*]), 'cursor', );
-//    }
-
-//    public function nextProductByUserCursorPaginator($products)
-//    {
-//        return $products->nextCursor();
-//    }
-
     function getProductByUser(int $userId)
     {
         // TODO: Implement getProductByUser() method.
-        return Product::query()->where('seller_id', $userId)->orderBy('created_at', 'desc')->simplePaginate(2);
+        return Product::where('seller_id', $userId)->paginate(4);
     }
 
     public function updateProduct(array $data, $id): bool
     {
-
-        // Menentukan nama file
-//        $coverName = 'cover_' . time() . '.' . $data['cover']->getClientOriginalExtension();
-//        $assetName = 'asset_' . time() . '.' . $data['file']->getClientOriginalExtension();
-
-        // Menyimpan file dengan nama khusus
-//        $cover = $data['cover']->storeAs("/product/pictures/" . Auth::user()->id, $coverName, 'local');
-//        $asset = $data['file']->storeAs('/product/assets/' . Auth::user()->id, $assetName, 'local');
-
         // Mengambil produk yang ada
         $product = Product::query()->where('id', $id)->first();
 
@@ -133,12 +78,48 @@ class ProductServiceImpl implements ProductService
         $product->title = $data['name'];
         $product->price = $data['price'];
         $product->description = $data['about'];
-        $product->category_id = Category::query()->where('name', $data['category'])->first()->id;
-//        $product->image_product_url = Auth::user()->id . "/" . $coverName;
-//        $product->asset_product_url = Auth::user()->id . "/" . $assetName;
+        $product->category_id = Category::query()->where('name', $data['category_id'])->first()->id;
         $product->seller_id = Auth::user()->id;
+
+
+        if (isset($data['cover'])) {
+            $coverName =  Uuid::uuid5(Uuid::NAMESPACE_DNS, time() . "cover_") . $data['cover']->getClientOriginalExtension();
+            $product->image_product_url = Auth::user()->id . "/" . $coverName;
+
+            // Store files with custom names
+            $cover = $data['cover']->storeAs("/product/pictures/" . Auth::user()->id , $coverName, 'local');
+        }
+        if (isset($data['path_file'])) {
+            $assetName = Uuid::uuid5(Uuid::NAMESPACE_DNS, time() . "asset_") . '.' . $data['path_file']->getClientOriginalExtension();
+            $asset = $data['path_file']->storeAs('/product/assets/' . Auth::user()->id, $assetName, 'local');
+            $product->asset_product_url = Auth::user()->id . "/" . $assetName;
+
+            if (!$data['path_file']->getClientOriginalExtension() == 'zip') {
+                return false;
+            }
+        }
         $product->save();
 
         return true;
+    }
+
+    function deleteProduct(string $idProduct, $dataRequest)
+    {
+        $product = Product::query()->where('id', $idProduct)->first();
+        $reviews = $product->reviews;
+        foreach ($reviews as $review) {
+            $review->delete();
+        }
+        $product->delete();
+
+        $currentPage = $dataRequest->get('page', 1); // Default to page 1 if not provided
+
+        // Check if there are products left on the current page
+        $productsOnPage = Product::where('seller_id', Auth::id())->paginate(4, ['*'], 'page', $currentPage);
+
+        return [
+            'currentPage' => $currentPage,
+            'isProductOnPageEmpty' => $productsOnPage->isEmpty()
+        ];
     }
 }

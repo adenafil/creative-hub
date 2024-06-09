@@ -12,5 +12,6 @@ interface ProductService
     function downloadProduct();
     function getProductByUser(int $userId);
     function updateProduct(array $data, int $id): bool;
+    function deleteProduct(string $idProduct, $dataRequest);
 
 }

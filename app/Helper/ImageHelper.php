@@ -5,6 +5,8 @@ class ImageHelper
 {
     public static function isThisImage(string $url): bool
     {
+        if (substr($url, 0, strlen("https://public-files.gumroad.com/")) === "https://public-files.gumroad.com/")
+            return true;
         // Mendapatkan informasi gambar
         $imageInfo = @getimagesize($url);
 
@@ -17,5 +19,6 @@ class ImageHelper
 //            self::assertTrue(true);
 //        }
         return !($imageInfo === false);
+
     }
 }

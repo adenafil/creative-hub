@@ -57,4 +57,34 @@
         background-color: rgb(24 24 24 / var(--tw-bg-opacity));
     }
 
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+    .no-scrollbar {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
+    @media (max-width: 640px) {
+        .payment-wrapper {
+            display: flex;
+            overflow-x: scroll;
+        }
+        .payment-card {
+            flex: 0 0 auto;
+            width: 100%;
+            max-width: 100%;
+        }
+    }
+    @media (min-width: 641px) {
+        .payment-wrapper {
+            display: flex;
+            overflow-x: scroll;
+        }
+        .payment-card {
+            flex: 0 0 auto;
+            width: 30.30%;
+            max-width: 30.30%;
+        }
+    }
+
 }

@@ -11,6 +11,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
@@ -30,40 +31,37 @@ class ProductController extends Controller
         return view('admin.products.index', compact('products'));
     }
 
-    public function deleteProduct()
-    {
-
-    }
-
-
     public function create()
     {
-        return \response()->view('admin.products.create');
+        $categories = Category::pluck('name', 'id'); // Assuming 'name' is the column for category names
+        return view('admin.products.create', compact('categories'));
     }
 
 
-    public function destroy($id): RedirectResponse
+    public function destroy(Request $request, $id): RedirectResponse
     {
 
-        $product = Product::query()->where('id', $id)->first();
-        $reviews = $product->reviews;
-        foreach ($reviews as $review) {
-            $review->delete();
+        $validateData = $this->productService->deleteProduct($id, $request);
+
+        // If the current page is empty after deletion, redirect to page 1
+        if ($validateData['isProductOnPageEmpty'] && $validateData['currentPage'] > 1) {
+            return redirect()->route('product.index', ['page' => 1])->with('success', 'Product has been deleted');
         }
-        $product->delete();
 
-
-        return redirect()->route('product.index')->with('success', 'Product have been deleted');
+        return redirect()->route('product.index', ['page' => $validateData['currentPage']])->with('success', 'Product has been deleted');
     }
 
 
-    public function doCreate(AddProductRequest $request): Response
+    public function doCreate(AddProductRequest $request): Response | RedirectResponse
     {
-        $data = $request->only(['name', 'price', 'about', 'category', 'cover', 'file']);
+        $data = $request->only(['name', 'price', 'about', 'category_id', 'cover', 'path_file']);
+
         $result = $this->productService->addProduct($data);
 
-        $products = $this->productService->getProductByUser(Auth::id());
-        return \response()->view('admin.products.index', compact('products'));
+        if ($result) {
+            $products = $this->productService->getProductByUser(Auth::id());
+        }
+        return \redirect()->route('product.index');
     }
     public function download(): \Symfony\Component\HttpFoundation\BinaryFileResponse
     {
@@ -75,16 +73,18 @@ class ProductController extends Controller
     {
         $product = Product::query()->where("id", $id)->get(); // Mengambil data produk berdasarkan ID
 //        dd($product[0]);
-        return \response()->view('admin.products.edit', ["product" => $product[0]]);
+        $categories = Category::pluck('name', 'id'); // Assuming 'name' is the column for category names
+        return \response()->view('admin.products.edit', ["product" => $product[0], 'categories' => $categories]);
     }
 
-    public function doEdit(UpdateProductRequest $request, $id): Response
+    public function doEdit(UpdateProductRequest $request, $id): RedirectResponse
     {
-        $data = $request->only(['name', 'price', 'about', 'category', 'cover', 'file']);
+        $data = $request->only(['name', 'price', 'about', 'category_id', 'cover', 'path_file']);
         $result = $this->productService->updateProduct($data, $id);
 
         $products = $this->productService->getProductByUser(Auth::id());
-        return \response()->view('admin.products.index', compact('products'));
+        return \redirect()->route('product.index', compact('products'));
     }
+
 
 }

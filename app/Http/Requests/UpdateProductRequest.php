@@ -23,10 +23,11 @@ class UpdateProductRequest extends FormRequest
     {
         return [
             'cover' => 'file|mimes:jpeg,png,jpg|max:5120',
-            'file' => 'file|mimes:zip,gz|max:16384',
+            'path_file' => 'file|mimes:zip,gz|max:16384',
             'name' => 'required|string', // Corrected syntax
             'price' => 'required|numeric|min:0', // Corrected syntax
-            'category' => 'required|string|in:ebook,font,icon,template,ui kit',
+            'category_id' => 'required|string|in:ebook,font,icon,template,ui kit',
+            'about' => 'required|string',
         ];
     }
 }

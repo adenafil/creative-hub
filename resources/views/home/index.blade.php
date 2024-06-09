@@ -1,4 +1,5 @@
- <!doctype html>
+@php use App\Helper\ImageHelper; @endphp
+    <!doctype html>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -280,20 +281,28 @@
         @foreach($dataHome['newProducts'] as $data)
             <div class="product-card flex flex-col rounded-[18px] bg-[#181818] overflow-hidden">
                 <a href="details.html" class="thumbnail w-full h-[180px] flex shrink-0 overflow-hidden relative">
-                    <img src="{{$data['url_photo_product']}}" class="w-full h-full object-cover" alt="thumbnail">
-                    <p class="backdrop-blur bg-black/30 rounded-[4px] p-[4px_8px] absolute top-3 right-[14px] z-7">Rp {{$data['price']}}</p>
+                    <img src="{{
+                                    ImageHelper::isThisImage($data->image_product_url)
+                                    ? $data->image_product_url
+                                    : URL::signedRoute('file.view', ['encoded' => base64_encode($data->image_product_url)])
+                                     }}
+    " class="w-full h-full object-cover" alt="thumbnail"><p class="backdrop-blur bg-black/30 rounded-[4px] p-[4px_8px] absolute top-3 right-[14px] z-7">Rp {{number_format($data->price, 0, ',', '.')}}</p>
                 </a>
                 <div class="p-[10px_14px_12px] h-full flex flex-col justify-between gap-[14px]">
                     <div class="flex flex-col gap-1">
                         <a href="details.html" class="font-semibold text-xs md:text-lg lg:text-lg line-clamp-2 hover:line-clamp-none">{{$data['title']}}</a>
                         <p
-                            class="bg-[#2A2A2A] text-[10px] md:text-xs lg:text-xs text-creativehub-grey rounded-[4px] p-[4px_6px] w-fit">{{strtoupper($data['category_name'])}}</p>
+                            class="bg-[#2A2A2A] text-[10px] md:text-xs lg:text-xs text-creativehub-grey rounded-[4px] p-[4px_6px] w-fit">{{strtoupper($data->category->name)}}</p>
                     </div>
                     <div class="flex items-center gap-[6px]">
                         <div class="w-6 h-6 flex shrink-0 items-center justify-center rounded-full overflow-hidden">
-                            <img src="{{$data['url_photo_seller']}}" class="w-full h-full object-cover" alt="logo">
+                            <img src="{{
+                                ImageHelper::isThisImage($data->user->user_detail->image_url)
+                                    ? $data->user->user_detail->image_url
+                                    : URL::signedRoute('file.view', ['encoded' => base64_encode($data->user->user_detail->image_url)])
+}}" class="w-full h-full object-cover" alt="logo">
                         </div>
-                        <a href="" class="font-semibold text-xs text-creativehub-grey">{{$data['seller_name']}}</a>
+                        <a href="" class="font-semibold text-xs text-creativehub-grey">{{$data->user->name}}</a>
                     </div>
                 </div>
             </div>
@@ -489,10 +498,10 @@
                             <div class="swiper-slide group bg-img-transparent hover:bg-img-purple-to-orange p-[2px] rounded-2xl max-sm:max-w-sm max-sm:mx-auto transition-all duration-500 group:">
                                 <div class="p-6 bg-img-black-gradient group-active:bg-img-black transition-all duration-300 rounded-2xl">
                                     <div class="flex items-center gap-5 mb-5 sm:mb-9">
-                                        <img src="{{$reviews['image_url']}}" alt="avatar" class="w-12 h-12">
+                                        <img src="{{$reviews->user->user_detail->image_url}}" alt="avatar" class="w-12 h-12">
                                         <div class="grid gap-1">
-                                            <h5 class="font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#B05CB0] to-[#FCB16B] transition-all duration-500">{{$reviews['name']}}</h5>
-                                            <span class="text-sm leading-6 text-creativehub-light-grey hover:text-white">{{$reviews['title']}} </span>
+                                            <h5 class="font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#B05CB0] to-[#FCB16B] transition-all duration-500">{{$reviews->user->name}}</h5>
+                                            <span class="text-sm leading-6 text-creativehub-light-grey hover:text-white">{{$reviews->comments}} </span>
                                         </div>
                                     </div>
                                     <div class="flex items-center mb-5 sm:mb-9 gap-2 text-amber-500 transition-all duration-500">

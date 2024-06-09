@@ -26,7 +26,7 @@ class ProductTest extends TestCase
 
         $reviews = $product->reviews;
         self::assertNotNull($reviews);
-        var_dump($reviews);
+        var_dump($product->user->user_detail->image_url);
 
     }
 }

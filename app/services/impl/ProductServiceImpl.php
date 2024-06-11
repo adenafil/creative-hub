@@ -66,6 +66,7 @@ class ProductServiceImpl implements ProductService
     function getProductByUser(int $userId)
     {
         // TODO: Implement getProductByUser() method.
+
         return Product::where('seller_id', $userId)->paginate(4);
     }
 

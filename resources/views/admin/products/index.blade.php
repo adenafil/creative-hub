@@ -47,7 +47,7 @@
 
                     @foreach ($products as $product)
                         <tr>
-                            <td class="text-center">{{$loop->iteration}}</td>
+                            <td class="text-center">{{($products->currentPage() - 1) * $products->perPage() + $loop->iteration}}</td>
                             <td class="">
                                 <div class="img-wrapper h-24">
                                     <img src="

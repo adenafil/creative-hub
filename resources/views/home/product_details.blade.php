@@ -84,7 +84,7 @@
         <div id="mega-menu-icons" class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1">
             <ul class="flex flex-col mt-4 font-medium md:flex-row md:mt-0 md:space-x-8 rtl:space-x-reverse">
                 <li>
-                    <a href="#" class="block py-2 px-3 font-medium text-gray-50 border-b border-creativehub-dark-grey md:w-auto md:border-0 hover:from-[#B05CB0] hover:to-[#FCB16B] hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r md:p-0" aria-current="page">Home</a>
+                    <a href="{{route('home')}}" class="block py-2 px-3 font-medium text-gray-50 border-b border-creativehub-dark-grey md:w-auto md:border-0 hover:from-[#B05CB0] hover:to-[#FCB16B] hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r md:p-0" aria-current="page">Home</a>
                 </li>
                 <li>
                     <button id="mega-menu-icons-dropdown-button" data-dropdown-toggle="mega-menu-icons-dropdown" class="flex items-center justify-between w-full py-2 px-3 font-medium text-gray-50 border-b border-creativehub-dark-grey md:w-auto md:border-0 hover:from-[#B05CB0] hover:to-[#FCB16B] hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r md:p-0">

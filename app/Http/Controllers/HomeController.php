@@ -36,4 +36,9 @@ class HomeController extends Controller
             'product' => $product
         ]);
     }
+
+    public function successCheckout($id)
+    {
+        return \response()->view('home.success-checkout', [$id]);
+    }
 }

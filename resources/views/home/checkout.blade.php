@@ -76,7 +76,7 @@
             </a>
             <!-- State profile ini muncul ketika user sudah login -->
             <a href="#" class="w-9 border border-solid border-white rounded-md hidden">
-                <img src="../assets/photos/photo-sample.jpg" alt="dashboard" class="object-cover rounded-md w-full">
+                <img src="{{URL::to('/')}}/assets/photos/photo-sample.jpg" alt="dashboard" class="object-cover rounded-md w-full">
             </a>
             <button data-collapse-toggle="mega-menu-icons" type="button"
                     class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 border-creativehub-grey border"
@@ -250,7 +250,7 @@
                                 </select>
                             </div>
                             <div class="w-6 h-6 flex shrink-0">
-                                <img src="../assets/icons/bank.svg" alt="icon">
+                                <img src="{{URL::to('/')}}/assets/icons/bank.svg" alt="icon">
                             </div>
                         </div>
                     </div>
@@ -266,7 +266,7 @@
                                 </div>
                             </div>
                             <div class="w-6 h-6 flex shrink-0">
-                                <img src="../assets/icons/user-square.svg" alt="icon">
+                                <img src="{{URL::to('/')}}/assets/icons/user-square.svg" alt="icon">
                             </div>
                         </div>
                     </div>
@@ -281,7 +281,7 @@
                             </div>
                         </div>
                         <div class="w-6 h-6 flex shrink-0">
-                            <img src="../assets/icons/card.svg" alt="icon">
+                            <img src="{{URL::to('/')}}/assets/icons/card.svg" alt="icon">
                         </div>
                     </div>
                 </div>
@@ -312,7 +312,7 @@
                         </div>
                     </div>
                 </div>
-                <a href="success-checkout.html"
+                <a href="{{route('success.checkout', ['id' => $product->id])}}"
                    class="rounded-full text-center bg-[#2D68F8] p-[8px_18px] font-semibold hover:bg-[#083297] active:bg-[#062162] transition-all duration-300">Checkout
                     Now</a>
             </div>

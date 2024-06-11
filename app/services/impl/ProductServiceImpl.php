@@ -20,6 +20,7 @@ class ProductServiceImpl implements ProductService
     function getDataHome(int $length)
     {
         $products = Product::query()->latest()->limit($length)->get();
+        $user =
 
         $reviews = Review::query()->latest()->limit($length - 3)->get();
         return [

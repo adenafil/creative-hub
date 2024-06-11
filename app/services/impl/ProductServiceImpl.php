@@ -33,6 +33,7 @@ class ProductServiceImpl implements ProductService
     {
         // Generate unique names for files
 
+
         $coverName =  Uuid::uuid5(Uuid::NAMESPACE_DNS, time() . "cover_") . $data['cover']->getClientOriginalExtension();
         $assetName = Uuid::uuid5(Uuid::NAMESPACE_DNS, time() . "asset_") . '.' . $data['path_file']->getClientOriginalExtension();
 
@@ -72,6 +73,7 @@ class ProductServiceImpl implements ProductService
 
     public function updateProduct(array $data, $id): bool
     {
+
         // Mengambil produk yang ada
         $product = Product::query()->where('id', $id)->first();
 

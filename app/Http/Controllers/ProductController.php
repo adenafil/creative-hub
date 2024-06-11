@@ -13,6 +13,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
@@ -25,14 +26,18 @@ class ProductController extends Controller
         return $this->productService = $productService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        Session::put('product_index_page', $request->input('page', 1));
+
         $products = $this->productService->getProductByUser(Auth::id());
         return view('admin.products.index', compact('products'));
     }
 
-    public function create()
+    public function create(Request $request)
     {
+        Session::get('product_index_page');
+
         $categories = Category::pluck('name', 'id'); // Assuming 'name' is the column for category names
         return view('admin.products.create', compact('categories'));
     }
@@ -61,7 +66,8 @@ class ProductController extends Controller
         if ($result) {
             $products = $this->productService->getProductByUser(Auth::id());
         }
-        return \redirect()->route('product.index');
+
+        return redirect()->route('product.index', ['page' => Session::get('product_index_page')])->with('success', 'Product has been created');
     }
     public function download(): \Symfony\Component\HttpFoundation\BinaryFileResponse
     {
@@ -82,8 +88,8 @@ class ProductController extends Controller
         $data = $request->only(['name', 'price', 'about', 'category_id', 'cover', 'path_file']);
         $result = $this->productService->updateProduct($data, $id);
 
-        $products = $this->productService->getProductByUser(Auth::id());
-        return \redirect()->route('product.index', compact('products'));
+//        $products = $this->productService->getProductByUser(Auth::id());
+        return \redirect()->route('product.index', ['page' => Session::get('product_index_page')]);
     }
 
 

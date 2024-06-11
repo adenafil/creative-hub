@@ -25,7 +25,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 shadow-md mt-6">
 
             <!--Card-->
-            <div id='recipients' class="py-8 px-4 mt-6 lg:mt-0 rounded shadow bg-white dark:text-white dark:bg-[#1F2937]">
+            <div id='recipients' class="px-4 mt-6 lg:mt-0 rounded shadow bg-white dark:text-white dark:bg-[#1F2937]">
 
 
                 <table id="productTable" class="stripe hover" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
@@ -187,46 +187,46 @@
             }
 
             /*Pagination Buttons*/
-            .dataTables_wrapper .dataTables_paginate .paginate_button {
-                font-weight: 700;
-                /*font-bold*/
-                border-radius: .25rem;
-                /*rounded*/
-                border: 1px solid transparent;
-                /*border border-transparent*/
-            }
+            /*.dataTables_wrapper .dataTables_paginate .paginate_button {*/
+            /*    font-weight: 700;*/
+            /*    !*font-bold*!*/
+            /*    border-radius: .25rem;*/
+            /*    !*rounded*!*/
+            /*    border: 1px solid transparent;*/
+            /*    !*border border-transparent*!*/
+            /*}*/
 
             /*Pagination Buttons - Current selected */
-            .dataTables_wrapper .dataTables_paginate .paginate_button.current {
-                color: #fff !important;
-                /*text-white*/
-                box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
-                /*shadow*/
-                font-weight: 700;
-                /*font-bold*/
-                border-radius: .25rem;
-                /*rounded*/
-                background: #667eea !important;
-                /*bg-indigo-500*/
-                border: 1px solid transparent;
-                /*border border-transparent*/
-            }
+            /*.dataTables_wrapper .dataTables_paginate .paginate_button.current {*/
+            /*    color: #fff !important;*/
+            /*    !*text-white*!*/
+            /*    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);*/
+            /*    !*shadow*!*/
+            /*    font-weight: 700;*/
+            /*    !*font-bold*!*/
+            /*    border-radius: .25rem;*/
+            /*    !*rounded*!*/
+            /*    background: #667eea !important;*/
+            /*    !*bg-indigo-500*!*/
+            /*    border: 1px solid transparent;*/
+            /*    !*border border-transparent*!*/
+            /*    .dataTables_wrapper .dataTables_paginate .paginate_button:hover {*/
+            /*        color: #fff !important;*/
+            /*        !*text-white*!*/
+            /*        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);*/
+            /*        !*shadow*!*/
+            /*        font-weight: 700;*/
+            /*        !*font-bold*!*/
+            /*        border-radius: .25rem;*/
+            /*        !*rounded*!*/
+            /*        background: #667eea !important;*/
+            /*        !*bg-indigo-500*!*/
+            /*        border: 1px solid transparent;*/
+            /*        !*border border-transparent*!*/
+            /*    }*/
+
 
             /*Pagination Buttons - Hover */
-            .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-                color: #fff !important;
-                /*text-white*/
-                box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
-                /*shadow*/
-                font-weight: 700;
-                /*font-bold*/
-                border-radius: .25rem;
-                /*rounded*/
-                background: #667eea !important;
-                /*bg-indigo-500*/
-                border: 1px solid transparent;
-                /*border border-transparent*/
-            }
 
             /*Add padding to bottom border */
             table.dataTable.no-footer {
@@ -252,6 +252,13 @@
             /*table.dataTable>tbody>tr.child ul.dtr-details {*/
             /*    width: 100%;*/
             /*}*/
+
+            #productTable_info, #productTable_paginate, #productTable_length, #productTable_filter {
+                display: none!important;
+            }
+            .dataTables_scrollBody{
+                border-bottom: none!important;
+            }
 
             /* Dark mode styles for .dataTables_length */
             @media (prefers-color-scheme: dark) {

@@ -13,5 +13,5 @@ interface ProductService
     function getProductByUser(int $userId);
     function updateProduct(array $data, int $id): bool;
     function deleteProduct(string $idProduct, $dataRequest);
-
+    function getProductDataOnHome(int $id): array;
 }

@@ -17,7 +17,6 @@ use Ramsey\Uuid\Nonstandard\Uuid;
 
 class ProductServiceImpl implements ProductService
 {
-
     function getDataHome(int $length)
     {
         $products = Product::query()->latest()->limit($length)->get();
@@ -120,6 +119,18 @@ class ProductServiceImpl implements ProductService
         return [
             'currentPage' => $currentPage,
             'isProductOnPageEmpty' => $productsOnPage->isEmpty()
+        ];
+    }
+
+    function getProductDataOnHome(int $id) : array{
+        $product = Product::query()->where('id', $id)->first();
+        $reviews = Review::query()->where('product_id', $id)->get();
+        $products = Product::query()->limit(4)->get();
+
+        return [
+            "product" => $product,
+            "products" => $products,
+            "reviews" => $reviews,
         ];
     }
 }

@@ -11,7 +11,9 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::controller(HomeController::class)->group(function () {
-   Route::get('/', 'index');
+   Route::get('/', 'index')->name('home');
+   Route::get('/products/{id}', 'products')->name('husain');
+   Route::get('/products/{id}/checkout', 'checkout')->name('checkout');
 });
 
 //Route::get('admin/dashboard', function () {
@@ -47,63 +49,8 @@ Route::middleware('auth')->group(function () {
 });
 
 
-//Route::get('/file/{encoded}', function ($encoded) {
-//    $decoded = base64_decode($encoded);
-//    list($folder, $filename) = explode('/', $decoded);
-//
-//    $path = storage_path("app/product/pictures/{$folder}/{$filename}");
-//
-//    if (!File::exists($path)) {
-//        abort(404);
-//    }
-//
-//    $file = File::get($path);
-//    $type = File::mimeType($path);
-//
-//    $response = Response::make($file, 200);
-//    $response->header("Content-Type", $type);
-//
-//    return $response;
-//})->name('file.view');
-
-//Route::get('/file/{encoded}', function ($encoded) {
-//    try {
-//        $decoded = base64_decode($encoded);
-//        $path = storage_path("app/product/pictures/{$decoded}");
-//
-//        if (!File::exists($path)) {
-//            return response("File not found at path: $path", 404);
-//        }
-//
-//        $file = File::get($path);
-//        $type = File::mimeType($path);
-//
-//        $response = Response::make($file, 200);
-//        $response->header("Content-Type", $type);
-//
-//        return $response;
-//    } catch (\Exception $e) {
-//        return response("Error decoding path: " . $e->getMessage(), 500);
-//    }
-//})->name('file.view');
 
 Route::get('/file/{encoded}', [FileController::class, 'viewFile'])->name('file.view');
 
-//Route::get('/tes', function () {
-//    $encodedPath = base64_encode("37/cover_1717813678.png");
-//    return \route('file.view', ['encoded' => $encodedPath]);
-//});
-//
-Route::get('/test-encode', function () {
-    $path = "cover_1717795197.png";
-    $encodedPath = base64_encode($path);
-    $decodedPath = base64_decode($encodedPath);
-
-    return response()->json([
-        'original' => $path,
-        'encoded' => $encodedPath,
-        'decoded' => $decodedPath,
-    ]);
-});
 
 require __DIR__.'/auth.php';

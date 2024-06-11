@@ -9,6 +9,7 @@
           rel="stylesheet" />
     <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
 </head>
 <style>
     .swiper-rtl .swiper-button-next:after {
@@ -98,21 +99,21 @@
                                 <li>
                                     <a href="#" class="flex items-center text-white hover:text-pink-400 group">
                                         <span class="sr-only">All Products</span>
-                                        <img src="../assets/icons/cart.svg" alt="All Products" class="w-7 h-7 me-2">
+                                            <img src="https://raw.githubusercontent.com/fe-husni/creativehub-main/main/assets/icons/cart.svg" alt="All Products" class="w-7 h-7 me-2">
                                         All Products
                                     </a>
                                 </li>
                                 <li>
                                     <a href="#" class="flex items-center text-white hover:text-pink-400 group">
                                         <span class="sr-only">Icons</span>
-                                        <img src="../assets/icons/hat.svg" alt="All Products" class="w-7 h-7 me-2">
+                                        <img src="https://raw.githubusercontent.com/fe-husni/creativehub-main/main/assets/icons/hat.svg" alt="All Products" class="w-7 h-7 me-2">
                                         Icons
                                     </a>
                                 </li>
                                 <li>
                                     <a href="#" class="flex items-center text-white hover:text-pink-400 group">
                                         <span class="sr-only">Templates</span>
-                                        <img src="../assets/icons/laptop.svg" alt="All Products" class="w-7 h-7 me-2">
+                                        <img src="https://raw.githubusercontent.com/fe-husni/creativehub-main/main/assets/icons/laptop.svg" alt="All Products" class="w-7 h-7 me-2">
                                         Templates
                                     </a>
                                 </li>
@@ -123,21 +124,21 @@
                                 <li>
                                     <a href="#" class="flex items-center text-white hover:text-pink-400 group">
                                         <span class="sr-only">Fonts</span>
-                                        <img src="../assets/icons/pen.svg" alt="All Products" class="w-7 h-7 me-2">
+                                        <img src="https://raw.githubusercontent.com/fe-husni/creativehub-main/main/assets/icons/pen.svg" alt="All Products" class="w-7 h-7 me-2">
                                         Fonts
                                     </a>
                                 </li>
                                 <li>
                                     <a href="#" class="flex items-center text-white hover:text-pink-400 group">
                                         <span class="sr-only">E-Books</span>
-                                        <img src="../assets/icons/book.svg" alt="All Products" class="w-7 h-7 me-2">
+                                        <img src="https://raw.githubusercontent.com/fe-husni/creativehub-main/main/assets/icons/book.svg" alt="All Products" class="w-7 h-7 me-2">
                                         E-Books
                                     </a>
                                 </li>
                                 <li>
                                     <a href="#" class="flex items-center text-white hover:text-pink-400 group">
                                         <span class="sr-only">UI Kits</span>
-                                        <img src="../assets/icons/check-3d.svg" alt="All Products" class="w-7 h-7 me-2">
+                                        <img src="https://raw.githubusercontent.com/fe-husni/creativehub-main/main/assets/icons/check-3d.svg" alt="All Products" class="w-7 h-7 me-2">
                                         UI Kits
                                     </a>
                                 </li>
@@ -156,7 +157,7 @@
 
 <!-- Hero Section -->
 <header
-    class="w-full pt-[74px] pb-[34px] bg-[url('../assets/backgrounds/hero-image.png')] bg-cover bg-no-repeat bg-center relative z-0">
+    class="w-full pt-[74px] pb-[34px] bg-[url('https://raw.githubusercontent.com/fe-husni/creativehub-main/main/assets/backgrounds/hero-image.png')] bg-cover bg-no-repeat bg-center relative z-0">
     <div class="container max-w-[1130px] mx-auto flex flex-col items-center justify-center gap-[34px] z-10">
         <div class="flex flex-col gap-2 text-center w-fit mt-20 z-10 items-center">
             <h1 class="font-semibold text-3xl leading-[130%] md:text-[60px] xl:text-[60px]">Explore High Quality<br>Digital Products</h1>
@@ -280,7 +281,7 @@
 
         @foreach($dataHome['newProducts'] as $data)
             <div class="product-card flex flex-col rounded-[18px] bg-[#181818] overflow-hidden">
-                <a href="details.html" class="thumbnail w-full h-[180px] flex shrink-0 overflow-hidden relative">
+                <a href="{{ route("husain", [$data->id]) }}" class="thumbnail w-full h-[180px] flex shrink-0 overflow-hidden relative">
                     <img src="{{
                                     ImageHelper::isThisImage($data->image_product_url)
                                     ? $data->image_product_url
@@ -307,154 +308,6 @@
                 </div>
             </div>
         @endforeach
-
-
-{{--        <div class="product-card flex flex-col rounded-[18px] bg-[#181818] overflow-hidden">--}}
-{{--            <a href="details.html" class="thumbnail w-full h-[180px] flex shrink-0 overflow-hidden relative">--}}
-{{--                <img src="../assets/thumbnails/img2.png" class="w-full h-full object-cover" alt="thumbnail">--}}
-{{--                <p class="backdrop-blur bg-black/30 rounded-[4px] p-[4px_8px] absolute top-3 right-[14px] z-7">Rp--}}
-{{--                    179,000</p>--}}
-{{--            </a>--}}
-{{--            <div class="p-[10px_14px_12px] h-full flex flex-col justify-between gap-[14px]">--}}
-{{--                <div class="flex flex-col gap-1">--}}
-{{--                    <a href="details.html" class="font-semibold text-xs md:text-lg lg:text-lg line-clamp-2 hover:line-clamp-none">Homey: Real Estate Mobile UI Kit</a>--}}
-{{--                    <p--}}
-{{--                        class="bg-[#2A2A2A] text-[10px] md:text-xs lg:text-xs text-creativehub-grey rounded-[4px] p-[4px_6px] w-fit">--}}
-{{--                        UI Kit</p>--}}
-{{--                </div>--}}
-{{--                <div class="flex items-center gap-[6px]">--}}
-{{--                    <div class="w-6 h-6 flex shrink-0 items-center justify-center rounded-full overflow-hidden">--}}
-{{--                        <img src="../assets/logos/JNKK.svg" class="w-full h-full object-cover" alt="logo">--}}
-{{--                    </div>--}}
-{{--                    <a href="" class="font-semibold text-xs text-creativehub-grey">John Doe</a>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--        <div class="product-card flex flex-col rounded-[18px] bg-[#181818] overflow-hidden">--}}
-{{--            <a href="details.html" class="thumbnail w-full h-[180px] flex shrink-0 overflow-hidden relative">--}}
-{{--                <img src="../assets/thumbnails/img1.png" class="w-full h-full object-cover" alt="thumbnail">--}}
-{{--                <p class="backdrop-blur bg-black/30 rounded-[4px] p-[4px_8px] absolute top-3 right-[14px] z-7">Rp--}}
-{{--                    129,000</p>--}}
-{{--            </a>--}}
-{{--            <div class="p-[10px_14px_12px] h-full flex flex-col justify-between gap-[14px]">--}}
-{{--                <div class="flex flex-col gap-1">--}}
-{{--                    <a href="details.html" class="font-semibold text-xs md:text-lg lg:text-lg line-clamp-2 hover:line-clamp-none">SaaS Website--}}
-{{--                        Master Template: Streamline Your Digital Solution</a>--}}
-{{--                    <p--}}
-{{--                        class="bg-[#2A2A2A] text-[10px] md:text-xs lg:text-xs text-creativehub-grey rounded-[4px] p-[4px_6px] w-fit">--}}
-{{--                        Template</p>--}}
-{{--                </div>--}}
-{{--                <div class="flex items-center gap-[6px]">--}}
-{{--                    <div class="w-6 h-6 flex shrink-0 items-center justify-center rounded-full overflow-hidden">--}}
-{{--                        <img src="../assets/logos/framer.png" class="w-full h-full object-cover" alt="logo">--}}
-{{--                    </div>--}}
-{{--                    <a href="" class="font-semibold text-xs text-creativehub-grey">Jaog Framer</a>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--        <div class="product-card flex flex-col rounded-[18px] bg-[#181818] overflow-hidden">--}}
-{{--            <a href="details.html" class="thumbnail w-full h-[180px] flex shrink-0 overflow-hidden relative">--}}
-{{--                <img src="../assets/thumbnails/img5.png" class="w-full h-full object-cover" alt="thumbnail">--}}
-{{--                <p class="backdrop-blur bg-black/30 rounded-[4px] p-[4px_8px] absolute top-3 right-[14px] z-7">Rp--}}
-{{--                    499,000</p>--}}
-{{--            </a>--}}
-{{--            <div class="p-[10px_14px_12px] h-full flex flex-col justify-between gap-[14px]">--}}
-{{--                <div class="flex flex-col gap-1">--}}
-{{--                    <a href="details.html" class="font-semibold text-xs md:text-lg lg:text-lg line-clamp-2 hover:line-clamp-none">Gamify-RPG: 3D Illustration & Icon Pack</a>--}}
-{{--                    <p--}}
-{{--                        class="bg-[#2A2A2A] text-[10px] md:text-xs lg:text-xs text-creativehub-grey rounded-[4px] p-[4px_6px] w-fit">--}}
-{{--                        UI Kit</p>--}}
-{{--                </div>--}}
-{{--                <div class="flex items-center gap-[6px]">--}}
-{{--                    <div class="w-6 h-6 flex shrink-0 items-center justify-center rounded-full overflow-hidden">--}}
-{{--                        <img src="../assets/logos/JNKK.svg" class="w-full h-full object-cover" alt="logo">--}}
-{{--                    </div>--}}
-{{--                    <a href="" class="font-semibold text-xs text-creativehub-grey">John Doe</a>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--        <div class="product-card flex flex-col rounded-[18px] bg-[#181818] overflow-hidden">--}}
-{{--            <a href="details.html" class="thumbnail w-full h-[180px] flex shrink-0 overflow-hidden relative">--}}
-{{--                <img src="../assets/thumbnails/img6.png" class="w-full h-full object-cover" alt="thumbnail">--}}
-{{--                <p class="backdrop-blur bg-black/30 rounded-[4px] p-[4px_8px] absolute top-3 right-[14px] z-7">Rp--}}
-{{--                    113,000</p>--}}
-{{--            </a>--}}
-{{--            <div class="p-[10px_14px_12px] h-full flex flex-col justify-between gap-[14px]">--}}
-{{--                <div class="flex flex-col gap-1">--}}
-{{--                    <a href="details.html" class="font-semibold text-xs md:text-lg lg:text-lg line-clamp-2 hover:line-clamp-none">Hand Gesture Icon Pack</a>--}}
-{{--                    <p--}}
-{{--                        class="bg-[#2A2A2A] text-[10px] md:text-xs lg:text-xs text-creativehub-grey rounded-[4px] p-[4px_6px] w-fit">--}}
-{{--                        Icon</p>--}}
-{{--                </div>--}}
-{{--                <div class="flex items-center gap-[6px]">--}}
-{{--                    <div class="w-6 h-6 flex shrink-0 items-center justify-center rounded-full overflow-hidden">--}}
-{{--                        <img src="../assets/logos/framer.png" class="w-full h-full object-cover" alt="logo">--}}
-{{--                    </div>--}}
-{{--                    <a href="" class="font-semibold text-xs text-creativehub-grey">Jaog Framer</a>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--        <div class="product-card flex flex-col rounded-[18px] bg-[#181818] overflow-hidden">--}}
-{{--            <a href="details.html" class="thumbnail w-full h-[180px] flex shrink-0 overflow-hidden relative">--}}
-{{--                <img src="../assets/thumbnails/img7.png" class="w-full h-full object-cover" alt="thumbnail">--}}
-{{--                <p class="backdrop-blur bg-black/30 rounded-[4px] p-[4px_8px] absolute top-3 right-[14px] z-7">Rp--}}
-{{--                    75,000</p>--}}
-{{--            </a>--}}
-{{--            <div class="p-[10px_14px_12px] h-full flex flex-col justify-between gap-[14px]">--}}
-{{--                <div class="flex flex-col gap-1">--}}
-{{--                    <a href="details.html" class="font-semibold text-xs md:text-lg lg:text-lg line-clamp-2 hover:line-clamp-none">Kirgina Fonts Family</a>--}}
-{{--                    <p--}}
-{{--                        class="bg-[#2A2A2A] text-[10px] md:text-xs lg:text-xs text-creativehub-grey rounded-[4px] p-[4px_6px] w-fit">--}}
-{{--                        Font</p>--}}
-{{--                </div>--}}
-{{--                <div class="flex items-center gap-[6px]">--}}
-{{--                    <div class="w-6 h-6 flex shrink-0 items-center justify-center rounded-full overflow-hidden">--}}
-{{--                        <img src="../assets/logos/JNKK.svg" class="w-full h-full object-cover" alt="logo">--}}
-{{--                    </div>--}}
-{{--                    <a href="" class="font-semibold text-xs text-creativehub-grey">John Doe</a>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--        <div class="product-card flex flex-col rounded-[18px] bg-[#181818] overflow-hidden">--}}
-{{--            <a href="details.html" class="thumbnail w-full h-[180px] flex shrink-0 overflow-hidden relative">--}}
-{{--                <img src="../assets/thumbnails/img-8.png" class="w-full h-full object-cover" alt="thumbnail">--}}
-{{--                <p class="backdrop-blur bg-black/30 rounded-[4px] p-[4px_8px] absolute top-3 right-[14px] z-7">Rp--}}
-{{--                    799,000</p>--}}
-{{--            </a>--}}
-{{--            <div class="p-[10px_14px_12px] h-full flex flex-col justify-between gap-[14px]">--}}
-{{--                <div class="flex flex-col gap-1">--}}
-{{--                    <a href="details.html" class="font-semibold text-xs md:text-lg lg:text-lg line-clamp-2 hover:line-clamp-none">Akio: Framer Portfolio Template</a>--}}
-{{--                    <p--}}
-{{--                        class="bg-[#2A2A2A] text-[10px] md:text-xs lg:text-xs text-creativehub-grey rounded-[4px] p-[4px_6px] w-fit">--}}
-{{--                        Template</p>--}}
-{{--                </div>--}}
-{{--                <div class="flex items-center gap-[6px]">--}}
-{{--                    <div class="w-6 h-6 flex shrink-0 items-center justify-center rounded-full overflow-hidden">--}}
-{{--                        <img src="../assets/logos/framer.png" class="w-full h-full object-cover" alt="logo">--}}
-{{--                    </div>--}}
-{{--                    <a href="" class="font-semibold text-xs text-creativehub-grey">Jaog Framer</a>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--        <div class="product-card flex flex-col rounded-[18px] bg-[#181818] overflow-hidden">--}}
-{{--            <a href="details.html" class="thumbnail w-full h-[180px] flex shrink-0 overflow-hidden relative">--}}
-{{--                <img src="../assets/thumbnails/img3.png" class="w-full h-full object-cover" alt="thumbnail">--}}
-{{--                <p class="backdrop-blur bg-black/30 rounded-[4px] p-[4px_8px] absolute top-3 right-[14px] z-7">Rp--}}
-{{--                    303,000</p>--}}
-{{--            </a>--}}
-{{--            <div class="p-[10px_14px_12px] h-full flex flex-col justify-between gap-[14px]">--}}
-{{--                <div class="flex flex-col gap-1">--}}
-{{--                    <a href="details.html" class="font-semibold text-xs md:text-lg lg:text-lg line-clamp-2 hover:line-clamp-none">OSLER UI Kit: AI Telehealth & Telemedicine Website</a>--}}
-{{--                    <p class="bg-[#2A2A2A] text-[10px] md:text-xs lg:text-xs text-creativehub-grey rounded-[4px] p-[4px_6px] w-fit">UI Kit</p>--}}
-{{--                </div>--}}
-{{--                <div class="flex items-center gap-[6px]">--}}
-{{--                    <div class="w-6 h-6 flex shrink-0 items-center justify-center rounded-full overflow-hidden">--}}
-{{--                        <img src="../assets/icons/ydntkwia.svg" class="w-full h-full object-cover" alt="logo">--}}
-{{--                    </div>--}}
-{{--                    <a href="" class="font-semibold text-xs text-creativehub-grey">BG. YDNTKWIA</a>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
     </div>
 </section>
 
@@ -490,295 +343,57 @@
                     </button>
                 </div>
             </div>
-            <div class="w-full lg:w-3/5 cursor-grab">
+            <div class="w-full lg:w-3/5">
                 <!--Slider wrapper-->
                 <div class="swiper mySwiper">
-                    @foreach($dataHome['reviews'] as $reviews)
-                        <div class="swiper-wrapper">
+                    <div class="swiper-wrapper">
+
+                        {{-- Loop Here --}}
+                        @foreach($dataHome['reviews'] as $reviews)
                             <div class="swiper-slide group bg-img-transparent hover:bg-img-purple-to-orange p-[2px] rounded-2xl max-sm:max-w-sm max-sm:mx-auto transition-all duration-500 group:">
                                 <div class="p-6 bg-img-black-gradient group-active:bg-img-black transition-all duration-300 rounded-2xl">
                                     <div class="flex items-center gap-5 mb-5 sm:mb-9">
-                                        <img src="{{$reviews->user->user_detail->image_url}}" alt="avatar" class="w-12 h-12">
+                                        <img src="https://pagedone.io/asset/uploads/1696229969.png" alt="avatar" class="w-12 h-12">
                                         <div class="grid gap-1">
-                                            <h5 class="font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#B05CB0] to-[#FCB16B] transition-all duration-500">{{$reviews->user->name}}</h5>
-                                            <span class="text-sm leading-6 text-creativehub-light-grey hover:text-white">{{$reviews->comments}} </span>
+                                            <h5 class="font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#B05CB0] to-[#FCB16B] transition-all duration-500">{{ $reviews->user->name }}</h5>
+                                            <span class="text-sm leading-6 text-creativehub-light-grey hover:text-white">{{ $reviews->user->user_detail->title }}</span>
                                         </div>
                                     </div>
                                     <div class="flex items-center mb-5 sm:mb-9 gap-2 text-amber-500 transition-all duration-500">
+
+                                        {{-- Ini State bintang ya maniez --}}
+                                        {{-- Ini ketika filled (bintang kuning) --}}
                                         <svg class="w-5 h-5" viewBox="0 0 18 17" fill="none"
                                              xmlns="http://www.w3.org/2000/svg">
                                             <path
                                                 d="M8.10326 1.31699C8.47008 0.57374 9.52992 0.57374 9.89674 1.31699L11.7063 4.98347C11.8519 5.27862 12.1335 5.48319 12.4592 5.53051L16.5054 6.11846C17.3256 6.23765 17.6531 7.24562 17.0596 7.82416L14.1318 10.6781C13.8961 10.9079 13.7885 11.2389 13.8442 11.5632L14.5353 15.5931C14.6754 16.41 13.818 17.033 13.0844 16.6473L9.46534 14.7446C9.17402 14.5915 8.82598 14.5915 8.53466 14.7446L4.91562 16.6473C4.18199 17.033 3.32456 16.41 3.46467 15.5931L4.15585 11.5632C4.21148 11.2389 4.10393 10.9079 3.86825 10.6781L0.940384 7.82416C0.346867 7.24562 0.674378 6.23765 1.4946 6.11846L5.54081 5.53051C5.86652 5.48319 6.14808 5.27862 6.29374 4.98347L8.10326 1.31699Z"
                                                 fill="currentColor"></path>
                                         </svg>
+
+                                        {{-- Ini State ketika non fill --}}
                                         <svg class="w-5 h-5" viewBox="0 0 18 17" fill="none"
                                              xmlns="http://www.w3.org/2000/svg">
                                             <path
                                                 d="M8.10326 1.31699C8.47008 0.57374 9.52992 0.57374 9.89674 1.31699L11.7063 4.98347C11.8519 5.27862 12.1335 5.48319 12.4592 5.53051L16.5054 6.11846C17.3256 6.23765 17.6531 7.24562 17.0596 7.82416L14.1318 10.6781C13.8961 10.9079 13.7885 11.2389 13.8442 11.5632L14.5353 15.5931C14.6754 16.41 13.818 17.033 13.0844 16.6473L9.46534 14.7446C9.17402 14.5915 8.82598 14.5915 8.53466 14.7446L4.91562 16.6473C4.18199 17.033 3.32456 16.41 3.46467 15.5931L4.15585 11.5632C4.21148 11.2389 4.10393 10.9079 3.86825 10.6781L0.940384 7.82416C0.346867 7.24562 0.674378 6.23765 1.4946 6.11846L5.54081 5.53051C5.86652 5.48319 6.14808 5.27862 6.29374 4.98347L8.10326 1.31699Z"
-                                                fill="currentColor"></path>
+                                                fill="#595959"></path>
                                         </svg>
-                                        <svg class="w-5 h-5" viewBox="0 0 18 17" fill="none"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M8.10326 1.31699C8.47008 0.57374 9.52992 0.57374 9.89674 1.31699L11.7063 4.98347C11.8519 5.27862 12.1335 5.48319 12.4592 5.53051L16.5054 6.11846C17.3256 6.23765 17.6531 7.24562 17.0596 7.82416L14.1318 10.6781C13.8961 10.9079 13.7885 11.2389 13.8442 11.5632L14.5353 15.5931C14.6754 16.41 13.818 17.033 13.0844 16.6473L9.46534 14.7446C9.17402 14.5915 8.82598 14.5915 8.53466 14.7446L4.91562 16.6473C4.18199 17.033 3.32456 16.41 3.46467 15.5931L4.15585 11.5632C4.21148 11.2389 4.10393 10.9079 3.86825 10.6781L0.940384 7.82416C0.346867 7.24562 0.674378 6.23765 1.4946 6.11846L5.54081 5.53051C5.86652 5.48319 6.14808 5.27862 6.29374 4.98347L8.10326 1.31699Z"
-                                                fill="currentColor"></path>
-                                        </svg>
-                                        <svg class="w-5 h-5" viewBox="0 0 18 17" fill="none"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M8.10326 1.31699C8.47008 0.57374 9.52992 0.57374 9.89674 1.31699L11.7063 4.98347C11.8519 5.27862 12.1335 5.48319 12.4592 5.53051L16.5054 6.11846C17.3256 6.23765 17.6531 7.24562 17.0596 7.82416L14.1318 10.6781C13.8961 10.9079 13.7885 11.2389 13.8442 11.5632L14.5353 15.5931C14.6754 16.41 13.818 17.033 13.0844 16.6473L9.46534 14.7446C9.17402 14.5915 8.82598 14.5915 8.53466 14.7446L4.91562 16.6473C4.18199 17.033 3.32456 16.41 3.46467 15.5931L4.15585 11.5632C4.21148 11.2389 4.10393 10.9079 3.86825 10.6781L0.940384 7.82416C0.346867 7.24562 0.674378 6.23765 1.4946 6.11846L5.54081 5.53051C5.86652 5.48319 6.14808 5.27862 6.29374 4.98347L8.10326 1.31699Z"
-                                                fill="currentColor"></path>
-                                        </svg>
-                                        <svg class="w-5 h-5" viewBox="0 0 18 17" fill="none"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M8.10326 1.31699C8.47008 0.57374 9.52992 0.57374 9.89674 1.31699L11.7063 4.98347C11.8519 5.27862 12.1335 5.48319 12.4592 5.53051L16.5054 6.11846C17.3256 6.23765 17.6531 7.24562 17.0596 7.82416L14.1318 10.6781C13.8961 10.9079 13.7885 11.2389 13.8442 11.5632L14.5353 15.5931C14.6754 16.41 13.818 17.033 13.0844 16.6473L9.46534 14.7446C9.17402 14.5915 8.82598 14.5915 8.53466 14.7446L4.91562 16.6473C4.18199 17.033 3.32456 16.41 3.46467 15.5931L4.15585 11.5632C4.21148 11.2389 4.10393 10.9079 3.86825 10.6781L0.940384 7.82416C0.346867 7.24562 0.674378 6.23765 1.4946 6.11846L5.54081 5.53051C5.86652 5.48319 6.14808 5.27862 6.29374 4.98347L8.10326 1.31699Z"
-                                                fill="currentColor"></path>
-                                        </svg>
+
                                     </div>
                                     <p class="text-sm text-creativehub-light-grey leading-6 transition-all duration-500 min-h-24  group-hover:text-white">
-                                        {{$reviews['comment']}}
+                                        {{ $reviews->comments }}
                                     </p>
                                 </div>
                             </div>
-                    @endforeach
+                        @endforeach
+                        {{-- End Loop Here --}}
 
-{{--                        <div class="swiper-slide group bg-img-transparent hover:bg-img-purple-to-orange p-[2px] rounded-2xl max-sm:max-w-sm max-sm:mx-auto transition-all duration-500 group:">--}}
-{{--                            <div class="p-6 bg-img-black-gradient group-active:bg-img-black transition-all duration-300 rounded-2xl">--}}
-{{--                                <div class="flex items-center gap-5 mb-5 sm:mb-9">--}}
-{{--                                    <img src="../assets/photos/photo1.png" alt="avatar" class="w-12 h-12">--}}
-{{--                                    <div class="grid gap-1">--}}
-{{--                                        <h5 class="font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#B05CB0] to-[#FCB16B] transition-all duration-500">Joni Yes Papa</h5>--}}
-{{--                                        <span class="text-sm leading-6 text-creativehub-light-grey hover:text-white">Brand Design Consultant </span>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <div class="flex items-center mb-5 sm:mb-9 gap-2 text-amber-500 transition-all duration-500">--}}
-{{--                                    <svg class="w-5 h-5" viewBox="0 0 18 17" fill="none"--}}
-{{--                                         xmlns="http://www.w3.org/2000/svg">--}}
-{{--                                        <path--}}
-{{--                                            d="M8.10326 1.31699C8.47008 0.57374 9.52992 0.57374 9.89674 1.31699L11.7063 4.98347C11.8519 5.27862 12.1335 5.48319 12.4592 5.53051L16.5054 6.11846C17.3256 6.23765 17.6531 7.24562 17.0596 7.82416L14.1318 10.6781C13.8961 10.9079 13.7885 11.2389 13.8442 11.5632L14.5353 15.5931C14.6754 16.41 13.818 17.033 13.0844 16.6473L9.46534 14.7446C9.17402 14.5915 8.82598 14.5915 8.53466 14.7446L4.91562 16.6473C4.18199 17.033 3.32456 16.41 3.46467 15.5931L4.15585 11.5632C4.21148 11.2389 4.10393 10.9079 3.86825 10.6781L0.940384 7.82416C0.346867 7.24562 0.674378 6.23765 1.4946 6.11846L5.54081 5.53051C5.86652 5.48319 6.14808 5.27862 6.29374 4.98347L8.10326 1.31699Z"--}}
-{{--                                            fill="currentColor"></path>--}}
-{{--                                    </svg>--}}
-{{--                                    <svg class="w-5 h-5" viewBox="0 0 18 17" fill="none"--}}
-{{--                                         xmlns="http://www.w3.org/2000/svg">--}}
-{{--                                        <path--}}
-{{--                                            d="M8.10326 1.31699C8.47008 0.57374 9.52992 0.57374 9.89674 1.31699L11.7063 4.98347C11.8519 5.27862 12.1335 5.48319 12.4592 5.53051L16.5054 6.11846C17.3256 6.23765 17.6531 7.24562 17.0596 7.82416L14.1318 10.6781C13.8961 10.9079 13.7885 11.2389 13.8442 11.5632L14.5353 15.5931C14.6754 16.41 13.818 17.033 13.0844 16.6473L9.46534 14.7446C9.17402 14.5915 8.82598 14.5915 8.53466 14.7446L4.91562 16.6473C4.18199 17.033 3.32456 16.41 3.46467 15.5931L4.15585 11.5632C4.21148 11.2389 4.10393 10.9079 3.86825 10.6781L0.940384 7.82416C0.346867 7.24562 0.674378 6.23765 1.4946 6.11846L5.54081 5.53051C5.86652 5.48319 6.14808 5.27862 6.29374 4.98347L8.10326 1.31699Z"--}}
-{{--                                            fill="currentColor"></path>--}}
-{{--                                    </svg>--}}
-{{--                                    <svg class="w-5 h-5" viewBox="0 0 18 17" fill="none"--}}
-{{--                                         xmlns="http://www.w3.org/2000/svg">--}}
-{{--                                        <path--}}
-{{--                                            d="M8.10326 1.31699C8.47008 0.57374 9.52992 0.57374 9.89674 1.31699L11.7063 4.98347C11.8519 5.27862 12.1335 5.48319 12.4592 5.53051L16.5054 6.11846C17.3256 6.23765 17.6531 7.24562 17.0596 7.82416L14.1318 10.6781C13.8961 10.9079 13.7885 11.2389 13.8442 11.5632L14.5353 15.5931C14.6754 16.41 13.818 17.033 13.0844 16.6473L9.46534 14.7446C9.17402 14.5915 8.82598 14.5915 8.53466 14.7446L4.91562 16.6473C4.18199 17.033 3.32456 16.41 3.46467 15.5931L4.15585 11.5632C4.21148 11.2389 4.10393 10.9079 3.86825 10.6781L0.940384 7.82416C0.346867 7.24562 0.674378 6.23765 1.4946 6.11846L5.54081 5.53051C5.86652 5.48319 6.14808 5.27862 6.29374 4.98347L8.10326 1.31699Z"--}}
-{{--                                            fill="currentColor"></path>--}}
-{{--                                    </svg>--}}
-{{--                                    <svg class="w-5 h-5" viewBox="0 0 18 17" fill="none"--}}
-{{--                                         xmlns="http://www.w3.org/2000/svg">--}}
-{{--                                        <path--}}
-{{--                                            d="M8.10326 1.31699C8.47008 0.57374 9.52992 0.57374 9.89674 1.31699L11.7063 4.98347C11.8519 5.27862 12.1335 5.48319 12.4592 5.53051L16.5054 6.11846C17.3256 6.23765 17.6531 7.24562 17.0596 7.82416L14.1318 10.6781C13.8961 10.9079 13.7885 11.2389 13.8442 11.5632L14.5353 15.5931C14.6754 16.41 13.818 17.033 13.0844 16.6473L9.46534 14.7446C9.17402 14.5915 8.82598 14.5915 8.53466 14.7446L4.91562 16.6473C4.18199 17.033 3.32456 16.41 3.46467 15.5931L4.15585 11.5632C4.21148 11.2389 4.10393 10.9079 3.86825 10.6781L0.940384 7.82416C0.346867 7.24562 0.674378 6.23765 1.4946 6.11846L5.54081 5.53051C5.86652 5.48319 6.14808 5.27862 6.29374 4.98347L8.10326 1.31699Z"--}}
-{{--                                            fill="currentColor"></path>--}}
-{{--                                    </svg>--}}
-{{--                                    <svg class="w-5 h-5" viewBox="0 0 18 17" fill="none"--}}
-{{--                                         xmlns="http://www.w3.org/2000/svg">--}}
-{{--                                        <path--}}
-{{--                                            d="M8.10326 1.31699C8.47008 0.57374 9.52992 0.57374 9.89674 1.31699L11.7063 4.98347C11.8519 5.27862 12.1335 5.48319 12.4592 5.53051L16.5054 6.11846C17.3256 6.23765 17.6531 7.24562 17.0596 7.82416L14.1318 10.6781C13.8961 10.9079 13.7885 11.2389 13.8442 11.5632L14.5353 15.5931C14.6754 16.41 13.818 17.033 13.0844 16.6473L9.46534 14.7446C9.17402 14.5915 8.82598 14.5915 8.53466 14.7446L4.91562 16.6473C4.18199 17.033 3.32456 16.41 3.46467 15.5931L4.15585 11.5632C4.21148 11.2389 4.10393 10.9079 3.86825 10.6781L0.940384 7.82416C0.346867 7.24562 0.674378 6.23765 1.4946 6.11846L5.54081 5.53051C5.86652 5.48319 6.14808 5.27862 6.29374 4.98347L8.10326 1.31699Z"--}}
-{{--                                            fill="currentColor"></path>--}}
-{{--                                    </svg>--}}
-{{--                                </div>--}}
-{{--                                <p class="text-sm text-creativehub-light-grey leading-6 transition-all duration-500 min-h-24  group-hover:text-white">--}}
-{{--                                    A lifesaver! The templates are beautiful and easy to customize. Improved my projects visually in no time.--}}
-{{--                                </p>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div class="swiper-slide group bg-img-transparent hover:bg-img-purple-to-orange p-[2px] rounded-2xl max-sm:max-w-sm max-sm:mx-auto transition-all duration-500 group:">--}}
-{{--                            <div class="p-6 bg-img-black-gradient group-active:bg-img-black transition-all duration-300 rounded-2xl">--}}
-{{--                                <div class="flex items-center gap-5 mb-5 sm:mb-9">--}}
-{{--                                    <img src="../assets/photos/photo2.png" alt="avatar" class="w-12 h-12">--}}
-{{--                                    <div class="grid gap-1">--}}
-{{--                                        <h5 class="font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#B05CB0] to-[#FCB16B] transition-all duration-500">Vanesa Sebelum 7 Hari</h5>--}}
-{{--                                        <span class="text-sm leading-6 text-creativehub-light-grey hover:text-white">Senior Graphic Designer </span>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <div class="flex items-center mb-5 sm:mb-9 gap-2 text-amber-500 transition-all duration-500">--}}
-{{--                                    <svg class="w-5 h-5" viewBox="0 0 18 17" fill="none"--}}
-{{--                                         xmlns="http://www.w3.org/2000/svg">--}}
-{{--                                        <path--}}
-{{--                                            d="M8.10326 1.31699C8.47008 0.57374 9.52992 0.57374 9.89674 1.31699L11.7063 4.98347C11.8519 5.27862 12.1335 5.48319 12.4592 5.53051L16.5054 6.11846C17.3256 6.23765 17.6531 7.24562 17.0596 7.82416L14.1318 10.6781C13.8961 10.9079 13.7885 11.2389 13.8442 11.5632L14.5353 15.5931C14.6754 16.41 13.818 17.033 13.0844 16.6473L9.46534 14.7446C9.17402 14.5915 8.82598 14.5915 8.53466 14.7446L4.91562 16.6473C4.18199 17.033 3.32456 16.41 3.46467 15.5931L4.15585 11.5632C4.21148 11.2389 4.10393 10.9079 3.86825 10.6781L0.940384 7.82416C0.346867 7.24562 0.674378 6.23765 1.4946 6.11846L5.54081 5.53051C5.86652 5.48319 6.14808 5.27862 6.29374 4.98347L8.10326 1.31699Z"--}}
-{{--                                            fill="currentColor"></path>--}}
-{{--                                    </svg>--}}
-{{--                                    <svg class="w-5 h-5" viewBox="0 0 18 17" fill="none"--}}
-{{--                                         xmlns="http://www.w3.org/2000/svg">--}}
-{{--                                        <path--}}
-{{--                                            d="M8.10326 1.31699C8.47008 0.57374 9.52992 0.57374 9.89674 1.31699L11.7063 4.98347C11.8519 5.27862 12.1335 5.48319 12.4592 5.53051L16.5054 6.11846C17.3256 6.23765 17.6531 7.24562 17.0596 7.82416L14.1318 10.6781C13.8961 10.9079 13.7885 11.2389 13.8442 11.5632L14.5353 15.5931C14.6754 16.41 13.818 17.033 13.0844 16.6473L9.46534 14.7446C9.17402 14.5915 8.82598 14.5915 8.53466 14.7446L4.91562 16.6473C4.18199 17.033 3.32456 16.41 3.46467 15.5931L4.15585 11.5632C4.21148 11.2389 4.10393 10.9079 3.86825 10.6781L0.940384 7.82416C0.346867 7.24562 0.674378 6.23765 1.4946 6.11846L5.54081 5.53051C5.86652 5.48319 6.14808 5.27862 6.29374 4.98347L8.10326 1.31699Z"--}}
-{{--                                            fill="currentColor"></path>--}}
-{{--                                    </svg>--}}
-{{--                                    <svg class="w-5 h-5" viewBox="0 0 18 17" fill="none"--}}
-{{--                                         xmlns="http://www.w3.org/2000/svg">--}}
-{{--                                        <path--}}
-{{--                                            d="M8.10326 1.31699C8.47008 0.57374 9.52992 0.57374 9.89674 1.31699L11.7063 4.98347C11.8519 5.27862 12.1335 5.48319 12.4592 5.53051L16.5054 6.11846C17.3256 6.23765 17.6531 7.24562 17.0596 7.82416L14.1318 10.6781C13.8961 10.9079 13.7885 11.2389 13.8442 11.5632L14.5353 15.5931C14.6754 16.41 13.818 17.033 13.0844 16.6473L9.46534 14.7446C9.17402 14.5915 8.82598 14.5915 8.53466 14.7446L4.91562 16.6473C4.18199 17.033 3.32456 16.41 3.46467 15.5931L4.15585 11.5632C4.21148 11.2389 4.10393 10.9079 3.86825 10.6781L0.940384 7.82416C0.346867 7.24562 0.674378 6.23765 1.4946 6.11846L5.54081 5.53051C5.86652 5.48319 6.14808 5.27862 6.29374 4.98347L8.10326 1.31699Z"--}}
-{{--                                            fill="currentColor"></path>--}}
-{{--                                    </svg>--}}
-{{--                                    <svg class="w-5 h-5" viewBox="0 0 18 17" fill="none"--}}
-{{--                                         xmlns="http://www.w3.org/2000/svg">--}}
-{{--                                        <path--}}
-{{--                                            d="M8.10326 1.31699C8.47008 0.57374 9.52992 0.57374 9.89674 1.31699L11.7063 4.98347C11.8519 5.27862 12.1335 5.48319 12.4592 5.53051L16.5054 6.11846C17.3256 6.23765 17.6531 7.24562 17.0596 7.82416L14.1318 10.6781C13.8961 10.9079 13.7885 11.2389 13.8442 11.5632L14.5353 15.5931C14.6754 16.41 13.818 17.033 13.0844 16.6473L9.46534 14.7446C9.17402 14.5915 8.82598 14.5915 8.53466 14.7446L4.91562 16.6473C4.18199 17.033 3.32456 16.41 3.46467 15.5931L4.15585 11.5632C4.21148 11.2389 4.10393 10.9079 3.86825 10.6781L0.940384 7.82416C0.346867 7.24562 0.674378 6.23765 1.4946 6.11846L5.54081 5.53051C5.86652 5.48319 6.14808 5.27862 6.29374 4.98347L8.10326 1.31699Z"--}}
-{{--                                            fill="currentColor"></path>--}}
-{{--                                    </svg>--}}
-{{--                                    <svg class="w-5 h-5" viewBox="0 0 18 17" fill="none"--}}
-{{--                                         xmlns="http://www.w3.org/2000/svg">--}}
-{{--                                        <path--}}
-{{--                                            d="M8.10326 1.31699C8.47008 0.57374 9.52992 0.57374 9.89674 1.31699L11.7063 4.98347C11.8519 5.27862 12.1335 5.48319 12.4592 5.53051L16.5054 6.11846C17.3256 6.23765 17.6531 7.24562 17.0596 7.82416L14.1318 10.6781C13.8961 10.9079 13.7885 11.2389 13.8442 11.5632L14.5353 15.5931C14.6754 16.41 13.818 17.033 13.0844 16.6473L9.46534 14.7446C9.17402 14.5915 8.82598 14.5915 8.53466 14.7446L4.91562 16.6473C4.18199 17.033 3.32456 16.41 3.46467 15.5931L4.15585 11.5632C4.21148 11.2389 4.10393 10.9079 3.86825 10.6781L0.940384 7.82416C0.346867 7.24562 0.674378 6.23765 1.4946 6.11846L5.54081 5.53051C5.86652 5.48319 6.14808 5.27862 6.29374 4.98347L8.10326 1.31699Z"--}}
-{{--                                            fill="currentColor"></path>--}}
-{{--                                    </svg>--}}
-{{--                                </div>--}}
-{{--                                <p class="text-sm text-creativehub-light-grey leading-6 transition-all duration-500 min-h-24  group-hover:text-white">--}}
-{{--                                    Impressed with the quality and service. A great asset for creative and professional design solutions.--}}
-{{--                                </p>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div class="swiper-slide group bg-img-transparent hover:bg-img-purple-to-orange p-[2px] rounded-2xl max-sm:max-w-sm max-sm:mx-auto transition-all duration-500 group:">--}}
-{{--                            <div class="p-6 bg-img-black-gradient group-active:bg-img-black transition-all duration-300 rounded-2xl">--}}
-{{--                                <div class="flex items-center gap-5 mb-5 sm:mb-9">--}}
-{{--                                    <img src="https://pagedone.io/asset/uploads/1696229969.png" alt="avatar" class="w-12 h-12">--}}
-{{--                                    <div class="grid gap-1">--}}
-{{--                                        <h5 class="font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#B05CB0] to-[#FCB16B] transition-all duration-500">Vina Sebelum ke Garuts</h5>--}}
-{{--                                        <span class="text-sm leading-6 text-creativehub-light-grey hover:text-white">Product Designer </span>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <div class="flex items-center mb-5 sm:mb-9 gap-2 text-amber-500 transition-all duration-500">--}}
-{{--                                    <svg class="w-5 h-5" viewBox="0 0 18 17" fill="none"--}}
-{{--                                         xmlns="http://www.w3.org/2000/svg">--}}
-{{--                                        <path--}}
-{{--                                            d="M8.10326 1.31699C8.47008 0.57374 9.52992 0.57374 9.89674 1.31699L11.7063 4.98347C11.8519 5.27862 12.1335 5.48319 12.4592 5.53051L16.5054 6.11846C17.3256 6.23765 17.6531 7.24562 17.0596 7.82416L14.1318 10.6781C13.8961 10.9079 13.7885 11.2389 13.8442 11.5632L14.5353 15.5931C14.6754 16.41 13.818 17.033 13.0844 16.6473L9.46534 14.7446C9.17402 14.5915 8.82598 14.5915 8.53466 14.7446L4.91562 16.6473C4.18199 17.033 3.32456 16.41 3.46467 15.5931L4.15585 11.5632C4.21148 11.2389 4.10393 10.9079 3.86825 10.6781L0.940384 7.82416C0.346867 7.24562 0.674378 6.23765 1.4946 6.11846L5.54081 5.53051C5.86652 5.48319 6.14808 5.27862 6.29374 4.98347L8.10326 1.31699Z"--}}
-{{--                                            fill="currentColor"></path>--}}
-{{--                                    </svg>--}}
-{{--                                    <svg class="w-5 h-5" viewBox="0 0 18 17" fill="none"--}}
-{{--                                         xmlns="http://www.w3.org/2000/svg">--}}
-{{--                                        <path--}}
-{{--                                            d="M8.10326 1.31699C8.47008 0.57374 9.52992 0.57374 9.89674 1.31699L11.7063 4.98347C11.8519 5.27862 12.1335 5.48319 12.4592 5.53051L16.5054 6.11846C17.3256 6.23765 17.6531 7.24562 17.0596 7.82416L14.1318 10.6781C13.8961 10.9079 13.7885 11.2389 13.8442 11.5632L14.5353 15.5931C14.6754 16.41 13.818 17.033 13.0844 16.6473L9.46534 14.7446C9.17402 14.5915 8.82598 14.5915 8.53466 14.7446L4.91562 16.6473C4.18199 17.033 3.32456 16.41 3.46467 15.5931L4.15585 11.5632C4.21148 11.2389 4.10393 10.9079 3.86825 10.6781L0.940384 7.82416C0.346867 7.24562 0.674378 6.23765 1.4946 6.11846L5.54081 5.53051C5.86652 5.48319 6.14808 5.27862 6.29374 4.98347L8.10326 1.31699Z"--}}
-{{--                                            fill="currentColor"></path>--}}
-{{--                                    </svg>--}}
-{{--                                    <svg class="w-5 h-5" viewBox="0 0 18 17" fill="none"--}}
-{{--                                         xmlns="http://www.w3.org/2000/svg">--}}
-{{--                                        <path--}}
-{{--                                            d="M8.10326 1.31699C8.47008 0.57374 9.52992 0.57374 9.89674 1.31699L11.7063 4.98347C11.8519 5.27862 12.1335 5.48319 12.4592 5.53051L16.5054 6.11846C17.3256 6.23765 17.6531 7.24562 17.0596 7.82416L14.1318 10.6781C13.8961 10.9079 13.7885 11.2389 13.8442 11.5632L14.5353 15.5931C14.6754 16.41 13.818 17.033 13.0844 16.6473L9.46534 14.7446C9.17402 14.5915 8.82598 14.5915 8.53466 14.7446L4.91562 16.6473C4.18199 17.033 3.32456 16.41 3.46467 15.5931L4.15585 11.5632C4.21148 11.2389 4.10393 10.9079 3.86825 10.6781L0.940384 7.82416C0.346867 7.24562 0.674378 6.23765 1.4946 6.11846L5.54081 5.53051C5.86652 5.48319 6.14808 5.27862 6.29374 4.98347L8.10326 1.31699Z"--}}
-{{--                                            fill="currentColor"></path>--}}
-{{--                                    </svg>--}}
-{{--                                    <svg class="w-5 h-5" viewBox="0 0 18 17" fill="none"--}}
-{{--                                         xmlns="http://www.w3.org/2000/svg">--}}
-{{--                                        <path--}}
-{{--                                            d="M8.10326 1.31699C8.47008 0.57374 9.52992 0.57374 9.89674 1.31699L11.7063 4.98347C11.8519 5.27862 12.1335 5.48319 12.4592 5.53051L16.5054 6.11846C17.3256 6.23765 17.6531 7.24562 17.0596 7.82416L14.1318 10.6781C13.8961 10.9079 13.7885 11.2389 13.8442 11.5632L14.5353 15.5931C14.6754 16.41 13.818 17.033 13.0844 16.6473L9.46534 14.7446C9.17402 14.5915 8.82598 14.5915 8.53466 14.7446L4.91562 16.6473C4.18199 17.033 3.32456 16.41 3.46467 15.5931L4.15585 11.5632C4.21148 11.2389 4.10393 10.9079 3.86825 10.6781L0.940384 7.82416C0.346867 7.24562 0.674378 6.23765 1.4946 6.11846L5.54081 5.53051C5.86652 5.48319 6.14808 5.27862 6.29374 4.98347L8.10326 1.31699Z"--}}
-{{--                                            fill="currentColor"></path>--}}
-{{--                                    </svg>--}}
-{{--                                    <svg class="w-5 h-5" viewBox="0 0 18 17" fill="none"--}}
-{{--                                         xmlns="http://www.w3.org/2000/svg">--}}
-{{--                                        <path--}}
-{{--                                            d="M8.10326 1.31699C8.47008 0.57374 9.52992 0.57374 9.89674 1.31699L11.7063 4.98347C11.8519 5.27862 12.1335 5.48319 12.4592 5.53051L16.5054 6.11846C17.3256 6.23765 17.6531 7.24562 17.0596 7.82416L14.1318 10.6781C13.8961 10.9079 13.7885 11.2389 13.8442 11.5632L14.5353 15.5931C14.6754 16.41 13.818 17.033 13.0844 16.6473L9.46534 14.7446C9.17402 14.5915 8.82598 14.5915 8.53466 14.7446L4.91562 16.6473C4.18199 17.033 3.32456 16.41 3.46467 15.5931L4.15585 11.5632C4.21148 11.2389 4.10393 10.9079 3.86825 10.6781L0.940384 7.82416C0.346867 7.24562 0.674378 6.23765 1.4946 6.11846L5.54081 5.53051C5.86652 5.48319 6.14808 5.27862 6.29374 4.98347L8.10326 1.31699Z"--}}
-{{--                                            fill="currentColor"></path>--}}
-{{--                                    </svg>--}}
-{{--                                </div>--}}
-{{--                                <p class="text-sm text-creativehub-light-grey leading-6 transition-all duration-500 min-h-24  group-hover:text-white">--}}
-{{--                                    Using these templates has boosted my productivity significantly. Highly recommended for all designers!--}}
-{{--                                </p>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div class="swiper-slide group bg-img-transparent hover:bg-img-purple-to-orange p-[2px] rounded-2xl max-sm:max-w-sm max-sm:mx-auto transition-all duration-500 group:">--}}
-{{--                            <div class="p-6 bg-img-black-gradient group-active:bg-img-black transition-all duration-300 rounded-2xl">--}}
-{{--                                <div class="flex items-center gap-5 mb-5 sm:mb-9">--}}
-{{--                                    <img src="../assets/photos/photo1.png" alt="avatar" class="w-12 h-12">--}}
-{{--                                    <div class="grid gap-1">--}}
-{{--                                        <h5 class="font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#B05CB0] to-[#FCB16B] transition-all duration-500">Joni Yes Papa</h5>--}}
-{{--                                        <span class="text-sm leading-6 text-creativehub-light-grey hover:text-white">Brand Design Consultant </span>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <div class="flex items-center mb-5 sm:mb-9 gap-2 text-amber-500 transition-all duration-500">--}}
-{{--                                    <svg class="w-5 h-5" viewBox="0 0 18 17" fill="none"--}}
-{{--                                         xmlns="http://www.w3.org/2000/svg">--}}
-{{--                                        <path--}}
-{{--                                            d="M8.10326 1.31699C8.47008 0.57374 9.52992 0.57374 9.89674 1.31699L11.7063 4.98347C11.8519 5.27862 12.1335 5.48319 12.4592 5.53051L16.5054 6.11846C17.3256 6.23765 17.6531 7.24562 17.0596 7.82416L14.1318 10.6781C13.8961 10.9079 13.7885 11.2389 13.8442 11.5632L14.5353 15.5931C14.6754 16.41 13.818 17.033 13.0844 16.6473L9.46534 14.7446C9.17402 14.5915 8.82598 14.5915 8.53466 14.7446L4.91562 16.6473C4.18199 17.033 3.32456 16.41 3.46467 15.5931L4.15585 11.5632C4.21148 11.2389 4.10393 10.9079 3.86825 10.6781L0.940384 7.82416C0.346867 7.24562 0.674378 6.23765 1.4946 6.11846L5.54081 5.53051C5.86652 5.48319 6.14808 5.27862 6.29374 4.98347L8.10326 1.31699Z"--}}
-{{--                                            fill="currentColor"></path>--}}
-{{--                                    </svg>--}}
-{{--                                    <svg class="w-5 h-5" viewBox="0 0 18 17" fill="none"--}}
-{{--                                         xmlns="http://www.w3.org/2000/svg">--}}
-{{--                                        <path--}}
-{{--                                            d="M8.10326 1.31699C8.47008 0.57374 9.52992 0.57374 9.89674 1.31699L11.7063 4.98347C11.8519 5.27862 12.1335 5.48319 12.4592 5.53051L16.5054 6.11846C17.3256 6.23765 17.6531 7.24562 17.0596 7.82416L14.1318 10.6781C13.8961 10.9079 13.7885 11.2389 13.8442 11.5632L14.5353 15.5931C14.6754 16.41 13.818 17.033 13.0844 16.6473L9.46534 14.7446C9.17402 14.5915 8.82598 14.5915 8.53466 14.7446L4.91562 16.6473C4.18199 17.033 3.32456 16.41 3.46467 15.5931L4.15585 11.5632C4.21148 11.2389 4.10393 10.9079 3.86825 10.6781L0.940384 7.82416C0.346867 7.24562 0.674378 6.23765 1.4946 6.11846L5.54081 5.53051C5.86652 5.48319 6.14808 5.27862 6.29374 4.98347L8.10326 1.31699Z"--}}
-{{--                                            fill="currentColor"></path>--}}
-{{--                                    </svg>--}}
-{{--                                    <svg class="w-5 h-5" viewBox="0 0 18 17" fill="none"--}}
-{{--                                         xmlns="http://www.w3.org/2000/svg">--}}
-{{--                                        <path--}}
-{{--                                            d="M8.10326 1.31699C8.47008 0.57374 9.52992 0.57374 9.89674 1.31699L11.7063 4.98347C11.8519 5.27862 12.1335 5.48319 12.4592 5.53051L16.5054 6.11846C17.3256 6.23765 17.6531 7.24562 17.0596 7.82416L14.1318 10.6781C13.8961 10.9079 13.7885 11.2389 13.8442 11.5632L14.5353 15.5931C14.6754 16.41 13.818 17.033 13.0844 16.6473L9.46534 14.7446C9.17402 14.5915 8.82598 14.5915 8.53466 14.7446L4.91562 16.6473C4.18199 17.033 3.32456 16.41 3.46467 15.5931L4.15585 11.5632C4.21148 11.2389 4.10393 10.9079 3.86825 10.6781L0.940384 7.82416C0.346867 7.24562 0.674378 6.23765 1.4946 6.11846L5.54081 5.53051C5.86652 5.48319 6.14808 5.27862 6.29374 4.98347L8.10326 1.31699Z"--}}
-{{--                                            fill="currentColor"></path>--}}
-{{--                                    </svg>--}}
-{{--                                    <svg class="w-5 h-5" viewBox="0 0 18 17" fill="none"--}}
-{{--                                         xmlns="http://www.w3.org/2000/svg">--}}
-{{--                                        <path--}}
-{{--                                            d="M8.10326 1.31699C8.47008 0.57374 9.52992 0.57374 9.89674 1.31699L11.7063 4.98347C11.8519 5.27862 12.1335 5.48319 12.4592 5.53051L16.5054 6.11846C17.3256 6.23765 17.6531 7.24562 17.0596 7.82416L14.1318 10.6781C13.8961 10.9079 13.7885 11.2389 13.8442 11.5632L14.5353 15.5931C14.6754 16.41 13.818 17.033 13.0844 16.6473L9.46534 14.7446C9.17402 14.5915 8.82598 14.5915 8.53466 14.7446L4.91562 16.6473C4.18199 17.033 3.32456 16.41 3.46467 15.5931L4.15585 11.5632C4.21148 11.2389 4.10393 10.9079 3.86825 10.6781L0.940384 7.82416C0.346867 7.24562 0.674378 6.23765 1.4946 6.11846L5.54081 5.53051C5.86652 5.48319 6.14808 5.27862 6.29374 4.98347L8.10326 1.31699Z"--}}
-{{--                                            fill="currentColor"></path>--}}
-{{--                                    </svg>--}}
-{{--                                    <svg class="w-5 h-5" viewBox="0 0 18 17" fill="none"--}}
-{{--                                         xmlns="http://www.w3.org/2000/svg">--}}
-{{--                                        <path--}}
-{{--                                            d="M8.10326 1.31699C8.47008 0.57374 9.52992 0.57374 9.89674 1.31699L11.7063 4.98347C11.8519 5.27862 12.1335 5.48319 12.4592 5.53051L16.5054 6.11846C17.3256 6.23765 17.6531 7.24562 17.0596 7.82416L14.1318 10.6781C13.8961 10.9079 13.7885 11.2389 13.8442 11.5632L14.5353 15.5931C14.6754 16.41 13.818 17.033 13.0844 16.6473L9.46534 14.7446C9.17402 14.5915 8.82598 14.5915 8.53466 14.7446L4.91562 16.6473C4.18199 17.033 3.32456 16.41 3.46467 15.5931L4.15585 11.5632C4.21148 11.2389 4.10393 10.9079 3.86825 10.6781L0.940384 7.82416C0.346867 7.24562 0.674378 6.23765 1.4946 6.11846L5.54081 5.53051C5.86652 5.48319 6.14808 5.27862 6.29374 4.98347L8.10326 1.31699Z"--}}
-{{--                                            fill="currentColor"></path>--}}
-{{--                                    </svg>--}}
-{{--                                </div>--}}
-{{--                                <p class="text-sm text-creativehub-light-grey leading-6 transition-all duration-500 min-h-24  group-hover:text-white">--}}
-{{--                                    A lifesaver! The templates are beautiful and easy to customize. Improved my projects visually in no time.--}}
-{{--                                </p>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div class="swiper-slide group bg-img-transparent hover:bg-img-purple-to-orange p-[2px] rounded-2xl max-sm:max-w-sm max-sm:mx-auto transition-all duration-500 group:">--}}
-{{--                            <div class="p-6 bg-img-black-gradient group-active:bg-img-black transition-all duration-300 rounded-2xl">--}}
-{{--                                <div class="flex items-center gap-5 mb-5 sm:mb-9">--}}
-{{--                                    <img src="../assets/photos/photo2.png" alt="avatar" class="w-12 h-12">--}}
-{{--                                    <div class="grid gap-1">--}}
-{{--                                        <h5 class="font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#B05CB0] to-[#FCB16B] transition-all duration-500">Vanesa Sebelum 7 Hari</h5>--}}
-{{--                                        <span class="text-sm leading-6 text-creativehub-light-grey hover:text-white">Senior Graphic Designer </span>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <div class="flex items-center mb-5 sm:mb-9 gap-2 text-amber-500 transition-all duration-500">--}}
-{{--                                    <svg class="w-5 h-5" viewBox="0 0 18 17" fill="none"--}}
-{{--                                         xmlns="http://www.w3.org/2000/svg">--}}
-{{--                                        <path--}}
-{{--                                            d="M8.10326 1.31699C8.47008 0.57374 9.52992 0.57374 9.89674 1.31699L11.7063 4.98347C11.8519 5.27862 12.1335 5.48319 12.4592 5.53051L16.5054 6.11846C17.3256 6.23765 17.6531 7.24562 17.0596 7.82416L14.1318 10.6781C13.8961 10.9079 13.7885 11.2389 13.8442 11.5632L14.5353 15.5931C14.6754 16.41 13.818 17.033 13.0844 16.6473L9.46534 14.7446C9.17402 14.5915 8.82598 14.5915 8.53466 14.7446L4.91562 16.6473C4.18199 17.033 3.32456 16.41 3.46467 15.5931L4.15585 11.5632C4.21148 11.2389 4.10393 10.9079 3.86825 10.6781L0.940384 7.82416C0.346867 7.24562 0.674378 6.23765 1.4946 6.11846L5.54081 5.53051C5.86652 5.48319 6.14808 5.27862 6.29374 4.98347L8.10326 1.31699Z"--}}
-{{--                                            fill="currentColor"></path>--}}
-{{--                                    </svg>--}}
-{{--                                    <svg class="w-5 h-5" viewBox="0 0 18 17" fill="none"--}}
-{{--                                         xmlns="http://www.w3.org/2000/svg">--}}
-{{--                                        <path--}}
-{{--                                            d="M8.10326 1.31699C8.47008 0.57374 9.52992 0.57374 9.89674 1.31699L11.7063 4.98347C11.8519 5.27862 12.1335 5.48319 12.4592 5.53051L16.5054 6.11846C17.3256 6.23765 17.6531 7.24562 17.0596 7.82416L14.1318 10.6781C13.8961 10.9079 13.7885 11.2389 13.8442 11.5632L14.5353 15.5931C14.6754 16.41 13.818 17.033 13.0844 16.6473L9.46534 14.7446C9.17402 14.5915 8.82598 14.5915 8.53466 14.7446L4.91562 16.6473C4.18199 17.033 3.32456 16.41 3.46467 15.5931L4.15585 11.5632C4.21148 11.2389 4.10393 10.9079 3.86825 10.6781L0.940384 7.82416C0.346867 7.24562 0.674378 6.23765 1.4946 6.11846L5.54081 5.53051C5.86652 5.48319 6.14808 5.27862 6.29374 4.98347L8.10326 1.31699Z"--}}
-{{--                                            fill="currentColor"></path>--}}
-{{--                                    </svg>--}}
-{{--                                    <svg class="w-5 h-5" viewBox="0 0 18 17" fill="none"--}}
-{{--                                         xmlns="http://www.w3.org/2000/svg">--}}
-{{--                                        <path--}}
-{{--                                            d="M8.10326 1.31699C8.47008 0.57374 9.52992 0.57374 9.89674 1.31699L11.7063 4.98347C11.8519 5.27862 12.1335 5.48319 12.4592 5.53051L16.5054 6.11846C17.3256 6.23765 17.6531 7.24562 17.0596 7.82416L14.1318 10.6781C13.8961 10.9079 13.7885 11.2389 13.8442 11.5632L14.5353 15.5931C14.6754 16.41 13.818 17.033 13.0844 16.6473L9.46534 14.7446C9.17402 14.5915 8.82598 14.5915 8.53466 14.7446L4.91562 16.6473C4.18199 17.033 3.32456 16.41 3.46467 15.5931L4.15585 11.5632C4.21148 11.2389 4.10393 10.9079 3.86825 10.6781L0.940384 7.82416C0.346867 7.24562 0.674378 6.23765 1.4946 6.11846L5.54081 5.53051C5.86652 5.48319 6.14808 5.27862 6.29374 4.98347L8.10326 1.31699Z"--}}
-{{--                                            fill="currentColor"></path>--}}
-{{--                                    </svg>--}}
-{{--                                    <svg class="w-5 h-5" viewBox="0 0 18 17" fill="none"--}}
-{{--                                         xmlns="http://www.w3.org/2000/svg">--}}
-{{--                                        <path--}}
-{{--                                            d="M8.10326 1.31699C8.47008 0.57374 9.52992 0.57374 9.89674 1.31699L11.7063 4.98347C11.8519 5.27862 12.1335 5.48319 12.4592 5.53051L16.5054 6.11846C17.3256 6.23765 17.6531 7.24562 17.0596 7.82416L14.1318 10.6781C13.8961 10.9079 13.7885 11.2389 13.8442 11.5632L14.5353 15.5931C14.6754 16.41 13.818 17.033 13.0844 16.6473L9.46534 14.7446C9.17402 14.5915 8.82598 14.5915 8.53466 14.7446L4.91562 16.6473C4.18199 17.033 3.32456 16.41 3.46467 15.5931L4.15585 11.5632C4.21148 11.2389 4.10393 10.9079 3.86825 10.6781L0.940384 7.82416C0.346867 7.24562 0.674378 6.23765 1.4946 6.11846L5.54081 5.53051C5.86652 5.48319 6.14808 5.27862 6.29374 4.98347L8.10326 1.31699Z"--}}
-{{--                                            fill="currentColor"></path>--}}
-{{--                                    </svg>--}}
-{{--                                    <svg class="w-5 h-5" viewBox="0 0 18 17" fill="none"--}}
-{{--                                         xmlns="http://www.w3.org/2000/svg">--}}
-{{--                                        <path--}}
-{{--                                            d="M8.10326 1.31699C8.47008 0.57374 9.52992 0.57374 9.89674 1.31699L11.7063 4.98347C11.8519 5.27862 12.1335 5.48319 12.4592 5.53051L16.5054 6.11846C17.3256 6.23765 17.6531 7.24562 17.0596 7.82416L14.1318 10.6781C13.8961 10.9079 13.7885 11.2389 13.8442 11.5632L14.5353 15.5931C14.6754 16.41 13.818 17.033 13.0844 16.6473L9.46534 14.7446C9.17402 14.5915 8.82598 14.5915 8.53466 14.7446L4.91562 16.6473C4.18199 17.033 3.32456 16.41 3.46467 15.5931L4.15585 11.5632C4.21148 11.2389 4.10393 10.9079 3.86825 10.6781L0.940384 7.82416C0.346867 7.24562 0.674378 6.23765 1.4946 6.11846L5.54081 5.53051C5.86652 5.48319 6.14808 5.27862 6.29374 4.98347L8.10326 1.31699Z"--}}
-{{--                                            fill="currentColor"></path>--}}
-{{--                                    </svg>--}}
-{{--                                </div>--}}
-{{--                                <p class="text-sm text-creativehub-light-grey leading-6 transition-all duration-500 min-h-24  group-hover:text-white">--}}
-{{--                                    Impressed with the quality and service. A great asset for creative and professional design solutions.--}}
-{{--                                </p>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
 
 <!-- Tools Section -->
 <section id="Tool" class="mb-[102px] flex flex-col gap-8">
@@ -794,7 +409,7 @@
                     <div
                         class="w-[300px] h-[100px] rounded-full p-[18px_24px] bg-img-black-gradient group-hover:[background-image:linear-gradient(#181818,#181818)] group-active:bg-img-black transition-all duration-300 flex gap-4 items-center shrink-0">
                         <div class="w-16 h-16 overflow-hidden flex shrink-0">
-                            <img src="../assets/logos/blender.svg" class="w-full h-full object-contain"
+                            <img src="https://raw.githubusercontent.com/fe-husni/creativehub-main/main/assets/logos/blender.svg" class="w-full h-full object-contain"
                                  alt="logo">
                         </div>
                         <div class="flex flex-col justify-center gap-1">
@@ -808,7 +423,7 @@
                     <div
                         class="w-[300px] h-[100px] rounded-full p-[18px_24px] bg-img-black-gradient group-hover:[background-image:linear-gradient(#181818,#181818)] group-active:bg-img-black transition-all duration-300 flex gap-4 items-center shrink-0">
                         <div class="w-16 h-16 overflow-hidden flex shrink-0">
-                            <img src="../assets/logos/Excel.svg" class="w-full h-full object-contain"
+                            <img src="https://raw.githubusercontent.com/fe-husni/creativehub-main/main/assets/logos/Excel.svg" class="w-full h-full object-contain"
                                  alt="logo">
                         </div>
                         <div class="flex flex-col justify-center gap-1">
@@ -822,7 +437,7 @@
                     <div
                         class="w-[300px] h-[100px] rounded-full p-[18px_24px] bg-img-black-gradient group-hover:[background-image:linear-gradient(#181818,#181818)] group-active:bg-img-black transition-all duration-300 flex gap-4 items-center shrink-0">
                         <div class="w-16 h-16 overflow-hidden flex shrink-0">
-                            <img src="../assets/logos/Kotlin.svg" class="w-full h-full object-contain"
+                            <img src="https://raw.githubusercontent.com/fe-husni/creativehub-main/main/assets/logos/Kotlin.svg" class="w-full h-full object-contain"
                                  alt="logo">
                         </div>
                         <div class="flex flex-col justify-center gap-1">
@@ -837,7 +452,7 @@
                     <div
                         class="w-[300px] h-[100px] rounded-full p-[18px_24px] bg-img-black-gradient group-hover:[background-image:linear-gradient(#181818,#181818)] group-active:bg-img-black transition-all duration-300 flex gap-4 items-center shrink-0">
                         <div class="w-16 h-16 overflow-hidden flex shrink-0">
-                            <img src="../assets/logos/Laravel.svg" class="w-full h-full object-contain"
+                            <img src="https://raw.githubusercontent.com/fe-husni/creativehub-main/main/assets/logos/Laravel.svg" class="w-full h-full object-contain"
                                  alt="logo">
                         </div>
                         <div class="flex flex-col justify-center gap-1">
@@ -852,7 +467,7 @@
                     <div
                         class="w-[300px] h-[100px] rounded-full p-[18px_24px] bg-img-black-gradient group-hover:[background-image:linear-gradient(#181818,#181818)] group-active:bg-img-black transition-all duration-300 flex gap-4 items-center shrink-0">
                         <div class="w-16 h-16 overflow-hidden flex shrink-0">
-                            <img src="../assets/logos/Vue.svg" class="w-full h-full object-contain"
+                            <img src="https://raw.githubusercontent.com/fe-husni/creativehub-main/main/assets/logos/Vue.svg" class="w-full h-full object-contain"
                                  alt="logo">
                         </div>
                         <div class="flex flex-col justify-center gap-1">
@@ -867,7 +482,7 @@
                     <div
                         class="w-[300px] h-[100px] rounded-full p-[18px_24px] bg-img-black-gradient group-hover:[background-image:linear-gradient(#181818,#181818)] group-active:bg-img-black transition-all duration-300 flex gap-4 items-center shrink-0">
                         <div class="w-16 h-16 overflow-hidden flex shrink-0">
-                            <img src="../assets/logos/figma-logo.svg" class="w-full h-full object-contain"
+                            <img src="https://raw.githubusercontent.com/fe-husni/creativehub-main/main/assets/logos/figma-logo.svg" class="w-full h-full object-contain"
                                  alt="logo">
                         </div>
                         <div class="flex flex-col justify-center gap-1">
@@ -881,7 +496,7 @@
                     <div
                         class="w-[300px] h-[100px] rounded-full p-[18px_24px] bg-img-black-gradient group-hover:[background-image:linear-gradient(#181818,#181818)] group-active:bg-img-black transition-all duration-300 flex gap-4 items-center shrink-0">
                         <div class="w-16 h-16 overflow-hidden flex shrink-0">
-                            <img src="../assets/logos/flutter.svg" class="w-full h-full object-contain"
+                            <img src="https://raw.githubusercontent.com/fe-husni/creativehub-main/main/assets/logos/flutter.svg" class="w-full h-full object-contain"
                                  alt="logo">
                         </div>
                         <div class="flex flex-col justify-center gap-1">
@@ -896,7 +511,7 @@
                     <div
                         class="w-[300px] h-[100px] rounded-full p-[18px_24px] bg-img-black-gradient group-hover:[background-image:linear-gradient(#181818,#181818)] group-active:bg-img-black transition-all duration-300 flex gap-4 items-center shrink-0">
                         <div class="w-16 h-16 overflow-hidden flex shrink-0">
-                            <img src="../assets/logos/golang.svg" class="w-full h-full object-contain"
+                            <img src="https://raw.githubusercontent.com/fe-husni/creativehub-main/main/assets/logos/golang.svg" class="w-full h-full object-contain"
                                  alt="logo">
                         </div>
                         <div class="flex flex-col justify-center gap-1">
@@ -914,7 +529,7 @@
                     <div
                         class="w-[300px] h-[100px] rounded-full p-[18px_24px] bg-img-black-gradient group-hover:[background-image:linear-gradient(#181818,#181818)] group-active:bg-img-black transition-all duration-300 flex gap-4 items-center shrink-0">
                         <div class="w-16 h-16 overflow-hidden flex shrink-0">
-                            <img src="../assets/logos/blender.svg" class="w-full h-full object-contain"
+                            <img src="https://raw.githubusercontent.com/fe-husni/creativehub-main/main/assets/logos/blender.svg" class="w-full h-full object-contain"
                                  alt="logo">
                         </div>
                         <div class="flex flex-col justify-center gap-1">
@@ -928,7 +543,7 @@
                     <div
                         class="w-[300px] h-[100px] rounded-full p-[18px_24px] bg-img-black-gradient group-hover:[background-image:linear-gradient(#181818,#181818)] group-active:bg-img-black transition-all duration-300 flex gap-4 items-center shrink-0">
                         <div class="w-16 h-16 overflow-hidden flex shrink-0">
-                            <img src="../assets/logos/Excel.svg" class="w-full h-full object-contain"
+                            <img src="https://raw.githubusercontent.com/fe-husni/creativehub-main/main/assets/logos/Excel.svg" class="w-full h-full object-contain"
                                  alt="logo">
                         </div>
                         <div class="flex flex-col justify-center gap-1">
@@ -942,7 +557,7 @@
                     <div
                         class="w-[300px] h-[100px] rounded-full p-[18px_24px] bg-img-black-gradient group-hover:[background-image:linear-gradient(#181818,#181818)] group-active:bg-img-black transition-all duration-300 flex gap-4 items-center shrink-0">
                         <div class="w-16 h-16 overflow-hidden flex shrink-0">
-                            <img src="../assets/logos/Kotlin.svg" class="w-full h-full object-contain"
+                            <img src="https://raw.githubusercontent.com/fe-husni/creativehub-main/main/assets/logos/Kotlin.svg" class="w-full h-full object-contain"
                                  alt="logo">
                         </div>
                         <div class="flex flex-col justify-center gap-1">
@@ -957,7 +572,7 @@
                     <div
                         class="w-[300px] h-[100px] rounded-full p-[18px_24px] bg-img-black-gradient group-hover:[background-image:linear-gradient(#181818,#181818)] group-active:bg-img-black transition-all duration-300 flex gap-4 items-center shrink-0">
                         <div class="w-16 h-16 overflow-hidden flex shrink-0">
-                            <img src="../assets/logos/Laravel.svg" class="w-full h-full object-contain"
+                            <img src="https://raw.githubusercontent.com/fe-husni/creativehub-main/main/assets/logos/Laravel.svg" class="w-full h-full object-contain"
                                  alt="logo">
                         </div>
                         <div class="flex flex-col justify-center gap-1">
@@ -972,7 +587,7 @@
                     <div
                         class="w-[300px] h-[100px] rounded-full p-[18px_24px] bg-img-black-gradient group-hover:[background-image:linear-gradient(#181818,#181818)] group-active:bg-img-black transition-all duration-300 flex gap-4 items-center shrink-0">
                         <div class="w-16 h-16 overflow-hidden flex shrink-0">
-                            <img src="../assets/logos/Vue.svg" class="w-full h-full object-contain"
+                            <img src="https://raw.githubusercontent.com/fe-husni/creativehub-main/main/assets/logos/Vue.svg" class="w-full h-full object-contain"
                                  alt="logo">
                         </div>
                         <div class="flex flex-col justify-center gap-1">
@@ -987,7 +602,7 @@
                     <div
                         class="w-[300px] h-[100px] rounded-full p-[18px_24px] bg-img-black-gradient group-hover:[background-image:linear-gradient(#181818,#181818)] group-active:bg-img-black transition-all duration-300 flex gap-4 items-center shrink-0">
                         <div class="w-16 h-16 overflow-hidden flex shrink-0">
-                            <img src="../assets/logos/figma-logo.svg" class="w-full h-full object-contain"
+                            <img src="https://raw.githubusercontent.com/fe-husni/creativehub-main/main/assets/logos/figma-logo.svg" class="w-full h-full object-contain"
                                  alt="logo">
                         </div>
                         <div class="flex flex-col justify-center gap-1">
@@ -1001,7 +616,7 @@
                     <div
                         class="w-[300px] h-[100px] rounded-full p-[18px_24px] bg-img-black-gradient group-hover:[background-image:linear-gradient(#181818,#181818)] group-active:bg-img-black transition-all duration-300 flex gap-4 items-center shrink-0">
                         <div class="w-16 h-16 overflow-hidden flex shrink-0">
-                            <img src="../assets/logos/flutter.svg" class="w-full h-full object-contain"
+                            <img src="https://raw.githubusercontent.com/fe-husni/creativehub-main/main/assets/logos/flutter.svg" class="w-full h-full object-contain"
                                  alt="logo">
                         </div>
                         <div class="flex flex-col justify-center gap-1">
@@ -1016,7 +631,7 @@
                     <div
                         class="w-[300px] h-[100px] rounded-full p-[18px_24px] bg-img-black-gradient group-hover:[background-image:linear-gradient(#181818,#181818)] group-active:bg-img-black transition-all duration-300 flex gap-4 items-center shrink-0">
                         <div class="w-16 h-16 overflow-hidden flex shrink-0">
-                            <img src="../assets/logos/golang.svg" class="w-full h-full object-contain"
+                            <img src="https://raw.githubusercontent.com/fe-husni/creativehub-main/main/assets/logos/golang.svg" class="w-full h-full object-contain"
                                  alt="logo">
                         </div>
                         <div class="flex flex-col justify-center gap-1">
@@ -1036,7 +651,7 @@
                     <div
                         class="w-[300px] h-[100px] rounded-full p-[18px_24px] bg-img-black-gradient group-hover:[background-image:linear-gradient(#181818,#181818)] group-active:bg-img-black transition-all duration-300 flex gap-4 items-center shrink-0">
                         <div class="w-16 h-16 overflow-hidden flex shrink-0">
-                            <img src="../assets/logos/blender.svg" class="w-full h-full object-contain"
+                            <img src="https://raw.githubusercontent.com/fe-husni/creativehub-main/main/assets/logos/blender.svg" class="w-full h-full object-contain"
                                  alt="logo">
                         </div>
                         <div class="flex flex-col justify-center gap-1">
@@ -1050,7 +665,7 @@
                     <div
                         class="w-[300px] h-[100px] rounded-full p-[18px_24px] bg-img-black-gradient group-hover:[background-image:linear-gradient(#181818,#181818)] group-active:bg-img-black transition-all duration-300 flex gap-4 items-center shrink-0">
                         <div class="w-16 h-16 overflow-hidden flex shrink-0">
-                            <img src="../assets/logos/Excel.svg" class="w-full h-full object-contain"
+                            <img src="https://raw.githubusercontent.com/fe-husni/creativehub-main/main/assets/logos/Excel.svg" class="w-full h-full object-contain"
                                  alt="logo">
                         </div>
                         <div class="flex flex-col justify-center gap-1">
@@ -1064,7 +679,7 @@
                     <div
                         class="w-[300px] h-[100px] rounded-full p-[18px_24px] bg-img-black-gradient group-hover:[background-image:linear-gradient(#181818,#181818)] group-active:bg-img-black transition-all duration-300 flex gap-4 items-center shrink-0">
                         <div class="w-16 h-16 overflow-hidden flex shrink-0">
-                            <img src="../assets/logos/Kotlin.svg" class="w-full h-full object-contain"
+                            <img src="https://raw.githubusercontent.com/fe-husni/creativehub-main/main/assets/logos/Kotlin.svg" class="w-full h-full object-contain"
                                  alt="logo">
                         </div>
                         <div class="flex flex-col justify-center gap-1">
@@ -1079,7 +694,7 @@
                     <div
                         class="w-[300px] h-[100px] rounded-full p-[18px_24px] bg-img-black-gradient group-hover:[background-image:linear-gradient(#181818,#181818)] group-active:bg-img-black transition-all duration-300 flex gap-4 items-center shrink-0">
                         <div class="w-16 h-16 overflow-hidden flex shrink-0">
-                            <img src="../assets/logos/Laravel.svg" class="w-full h-full object-contain"
+                            <img src="https://raw.githubusercontent.com/fe-husni/creativehub-main/main/assets/logos/Laravel.svg" class="w-full h-full object-contain"
                                  alt="logo">
                         </div>
                         <div class="flex flex-col justify-center gap-1">
@@ -1094,7 +709,7 @@
                     <div
                         class="w-[300px] h-[100px] rounded-full p-[18px_24px] bg-img-black-gradient group-hover:[background-image:linear-gradient(#181818,#181818)] group-active:bg-img-black transition-all duration-300 flex gap-4 items-center shrink-0">
                         <div class="w-16 h-16 overflow-hidden flex shrink-0">
-                            <img src="../assets/logos/Vue.svg" class="w-full h-full object-contain"
+                            <img src="https://raw.githubusercontent.com/fe-husni/creativehub-main/main/assets/logos/Vue.svg" class="w-full h-full object-contain"
                                  alt="logo">
                         </div>
                         <div class="flex flex-col justify-center gap-1">
@@ -1109,7 +724,7 @@
                     <div
                         class="w-[300px] h-[100px] rounded-full p-[18px_24px] bg-img-black-gradient group-hover:[background-image:linear-gradient(#181818,#181818)] group-active:bg-img-black transition-all duration-300 flex gap-4 items-center shrink-0">
                         <div class="w-16 h-16 overflow-hidden flex shrink-0">
-                            <img src="../assets/logos/figma-logo.svg" class="w-full h-full object-contain"
+                            <img src="https://raw.githubusercontent.com/fe-husni/creativehub-main/main/assets/logos/figma-logo.svg" class="w-full h-full object-contain"
                                  alt="logo">
                         </div>
                         <div class="flex flex-col justify-center gap-1">
@@ -1123,7 +738,7 @@
                     <div
                         class="w-[300px] h-[100px] rounded-full p-[18px_24px] bg-img-black-gradient group-hover:[background-image:linear-gradient(#181818,#181818)] group-active:bg-img-black transition-all duration-300 flex gap-4 items-center shrink-0">
                         <div class="w-16 h-16 overflow-hidden flex shrink-0">
-                            <img src="../assets/logos/flutter.svg" class="w-full h-full object-contain"
+                            <img src="https://raw.githubusercontent.com/fe-husni/creativehub-main/main/assets/logos/flutter.svg" class="w-full h-full object-contain"
                                  alt="logo">
                         </div>
                         <div class="flex flex-col justify-center gap-1">
@@ -1138,7 +753,7 @@
                     <div
                         class="w-[300px] h-[100px] rounded-full p-[18px_24px] bg-img-black-gradient group-hover:[background-image:linear-gradient(#181818,#181818)] group-active:bg-img-black transition-all duration-300 flex gap-4 items-center shrink-0">
                         <div class="w-16 h-16 overflow-hidden flex shrink-0">
-                            <img src="../assets/logos/golang.svg" class="w-full h-full object-contain"
+                            <img src="https://raw.githubusercontent.com/fe-husni/creativehub-main/main/assets/logos/golang.svg" class="w-full h-full object-contain"
                                  alt="logo">
                         </div>
                         <div class="flex flex-col justify-center gap-1">
@@ -1156,7 +771,7 @@
                     <div
                         class="w-[300px] h-[100px] rounded-full p-[18px_24px] bg-img-black-gradient group-hover:[background-image:linear-gradient(#181818,#181818)] group-active:bg-img-black transition-all duration-300 flex gap-4 items-center shrink-0">
                         <div class="w-16 h-16 overflow-hidden flex shrink-0">
-                            <img src="../assets/logos/blender.svg" class="w-full h-full object-contain"
+                            <img src="https://raw.githubusercontent.com/fe-husni/creativehub-main/main/assets/logos/blender.svg" class="w-full h-full object-contain"
                                  alt="logo">
                         </div>
                         <div class="flex flex-col justify-center gap-1">
@@ -1170,7 +785,7 @@
                     <div
                         class="w-[300px] h-[100px] rounded-full p-[18px_24px] bg-img-black-gradient group-hover:[background-image:linear-gradient(#181818,#181818)] group-active:bg-img-black transition-all duration-300 flex gap-4 items-center shrink-0">
                         <div class="w-16 h-16 overflow-hidden flex shrink-0">
-                            <img src="../assets/logos/Excel.svg" class="w-full h-full object-contain"
+                            <img src="https://raw.githubusercontent.com/fe-husni/creativehub-main/main/assets/logos/Excel.svg" class="w-full h-full object-contain"
                                  alt="logo">
                         </div>
                         <div class="flex flex-col justify-center gap-1">
@@ -1184,7 +799,7 @@
                     <div
                         class="w-[300px] h-[100px] rounded-full p-[18px_24px] bg-img-black-gradient group-hover:[background-image:linear-gradient(#181818,#181818)] group-active:bg-img-black transition-all duration-300 flex gap-4 items-center shrink-0">
                         <div class="w-16 h-16 overflow-hidden flex shrink-0">
-                            <img src="../assets/logos/Kotlin.svg" class="w-full h-full object-contain"
+                            <img src="https://raw.githubusercontent.com/fe-husni/creativehub-main/main/assets/logos/Kotlin.svg" class="w-full h-full object-contain"
                                  alt="logo">
                         </div>
                         <div class="flex flex-col justify-center gap-1">
@@ -1199,7 +814,7 @@
                     <div
                         class="w-[300px] h-[100px] rounded-full p-[18px_24px] bg-img-black-gradient group-hover:[background-image:linear-gradient(#181818,#181818)] group-active:bg-img-black transition-all duration-300 flex gap-4 items-center shrink-0">
                         <div class="w-16 h-16 overflow-hidden flex shrink-0">
-                            <img src="../assets/logos/Laravel.svg" class="w-full h-full object-contain"
+                            <img src="https://raw.githubusercontent.com/fe-husni/creativehub-main/main/assets/logos/Laravel.svg" class="w-full h-full object-contain"
                                  alt="logo">
                         </div>
                         <div class="flex flex-col justify-center gap-1">
@@ -1214,7 +829,7 @@
                     <div
                         class="w-[300px] h-[100px] rounded-full p-[18px_24px] bg-img-black-gradient group-hover:[background-image:linear-gradient(#181818,#181818)] group-active:bg-img-black transition-all duration-300 flex gap-4 items-center shrink-0">
                         <div class="w-16 h-16 overflow-hidden flex shrink-0">
-                            <img src="../assets/logos/Vue.svg" class="w-full h-full object-contain"
+                            <img src="https://raw.githubusercontent.com/fe-husni/creativehub-main/main/assets/logos/Vue.svg" class="w-full h-full object-contain"
                                  alt="logo">
                         </div>
                         <div class="flex flex-col justify-center gap-1">
@@ -1229,7 +844,7 @@
                     <div
                         class="w-[300px] h-[100px] rounded-full p-[18px_24px] bg-img-black-gradient group-hover:[background-image:linear-gradient(#181818,#181818)] group-active:bg-img-black transition-all duration-300 flex gap-4 items-center shrink-0">
                         <div class="w-16 h-16 overflow-hidden flex shrink-0">
-                            <img src="../assets/logos/figma-logo.svg" class="w-full h-full object-contain"
+                            <img src="https://raw.githubusercontent.com/fe-husni/creativehub-main/main/assets/logos/figma-logo.svg" class="w-full h-full object-contain"
                                  alt="logo">
                         </div>
                         <div class="flex flex-col justify-center gap-1">
@@ -1243,7 +858,7 @@
                     <div
                         class="w-[300px] h-[100px] rounded-full p-[18px_24px] bg-img-black-gradient group-hover:[background-image:linear-gradient(#181818,#181818)] group-active:bg-img-black transition-all duration-300 flex gap-4 items-center shrink-0">
                         <div class="w-16 h-16 overflow-hidden flex shrink-0">
-                            <img src="../assets/logos/flutter.svg" class="w-full h-full object-contain"
+                            <img src="https://raw.githubusercontent.com/fe-husni/creativehub-main/main/assets/logos/flutter.svg" class="w-full h-full object-contain"
                                  alt="logo">
                         </div>
                         <div class="flex flex-col justify-center gap-1">
@@ -1258,7 +873,7 @@
                     <div
                         class="w-[300px] h-[100px] rounded-full p-[18px_24px] bg-img-black-gradient group-hover:[background-image:linear-gradient(#181818,#181818)] group-active:bg-img-black transition-all duration-300 flex gap-4 items-center shrink-0">
                         <div class="w-16 h-16 overflow-hidden flex shrink-0">
-                            <img src="../assets/logos/golang.svg" class="w-full h-full object-contain"
+                            <img src="https://raw.githubusercontent.com/fe-husni/creativehub-main/main/assets/logos/golang.svg" class="w-full h-full object-contain"
                                  alt="logo">
                         </div>
                         <div class="flex flex-col justify-center gap-1">
@@ -1411,7 +1026,7 @@
 
 
 <!-- Flowbite Plugins -->
-<script src="../node_modules/flowbite/dist/flowbite.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 <!-- JQuery -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <!-- Flickity -->
@@ -1419,6 +1034,24 @@
 <!-- Swiper.js CDN -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <!-- Main.js Script -->
-<script src="main.js"></script>
+@vite(['resources/css/app.css', 'resources/js/app.js'])
+
+<script>
+    // Search Function
+    const searchInput = document.getElementById('searchInput');
+    const resetButton = document.getElementById('resetButton');
+
+    searchInput.addEventListener('input', function () {
+        if (this.value.trim() !== '') {
+            resetButton.classList.remove('hidden');
+        } else {
+            resetButton.classList.add('hidden');
+        }
+    });
+
+    resetButton.addEventListener('click', function () {
+        resetButton.classList.add('hidden');
+    });
+</script>
 </body>
 </html>

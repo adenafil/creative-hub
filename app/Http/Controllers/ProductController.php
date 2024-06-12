@@ -26,14 +26,90 @@ class ProductController extends Controller
         return $this->productService = $productService;
     }
 
+<<<<<<< HEAD
+=======
+//    public function index(Request $request)
+//    {
+//        Session::put('product_index_page', $request->input('page', 1));
+//
+//        $products = $this->productService->getProductByUser(Auth::id());
+//        return view('admin.products.index', compact('products'));
+//    }
+
+>>>>>>> e56b32449f277dce4e742b00d3dccc177116bb74
     public function index(Request $request)
     {
         Session::put('product_index_page', $request->input('page', 1));
 
+<<<<<<< HEAD
         $products = $this->productService->getProductByUser(Auth::id());
         return view('admin.products.index', compact('products'));
     }
 
+=======
+        // Tentukan jumlah item per halaman
+        $perPage = 4;
+
+        // Ambil halaman saat ini dari query string, defaultnya 1
+        $currentPage = $request->input('page', 1);
+
+        // Hitung offset
+        $offset = ($currentPage - 1) * $perPage;
+
+        // Ambil data produk untuk halaman saat ini
+        $products = $this->productService->getProductByUser(Auth::id(), $offset, $perPage);
+
+        // Hitung total produk
+        $totalProducts = Product::where('seller_id', Auth::id())->count();
+
+        // Hitung jumlah halaman
+        $totalPages = ceil($totalProducts / $perPage);
+
+        // Hitung item yang sedang ditampilkan
+        $firstItem = $offset + 1;
+        $lastItem = min($offset + $perPage, $totalProducts);
+
+        // Buat elemen pagination seperti yang ada di metode elements()
+        $window = $this->paginationWindow($currentPage, $totalPages);
+
+        return view('admin.products.index', compact('products', 'totalProducts', 'perPage', 'currentPage', 'totalPages', 'window', 'firstItem', 'lastItem'));
+    }
+
+    protected function paginationWindow($currentPage, $totalPages)
+    {
+        $onEachSide = 3; // Number of links on each side of the current page
+        $window = [];
+
+        // Previous and next ranges
+        $start = max($currentPage - $onEachSide, 1);
+        $end = min($currentPage + $onEachSide, $totalPages);
+
+        // Window for pagination
+        for ($i = $start; $i <= $end; $i++) {
+            $window[] = $i;
+        }
+
+        // Add ellipses and edges
+        $pagination = [];
+        if ($start > 1) {
+            $pagination[] = 1;
+            if ($start > 2) {
+                $pagination[] = '...';
+            }
+        }
+        $pagination = array_merge($pagination, $window);
+        if ($end < $totalPages) {
+            if ($end < $totalPages - 1) {
+                $pagination[] = '...';
+            }
+            $pagination[] = $totalPages;
+        }
+
+        return $pagination;
+    }
+
+
+>>>>>>> e56b32449f277dce4e742b00d3dccc177116bb74
     public function create(Request $request)
     {
         Session::get('product_index_page');

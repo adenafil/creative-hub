@@ -8,6 +8,7 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+<<<<<<< HEAD
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg flex justify-between items-center">
                 <div class="p-4 sm:p-6 text-gray-900 dark:text-gray-100">
                     {{ __("My Products") }}
@@ -18,15 +19,47 @@
                         {{ __('Add Product') }}
                     </x-primary-button>
                 </a>
+=======
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg flex justify-between items-center flex-col sm:flex-row py-6 gap-y-4">
+
+                <form class="flex items-center ml-4 w-2/3">
+                    <label for="simple-search" class="sr-only">Search</label>
+                    <div class="relative w-full">
+                        <input type="text" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search..." required />
+                    </div>
+                    <button type="submit" class="p-2.5 ms-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-gray-700 focus:ring-4 focus:outline-none bg-[#1F2937] focus:ring-[#1F2937] hover:bg-gray-700 ">
+                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                        </svg>
+                        <span class="sr-only">Search</span>
+                    </button>
+                </form>
+
+
+>>>>>>> e56b32449f277dce4e742b00d3dccc177116bb74
             </div>
         </div>
 
         <!--Container-->
+<<<<<<< HEAD
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 shadow-md mt-6">
 
             <!--Card-->
             <div id='recipients' class="px-4 mt-6 lg:mt-0 rounded shadow bg-white dark:text-white dark:bg-[#1F2937]">
 
+=======
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-6">
+
+
+            <!--Card-->
+            <div id='recipients' class="px-4 py-8 mt-6 lg:mt-0 rounded shadow bg-white dark:text-white dark:bg-[#1F2937] flex flex-col items-start sm:items-end">
+
+                <a href="{{route('create.product')}}">
+                    <x-primary-button @class('mr-0 sm:mr-10')>
+                        {{ __('Add Product') }}
+                    </x-primary-button>
+                </a>
+>>>>>>> e56b32449f277dce4e742b00d3dccc177116bb74
 
                 <table id="productTable" class="stripe hover" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
                     <thead>
@@ -77,6 +110,7 @@
                         </tr>
                     @endforeach
 
+<<<<<<< HEAD
                     <!-- Rest of your data (refer to https://datatables.net/examples/server_side/ for server side processing)-->
 {{--                    <tr>--}}
 {{--                        <td class="text-center">2.</td>--}}
@@ -142,6 +176,53 @@
 
 
         <!--/container-->
+=======
+                    </tbody>
+
+                </table>
+            </div>
+
+            <div class="flex justify-center items-center gap-y-2 flex-col mt-10">
+
+                <span class="text-sm text-gray-700 dark:text-gray-400">Showing <span class="font-semibold text-gray-900 dark:text-white">{{ $firstItem }}</span> to <span class="font-semibold text-gray-900 dark:text-white">{{ $lastItem }}</span> of <span class="font-semibold text-gray-900 dark:text-white">{{ $totalProducts }}</span> Entries</span>
+
+                <nav aria-label="Page navigation example">
+                    <ul class="inline-flex -space-x-px text-sm">
+                        {{-- Previous Page Link --}}
+                        @if ($currentPage > 1)
+                        <li>
+                            <a href="{{ url()->current() }}?page={{ $currentPage - 1 }}" class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</a>
+                        </li>
+                        @endif
+
+                        {{-- Pagination Elements --}}
+                        @foreach ($window as $page)
+                            @if (is_string($page))
+                                <li class="">
+                                    <span class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">{{ $page }}</span>
+                                </li>
+                            @elseif ($page == $currentPage)
+                                <li class="">
+                                    <span class="flex items-center justify-center px-3 h-8 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">{{ $page }}</span>
+                                </li>
+                            @else
+                                <a href="{{ url()->current() }}?page={{ $page }}" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">{{ $page }}</a>
+                            @endif
+                        @endforeach
+
+                        {{-- Next Page Link --}}
+                        @if ($currentPage < $totalPages)
+                            <li>
+                                <a href="{{ url()->current() }}?page={{ $currentPage + 1 }}" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</a>
+                            </li>
+                        @endif
+                    </ul>
+                </nav>
+
+            </div>
+        </div>
+
+>>>>>>> e56b32449f277dce4e742b00d3dccc177116bb74
     </div>
 
     {{-- Resource CDN & Styling untuk datatables --}}
@@ -154,6 +235,13 @@
         <style>
             /*Overrides for Tailwind CSS */
 
+<<<<<<< HEAD
+=======
+            /*Overide Pagination*/
+            /*#pagination-controls nav .sm:hidden {*/
+
+            /*}*/
+>>>>>>> e56b32449f277dce4e742b00d3dccc177116bb74
 
             /*Form fields*/
             .dataTables_wrapper select,
@@ -186,6 +274,7 @@
                 /*bg-indigo-100*/
             }
 
+<<<<<<< HEAD
             /*Pagination Buttons*/
             /*.dataTables_wrapper .dataTables_paginate .paginate_button {*/
             /*    font-weight: 700;*/
@@ -226,6 +315,8 @@
             /*    }*/
 
 
+=======
+>>>>>>> e56b32449f277dce4e742b00d3dccc177116bb74
             /*Pagination Buttons - Hover */
 
             /*Add padding to bottom border */

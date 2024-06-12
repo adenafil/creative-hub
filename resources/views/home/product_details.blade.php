@@ -158,7 +158,11 @@
 <!-- Header -->
 <header class="w-full pt-[74px] pb-[103px] relative z-0">
     <div class="container max-w-[1200px] px-4 mx-auto flex flex-col items-center justify-center z-10 ">
+<<<<<<< HEAD
         <div class="flex flex-col gap-4 mt-7 z-10">
+=======
+        <div class="flex flex-col gap-4 mt-7 z-10 w-full">
+>>>>>>> e56b32449f277dce4e742b00d3dccc177116bb74
             <p class="bg-img-transparent bg-img-purple-to-orange transition-all duration-300 font-semibold text-xs md:text-2xl lg:text-2xl text-white rounded-md p-[8px_16px] w-fit">{{$product->category->name}}</p>
             <h1 class="font-semibold text-2xl md:text-[50px] lg:text-[50px] leading-normal drop-shadow-2xl">{{$product->title}}</h1>
         </div>
@@ -194,7 +198,15 @@
     <div class="flex gap-8 bg-creativehub-dark-footer p-8 mt-10 rounded-[20px]">
         <div class="flex flex-col">
             <h1 class="font-semibold text-[16px] md:text-xl lg:text-xl">Descrtiption</h1>
+<<<<<<< HEAD
             <p class="text-creativehub-grey text-sm md:text-lg lg:text-lg leading-relaxed mt-6 mb-8">{!! $product->description !!}</p>
+=======
+            <p class="text-creativehub-grey text-sm md:text-lg lg:text-lg leading-relaxed">
+                <div class="text-creativehub-grey text-sm md:text-lg lg:text-lg leading-relaxed mt-6 mb-8">
+                    {!! $product->description !!}
+                </div>
+            </p>
+>>>>>>> e56b32449f277dce4e742b00d3dccc177116bb74
             <div class="flex flex-wrap items-center gap-[10px] mb-4">
                 <a href=""
                    class="w-9 h-9 justify-center items-center rounded-full flex shrink-0 overflow-hidden border-[0.69px] border-[#414141]">

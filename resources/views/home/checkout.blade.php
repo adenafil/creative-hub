@@ -460,6 +460,28 @@
     </div>
 </footer>
 
+<<<<<<< HEAD
+=======
+<script>
+    function previewFile() {
+        var preview = document.querySelector('.file-preview');
+        var fileInput = document.querySelector('input[type=file]').files[0];
+        var reader = new FileReader();
+
+        reader.onloadend = function () {
+            var img = preview.querySelector('.thumbnail-proof'); // Get the thumbnail image element
+            img.src = reader.result; // Update src attribute with the uploaded file
+            preview.classList.remove('hidden'); // Remove the 'hidden' class to display the preview
+        }
+
+        if (fileInput) {
+            reader.readAsDataURL(fileInput);
+        } else {
+            preview.classList.add('hidden'); // Hide preview if no file selected
+        }
+    }
+</script>
+>>>>>>> e56b32449f277dce4e742b00d3dccc177116bb74
 
 <!-- Flowbite Plugins -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>

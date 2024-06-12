@@ -8,18 +8,6 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-<<<<<<< HEAD
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg flex justify-between items-center">
-                <div class="p-4 sm:p-6 text-gray-900 dark:text-gray-100">
-                    {{ __("My Products") }}
-                </div>
-
-                <a href="{{route('create.product')}}">
-                    <x-primary-button class="p-6 mr-4 sm:mr-6">
-                        {{ __('Add Product') }}
-                    </x-primary-button>
-                </a>
-=======
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg flex justify-between items-center flex-col sm:flex-row py-6 gap-y-4">
 
                 <form class="flex items-center ml-4 w-2/3">
@@ -36,18 +24,10 @@
                 </form>
 
 
->>>>>>> e56b32449f277dce4e742b00d3dccc177116bb74
             </div>
         </div>
 
         <!--Container-->
-<<<<<<< HEAD
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 shadow-md mt-6">
-
-            <!--Card-->
-            <div id='recipients' class="px-4 mt-6 lg:mt-0 rounded shadow bg-white dark:text-white dark:bg-[#1F2937]">
-
-=======
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-6">
 
 
@@ -59,7 +39,6 @@
                         {{ __('Add Product') }}
                     </x-primary-button>
                 </a>
->>>>>>> e56b32449f277dce4e742b00d3dccc177116bb74
 
                 <table id="productTable" class="stripe hover" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
                     <thead>
@@ -110,73 +89,6 @@
                         </tr>
                     @endforeach
 
-<<<<<<< HEAD
-                    <!-- Rest of your data (refer to https://datatables.net/examples/server_side/ for server side processing)-->
-{{--                    <tr>--}}
-{{--                        <td class="text-center">2.</td>--}}
-{{--                        <td class="">--}}
-{{--                            <div class="img-wrapper h-24">--}}
-{{--                                <img src="https://cdn.dribbble.com/userupload/2993027/file/original-4f2a6c9bfe6c2230805e568eedf0e0a0.png?resize=400x0"--}}
-{{--                                     class="w-16 h-full object-cover md:w-32 max-w-full max-h-full rounded-md" alt="">--}}
-{{--                            </div>--}}
-{{--                        </td>--}}
-{{--                        <td class="text-center">Graphic Designer Template Web Portfolio</td>--}}
-{{--                        <td class="text-center">Template</td>--}}
-{{--                        <td class="text-center">Rp 1,300,500</td>--}}
-{{--                        <td class="">--}}
-{{--                            <div class="btn-group flex items-center gap-2 justify-center">--}}
-{{--                                <a href="#" class="flex h-fit">--}}
-{{--                                    <button type="button" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5">Edit</button>--}}
-{{--                                </a>--}}
-{{--                                <form action="#" method="post" class="flex h-fit">--}}
-{{--                                    @csrf--}}
-{{--                                    @method('DELETE')--}}
-{{--                                    <button type="submit" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5">Delete</button>--}}
-{{--                                </form>--}}
-{{--                            </div>--}}
-{{--                        </td>--}}
-{{--                    </tr><tr>--}}
-{{--                        <td class="text-center">3.</td>--}}
-{{--                        <td class="">--}}
-{{--                            <div class="img-wrapper h-24">--}}
-{{--                                <img src="https://assets-global.website-files.com/5e3ce2ec7f6e53c045fe7cfa/6050ac4f4030c27b8aef9023_Thumbnail%20(2)%20(1).png"--}}
-{{--                                     class="w-16 h-full object-cover md:w-32 max-w-full max-h-full rounded-md" alt="">--}}
-{{--                            </div>--}}
-{{--                        </td>--}}
-{{--                        <td class="text-center">Socially UI Kit</td>--}}
-{{--                        <td class="text-center">UI Kit</td>--}}
-{{--                        <td class="text-center">Rp 69,999</td>--}}
-{{--                        <td class="">--}}
-{{--                            <div class="btn-group flex items-center gap-2 justify-center">--}}
-{{--                                <a href="#" class="flex h-fit">--}}
-{{--                                    <button type="button" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5">Edit</button>--}}
-{{--                                </a>--}}
-{{--                                <form action="#" method="post" class="flex h-fit">--}}
-{{--                                    @csrf--}}
-{{--                                    @method('DELETE')--}}
-{{--                                    <button type="submit" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5">Delete</button>--}}
-{{--                                </form>--}}
-{{--                            </div>--}}
-{{--                        </td>--}}
-{{--                    </tr>--}}
-                    </tbody>
-
-                </table>
-
-
-            </div>
-
-            <!-- Pagination Controls -->
-            <div id="pagination-controls" class="mt-4 flex justify-center items-center gap-4">
-                {{ $products->links() }}
-            </div>
-
-            <!--/Card-->
-        </div>
-
-
-        <!--/container-->
-=======
                     </tbody>
 
                 </table>
@@ -222,7 +134,6 @@
             </div>
         </div>
 
->>>>>>> e56b32449f277dce4e742b00d3dccc177116bb74
     </div>
 
     {{-- Resource CDN & Styling untuk datatables --}}
@@ -235,13 +146,10 @@
         <style>
             /*Overrides for Tailwind CSS */
 
-<<<<<<< HEAD
-=======
             /*Overide Pagination*/
             /*#pagination-controls nav .sm:hidden {*/
 
             /*}*/
->>>>>>> e56b32449f277dce4e742b00d3dccc177116bb74
 
             /*Form fields*/
             .dataTables_wrapper select,
@@ -274,49 +182,6 @@
                 /*bg-indigo-100*/
             }
 
-<<<<<<< HEAD
-            /*Pagination Buttons*/
-            /*.dataTables_wrapper .dataTables_paginate .paginate_button {*/
-            /*    font-weight: 700;*/
-            /*    !*font-bold*!*/
-            /*    border-radius: .25rem;*/
-            /*    !*rounded*!*/
-            /*    border: 1px solid transparent;*/
-            /*    !*border border-transparent*!*/
-            /*}*/
-
-            /*Pagination Buttons - Current selected */
-            /*.dataTables_wrapper .dataTables_paginate .paginate_button.current {*/
-            /*    color: #fff !important;*/
-            /*    !*text-white*!*/
-            /*    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);*/
-            /*    !*shadow*!*/
-            /*    font-weight: 700;*/
-            /*    !*font-bold*!*/
-            /*    border-radius: .25rem;*/
-            /*    !*rounded*!*/
-            /*    background: #667eea !important;*/
-            /*    !*bg-indigo-500*!*/
-            /*    border: 1px solid transparent;*/
-            /*    !*border border-transparent*!*/
-            /*    .dataTables_wrapper .dataTables_paginate .paginate_button:hover {*/
-            /*        color: #fff !important;*/
-            /*        !*text-white*!*/
-            /*        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);*/
-            /*        !*shadow*!*/
-            /*        font-weight: 700;*/
-            /*        !*font-bold*!*/
-            /*        border-radius: .25rem;*/
-            /*        !*rounded*!*/
-            /*        background: #667eea !important;*/
-            /*        !*bg-indigo-500*!*/
-            /*        border: 1px solid transparent;*/
-            /*        !*border border-transparent*!*/
-            /*    }*/
-
-
-=======
->>>>>>> e56b32449f277dce4e742b00d3dccc177116bb74
             /*Pagination Buttons - Hover */
 
             /*Add padding to bottom border */

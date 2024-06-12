@@ -1,25 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-<<<<<<< HEAD
-            {{ __('Ini Details My Transactions') }}
-=======
             {{ __('Ini Index My Transactions') }}
->>>>>>> e56b32449f277dce4e742b00d3dccc177116bb74
         </h2>
     </x-slot>
 
     <div class="py-12">
-<<<<<<< HEAD
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __("DETAILLL") }}
-                </div>
-            </div>
-        </div>
-    </div>
-=======
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 flex flex-col gap-12">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg px-4 py-12 sm:px-8 flex flex-col gap-16">
 
@@ -120,5 +106,4 @@
     </div>
 
 
->>>>>>> e56b32449f277dce4e742b00d3dccc177116bb74
 </x-app-layout>

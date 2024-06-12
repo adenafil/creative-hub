@@ -23,20 +23,12 @@
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('product.order.index')" :active="request()->routeIs('product.order.index')">
-<<<<<<< HEAD
-                        {{ __('My Orders') }}
-=======
                         {{ __('My Sales') }}
->>>>>>> e56b32449f277dce4e742b00d3dccc177116bb74
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('transaction.index')" :active="request()->routeIs('transaction.index')">
-<<<<<<< HEAD
-                        {{ __('My Transactions') }}
-=======
                         {{ __('My Purchases') }}
->>>>>>> e56b32449f277dce4e742b00d3dccc177116bb74
                     </x-nav-link>
                 </div>
             </div>
@@ -101,17 +93,10 @@
                 {{ __('My Products') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('product.order.index')" :active="request()->routeIs('product.order.index')">
-<<<<<<< HEAD
-                {{ __('My Orders') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('transaction.index')" :active="request()->routeIs('transaction.index')">
-                {{ __('My Transactions') }}
-=======
                 {{ __('My Sales') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('transaction.index')" :active="request()->routeIs('transaction.index')">
                 {{ __('My Purchases') }}
->>>>>>> e56b32449f277dce4e742b00d3dccc177116bb74
             </x-responsive-nav-link>
         </div>
 

@@ -26,8 +26,6 @@ class ProductController extends Controller
         return $this->productService = $productService;
     }
 
-<<<<<<< HEAD
-=======
 //    public function index(Request $request)
 //    {
 //        Session::put('product_index_page', $request->input('page', 1));
@@ -36,17 +34,10 @@ class ProductController extends Controller
 //        return view('admin.products.index', compact('products'));
 //    }
 
->>>>>>> e56b32449f277dce4e742b00d3dccc177116bb74
     public function index(Request $request)
     {
         Session::put('product_index_page', $request->input('page', 1));
 
-<<<<<<< HEAD
-        $products = $this->productService->getProductByUser(Auth::id());
-        return view('admin.products.index', compact('products'));
-    }
-
-=======
         // Tentukan jumlah item per halaman
         $perPage = 4;
 
@@ -109,7 +100,6 @@ class ProductController extends Controller
     }
 
 
->>>>>>> e56b32449f277dce4e742b00d3dccc177116bb74
     public function create(Request $request)
     {
         Session::get('product_index_page');

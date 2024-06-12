@@ -460,8 +460,6 @@
     </div>
 </footer>
 
-<<<<<<< HEAD
-=======
 <script>
     function previewFile() {
         var preview = document.querySelector('.file-preview');
@@ -481,7 +479,6 @@
         }
     }
 </script>
->>>>>>> e56b32449f277dce4e742b00d3dccc177116bb74
 
 <!-- Flowbite Plugins -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>

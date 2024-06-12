@@ -6,16 +6,6 @@
     </x-slot>
 
     <div class="py-12">
-<<<<<<< HEAD
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __("Manage your transaction here") }}
-                </div>
-            </div>
-        </div>
-    </div>
-=======
 
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg flex justify-between items-center flex-col sm:flex-row py-6 gap-y-4">
@@ -333,5 +323,4 @@
 
         </script>
     @endpush
->>>>>>> e56b32449f277dce4e742b00d3dccc177116bb74
 </x-app-layout>

@@ -194,7 +194,7 @@
                                                                               {{
                         ImageHelper::isThisImage($product->image_product_url)
                         ? $product->image_product_url
-                        : URL::signedRoute('file.view', ['encoded' => base64_encode($product->image_product_url)])
+                        : URL::signedRoute('file.view', ['encoded' => ImageHelper::encodePath($product->image_product_url)])
                         }}
 
                     " class="w-full h-full object-cover"
@@ -215,7 +215,7 @@
                                 {{
                             ImageHelper::isThisImage($product->user->user_detail->image_url)
                         ? $product->user->user_detail->image_url
-                        : URL::signedRoute('file.view', ['encoded' => base64_encode($product->user->user_detail->image_url)])
+                        : URL::signedRoute('profile.file', ['encoded' => ImageHelper::encodePath($product->user->user_detail->image_url)])
                         }}
                                 " alt="logo">
                             </div>

@@ -59,7 +59,7 @@
 <!-- Navbar -->
 <nav id="navbar" class="w-full fixed top-0 bg-[#00000048] backdrop-blur-lg z-50">
     <div class="flex flex-wrap items-center justify-between max-w-screen-xl mx-auto p-4">
-        <a href="index.html" class="flex items-center space-x-2 rtl:space-x-reverse">
+        <a href="#" class="flex items-center space-x-2 rtl:space-x-reverse">
             <img src="../assets/logos/logo-singgle.svg" class="h-6" alt="CreativeHub Logo"/>
             <span
                 class="self-center sm:text-xl md:text-2xl font-semibold whitespace-nowrap text-white">CreativeHub</span>
@@ -78,7 +78,13 @@
 
             @if(auth()->check())
                 <a href="{{route('dashboard')}}" class="w-9 border border-solid border-white rounded-md">
-                    <img src="{{auth()->user()->user_detail->image_url}}" alt="dashboard" class="object-cover rounded-md w-full">
+                    <img src="{{
+
+                                    ImageHelper::isThisImage(auth()->user()->user_detail->image_url)
+                                    ? auth()->user()->user_detail->image_url
+                                    : URL::signedRoute('profile.file', ['encoded' => ImageHelper::encodePath(auth()->user()->user_detail->image_url)])
+
+}}" alt="dashboard" class="object-cover rounded-md w-full">
                 </a>
             @endif
 
@@ -324,7 +330,7 @@
                     <img src="{{
                                     ImageHelper::isThisImage($data->image_product_url)
                                     ? $data->image_product_url
-                                    : URL::signedRoute('file.view', ['encoded' => base64_encode($data->image_product_url)])
+                                    : URL::signedRoute('file.view', ['encoded' => ImageHelper::encodePath($data->image_product_url)])
                                      }}
     " class="w-full h-full object-cover" alt="thumbnail">
                     <p class="backdrop-blur bg-black/30 rounded-[4px] p-[4px_8px] absolute top-3 right-[14px] z-7">
@@ -342,8 +348,9 @@
                             <img src="{{
                                 ImageHelper::isThisImage($data->user->user_detail->image_url)
                                     ? $data->user->user_detail->image_url
-                                    : URL::signedRoute('file.view', ['encoded' => base64_encode($data->user->user_detail->image_url)])
-}}" class="w-full h-full object-cover" alt="logo">
+                                    : URL::signedRoute('profile.file', ['encoded' => ImageHelper::encodePath($data->user->user_detail->image_url)])
+}}"
+                                 class="w-full h-full object-cover" alt="logo">
                         </div>
                         <a href="" class="font-semibold text-xs text-creativehub-grey">{{$data->user->name}}</a>
                     </div>
@@ -1022,7 +1029,7 @@
     <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div class="md:flex md:justify-between">
             <div class="mb-6 md:mb-0">
-                <a href="index.html" class="flex items-center">
+                <a href="#" class="flex items-center">
                     <img src="../assets/logos/logo-singgle.svg" class="h-8 me-3" alt="FlowBite Logo"/>
                     <span class="self-center text-2xl font-semibold whitespace-nowrap text-white">CreativeHub</span>
                 </a>

@@ -49,9 +49,17 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/test-log', function () {
+    \Illuminate\Support\Facades\Log::debug('Test log message');
+    return 'Check the log file for a message.';
+});
 
 
-Route::get('/file/{encoded}', [FileController::class, 'viewFile'])->name('file.view');
+
+Route::controller(FileController::class)->group(function () {
+    Route::get('/file/product/{encoded}', [FileController::class, 'viewImageInProduct'])->name('file.view');
+    Route::get('/file/profile/{encoded}', [FileController::class, 'viewImageInProfile'])->name('profile.file');
+});
 
 
 require __DIR__.'/auth.php';

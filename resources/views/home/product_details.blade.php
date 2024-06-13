@@ -168,7 +168,7 @@
             {{
                 ImageHelper::isThisImage($product->image_product_url)
             ? $product->image_product_url
-            : URL::signedRoute('file.view', ['encoded' => base64_encode($product->image_product_url)])
+            : URL::signedRoute('file.view', ['encoded' => ImageHelper::encodePath($product->image_product_url)])
             }}
         " class="w-full h-full object-cover" alt="hero image">
     </div>
@@ -184,7 +184,7 @@
             {{
                 ImageHelper::isThisImage($product->image_product_url)
             ? $product->image_product_url
-            : URL::signedRoute('file.view', ['encoded' => base64_encode($product->image_product_url)])
+            : URL::signedRoute('file.view', ['encoded' => ImageHelper::encodePath($product->image_product_url)])
 
             }}
             " class="w-full h-full object-cover" alt="hero image">
@@ -289,7 +289,7 @@
                         </div>
                     </div>
                 </div>
-                <a href="{{route('checkout', ["id" => "205"])}}"
+                <a href="{{route('checkout', ["id" => $product->id])}}"
                    class="bg-[#2D68F8] text-center font-semibold p-[12px_20px] rounded-full hover:bg-[#083297] active:bg-[#062162] transition-all duration-300">Checkout</a>
             </div>
         </div>
@@ -301,7 +301,7 @@
                         {{
                         ImageHelper::isThisImage($product->user->user_detail->image_url)
                         ? $product->user->user_detail->image_url
-                        : URL::signedRoute('file.view', ['encoded' => base64_encode($product->user->user_detail->image_url)])
+                        : URL::signedRoute('profile.file', ['encoded' => ImageHelper::encodePath($product->user->user_detail->image_url)])
                         }}
                         " alt="icon">
                     </div>
@@ -330,12 +330,12 @@
         @foreach($products as $data)
 
             <div class="product-card flex flex-col rounded-[18px] bg-[#181818] overflow-hidden">
-                <a href="details.html" class="thumbnail w-full h-[180px] flex shrink-0 overflow-hidden relative">
+                <a href="{{route('home.product.detail', $data->id)}}" class="thumbnail w-full h-[180px] flex shrink-0 overflow-hidden relative">
                     <img src="
                                             {{
-                        ImageHelper::isThisImage($product->image_product_url)
-                        ? $product->image_product_url
-                        : URL::signedRoute('file.view', ['encoded' => base64_encode($product->image_product_url)])
+                        ImageHelper::isThisImage($data->image_product_url)
+                        ? $data->image_product_url
+                        : URL::signedRoute('file.view', ['encoded' => ImageHelper::encodePath($data->image_product_url)])
                         }}
                     " class="w-full h-full object-cover" alt="thumbnail">
                     <p class="backdrop-blur bg-black/30 rounded-[4px] p-[4px_8px] absolute top-3 right-[14px] z-7">Rp
@@ -344,7 +344,7 @@
                 </a>
                 <div class="p-[10px_14px_12px] h-full flex flex-col justify-between gap-[14px]">
                     <div class="flex flex-col gap-1">
-                        <a href="details.html" class="font-semibold text-xs md:text-lg lg:text-lg line-clamp-2 hover:line-clamp-none">{{$data->title}}</a>
+                        <a href="{{route('home.product.detail', $data->id)}}" class="font-semibold text-xs md:text-lg lg:text-lg line-clamp-2 hover:line-clamp-none">{{$data->title}}</a>
                         <p class="bg-[#2A2A2A] text-[10px] md:text-xs lg:text-xs text-creativehub-grey rounded-[4px] p-[4px_6px] w-fit">{{$data->category->name}}</p>
                     </div>
                     <div class="flex items-center gap-[6px]">
@@ -353,7 +353,7 @@
                                                                         {{
                         ImageHelper::isThisImage($data->user->user_detail->image_url)
                         ? $data->user->user_detail->image_url
-                        : URL::signedRoute('file.view', ['encoded' => base64_encode($data->user->user_detail->image_url)])
+                        : URL::signedRoute('profile.file', ['encoded' => ImageHelper::encodePath($data->user->user_detail->image_url)])
                         }}
                             " class="w-full h-full object-cover" alt="logo">
                         </div>
@@ -462,7 +462,7 @@
     <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div class="md:flex md:justify-between">
             <div class="mb-6 md:mb-0">
-                <a href="index.html" class="flex items-center">
+                <a href="{{route('home')}}" class="flex items-center">
                     <img src="../assets/logos/logo-singgle.svg" class="h-8 me-3" alt="FlowBite Logo" />
                     <span class="self-center text-2xl font-semibold whitespace-nowrap text-white">CreativeHub</span>
                 </a>

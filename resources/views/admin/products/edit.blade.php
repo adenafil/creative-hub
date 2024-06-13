@@ -32,7 +32,7 @@
                             {{
                         ImageHelper::isThisImage($product->image_product_url)
                     ? $product->image_product_url
-                    : URL::signedRoute('file.view', ['encoded' => base64_encode($product->image_product_url)])
+                    : URL::signedRoute('file.view', ['encoded' => ImageHelper::encodePath($product->image_product_url)])
                             }}
                             " class="w-16 md:w-32 max-w-full max-h-full rounded-md" alt="">
                             <x-text-input id="cover" class="block mt-1 w-full" type="file" name="cover" />

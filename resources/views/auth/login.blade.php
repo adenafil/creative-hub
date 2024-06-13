@@ -6,6 +6,9 @@
         @csrf
 
         <!-- Email or Username -->
+        <input type="hidden" name="checkout" value="1">
+
+
         <div>
             <x-input-label for="login" :value="__('Username or email')" />
             <x-text-input id="login" class="block mt-1 w-full" type="text" name="login" :value="old('login')" required autofocus />

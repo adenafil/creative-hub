@@ -75,9 +75,24 @@
                 <span class="text-sm">9</span>
             </a>
             <!-- State profile ini muncul ketika user sudah login -->
-            <a href="#" class="w-9 border border-solid border-white rounded-md hidden">
-                <img src="{{URL::to('/')}}/assets/photos/photo-sample.jpg" alt="dashboard" class="object-cover rounded-md w-full">
-            </a>
+
+            @if(auth()->check())
+                <a href="#" class="w-9 border border-solid border-white rounded-md">
+                    <img src="
+                                                @if(isset(auth()->user()->user_detail->image_url))
+                                    {{
+                                        ImageHelper::isThisImage(auth()->user()->user_detail->image_url)
+                                        ? auth()->user()->user_detail->image_url
+                                        : URL::signedRoute('profile.file', ['encoded' => ImageHelper::encodePath(auth()->user()->user_detail->image_url)])
+                                    }}
+                                @else
+                                    {{\Illuminate\Support\Facades\URL::to('/assets/photos/img.png')}}
+                                @endif
+
+                " alt="dashboard" class="object-cover rounded-md w-full">
+                </a>
+            @endif
+
             <button data-collapse-toggle="mega-menu-icons" type="button"
                     class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 border-creativehub-grey border"
                     aria-controls="mega-menu-icons" aria-expanded="false">
@@ -242,11 +257,18 @@
                                 <select name="bank" id="bank"
                                         class="mt-1 font-semibold bg-transparent appearance-none border-none outline-none px-1 invalid:text-[#595959] invalid:font-normal invalid:text-sm"
                                         required>
-                                    <option class="text-creativehub-black" value="Angga Bank" selected>Mandiri</option>
-                                    <option class="text-creativehub-black" value="Angga Bank">Dana</option>
-                                    <option class="text-creativehub-black" value="Angga Bank">OVO</option>
-                                    <option class="text-creativehub-black" value="Angga Bank">Gopay</option>
-                                    <option class="text-creativehub-black" value="Angga Bank">BTN</option>
+                                    @foreach($product->user->payment_methods as $payment_method)
+                                        <option
+                                            class="text-creativehub-black" value="Angga Bank"
+                                            data-account-name ="{{$payment_method->payment_account_recipient_name}}"
+                                            data-account-number ="{{$payment_method->payment_account_number}}"
+                                        >{{$payment_method->payment_account_name}}</option>
+
+                                    @endforeach
+{{--                                    <option class="text-creativehub-black" value="Angga Bank">Dana</option>--}}
+{{--                                    <option class="text-creativehub-black" value="Angga Bank">OVO</option>--}}
+{{--                                    <option class="text-creativehub-black" value="Angga Bank">Gopay</option>--}}
+{{--                                    <option class="text-creativehub-black" value="Angga Bank">BTN</option>--}}
                                 </select>
                             </div>
                             <div class="w-6 h-6 flex shrink-0">
@@ -260,7 +282,7 @@
                             <div class="flex flex-col w-full">
                                 <label for="name" class="text-xs text-creativehub-grey pl-1">Account Name</label>
                                 <div class="flex mt-1 items-center max-w-[149px]">
-                                    <input disabled type="text" name="name" value="Angga Pratama" id="name"
+                                    <input disabled type="text" name="name" value="{{$product->user->payment_methods[0]->payment_account_recipient_name}}" id="name"
                                            class="font-semibold bg-transparent appearance-none autofull-no-bg outline-none border-none px-1 placeholder:text-[#595959] placeholder:font-normal placeholder:text-sm w-full"
                                            placeholder="Type here" required></input>
                                 </div>
@@ -277,7 +299,7 @@
                             <div class="flex mt-1 items-center max-w-[322px]">
                                 <input type="tel" name="number" disabled id="number"
                                        class="mt-1 font-semibold bg-transparent appearance-none autofull-no-bg border-none outline-none px-1 placeholder:text-[#595959] placeholder:font-normal placeholder:text-sm w-full"
-                                       placeholder="Type here" value="8938989812" pattern="[0-9 -]" required></input>
+                                       placeholder="Type here" value="{{$product->user->payment_methods[0]->payment_account_number}}" pattern="[0-9 -]" required></input>
                             </div>
                         </div>
                         <div class="w-6 h-6 flex shrink-0">
@@ -478,6 +500,19 @@
             preview.classList.add('hidden'); // Hide preview if no file selected
         }
     }
+
+    document.getElementById('bank').addEventListener('change', function() {
+        var selectedOption = this.options[this.selectedIndex];
+        var accountName = selectedOption.getAttribute('data-account-name');
+        var accountNumber = selectedOption.getAttribute('data-account-number');
+
+        document.getElementById('name').value = accountName;
+        document.getElementById('number').value = accountNumber;
+    });
+
+    // Trigger change event on page load to populate initial values
+    document.getElementById('bank').dispatchEvent(new Event('change'));
+
 </script>
 
 <!-- Flowbite Plugins -->

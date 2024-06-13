@@ -71,9 +71,24 @@
                 <span class="text-sm">9</span>
             </a>
             <!-- State profile ini muncul ketika user sudah login -->
-            <a href="#" class="w-9 border border-solid border-white rounded-md hidden">
-                <img src="../assets/photos/photo-sample.jpg" alt="dashboard" class="object-cover rounded-md w-full">
-            </a>
+
+            @if(auth()->check())
+                <a href="#" class="w-9 border border-solid border-white rounded-md">
+                    <img src="
+                                @if(isset(auth()->user()->user_detail->image_url))
+                                    {{
+                                        ImageHelper::isThisImage(auth()->user()->user_detail->image_url)
+                                        ? auth()->user()->user_detail->image_url
+                                        : URL::signedRoute('profile.file', ['encoded' => ImageHelper::encodePath(auth()->user()->user_detail->image_url)])
+                                    }}
+                                @else
+                                    {{\Illuminate\Support\Facades\URL::to('/assets/photos/img.png')}}
+                                @endif
+
+                    " alt="dashboard" class="object-cover rounded-md w-full">
+                </a>
+            @endif
+
             <button data-collapse-toggle="mega-menu-icons" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 border-creativehub-grey border" aria-controls="mega-menu-icons" aria-expanded="false">
                 <span class="sr-only">Open main menu</span>
                 <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
@@ -289,8 +304,14 @@
                         </div>
                     </div>
                 </div>
-                <a href="{{route('checkout', ["id" => $product->id])}}"
-                   class="bg-[#2D68F8] text-center font-semibold p-[12px_20px] rounded-full hover:bg-[#083297] active:bg-[#062162] transition-all duration-300">Checkout</a>
+                @if(auth()->check())
+                    <a href="{{route('checkout', ["id" => $product->id])}}"
+                       class="bg-[#2D68F8] text-center font-semibold p-[12px_20px] rounded-full hover:bg-[#083297] active:bg-[#062162] transition-all duration-300">Checkout</a>
+                @endif
+                @if(!auth()->check())
+                    <a href="{{route('register', ['checkout' => $product->id]) }}"
+                       class="bg-[#2D68F8] text-center font-semibold p-[12px_20px] rounded-full hover:bg-[#083297] active:bg-[#062162] transition-all duration-300">Checkout</a>
+                @endif
             </div>
         </div>
         <div class="w-full p-[30px] bg-[#181818] rounded-[20px] flex flex-col gap-4 h-fit">

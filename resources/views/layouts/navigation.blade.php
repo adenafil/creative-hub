@@ -43,12 +43,16 @@
                             class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
                             <div class="img-profile w-8 h-8 mr-2">
                                 <img src="
-                                {{
-                                    ImageHelper::isThisImage(auth()->user()->user_detail->image_url)
-                                    ? auth()->user()->user_detail->image_url
-                                    : URL::signedRoute('profile.file', ['encoded' => ImageHelper::encodePath(auth()->user()->user_detail->image_url)])
-                                }}
-                                " alt="" class="rounded-full object-cover">
+                                @if(isset(auth()->user()->user_detail->image_url))
+                                    {{
+                                        ImageHelper::isThisImage(auth()->user()->user_detail->image_url)
+                                        ? auth()->user()->user_detail->image_url
+                                        : URL::signedRoute('profile.file', ['encoded' => ImageHelper::encodePath(auth()->user()->user_detail->image_url)])
+                                    }}
+                                @else
+                                    {{\Illuminate\Support\Facades\URL::to('/assets/photos/img.png')}}
+                                @endif
+                                     " alt="" class="rounded-full object-cover">
                             </div>
 
                             <div>{{ Auth::user()->name }}</div>

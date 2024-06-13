@@ -21,62 +21,68 @@
         </p>
     </header>
 
-    <form method="post" action="" class="mt-6 space-y-6">
-
+    <form method="post" action="{{route('profile.payment.method.update')}}" class="mt-6 space-y-6">
+        @csrf
+        @method('patch')
         {{-- Available Payment Field --}}
         <div>
             <x-input-label for="payment-method" :value="__('Available Payment Method')" />
             <div id="payment-wrapper" class="payment-wrapper mt-4 flex gap-4 overflow-x-scroll no-scrollbar">
 
                 <!-- Card Component 1 -->
-                <div class="payment-card w-64 py-6 bg-gradient-to-tl from-indigo-700 via-purple-600 to-purple-900 rounded-lg shadow-lg cursor-pointer">
-                    <div class="flex justify-between items-center mx-4 py-">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <rect x="3" y="5" width="18" height="14" rx="3" />
-                            <line x1="3" y1="10" x2="21" y2="10" />
-                            <line x1="7" y1="15" x2="7.01" y2="15" />
-                            <line x1="11" y1="15" x2="13" y2="15" />
-                        </svg>
-                        <p class="text-white text-sm font-bold">DANA</p>
+                @foreach(auth()->user()->payment_methods as $payment_method)
+                    <div class="payment-card w-64 py-6 bg-gradient-to-tl from-indigo-700 via-purple-600 to-purple-900 rounded-lg shadow-lg cursor-pointer">
+                        <div class="flex justify-between items-center mx-4 py-">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <rect x="3" y="5" width="18" height="14" rx="3" />
+                                <line x1="3" y1="10" x2="21" y2="10" />
+                                <line x1="7" y1="15" x2="7.01" y2="15" />
+                                <line x1="11" y1="15" x2="13" y2="15" />
+                            </svg>
+                            <p class="text-white text-sm font-bold">
+                                {{$payment_method->payment_account_name}}
+                            </p>
+                        </div>
+                        <div class="flex justify-center mt-4">
+                            <h1 class="text-white font-thins">
+                                {{$payment_method->payment_account_number}}
+                            </h1>
+                        </div>
+                        <div class="flex flex-col justfiy-end mt-4 px-4 text-white">
+                            <p class="text-gray-300 text-xs">On Behalf</p>
+                            <h4 class="uppercase tracking-wider font-semibold text-xs">
+                                {{$payment_method->payment_account_recipient_name}}
+                            </h4>
+                        </div>
                     </div>
-                    <div class="flex justify-center mt-4">
-                        <h1 class="text-white font-thins">
-                            081233046776
-                        </h1>
-                    </div>
-                    <div class="flex flex-col justfiy-end mt-4 px-4 text-white">
-                        <p class="text-gray-300 text-xs">On Behalf</p>
-                        <h4 class="uppercase tracking-wider font-semibold text-xs">
-                            Admin Cuy
-                        </h4>
-                    </div>
-                </div>
+                @endforeach
+
 
                 <!-- Card Component 2 -->
-                <div class="payment-card w-64 py-6 bg-gradient-to-tl from-indigo-700 via-purple-600 to-purple-900 rounded-lg shadow-lg cursor-pointer">
-                    <div class="flex justify-between items-center mx-4 py-">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <rect x="3" y="5" width="18" height="14" rx="3" />
-                            <line x1="3" y1="10" x2="21" y2="10" />
-                            <line x1="7" y1="15" x2="7.01" y2="15" />
-                            <line x1="11" y1="15" x2="13" y2="15" />
-                        </svg>
-                        <p class="text-white text-sm font-bold">CIMB NIAGA</p>
-                    </div>
-                    <div class="flex justify-center mt-4">
-                        <h1 class="text-white font-thins">
-                            9669081284568929
-                        </h1>
-                    </div>
-                    <div class="flex flex-col justfiy-end mt-4 px-4 text-white">
-                        <p class="text-gray-300 text-xs">On Behalf</p>
-                        <h4 class="uppercase tracking-wider font-semibold text-xs">
-                            Admin Cuy
-                        </h4>
-                    </div>
-                </div>
+{{--                <div class="payment-card w-64 py-6 bg-gradient-to-tl from-indigo-700 via-purple-600 to-purple-900 rounded-lg shadow-lg cursor-pointer">--}}
+{{--                    <div class="flex justify-between items-center mx-4 py-">--}}
+{{--                        <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">--}}
+{{--                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />--}}
+{{--                            <rect x="3" y="5" width="18" height="14" rx="3" />--}}
+{{--                            <line x1="3" y1="10" x2="21" y2="10" />--}}
+{{--                            <line x1="7" y1="15" x2="7.01" y2="15" />--}}
+{{--                            <line x1="11" y1="15" x2="13" y2="15" />--}}
+{{--                        </svg>--}}
+{{--                        <p class="text-white text-sm font-bold">CIMB NIAGA</p>--}}
+{{--                    </div>--}}
+{{--                    <div class="flex justify-center mt-4">--}}
+{{--                        <h1 class="text-white font-thins">--}}
+{{--                            9669081284568929--}}
+{{--                        </h1>--}}
+{{--                    </div>--}}
+{{--                    <div class="flex flex-col justfiy-end mt-4 px-4 text-white">--}}
+{{--                        <p class="text-gray-300 text-xs">On Behalf</p>--}}
+{{--                        <h4 class="uppercase tracking-wider font-semibold text-xs">--}}
+{{--                            Admin Cuy--}}
+{{--                        </h4>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
 
             </div>
         </div>
@@ -97,8 +103,8 @@
             <x-input-label for="payment-account-name" :value="__('Payment Account Name')" />
             <x-text-input class="mt-1 block w-full"
                           placeholder="Example: BRI, BTN, Dana, etc"
-                          id="recipient-name"
-                          name="recipient-name"
+                          id="payment-account-name"
+                          name="payment-account-name"
                           type="text"  required autofocus autocomplete="payment-account-name" />
             <x-input-error class="mt-2" :messages="$errors->get('payment-account-name')" />
         </div>
@@ -108,8 +114,8 @@
             <x-input-label for="payment-account-number" :value="__('Payment Account Number')" />
             <x-text-input class="mt-1 block w-full"
                           placeholder="Example: 0166010208xxxxx"
-                          id="recipient-name"
-                          name="recipient-name"
+                          id="payment-account-number"
+                          name="payment-account-number"
                           type="text"  required autofocus autocomplete="payment-account-number" />
             <x-input-error class="mt-2" :messages="$errors->get('payment-account-number')" />
         </div>

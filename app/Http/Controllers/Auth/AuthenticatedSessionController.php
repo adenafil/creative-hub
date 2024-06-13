@@ -7,6 +7,7 @@ use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
@@ -27,6 +28,13 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
+
+        Log::debug("log untuk chcek request" . $request->input('checkout'));
+//        dd($request->all());
+        if ($request->has('checkout')) {
+            $productId = $request->input('checkout');
+            return redirect()->route('checkout', ['id' => $productId]);
+        }
 
         return redirect()->intended(route('dashboard', absolute: false));
     }

@@ -23,22 +23,33 @@
             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="user_avatar">Profile
                 Picture</label>
             <img src="
-            {{
-    ImageHelper::isThisImage($user->user_detail->image_url)
-    ? $user->user_detail->image_url
-    : URL::signedRoute('profile.file', ['encoded' => ImageHelper::encodePath($user->user_detail->image_url)])
-            }}
+                                @if(isset(auth()->user()->user_detail->image_url))
+                                    {{
+                                        ImageHelper::isThisImage(auth()->user()->user_detail->image_url)
+                                        ? auth()->user()->user_detail->image_url
+                                        : URL::signedRoute('profile.file', ['encoded' => ImageHelper::encodePath(auth()->user()->user_detail->image_url)])
+                                    }}
+                                @else
+                                    {{\Illuminate\Support\Facades\URL::to('/assets/photos/img.png')}}
+                                @endif
             " alt="" class="w-16 h-16 object-cover mb-2 rounded-md">
             <input
                 class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                 aria-describedby="user_avatar_help" id="user_avatar" name="user_avatar" type="file">
         </div>
 
+{{--        <div>--}}
+{{--            <x-input-label for="name" :value="__('Name')"/>--}}
+{{--            <input type="text" id="disabled-input-2" aria-label="disabled input 2"--}}
+{{--                   class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mt-1 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"--}}
+{{--                   value="{{ auth()->user()->name }}" disabled readonly>--}}
+{{--            <x-input-error class="mt-2" :messages="$errors->get('name')"/>--}}
+{{--        </div>--}}
+
         <div>
             <x-input-label for="name" :value="__('Name')"/>
-            <input type="text" id="disabled-input-2" aria-label="disabled input 2"
-                   class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mt-1 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                   value="{{ auth()->user()->name }}" disabled readonly>
+            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full"
+                          :value="old('name', $user->name)" required autofocus autocomplete="name"/>
             <x-input-error class="mt-2" :messages="$errors->get('name')"/>
         </div>
 
@@ -73,6 +84,20 @@
                     @endif
                 </div>
             @endif
+        </div>
+
+        <div>
+            <x-input-label for="title" :value="__('Title')"/>
+            <x-text-input id="title" name="title" type="text" class="mt-1 block w-full"
+                          :value="old('title', $user->user_detail->title ?? '')" required autofocus autocomplete="title"/>
+            <x-input-error class="mt-2" :messages="$errors->get('title')"/>
+        </div>
+
+
+        <div>
+            <x-input-label for="bio" :value="__('Bio')"/>
+            <textarea id="bio" name="bio" rows="4" cols="50" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">{{$user->user_detail->bio ?? ''}}</textarea>
+            <x-input-error class="mt-2" :messages="$errors->get('bio')"/>
         </div>
 
         <div class="flex items-center gap-4">

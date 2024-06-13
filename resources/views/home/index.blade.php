@@ -78,13 +78,18 @@
 
             @if(auth()->check())
                 <a href="{{route('dashboard')}}" class="w-9 border border-solid border-white rounded-md">
-                    <img src="{{
+                    <img src="
+                                @if(isset(auth()->user()->user_detail->image_url))
+                                    {{
+                                        ImageHelper::isThisImage(auth()->user()->user_detail->image_url)
+                                        ? auth()->user()->user_detail->image_url
+                                        : URL::signedRoute('profile.file', ['encoded' => ImageHelper::encodePath(auth()->user()->user_detail->image_url)])
+                                    }}
+                                @else
+                                    {{\Illuminate\Support\Facades\URL::to('/assets/photos/img.png')}}
+                                @endif
 
-                                    ImageHelper::isThisImage(auth()->user()->user_detail->image_url)
-                                    ? auth()->user()->user_detail->image_url
-                                    : URL::signedRoute('profile.file', ['encoded' => ImageHelper::encodePath(auth()->user()->user_detail->image_url)])
-
-}}" alt="dashboard" class="object-cover rounded-md w-full">
+    " alt="dashboard" class="object-cover rounded-md w-full">
                 </a>
             @endif
 

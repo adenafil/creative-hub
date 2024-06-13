@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductOrderController;
 use App\Http\Controllers\ProfileController;
@@ -47,13 +48,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
 
-Route::get('/test-log', function () {
-    \Illuminate\Support\Facades\Log::debug('Test log message');
-    return 'Check the log file for a message.';
+    Route::patch('/payment-method', [PaymentMethodController::class, 'update'])->name('profile.payment.method.update');
 });
-
 
 
 Route::controller(FileController::class)->group(function () {

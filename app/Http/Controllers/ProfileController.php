@@ -33,7 +33,7 @@ class ProfileController extends Controller
         \Illuminate\Support\Facades\Log::debug('Tesdfsdst log message');
         Log::debug('Request data: ', $request->all());
 
-        $data = $request->only(['username', 'user_avatar', 'email']);
+        $data = $request->only(['username', 'user_avatar', 'email', 'bio', 'title']);
         $user = Auth::user();
 
         Log::info('Authenticated user: ', ['id' => $user->id, 'email' => $user->email]);
@@ -66,15 +66,17 @@ class ProfileController extends Controller
         }
 
         $userDetails = $user->user_detail;
-        if ($userDetails && isset($avatarName)) {
-            $userDetails->image_url = Auth::user()->id . "/" . $avatarName;
-            try {
+        if ($userDetails) {
+            if (isset($data['user_avatar'])) {
+                $userDetails->image_url = Auth::user()->id . "/" . $avatarName;
                 Log::debug('Updating user details with image_url: ' . $avatarName);
-                $userDetails->save();
-            } catch (Exception $e) {
-                Log::error('Failed to update user details: ' . $e->getMessage());
-                return back()->withErrors(['user_details' => 'Failed to update user details: ' . $e->getMessage()]);
             }
+
+            $userDetails->title = $data['title'];
+            $userDetails->bio = $data['bio'];
+            $userDetails->save();
+            $userDetails->save();
+
         }
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');

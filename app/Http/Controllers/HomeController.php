@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PaymentMethod;
 use App\Models\Product;
 use App\Models\Review;
 use App\services\ProductService;
@@ -35,6 +36,10 @@ class HomeController extends Controller
         return \response()->view('home.checkout', [
             'product' => $product
         ]);
+    }
+
+    public function doCheckout(Request $request, $id)
+    {
     }
 
     public function successCheckout($id)

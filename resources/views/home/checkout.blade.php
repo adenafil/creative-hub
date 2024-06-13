@@ -227,11 +227,15 @@
                         <div class="flex items-center gap-2">
                             <div class="w-8 h-8 rounded-full flex shrink-0 overflow-hidden">
                                 <img src="
-                                {{
-                            ImageHelper::isThisImage($product->user->user_detail->image_url)
-                        ? $product->user->user_detail->image_url
-                        : URL::signedRoute('profile.file', ['encoded' => ImageHelper::encodePath($product->user->user_detail->image_url)])
-                        }}
+                                @if(isset(auth()->user()->user_detail->image_url))
+                                    {{
+                                        ImageHelper::isThisImage(auth()->user()->user_detail->image_url)
+                                        ? auth()->user()->user_detail->image_url
+                                        : URL::signedRoute('profile.file', ['encoded' => ImageHelper::encodePath(auth()->user()->user_detail->image_url)])
+                                    }}
+                                @else
+                                    {{\Illuminate\Support\Facades\URL::to('/assets/photos/img.png')}}
+                                @endif
                                 " alt="logo">
                             </div>
                             <p class="font-semibold text-creativehub-grey">{{$product->user->name}}</p>
@@ -282,7 +286,7 @@
                             <div class="flex flex-col w-full">
                                 <label for="name" class="text-xs text-creativehub-grey pl-1">Account Name</label>
                                 <div class="flex mt-1 items-center max-w-[149px]">
-                                    <input disabled type="text" name="name" value="{{$product->user->payment_methods[0]->payment_account_recipient_name}}" id="name"
+                                    <input disabled type="text" name="name" value="{{$product->user->payment_methods[0]->payment_account_recipient_name ?? ""}}" id="name"
                                            class="font-semibold bg-transparent appearance-none autofull-no-bg outline-none border-none px-1 placeholder:text-[#595959] placeholder:font-normal placeholder:text-sm w-full"
                                            placeholder="Type here" required></input>
                                 </div>
@@ -299,7 +303,7 @@
                             <div class="flex mt-1 items-center max-w-[322px]">
                                 <input type="tel" name="number" disabled id="number"
                                        class="mt-1 font-semibold bg-transparent appearance-none autofull-no-bg border-none outline-none px-1 placeholder:text-[#595959] placeholder:font-normal placeholder:text-sm w-full"
-                                       placeholder="Type here" value="{{$product->user->payment_methods[0]->payment_account_number}}" pattern="[0-9 -]" required></input>
+                                       placeholder="Type here" value="{{$product->user->payment_methods[0]->payment_account_number ?? ""}}" pattern="[0-9 -]" required></input>
                             </div>
                         </div>
                         <div class="w-6 h-6 flex shrink-0">

@@ -319,11 +319,15 @@
                 <div class="flex gap-3 items-center">
                     <div class="w-12 h-12 rounded-full overflow-hidden flex shrink-0">
                         <img src="
-                        {{
-                        ImageHelper::isThisImage($product->user->user_detail->image_url)
-                        ? $product->user->user_detail->image_url
-                        : URL::signedRoute('profile.file', ['encoded' => ImageHelper::encodePath($product->user->user_detail->image_url)])
-                        }}
+                                @if(isset(auth()->user()->user_detail->image_url))
+                                    {{
+                                        ImageHelper::isThisImage(auth()->user()->user_detail->image_url)
+                                        ? auth()->user()->user_detail->image_url
+                                        : URL::signedRoute('profile.file', ['encoded' => ImageHelper::encodePath(auth()->user()->user_detail->image_url)])
+                                    }}
+                                @else
+                                    {{\Illuminate\Support\Facades\URL::to('/assets/photos/img.png')}}
+                                @endif
                         " alt="icon">
                     </div>
                     <div class="flex flex-col gap-[2px]">
@@ -338,7 +342,7 @@
                     <img src="../assets/icons/arrow-right.svg" alt="icon">
                 </a>
             </div>
-            <p class="text-sm leading-[24px] text-creativehub-grey">{{$product->user->user_detail->bio}}</p>
+            <p class="text-sm leading-[24px] text-creativehub-grey">{{$product->user->user_detail->bio ?? ""}}</p>
         </div>
     </div>
 </section>

@@ -350,11 +350,17 @@
                     </div>
                     <div class="flex items-center gap-[6px]">
                         <div class="w-6 h-6 flex shrink-0 items-center justify-center rounded-full overflow-hidden">
-                            <img src="{{
-                                ImageHelper::isThisImage($data->user->user_detail->image_url)
-                                    ? $data->user->user_detail->image_url
-                                    : URL::signedRoute('profile.file', ['encoded' => ImageHelper::encodePath($data->user->user_detail->image_url)])
-}}"
+                            <img src="
+                                @if(isset(auth()->user()->user_detail->image_url))
+                                    {{
+                                        ImageHelper::isThisImage(auth()->user()->user_detail->image_url)
+                                        ? auth()->user()->user_detail->image_url
+                                        : URL::signedRoute('profile.file', ['encoded' => ImageHelper::encodePath(auth()->user()->user_detail->image_url)])
+                                    }}
+                                @else
+                                    {{\Illuminate\Support\Facades\URL::to('/assets/photos/img.png')}}
+                                @endif
+"
                                  class="w-full h-full object-cover" alt="logo">
                         </div>
                         <a href="" class="font-semibold text-xs text-creativehub-grey">{{$data->user->name}}</a>

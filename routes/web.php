@@ -16,13 +16,21 @@ Route::controller(HomeController::class)->group(function () {
    Route::get('/products/{id}', 'products')->name('home.product.detail');
    Route::get('/products/{id}/checkout', 'checkout')->name('checkout');
    Route::get('//products/{id}/checkout/success', 'successCheckout')->name('success.checkout');
+   Route::post('/products/{id}/checkout', 'doCheckout')->name('do.checkout');
 });
+
+Route::get('/kntl/{id}', function ($id) {
+    return $id;
+})->name('kntl');
+
 
 //Route::get('admin/dashboard', function () {
 //    return view('dashboard');
 //})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware(['auth', 'verified'])->group(function () {
+
+
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 
     // Rute untuk ProductController
@@ -35,11 +43,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Rute untuk ProductOrderController
     Route::get('/admin/product_orders', [ProductOrderController::class, 'index'])->name('product.order.index');
-    Route::get('/admin/product_orders/details', [ProductOrderController::class, 'detail'])->name('product.order.detail');
+    Route::get('/admin/product_orders/details/{id}', [ProductOrderController::class, 'detail'])->name('product.order.detail');
+    Route::post('/admin/product_orders/{id}', [ProductOrderController::class, 'doApproveOrDisapprove'])->name('product.approve.or.disapprove');
 
-    // Rute untuk TransactionController
-    Route::get('/admin/transactions', [TransactionController::class, 'index'])->name('transaction.index');
-    Route::get('/admin/transactions/details', [TransactionController::class, 'detail'])->name('transaction.detail');
+    // Rute untuk purchase
+    Route::get('/admin/purchases', [TransactionController::class, 'index'])->name('purchases.index');
+    Route::post('/admin/purchases/{id}', [TransactionController::class, 'doComment'])->name('purchases.comment.index');
+    Route::get('/admin/purchases/details/{id}', [TransactionController::class, 'detail'])->name('purchases.detail');
+    Route::get('/download', [TransactionController::class, 'doDownload'])->name('download.asset');
 
 });
 
@@ -56,6 +67,7 @@ Route::middleware('auth')->group(function () {
 Route::controller(FileController::class)->group(function () {
     Route::get('/file/product/{encoded}', [FileController::class, 'viewImageInProduct'])->name('file.view');
     Route::get('/file/profile/{encoded}', [FileController::class, 'viewImageInProfile'])->name('profile.file');
+    Route::get('/file/payment_proof/{encoded}', [FileController::class, 'viewImagePaymetnProof'])->name('proof.file');
 });
 
 

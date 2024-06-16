@@ -6,8 +6,7 @@
         @csrf
 
         <!-- Email or Username -->
-        <input type="hidden" name="checkout" value="1">
-
+        <input type="hidden" name="checkout" value="{{request()->input('checkout')}}">
 
         <div>
             <x-input-label for="login" :value="__('Username or email')" />

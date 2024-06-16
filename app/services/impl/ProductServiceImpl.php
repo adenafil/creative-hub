@@ -6,7 +6,9 @@ use App\Http\Requests\AddProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Purchase;
 use App\Models\Review;
+use App\Models\Transaction;
 use App\Models\User;
 use App\services\ProductService;
 use Illuminate\Contracts\Pagination\CursorPaginator;
@@ -56,11 +58,6 @@ class ProductServiceImpl implements ProductService
         $product->save();
 
         return true;
-
-    }
-
-    public function downloadProduct()
-    {
 
     }
 

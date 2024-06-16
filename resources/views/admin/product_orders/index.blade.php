@@ -13,7 +13,7 @@
                 <form class="flex items-center ml-4 w-2/3">
                     <label for="simple-search" class="sr-only">Search</label>
                     <div class="relative w-full">
-                        <input type="text" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search..." required />
+                        <input name="simple-search" type="text" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search..." required />
                     </div>
                     <button type="submit" class="p-2.5 ms-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-gray-700 focus:ring-4 focus:outline-none bg-[#1F2937] focus:ring-[#1F2937] hover:bg-gray-700 ">
                         <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -51,38 +51,45 @@
 
 {{--                    @endif--}}
 
-{{--                    @foreach ($products as $product)--}}
+                    @foreach ($data as $product)
                         <tr>
-                            <td class="text-center">1</td>
+                            <td class="text-center">{{ ($data->currentPage() - 1) * $data->perPage() + $loop->iteration }}</td>
                             <td class="">
                                 <div class="img-wrapper h-24">
-                                    <img src="https://s3-alpha.figma.com/hub/file/4812909515/af3c63d8-9dd1-4953-a0dd-eb3f14d1e6ca-cover.png"
+                                    <img src="{{
+                                \App\Helper\ImageHelper::isThisImage($product->image_product_url)
+                                ? $product->image_product_url
+                                : URL::signedRoute('file.view', ['encoded' => \App\Helper\ImageHelper::encodePath($product->image_product_url)]) }}"
                                          class="w-16 h-full object-cover md:w-32 max-w-full max-h-full rounded-md" alt="">
                                 </div>
                             </td>
-                            <td class="text-center">Saas Web UI Kit</td>
-                            <td class="text-center">UI Kit</td>
-                            <td class="text-center">Rp. 999,999</td>
+                            <td class="text-center">{{$product->title}}</td>
+                            <td class="text-center">{{$product->name}}</td>
+                            <td class="text-center">{{$product->price}}</td>
                             <td class="text-center">
-                                {{-- Pending Status --}}
-                                <span class="bg-yellow-100 text-yellow-800 text-sm font-medium me-2 px-4 py-1.5 rounded-full dark:bg-yellow-900 dark:text-yellow-300">Pending</span>
 
-                                {{-- if u want use this state, please remove class 'hidden' --}}
-                                {{-- Disapprove Status --}}
-                                <span class="hidden bg-red-100 text-red-800 text-sm font-medium me-2 px-4 py-1.5 rounded-full dark:bg-red-900 dark:text-red-300">Disapprove</span>
+                                @if($product->status == 'pending')
+                                    {{-- Pending Status --}}
+                                    <span class="bg-yellow-100 text-yellow-800 text-sm font-medium me-2 px-4 py-1.5 rounded-full dark:bg-yellow-900 dark:text-yellow-300">Pending</span>
+                                @elseif($product->status == 'disapprove')
+                                    {{-- if u want use this state, please remove class 'hidden' --}}
+                                    {{-- Disapprove Status --}}
+                                    <span class="bg-red-100 text-red-800 text-sm font-medium me-2 px-4 py-1.5 rounded-full dark:bg-red-900 dark:text-red-300">Disapprove</span>
+                                @elseif($product->status == 'paid')
+                                    {{-- Paid Status --}}
+                                    <span class="bg-green-100 text-green-800 text-sm font-medium me-2 px-4 py-1.5 rounded-full dark:bg-green-900 dark:text-green-300">Paid</span>
+                                @endif
 
-                                {{-- Paid Status --}}
-                                <span class="hidden bg-green-100 text-green-800 text-sm font-medium me-2 px-4 py-1.5 rounded-full dark:bg-green-900 dark:text-green-300">Green</span>
                             </td>
                             <td class="">
                                 <div class="btn-group flex items-center gap-2 justify-center">
-                                    <a href="#" class="flex h-fit">
+                                    <a href="{{route('product.order.detail', ['id' => $product->id, 'product' => base64_encode(json_encode($product))])}}" class="flex h-fit">
                                         <button type="button" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5">Detail</button>
                                     </a>
                                 </div>
                             </td>
                         </tr>
-{{--                    @endforeach--}}
+                    @endforeach
 
                     </tbody>
 
@@ -91,38 +98,38 @@
 
             <div class="flex justify-center items-center gap-y-2 flex-col mt-10">
 
-                <span class="text-sm text-gray-700 dark:text-gray-400">Showing <span class="font-semibold text-gray-900 dark:text-white">1</span> to <span class="font-semibold text-gray-900 dark:text-white">10</span> of <span class="font-semibold text-gray-900 dark:text-white">90</span> Entries</span>
+                <span class="text-sm text-gray-700 dark:text-gray-400">Showing <span class="font-semibold text-gray-900 dark:text-white">{{$firstItem}}</span> to <span class="font-semibold text-gray-900 dark:text-white">{{$lastItem}}</span> of <span class="font-semibold text-gray-900 dark:text-white">{{$totalData}}</span> Entries</span>
 
                 <nav aria-label="Page navigation example">
                     <ul class="inline-flex -space-x-px text-sm">
                         {{-- Previous Page Link --}}
-{{--                        @if ($currentPage > 1)--}}
+                        @if ($currentPage > 1)
                             <li>
-                                <a href="#" class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</a>
+                                <a href="{{ url()->current() }}?page={{ $currentPage - 1 }}" class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</a>
                             </li>
-{{--                        @endif--}}
+                        @endif
 
                         {{-- Pagination Elements --}}
-{{--                        @foreach ($window as $page)--}}
-{{--                            @if (is_string($page))--}}
+                        @foreach ($window as $page)
+                            @if (is_string($page))
                                 <li class="">
-                                    <span class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</span>
+                                    <span class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">{{ $page }}</span>
                                 </li>
-{{--                            @elseif ($page == $currentPage)--}}
+                            @elseif ($page == $currentPage)
                                 <li class="">
-                                    <span class="flex items-center justify-center px-3 h-8 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">2</span>
+                                    <span class="flex items-center justify-center px-3 h-8 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">{{ $page }}</span>
                                 </li>
-{{--                            @else--}}
-                                <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">3</a>
-{{--                            @endif--}}
-{{--                        @endforeach--}}
+                            @else
+                                <a href="{{ url()->current() }}?page={{ $page }}" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">{{ $page }}</a>
+                            @endif
+                        @endforeach
 
                         {{-- Next Page Link --}}
-{{--                        @if ($currentPage < $totalPages)--}}
+                        @if ($currentPage < $totalPages)
                             <li>
-                                <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</a>
+                                <a href="{{ url()->current() }}?page={{ $currentPage + 1 }}" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</a>
                             </li>
-{{--                        @endif--}}
+                        @endif
                     </ul>
                 </nav>
 

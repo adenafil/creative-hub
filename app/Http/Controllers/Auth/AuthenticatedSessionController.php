@@ -25,16 +25,26 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
+
+        $checkoutId = $request->input('checkout'); // Ambil nilai 'checkout' dari input request
+
+        // Simpan 'checkout' ke dalam session
+        session()->put('checkout', $checkoutId);
+
+
+
+        //        dd($request->all());
+        // Jika ada query parameter 'checkout', redirect ke route 'checkout'
+        if (session()->get('checkout') != null) {
+            $checkoutId = $request->query('checkout');
+//            dd(session()->get('checkout'));
+            return redirect()->route('checkout', ['id' => session()->get('checkout')]);
+        }
+
         $request->authenticate();
 
         $request->session()->regenerate();
-
-        Log::debug("log untuk chcek request" . $request->input('checkout'));
-//        dd($request->all());
-        if ($request->has('checkout')) {
-            $productId = $request->input('checkout');
-            return redirect()->route('checkout', ['id' => $productId]);
-        }
+        Log::debug("log untuk chcek request" . $request->query('checkout'));
 
         return redirect()->intended(route('dashboard', absolute: false));
     }

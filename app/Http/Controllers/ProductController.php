@@ -37,7 +37,6 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         Session::put('product_index_page', $request->input('page', 1));
-
         // Tentukan jumlah item per halaman
         $perPage = 4;
 
@@ -48,7 +47,11 @@ class ProductController extends Controller
         $offset = ($currentPage - 1) * $perPage;
 
         // Ambil data produk untuk halaman saat ini
-        $products = $this->productService->getProductByUser(Auth::id(), $offset, $perPage);
+        if ($request->query('simple-search')) {
+            $products = Product::query()->where('title', 'like', "%{$request->query('simple-search')}%")->paginate(4);
+        } else {
+            $products = $this->productService->getProductByUser(Auth::id(), $offset, $perPage);
+        }
 
         // Hitung total produk
         $totalProducts = Product::where('seller_id', Auth::id())->count();

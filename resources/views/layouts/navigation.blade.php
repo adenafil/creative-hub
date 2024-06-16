@@ -29,7 +29,7 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('transaction.index')" :active="request()->routeIs('transaction.index')">
+                    <x-nav-link :href="route('purchases.index')" :active="request()->routeIs('purchases.index')">
                         {{ __('My Purchases') }}
                     </x-nav-link>
                 </div>
@@ -116,7 +116,7 @@
                                    :active="request()->routeIs('product.order.index')">
                 {{ __('My Sales') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('transaction.index')" :active="request()->routeIs('transaction.index')">
+            <x-responsive-nav-link :href="route('purchases.index')" :active="request()->routeIs('purchases.index')">
                 {{ __('My Purchases') }}
             </x-responsive-nav-link>
         </div>

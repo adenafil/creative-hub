@@ -10,10 +10,10 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg flex justify-between items-center flex-col sm:flex-row py-6 gap-y-4">
 
-                <form class="flex items-center ml-4 w-2/3">
+                <form class="flex items-center ml-4 w-2/3" method="get" action="{{route('purchases.index')}}">
                     <label for="simple-search" class="sr-only">Search</label>
                     <div class="relative w-full">
-                        <input type="text" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search..." required />
+                        <input type="text" name="simple-search" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search..." required />
                     </div>
                     <button type="submit" class="p-2.5 ms-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-gray-700 focus:ring-4 focus:outline-none bg-[#1F2937] focus:ring-[#1F2937] hover:bg-gray-700 ">
                         <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -51,92 +51,92 @@
 
                     {{--                    @endif--}}
 
-                    {{--                    @foreach ($products as $product)--}}
-                    <tr>
-                        <td class="text-center">1</td>
-                        <td class="">
-                            <div class="img-wrapper h-24">
-                                <img src="https://s3-alpha.figma.com/hub/file/4812909515/af3c63d8-9dd1-4953-a0dd-eb3f14d1e6ca-cover.png"
-                                     class="w-16 h-full object-cover md:w-32 max-w-full max-h-full rounded-md" alt="">
-                            </div>
-                        </td>
-                        <td class="text-center">Saas Web UI Kit</td>
-                        <td class="text-center">UI Kit</td>
-                        <td class="text-center">Rp. 999,999</td>
-                        <td class="text-center">
-                            {{-- Pending Status --}}
-                            <span class="hidden bg-yellow-100 text-yellow-800 text-sm font-medium me-2 px-4 py-1.5 rounded-full dark:bg-yellow-900 dark:text-yellow-300">Pending</span>
+                    @foreach ($purchases as $purchase)
+                        <tr>
+                            <td class="text-center">{{ ($purchases->currentPage() - 1) * $purchases->perPage() + $loop->iteration }}</td>
+                            <td class="">
+                                <div class="img-wrapper h-24">
+                                    <img src="{{ \App\Helper\ImageHelper::isThisImage($purchase->image_product_url) ? $purchase->image_product_url : URL::signedRoute('file.view', ['encoded' => \App\Helper\ImageHelper::encodePath($purchase->image_product_url)]) }}" class="w-16 h-full object-cover md:w-32 max-w-full max-h-full rounded-md" alt="">
+                                </div>
+                            </td>
+                            <td class="text-center">{{ $purchase->title }}</td>
+                            <td class="text-center">{{ $purchase->name }}</td>
+                            <td class="text-center">{{ $purchase->price }}</td>
+                            <td class="text-center">
+                                @if ($purchase->status == 'pending')
+                                    <span class="bg-yellow-100 text-yellow-800 text-sm font-medium me-2 px-4 py-1.5 rounded-full dark:bg-yellow-900 dark:text-yellow-300">Pending</span>
+                                @elseif ($purchase->status == 'disapprove')
+                                    <span class="bg-red-100 text-red-800 text-sm font-medium me-2 px-4 py-1.5 rounded-full dark:bg-red-900 dark:text-red-300">Disapprove</span>
+                                @elseif ($purchase->status == 'paid')
+                                    <span class="bg-green-100 text-green-800 text-sm font-medium me-2 px-4 py-1.5 rounded-full dark:bg-green-900 dark:text-green-300">Paid</span>
+                                @endif
+                            </td>
+                            <td class="">
+                                <div class="btn-group flex items-center gap-2 justify-center">
+                                    <a href="{{ route('purchases.detail', ['id' => $purchase->product_id]) }}" class="flex h-fit">
+                                        <button type="button" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5">Detail</button>
+                                    </a>
 
-                            {{-- if u want use this state, please remove class 'hidden' --}}
-                            {{-- Disapprove Status --}}
-                            <span class="hidden bg-red-100 text-red-800 text-sm font-medium me-2 px-4 py-1.5 rounded-full dark:bg-red-900 dark:text-red-300">Disapprove</span>
+                                    <!-- Btn Review ini muncul ketika product sudah diapprove -->
+                                    <!-- Modal toggle -->
+                                    <button id="btn-review" data-modal-target="crud-modal-{{ $purchase->product_id }}" data-modal-toggle="crud-modal-{{ $purchase->product_id }}" data-product-id="{{ $purchase->product_id }}" class="btn-review focus:outline-none text-white bg-yellow-600 hover:bg-yellow-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5" type="button">
+                                        Reviews
+                                    </button>
 
-                            {{-- Paid Status --}}
-                            <span class="bg-green-100 text-green-800 text-sm font-medium me-2 px-4 py-1.5 rounded-full dark:bg-green-900 dark:text-green-300">Paid</span>
-                        </td>
-                        <td class="">
-                            <div class="btn-group flex items-center gap-2 justify-center">
-                                <a href="#" class="flex h-fit">
-                                    <button type="button" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5">Detail</button>
-                                </a>
+                                    <!-- Main modal -->
+                                    <div id="crud-modal-{{ $purchase->product_id }}" tabindex="-1" aria-hidden="true" class="crud-modal  overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full hidden">
+                                        <div class="relative p-4 w-full max-w-md max-h-full">
+                                            <!-- Modal content -->
+                                            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                                <!-- Modal header -->
+                                                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                                                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Give Your Feedback 🤗</h3>
+                                                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="crud-modal-{{ $purchase->product_id }}">
+                                                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                                        </svg>
+                                                        <span class="sr-only">Close modal</span>
+                                                    </button>
+                                                </div>
+                                                <!-- Modal body -->
+                                                <form id="review-form-{{ $purchase->product_id }}" method="post" action="{{ route('purchases.comment.index', ['id' => $purchase->product_id]) }}" class="p-4 md:p-5">
+                                                    @csrf
+                                                    <div class="reviews-star">
+                                                        <p class="text-center">All feedback is appreciated to help us improve our offering and remember that you can only edit once in your life time right maniezz! 😉</p>
+                                                        <div class="star-group flex justify-center">
+                                                            @for ($i = 1; $i <= 5; $i++)
+                                                                <div class="flex items-center flex-col">
+                                                                    <img src="{{ asset("assets/icons/star-$i.svg") }}" alt="">
+                                                                    @if($comments["isChecked-$purchase->product_id"] !== null && $i == $comments["isChecked-$purchase->product_id"])
+                                                                        {{\Illuminate\Support\Facades\Log::debug("log $i = "  . $comments["isChecked-$purchase->product_id"])}}
+                                                                        <input class="default-radio-1" type="radio" value="{{$comments["isChecked-$purchase->product_id"]}}" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" checked>
+                                                                    @else
+                                                                        <input class="default-radio-1" type="radio" value="{{$i}}" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                                    @endif
 
-                                {{-- Btn Review ini muncul ketika product sudah diapprove --}}
-                                <!-- Modal toggle -->
-                                <button data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="focus:outline-none text-white bg-yellow-600 hover:bg-yellow-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5" type="button">
-                                    Reviews
-                                </button>
-
-                                <!-- Main modal -->
-                                <div id="crud-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                                    <div class="relative p-4 w-full max-w-md max-h-full">
-                                        <!-- Modal content -->
-                                        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                                            <!-- Modal header -->
-                                            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                                                    Give Your Feedback 🤗
-                                                </h3>
-                                                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="crud-modal">
-                                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                                                    </svg>
-                                                    <span class="sr-only">Close modal</span>
-                                                </button>
-                                            </div>
-                                            <!-- Modal body -->
-                                            <form class="p-4 md:p-5">
-                                                <div class="reviews-star">
-                                                    <p class="text-center">All feedback is appreciated to help us improve our offering and remember that you can only edit once in your life time right maniezz! 😉</p>
-                                                    <div class="star-group flex justify-center">
-                                                        @for($i = 1; $i <= 5; $i++)
-                                                            <div class="flex items-center flex-col">
-                                                                <img src="{{ asset("assets/icons/star-$i.svg") }}" alt="">
-                                                                <input id="default-radio-1" type="radio" value="" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                                </div>
+                                                            @endfor
+                                                        </div>
+                                                        <div class="grid gap-4 mt-8 mb-4 grid-cols-2">
+                                                            <div class="col-span-2">
+                                                                <label for="comment" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product Reviews</label>
+                                                                <textarea name="comment" id="comment" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write Your Review Here">{{$comments[$purchase->product_id] ?? "Write Your Review Here"}}
+                                                                </textarea>
                                                             </div>
-                                                        @endfor
-
-
+                                                        </div>
+                                                        <button id="submitButton" type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" disabled>
+                                                            Submit
+                                                        </button>
                                                     </div>
-                                                </div>
-                                                <div class="grid gap-4 mt-8 mb-4 grid-cols-2">
-
-                                                    <div class="col-span-2">
-                                                        <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product Reviews</label>
-                                                        <textarea id="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your reviews here"></textarea>
-                                                    </div>
-                                                </div>
-                                                <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                                    Submit
-                                                </button>
-                                            </form>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                            </td>
+                        </tr>
+                    @endforeach
 
-                            </div>
-                        </td>
-                    </tr>
-                    {{--                    @endforeach--}}
 
                     </tbody>
 
@@ -145,45 +145,44 @@
 
             <div class="flex justify-center items-center gap-y-2 flex-col mt-10">
 
-                <span class="text-sm text-gray-700 dark:text-gray-400">Showing <span class="font-semibold text-gray-900 dark:text-white">1</span> to <span class="font-semibold text-gray-900 dark:text-white">10</span> of <span class="font-semibold text-gray-900 dark:text-white">90</span> Entries</span>
+                <span class="text-sm text-gray-700 dark:text-gray-400">Showing <span class="font-semibold text-gray-900 dark:text-white">{{ $firstItem }}</span> to <span class="font-semibold text-gray-900 dark:text-white">{{ $lastItem }}</span> of <span class="font-semibold text-gray-900 dark:text-white">{{ $totalPurchases }}</span> Entries</span>
 
                 <nav aria-label="Page navigation example">
                     <ul class="inline-flex -space-x-px text-sm">
                         {{-- Previous Page Link --}}
-                        {{--                        @if ($currentPage > 1)--}}
-                        <li>
-                            <a href="#" class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</a>
-                        </li>
-                        {{--                        @endif--}}
+                        @if ($currentPage > 1)
+                            <li>
+                                <a href="{{ url()->current() }}?page={{ $currentPage - 1 }}" class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</a>
+                            </li>
+                        @endif
 
                         {{-- Pagination Elements --}}
-                        {{--                        @foreach ($window as $page)--}}
-                        {{--                            @if (is_string($page))--}}
-                        <li class="">
-                            <span class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</span>
-                        </li>
-                        {{--                            @elseif ($page == $currentPage)--}}
-                        <li class="">
-                            <span class="flex items-center justify-center px-3 h-8 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">2</span>
-                        </li>
-                        {{--                            @else--}}
-                        <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">3</a>
-                        {{--                            @endif--}}
-                        {{--                        @endforeach--}}
+                        @foreach ($window as $page)
+                            @if (is_string($page))
+                                <li class="">
+                                    <span class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">{{ $page }}</span>
+                                </li>
+                            @elseif ($page == $currentPage)
+                                <li class="">
+                                    <span class="flex items-center justify-center px-3 h-8 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">{{ $page }}</span>
+                                </li>
+                            @else
+                                <a href="{{ url()->current() }}?page={{ $page }}" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">{{ $page }}</a>
+                            @endif
+                        @endforeach
 
                         {{-- Next Page Link --}}
-                        {{--                        @if ($currentPage < $totalPages)--}}
-                        <li>
-                            <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</a>
-                        </li>
-                        {{--                        @endif--}}
+                        @if ($currentPage < $totalPages)
+                            <li>
+                                <a href="{{ url()->current() }}?page={{ $currentPage + 1 }}" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</a>
+                            </li>
+                        @endif
                     </ul>
                 </nav>
 
             </div>
-        </div>
-    </div>
 
+    </div>
 
 
 
@@ -198,9 +197,9 @@
             /*Overrides for Tailwind CSS */
 
             /*Overide Pagination*/
-            #pagination-controls nav .sm:hidden {
+            /*#pagination-controls nav .sm:hidden {*/
 
-            }
+            /*}*/
 
             /*Form fields*/
             .dataTables_wrapper select,
@@ -301,8 +300,72 @@
                 }
             }
 
+
         </style>
     @endpush
+
+
+        <script>
+
+            document.addEventListener('DOMContentLoaded', function () {
+                    let adeComment = false;
+                    let adeRadio = false;
+
+                    let dataComment = '';
+
+                    function check() {
+                        if (dataComment.value.trim() !== "") {
+                            console.log('mama');
+                        }
+                    }
+
+                    const reviewsButtons  =  document.querySelectorAll('.btn-review');
+                    reviewsButtons.forEach(button => {
+                        button.addEventListener('click', function () {
+                            console.log('click');
+
+                            const submits = document.querySelectorAll('#submitButton');
+                            submits.forEach(submit => {
+
+                                document.querySelectorAll('#comment').forEach(comment => {
+                                    comment.addEventListener('input', function () {
+                                        console.log(comment.value);
+                                        if (comment.value !== "") {
+                                            adeComment = true;
+                                        }
+                                        console.log("messi " + adeComment);
+                                        dataComment += comment.value;
+
+                                    })
+                                });
+
+                                document.querySelectorAll('.default-radio-1').forEach(radio => {
+                                    radio.addEventListener('input', function () {
+
+                                        if (radio.checked) {
+                                            adeRadio = true;
+                                        }
+                                        console.log(radio.checked);
+
+                                    })
+                                })
+
+                                submit.removeAttribute('disabled');
+
+
+                                submit.addEventListener('click', function () {
+                                    submit.addAttribute('disabled');
+                                })
+                            });
+                        })
+
+
+                    });
+
+
+            });
+        </script>
+
 
     {{-- Resource CDN & Script Datatables --}}
     @push('scripts')

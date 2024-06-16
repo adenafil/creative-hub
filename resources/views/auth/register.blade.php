@@ -3,7 +3,7 @@
         @csrf
 
         <!-- Name -->
-        <input type="hidden" name="checkout" value="1">
+        <input type="hidden" name="checkout" value="{{request()->input('checkout')}}">
 
 
         <div>

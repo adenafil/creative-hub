@@ -32,7 +32,7 @@
                     <p class="text-xs text-belibang-grey">Thank you for supporting our great creators</p>
                 </div>
             </div>
-            <a href="index.html"
+            <a href="{{route('purchases.index')}}"
                class="w-[290px] h-12 flex items-center justify-center rounded-full text-center bg-[#2D68F8] p-[8px_18px] font-semibold hover:bg-[#083297] active:bg-[#062162] transition-all duration-300">Check
                 My Transactions</a>
         </div>

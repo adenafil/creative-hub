@@ -16,6 +16,10 @@ class Transaction extends Model
     public $incrementing = true;
     public $timestamps = false;
 
+    protected $fillable = [
+      'user_id'
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
@@ -30,6 +34,12 @@ class Transaction extends Model
     {
         return $this->hasMany(Purchase::class, 'transaction_id', 'id');
     }
+
+    public function purchase()
+    {
+        return $this->hasOne(Purchase::class, 'transaction_id', 'id');
+    }
+
 
     public function buyProducts(): BelongsToMany
     {

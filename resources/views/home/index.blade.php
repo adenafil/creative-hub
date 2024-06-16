@@ -52,6 +52,11 @@
         --tw-text-opacity: 1;
         color: rgb(79 70 229 / var(--tw-text-opacity));
     }
+
+    /*  Search Override  */
+    #searchInput {
+        background-color: transparent;
+    }
 </style>
 
 <body class="bg-creativehub-black font-poppins text-white">
@@ -229,7 +234,7 @@
                            class="bg-creativehub-darker-grey w-full pl-[36px] focus:outline-none border-none placeholder:text-[#595959] pr-9"
                            placeholder="Type anything to search..."/>
                     <input type="reset" id="resetButton"
-                           class="close-button hidden w-[38px] h-[38px] flex shrink-0 bg-[url('../assets/icons/close.svg')] hover:bg-[url('../assets/icons/close-white.svg')] transition-all duration-300 appearance-none transform -translate-x-1/2 -translate-y-1/2 absolute top-1/2 -right-5"
+                           class="close-button hidden w-[38px] h-[38px] flex shrink-0 bg-[url('https://raw.githubusercontent.com/fe-husni/creativehub-main/main/assets/icons/close.svg')] hover:bg-[url('https://raw.githubusercontent.com/fe-husni/creativehub-main/main/assets/icons/close-white.svg')] transition-all duration-300 appearance-none transform -translate-x-1/2 -translate-y-1/2 absolute top-1/2 -right-5"
                            value="">
                 </div>
             </form>
@@ -426,7 +431,7 @@
                                         <div class="grid gap-1">
                                             <h5 class="font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#B05CB0] to-[#FCB16B] transition-all duration-500">{{ $reviews->user->name }}</h5>
                                             <span
-                                                class="text-sm leading-6 text-creativehub-light-grey hover:text-white">{{ $reviews->user->user_detail->title }}</span>
+                                                class="text-sm leading-6 text-creativehub-light-grey hover:text-white">{{ $reviews->user->user_detail->title ?? "" }}</span>
                                         </div>
                                     </div>
                                     <div
@@ -1185,7 +1190,7 @@
 <!-- Swiper.js CDN -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <!-- Main.js Script -->
-@vite(['resources/css/app.css', 'resources/js/app.js', 'resource/css/output.css'])
+@vite(['resources/css/app.css', 'resources/js/app.js', 'resource/css/output.css']);
 
 <script>
     // Search Function

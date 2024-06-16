@@ -59,7 +59,7 @@
 <!-- Navbar -->
 <nav id="navbar" class="w-full fixed top-0 bg-[#00000048] backdrop-blur-lg z-50">
     <div class="flex flex-wrap items-center justify-between max-w-screen-xl mx-auto p-4">
-        <a href="index.html" class="flex items-center space-x-2 rtl:space-x-reverse">
+        <a href="{{route('home')}}" class="flex items-center space-x-2 rtl:space-x-reverse">
             <img src="{{URL::to('/')}}/assets/logos/logo-singgle.svg" class="h-6" alt="CreativeHub Logo">
             <span
                 class="self-center sm:text-xl md:text-2xl font-semibold whitespace-nowrap text-white">CreativeHub</span>
@@ -206,22 +206,26 @@
             <div class="product-detail flex flex-col gap-3">
                 <div class="thumbnail w-fit h-auto flex shrink-0 rounded-[20px] overflow-hidden">
                     <img src="
-                                                                              {{
-                        ImageHelper::isThisImage($product->image_product_url)
-                        ? $product->image_product_url
-                        : URL::signedRoute('file.view', ['encoded' => ImageHelper::encodePath($product->image_product_url)])
-                        }}
+                                @if(isset(auth()->user()->user_detail->image_url))
+                                    {{
+                                        ImageHelper::isThisImage(auth()->user()->user_detail->image_url)
+                                        ? auth()->user()->user_detail->image_url
+                                        : URL::signedRoute('profile.file', ['encoded' => ImageHelper::encodePath(auth()->user()->user_detail->image_url)])
+                                    }}
+                                @else
+                                    {{\Illuminate\Support\Facades\URL::to('/assets/photos/img.png')}}
+                                @endif
 
                     " class="w-full h-full object-cover"
                          alt="thumbnail">
                 </div>
                 <div class="product-title flex flex-col gap-[30px]">
                     <div class="flex flex-col gap-3">
-                        <p class="font-semibold">{{$product->title}}
+                        <p class="font-semibold">{{$product->title ?? ""}}
                         </p>
                         <p
                             class="bg-[#2A2A2A] font-semibold text-xs text-creativehub-grey rounded-[4px] p-[4px_6px] w-fit">
-                            {{$product->category->name}}</p>
+                            {{$product->category->name ?? ""}}</p>
                     </div>
                     <div class="flex justify-between items-center flex-wrap gap-y-3">
                         <div class="flex items-center gap-2">
@@ -238,18 +242,19 @@
                                 @endif
                                 " alt="logo">
                             </div>
-                            <p class="font-semibold text-creativehub-grey">{{$product->user->name}}</p>
+                            <p class="font-semibold text-creativehub-grey">{{$product->user->name ?? ""}}</p>
                         </div>
                         <p
                             class="font-semibold text-2xl sm:text-4xl bg-clip-text text-transparent bg-gradient-to-r from-[#B05CB0] to-[#FCB16B]">
-                            Rp {{number_format($product->price, 0, ',', '.')}}</p>
+                            Rp {{number_format($product->price ?? 0, 0, ',', '.')}}</p>
                     </div>
                 </div>
             </div>
         </div>
 
         <form
-            class="flex flex-col p-[30px] gap-[60px] rounded-[20px] w-full h-fit border-2 border-creativehub-darker-grey">
+            class="flex flex-col p-[30px] gap-[60px] rounded-[20px] w-full h-fit border-2 border-creativehub-darker-grey" method="post" action="{{route('do.checkout', ['id' => $product->id])}}" enctype="multipart/form-data">
+            @csrf
             <div class="w-full flex flex-col gap-4">
                 <p class="font-semibold text-xl">Transfer to:</p>
                 <div class="flex flex-col gap-3">
@@ -261,14 +266,18 @@
                                 <select name="bank" id="bank"
                                         class="mt-1 font-semibold bg-transparent appearance-none border-none outline-none px-1 invalid:text-[#595959] invalid:font-normal invalid:text-sm"
                                         required>
-                                    @foreach($product->user->payment_methods as $payment_method)
-                                        <option
-                                            class="text-creativehub-black" value="Angga Bank"
-                                            data-account-name ="{{$payment_method->payment_account_recipient_name}}"
-                                            data-account-number ="{{$payment_method->payment_account_number}}"
-                                        >{{$payment_method->payment_account_name}}</option>
 
-                                    @endforeach
+                                    @if(isset($product->user->payment_methods))
+                                        @foreach($product->user->payment_methods as $payment_method)
+                                            <option
+                                                class="text-creativehub-black" value="{{$payment_method->payment_account_name}}"
+                                                data-account-name ="{{$payment_method->payment_account_recipient_name}}"
+                                                data-account-number ="{{$payment_method->payment_account_number}}"
+                                            >{{$payment_method->payment_account_name}}</option>
+
+                                        @endforeach
+
+                                    @endif
 {{--                                    <option class="text-creativehub-black" value="Angga Bank">Dana</option>--}}
 {{--                                    <option class="text-creativehub-black" value="Angga Bank">OVO</option>--}}
 {{--                                    <option class="text-creativehub-black" value="Angga Bank">Gopay</option>--}}
@@ -286,7 +295,7 @@
                             <div class="flex flex-col w-full">
                                 <label for="name" class="text-xs text-creativehub-grey pl-1">Account Name</label>
                                 <div class="flex mt-1 items-center max-w-[149px]">
-                                    <input disabled type="text" name="name" value="{{$product->user->payment_methods[0]->payment_account_recipient_name ?? ""}}" id="name"
+                                    <input readonly type="text" name="name" value="{{$product->user->payment_methods[0]->payment_account_recipient_name ?? ""}}" id="name"
                                            class="font-semibold bg-transparent appearance-none autofull-no-bg outline-none border-none px-1 placeholder:text-[#595959] placeholder:font-normal placeholder:text-sm w-full"
                                            placeholder="Type here" required></input>
                                 </div>
@@ -301,7 +310,7 @@
                         <div class="flex flex-col w-full">
                             <label for="number" class="text-xs text-creativehub-grey pl-1">Account Number</label>
                             <div class="flex mt-1 items-center max-w-[322px]">
-                                <input type="tel" name="number" disabled id="number"
+                                <input type="tel" name="number" readonly id="number"
                                        class="mt-1 font-semibold bg-transparent appearance-none autofull-no-bg border-none outline-none px-1 placeholder:text-[#595959] placeholder:font-normal placeholder:text-sm w-full"
                                        placeholder="Type here" value="{{$product->user->payment_methods[0]->payment_account_number ?? ""}}" pattern="[0-9 -]" required></input>
                             </div>
@@ -317,6 +326,11 @@
                 <div class="flex flex-col gap-3">
                     <p class="text-xs text-[#2D68F8] p-[10px_22px] rounded-lg bg-[#2D68F805]">Please upload proof of
                         payment we will confirm it as soon as possible</p>
+
+                    @error('proof')
+                    <p class="text-xs text-[#ffffff] p-[10px_22px] rounded-lg bg-[#BA0F30]">{{$message}}</p>
+                    @enderror
+
                     <div class="flex gap-3">
                         <button type="button"
                                 class="flex gap-2 shrink-0 w-2/3 h-[48px] p-[12px_18px] justify-center items-center border border-dashed border-[#595959] rounded-lg hover:bg-[#2A2A2A] transition-all duration-300"
@@ -324,7 +338,8 @@
                             <p>Choose File</p>
                             <img src="{{URL::to('/')}}/assets/icons/document-upload.svg" alt="icon">
                         </button>
-                        <input type="file" name="proof" id="proof" class="hidden" onchange="previewFile()" required>
+
+                        <input type="file" name="proof" id="proof" class="hidden" onchange="previewFile()">
                         <div class="relative rounded-lg overflow-hidden bg-[#181818] w-full h-[48px]">
                             <div class="relative file-preview z-10 w-full h-full hidden">
                                 <img src="{{URL::to('/')}}/assets/icons/check.svg"
@@ -338,13 +353,24 @@
                         </div>
                     </div>
                 </div>
-                <a href="{{route('success.checkout', ['id' => $product->id])}}"
-                   class="rounded-full text-center bg-[#2D68F8] p-[8px_18px] font-semibold hover:bg-[#083297] active:bg-[#062162] transition-all duration-300">Checkout
-                    Now</a>
+
+
+
+
+            @if(isset($product->id))
+                    <button type="submit"
+                       class="rounded-full text-center bg-[#2D68F8] p-[8px_18px] font-semibold hover:bg-[#083297] active:bg-[#062162] transition-all duration-300">Checkout
+                        Now</button>
+                @else
+                    <a href="#"
+                       class="rounded-full text-center bg-[#2D68F8] p-[8px_18px] font-semibold hover:bg-[#083297] active:bg-[#062162] transition-all duration-300">Checkout
+                        Now</a>
+                @endif
             </div>
         </form>
     </div>
 </section>
+
 
 
 <!-- Footer -->
@@ -352,8 +378,8 @@
     <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div class="md:flex md:justify-between">
             <div class="mb-6 md:mb-0">
-                <a href="index.html" class="flex items-center">
-                    <img src="../assets/logos/logo-singgle.svg" class="h-8 me-3" alt="FlowBite Logo"/>
+                <a href="{{route('home')}}" class="flex items-center">
+                    <img src="{{URL::to('/')}}/assets/logos/logo-singgle.svg" class="h-8 me-3" alt="FlowBite Logo"/>
                     <span class="self-center text-2xl font-semibold whitespace-nowrap text-white">CreativeHub</span>
                 </a>
             </div>

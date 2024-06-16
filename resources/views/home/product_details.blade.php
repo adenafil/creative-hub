@@ -52,6 +52,10 @@
         --tw-text-opacity: 1;
         color: rgb(79 70 229 / var(--tw-text-opacity));
     }
+
+    #product-description li{
+        list-style: circle;
+    }
 </style>
 
 <body class="bg-creativehub-black font-poppins text-white">
@@ -59,7 +63,7 @@
 <!-- Navbar -->
 <nav id="navbar" class="w-full fixed top-0 bg-[#00000048] backdrop-blur-lg z-50">
     <div class="flex flex-wrap items-center justify-between max-w-screen-xl mx-auto p-4">
-        <a href="index.html" class="flex items-center space-x-2 rtl:space-x-reverse">
+        <a href="{{route('home')}}" class="flex items-center space-x-2 rtl:space-x-reverse">
             <img src="../assets/logos/logo-singgle.svg" class="h-6" alt="CreativeHub Logo" />
             <span class="self-center sm:text-xl md:text-2xl font-semibold whitespace-nowrap text-white">CreativeHub</span>
         </a>
@@ -202,15 +206,15 @@
             : URL::signedRoute('file.view', ['encoded' => ImageHelper::encodePath($product->image_product_url)])
 
             }}
-            " class="w-full h-full object-cover" alt="hero image">
+            " class="w-full max-h-[700px] object-cover" alt="hero image">
         </div>
     </div>
 
-    <div class="flex gap-8 bg-creativehub-dark-footer p-8 mt-10 rounded-[20px]">
+    <div class="flex gap-8 bg-creativehub-dark-footer py-8 px-16 mt-10 rounded-[20px]">
         <div class="flex flex-col">
             <h1 class="font-semibold text-[16px] md:text-xl lg:text-xl">Descrtiption</h1>
             <p class="text-creativehub-grey text-sm md:text-lg lg:text-lg leading-relaxed">
-                <div class="text-creativehub-grey text-sm md:text-lg lg:text-lg leading-relaxed mt-6 mb-8">
+                <div id="product-description" class="text-creativehub-grey text-sm md:text-lg lg:text-lg leading-relaxed mt-6 mb-8">
                     {!! $product->description !!}
                 </div>
             </p>
@@ -304,13 +308,21 @@
                         </div>
                     </div>
                 </div>
-                @if(auth()->check())
+                @if(auth()->check() && (\App\Models\Transaction::query()->where('user_id', auth()->user()->id)
+            ->where('transactions.user_id', '=', auth()->user()->id)
+            ->where('purchases.product_id', '=', $product->id)
+            ->join('purchases', 'purchases.transaction_id', '=', 'transactions.id')
+            ->select('purchases.*', 'transactions.*')
+            ->get()->count() == 0)
+            )
                     <a href="{{route('checkout', ["id" => $product->id])}}"
                        class="bg-[#2D68F8] text-center font-semibold p-[12px_20px] rounded-full hover:bg-[#083297] active:bg-[#062162] transition-all duration-300">Checkout</a>
-                @endif
-                @if(!auth()->check())
+                @elseif(!auth()->check())
                     <a href="{{route('register', ['checkout' => $product->id]) }}"
                        class="bg-[#2D68F8] text-center font-semibold p-[12px_20px] rounded-full hover:bg-[#083297] active:bg-[#062162] transition-all duration-300">Checkout</a>
+                @else
+                    <a href="{{route('purchases.index')}}"
+                       class="bg-[#2D68F8] text-center font-semibold p-[12px_20px] rounded-full hover:bg-[#083297] active:bg-[#062162] transition-all duration-300">Go to Products</a>
                 @endif
             </div>
         </div>

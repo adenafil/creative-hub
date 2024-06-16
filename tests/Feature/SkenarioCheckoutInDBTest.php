@@ -31,6 +31,7 @@ class SkenarioCheckoutInDBTest extends TestCase
             PaymentMethodSeeder::class
         ]);
 
+        # choose payments
         $user_payment = new UserPayment();
         $user_payment->user_id = User::query()->first()->id;
         $user_payment->payment_method_id = PaymentMethod::query()->first()->id;
@@ -38,15 +39,18 @@ class SkenarioCheckoutInDBTest extends TestCase
         $user_payment->status = 'pending';
         $user_payment->save();
 
+        # do transactions
         $transactions = new Transaction();
         $transactions->user_id = UserPayment::query()->first()->user_id;
         $transactions->user_payment_id = UserPayment::query()->first()->id;
         $transactions->save();
 
+        # and buy
         $idProduct = Product::query()->first()->id;
         $transactions->buyProducts()->attach($idProduct);
         $transactions->buyProducts()->attach( ($idProduct + 1) );
 
+        # cek table purchases
         $purchases = Purchase::query()->get();
         self::assertNotNull($purchases);
         self::assertCount(2, $purchases);
@@ -68,4 +72,6 @@ class SkenarioCheckoutInDBTest extends TestCase
         self::assertNotNull($purchase_of_user);
         self::assertCount(2, $purchase_of_user);
     }
+
+
 }

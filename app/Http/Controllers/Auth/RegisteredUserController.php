@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -29,6 +30,11 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        $checkoutId = $request->input('checkout'); // Ambil nilai 'checkout' dari input request
+
+        // Simpan 'checkout' ke dalam session
+        session()->put('checkout', $checkoutId);
+
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:255', 'min:6', 'unique:'.User::class],
@@ -47,6 +53,11 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
+        if ($request->has('checkout')) {
+            $checkoutId = $request->query('checkout');
+//            dd(session()->get('checkout'));
+            return redirect()->route('checkout', ['id' => session()->get('checkout'), 'product' => Product::query()->where('id', session()->get('checkout'))->first()]);
+        }
 
 
         return redirect(route('dashboard', absolute: false));

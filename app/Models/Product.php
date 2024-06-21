@@ -41,4 +41,13 @@ class Product extends Model
         return $this->belongsToMany(Transaction::class, 'purchases', 'product_id', 'transaction_id');
     }
 
+    public function productAddedIntoCart(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Cart::class,
+            'table_users_addcarts_products',
+            'product_id',
+            'cart_id'
+        );
+    }
 }

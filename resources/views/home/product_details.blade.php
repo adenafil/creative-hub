@@ -316,7 +316,7 @@
             ->get()->count() == 0)
             )
                     <a href="{{route('checkout', ["id" => $product->id])}}"
-                       class="bg-[#2D68F8] text-center font-semibold p-[12px_20px] rounded-full hover:bg-[#083297] active:bg-[#062162] transition-all duration-300">Checkout</a>
+                       class="bg-[#2D68F8] text-center font-semibold p-[12px_20px] rounded-full hover:bg-[#083297] active:bg-[#062162] transition-all duration-300">Go to Products</a>
                 @elseif(!auth()->check())
                     <a href="{{route('register', ['checkout' => $product->id]) }}"
                        class="bg-[#2D68F8] text-center font-semibold p-[12px_20px] rounded-full hover:bg-[#083297] active:bg-[#062162] transition-all duration-300">Checkout</a>
@@ -447,16 +447,22 @@
                                 <div class="p-6 bg-img-black-gradient group-active:bg-img-black transition-all duration-300 rounded-2xl">
                                     <div class="flex items-center gap-5 mb-5 sm:mb-9">
                                         <img src="
-                                                          {{
-                        ImageHelper::isThisImage($review->user->user_detail->image_url)
-                        ? $review->user->user_detail->image_url
-                        : URL::signedRoute('file.view', ['encoded' => base64_encode($review->user->user_detail->image_url)])
-                        }}
+
+                                @if(isset(auth()->user()->user_detail->image_url))
+                                    {{
+                                        ImageHelper::isThisImage(auth()->user()->user_detail->image_url)
+                                        ? auth()->user()->user_detail->image_url
+                                        : URL::signedRoute('profile.file', ['encoded' => ImageHelper::encodePath(auth()->user()->user_detail->image_url)])
+                                    }}
+                                @else
+                                    {{\Illuminate\Support\Facades\URL::to('/assets/photos/img.png')}}
+                                @endif
+
                                         " alt="avatar" class="w-12 h-12">
                                         <div class="grid gap-1">
                                             <h5 class="font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#B05CB0] to-[#FCB16B] transition-all duration-500">
                                                 {{ $review->user->name }}</h5>
-                                            <span class="text-sm leading-6 text-creativehub-light-grey hover:text-white">{{ $review->user->user_detail->title }}</span>
+                                            <span class="text-sm leading-6 text-creativehub-light-grey hover:text-white">{{ $review->user->user_detail->title ?? "" }}</span>
                                         </div>
                                     </div>
                                     <div class="flex items-center mb-5 sm:mb-9 gap-2 text-amber-500 transition-all duration-500">

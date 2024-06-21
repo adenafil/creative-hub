@@ -30,10 +30,11 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $checkoutId = $request->input('checkout'); // Ambil nilai 'checkout' dari input request
 
-        // Simpan 'checkout' ke dalam session
-        session()->put('checkout', $checkoutId);
+        $checkoutId = $request->input('checkout'); // Ambil nilai 'checkout' dari input request
+        if ($checkoutId != null) {
+            session()->put('checkout', $checkoutId);
+        }
 
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -53,7 +54,8 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        if ($request->has('checkout')) {
+
+        if ($request->input('checkout') != null) {
             $checkoutId = $request->query('checkout');
 //            dd(session()->get('checkout'));
             return redirect()->route('checkout', ['id' => session()->get('checkout'), 'product' => Product::query()->where('id', session()->get('checkout'))->first()]);

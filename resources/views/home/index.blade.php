@@ -332,6 +332,7 @@
 <section id="NewProduct" class="container max-w-[1200px] px-4 mx-auto mb-[102px] flex flex-col gap-8">
     <h2 class="font-semibold text-[32px]">New Product</h2>
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[22px]">
+{{--        {{dd(ImageHelper::isThisImage($dataHome['newProducts'][0]['image_product_url']))}}--}}
 
         @foreach($dataHome['newProducts'] as $data)
             <div class="product-card flex flex-col rounded-[18px] bg-[#181818] overflow-hidden">
@@ -354,13 +355,14 @@
                             class="bg-[#2A2A2A] text-[10px] md:text-xs lg:text-xs text-creativehub-grey rounded-[4px] p-[4px_6px] w-fit">{{strtoupper($data->category->name)}}</p>
                     </div>
                     <div class="flex items-center gap-[6px]">
+
                         <div class="w-6 h-6 flex shrink-0 items-center justify-center rounded-full overflow-hidden">
                             <img src="
-                                @if(isset(auth()->user()->user_detail->image_url))
+                                @if(isset($data->user->user_detail->image_url))
                                     {{
-                                        ImageHelper::isThisImage(auth()->user()->user_detail->image_url)
-                                        ? auth()->user()->user_detail->image_url
-                                        : URL::signedRoute('profile.file', ['encoded' => ImageHelper::encodePath(auth()->user()->user_detail->image_url)])
+                                        ImageHelper::isThisImage($data->user->user_detail->image_url)
+                                        ? $data->user->user_detail->image_url
+                                        : URL::signedRoute('profile.file', ['encoded' => ImageHelper::encodePath($data->user->user_detail->image_url)])
                                     }}
                                 @else
                                     {{\Illuminate\Support\Facades\URL::to('/assets/photos/img.png')}}
@@ -419,6 +421,7 @@
                 <div class="swiper mySwiper">
                     <div class="swiper-wrapper">
 
+
                         {{-- Loop Here --}}
                         @foreach($dataHome['reviews'] as $reviews)
                             <div
@@ -426,7 +429,18 @@
                                 <div
                                     class="p-6 bg-img-black-gradient group-active:bg-img-black transition-all duration-300 rounded-2xl">
                                     <div class="flex items-center gap-5 mb-5 sm:mb-9">
-                                        <img src="https://pagedone.io/asset/uploads/1696229969.png" alt="avatar"
+                                        <img src="
+                                                                        @if(isset($reviews->user->user_detail->image_url))
+                                    {{
+                                        ImageHelper::isThisImage($reviews->user->user_detail->image_url)
+                                        ? $reviews->user->user_detail->image_url
+                                        : URL::signedRoute('profile.file', ['encoded' => ImageHelper::encodePath($reviews->user->user_detail->image_url)])
+                                    }}
+                                @else
+                                    {{\Illuminate\Support\Facades\URL::to('/assets/photos/img.png')}}
+                                @endif
+
+                                        " alt="avatar"
                                              class="w-12 h-12">
                                         <div class="grid gap-1">
                                             <h5 class="font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#B05CB0] to-[#FCB16B] transition-all duration-500">{{ $reviews->user->name }}</h5>
@@ -437,22 +451,28 @@
                                     <div
                                         class="flex items-center mb-5 sm:mb-9 gap-2 text-amber-500 transition-all duration-500">
 
-                                        {{-- Ini State bintang ya maniez --}}
-                                        {{-- Ini ketika filled (bintang kuning) --}}
-                                        <svg class="w-5 h-5" viewBox="0 0 18 17" fill="none"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M8.10326 1.31699C8.47008 0.57374 9.52992 0.57374 9.89674 1.31699L11.7063 4.98347C11.8519 5.27862 12.1335 5.48319 12.4592 5.53051L16.5054 6.11846C17.3256 6.23765 17.6531 7.24562 17.0596 7.82416L14.1318 10.6781C13.8961 10.9079 13.7885 11.2389 13.8442 11.5632L14.5353 15.5931C14.6754 16.41 13.818 17.033 13.0844 16.6473L9.46534 14.7446C9.17402 14.5915 8.82598 14.5915 8.53466 14.7446L4.91562 16.6473C4.18199 17.033 3.32456 16.41 3.46467 15.5931L4.15585 11.5632C4.21148 11.2389 4.10393 10.9079 3.86825 10.6781L0.940384 7.82416C0.346867 7.24562 0.674378 6.23765 1.4946 6.11846L5.54081 5.53051C5.86652 5.48319 6.14808 5.27862 6.29374 4.98347L8.10326 1.31699Z"
-                                                fill="currentColor"></path>
-                                        </svg>
+                                        @for($i = 1; $i <= 5; $i++)
+                                            {{-- Ini State bintang ya maniez --}}
+                                            {{-- Ini ketika filled (bintang kuning) --}}
+                                            @if($reviews->star >= $i)
+                                                <svg class="w-5 h-5" viewBox="0 0 18 17" fill="none"
+                                                     xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M8.10326 1.31699C8.47008 0.57374 9.52992 0.57374 9.89674 1.31699L11.7063 4.98347C11.8519 5.27862 12.1335 5.48319 12.4592 5.53051L16.5054 6.11846C17.3256 6.23765 17.6531 7.24562 17.0596 7.82416L14.1318 10.6781C13.8961 10.9079 13.7885 11.2389 13.8442 11.5632L14.5353 15.5931C14.6754 16.41 13.818 17.033 13.0844 16.6473L9.46534 14.7446C9.17402 14.5915 8.82598 14.5915 8.53466 14.7446L4.91562 16.6473C4.18199 17.033 3.32456 16.41 3.46467 15.5931L4.15585 11.5632C4.21148 11.2389 4.10393 10.9079 3.86825 10.6781L0.940384 7.82416C0.346867 7.24562 0.674378 6.23765 1.4946 6.11846L5.54081 5.53051C5.86652 5.48319 6.14808 5.27862 6.29374 4.98347L8.10326 1.31699Z"
+                                                        fill="currentColor"></path>
+                                                </svg>
+                                            @else
+                                                {{-- Ini State ketika non fill --}}
+                                                <svg class="w-5 h-5" viewBox="0 0 18 17" fill="none"
+                                                     xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M8.10326 1.31699C8.47008 0.57374 9.52992 0.57374 9.89674 1.31699L11.7063 4.98347C11.8519 5.27862 12.1335 5.48319 12.4592 5.53051L16.5054 6.11846C17.3256 6.23765 17.6531 7.24562 17.0596 7.82416L14.1318 10.6781C13.8961 10.9079 13.7885 11.2389 13.8442 11.5632L14.5353 15.5931C14.6754 16.41 13.818 17.033 13.0844 16.6473L9.46534 14.7446C9.17402 14.5915 8.82598 14.5915 8.53466 14.7446L4.91562 16.6473C4.18199 17.033 3.32456 16.41 3.46467 15.5931L4.15585 11.5632C4.21148 11.2389 4.10393 10.9079 3.86825 10.6781L0.940384 7.82416C0.346867 7.24562 0.674378 6.23765 1.4946 6.11846L5.54081 5.53051C5.86652 5.48319 6.14808 5.27862 6.29374 4.98347L8.10326 1.31699Z"
+                                                        fill="#595959"></path>
+                                                </svg>
+                                            @endif
+                                        @endfor
 
-                                        {{-- Ini State ketika non fill --}}
-                                        <svg class="w-5 h-5" viewBox="0 0 18 17" fill="none"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M8.10326 1.31699C8.47008 0.57374 9.52992 0.57374 9.89674 1.31699L11.7063 4.98347C11.8519 5.27862 12.1335 5.48319 12.4592 5.53051L16.5054 6.11846C17.3256 6.23765 17.6531 7.24562 17.0596 7.82416L14.1318 10.6781C13.8961 10.9079 13.7885 11.2389 13.8442 11.5632L14.5353 15.5931C14.6754 16.41 13.818 17.033 13.0844 16.6473L9.46534 14.7446C9.17402 14.5915 8.82598 14.5915 8.53466 14.7446L4.91562 16.6473C4.18199 17.033 3.32456 16.41 3.46467 15.5931L4.15585 11.5632C4.21148 11.2389 4.10393 10.9079 3.86825 10.6781L0.940384 7.82416C0.346867 7.24562 0.674378 6.23765 1.4946 6.11846L5.54081 5.53051C5.86652 5.48319 6.14808 5.27862 6.29374 4.98347L8.10326 1.31699Z"
-                                                fill="#595959"></path>
-                                        </svg>
+
 
                                     </div>
                                     <p class="text-sm text-creativehub-light-grey leading-6 transition-all duration-500 min-h-24  group-hover:text-white">

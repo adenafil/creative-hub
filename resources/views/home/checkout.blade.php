@@ -77,7 +77,7 @@
             <!-- State profile ini muncul ketika user sudah login -->
 
             @if(auth()->check())
-                <a href="#" class="w-9 border border-solid border-white rounded-md">
+                <a href="{{route('dashboard')}}" class="w-9 border border-solid border-white rounded-md">
                     <img src="
                                                 @if(isset(auth()->user()->user_detail->image_url))
                                     {{

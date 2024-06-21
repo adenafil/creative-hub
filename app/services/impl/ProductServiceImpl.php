@@ -19,18 +19,6 @@ use Ramsey\Uuid\Nonstandard\Uuid;
 
 class ProductServiceImpl implements ProductService
 {
-    function getDataHome(int $length)
-    {
-        $products = Product::query()->latest()->limit($length)->get();
-        $user =
-
-        $reviews = Review::query()->latest()->limit($length - 3)->get();
-        return [
-            "newProducts" => $products,
-            "reviews" => $reviews,
-        ];
-    }
-
     function addProduct($data)
     {
         // Generate unique names for files
@@ -63,8 +51,6 @@ class ProductServiceImpl implements ProductService
 
     function getProductByUser(int $userId)
     {
-        // TODO: Implement getProductByUser() method.
-
         return Product::where('seller_id', $userId)->paginate(4);
     }
 
@@ -123,15 +109,4 @@ class ProductServiceImpl implements ProductService
         ];
     }
 
-    function getProductDataOnHome(int $id) : array{
-        $product = Product::query()->where('id', $id)->first();
-        $reviews = Review::query()->where('product_id', $id)->get();
-        $products = Product::query()->limit(4)->get();
-
-        return [
-            "product" => $product,
-            "products" => $products,
-            "reviews" => $reviews,
-        ];
-    }
 }

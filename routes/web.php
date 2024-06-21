@@ -52,6 +52,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/admin/purchases/details/{id}', [TransactionController::class, 'detail'])->name('purchases.detail');
     Route::get('/download', [TransactionController::class, 'doDownload'])->name('download.asset');
 
+    // Route untuk cart tapi butuh register/login(auth)
+    Route::get('/cart', [HomeController::class, 'cart'])->name('cart.index');
+
 });
 
 

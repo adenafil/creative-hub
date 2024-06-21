@@ -104,4 +104,9 @@ class HomeController extends Controller
     {
         return \response()->view('home.success-checkout', [$id]);
     }
+
+    public function cart()
+    {
+        return "cart index";
+    }
 }

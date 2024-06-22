@@ -35,7 +35,7 @@ $id = 570;
 $index_data = 0;
 for ($i = 570; $i < 1069; $i++) {
     $bio = "hi, i'm " . $decode_data[$index_data]['username'] ;
-    $title = 'enemployed';
+    $title = 'unemployed';
     $location = "https://www.aurelio.ai/_next/image?url=%2Fimages%2Fpeople%2Fplaceholder.png&w=640&q=100";
 
     $preparedStatement = $connection->prepare($sql_user_details);

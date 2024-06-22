@@ -27,7 +27,7 @@ class HomeController extends Controller
     public function index(Request $request): Response
     {
         $dataHome = $this->homeService->getDataProductOnIndex( 8);
-        return \response()->view('home.index', compact('dataHome'), 200);
+        return \response()->view('home.index', $dataHome, 200);
     }
 
     public function products($id)
@@ -39,9 +39,7 @@ class HomeController extends Controller
     public function checkout($id)
     {
         $product = Product::query()->where('id', $id)->first();
-        return \response()->view('home.checkout', [
-            'product' => $product
-        ]);
+        return \response()->view('home.checkout', compact('product'));
     }
 
     public function doCheckout(CheckoutRequest $request, $id)

@@ -357,7 +357,7 @@
                     <div class="flex flex-col gap-[2px]">
                         <p class="font-semibold">{{$product->user->name}}</p>
                         <p class="text-[#595959] text-sm leading-[18px]">
-                            <span class="font-semibold mr-1">103</span>
+                            <span class="font-semibold mr-1">{{$totalProduct}}</span>
                             Product
                         </p>
                     </div>

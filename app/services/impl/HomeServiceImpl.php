@@ -18,10 +18,7 @@ class HomeServiceImpl implements HomeService
         $products = Product::query()->latest()->limit($length)->get();
 //        dd($products[0]->user->user_detail);
         $reviews = Review::query()->latest()->limit($length - 3)->get();
-        return [
-            "newProducts" => $products,
-            "reviews" => $reviews,
-        ];
+        return compact('products', 'reviews');
     }
 
     function getDataDetailProduct(int $id): array
@@ -29,12 +26,9 @@ class HomeServiceImpl implements HomeService
         $product = Product::query()->where('id', $id)->first();
         $reviews = Review::query()->where('product_id', $id)->get();
         $products = Product::query()->limit(4)->get();
+        $totalProduct = Product::query()->where('seller_id', $product->seller_id)->count();
 
-        return [
-            "product" => $product,
-            "products" => $products,
-            "reviews" => $reviews,
-        ];
+        return compact('product', 'reviews', 'products', 'totalProduct');
     }
 
     function checkout($data, $id)

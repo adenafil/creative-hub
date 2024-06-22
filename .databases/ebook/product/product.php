@@ -55,7 +55,7 @@ for ($i = 0; $i < count($data); $i++) {
     // var_dump($seller_id);
     $desc = $data[$i]['sellerText'];
     $asset_product_url = $data[$i]['linkSellerHref'];
-    $price = $data[$i]['price'];
+    $price = $data[$i]['price'] * 16477;
     $category = 1;
 
     // siapkan preparedStatement

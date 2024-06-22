@@ -206,15 +206,11 @@
             <div class="product-detail flex flex-col gap-3">
                 <div class="thumbnail w-fit h-auto flex shrink-0 rounded-[20px] overflow-hidden">
                     <img src="
-                                @if(isset(auth()->user()->user_detail->image_url))
                                     {{
-                                        ImageHelper::isThisImage(auth()->user()->user_detail->image_url)
-                                        ? auth()->user()->user_detail->image_url
-                                        : URL::signedRoute('profile.file', ['encoded' => ImageHelper::encodePath(auth()->user()->user_detail->image_url)])
+                                        ImageHelper::isThisImage($product->image_product_url)
+                                        ? $product->image_product_url
+                                        : URL::signedRoute('profile.file', ['encoded' => ImageHelper::encodePath($product->image_product_url)])
                                     }}
-                                @else
-                                    {{\Illuminate\Support\Facades\URL::to('/assets/photos/img.png')}}
-                                @endif
 
                     " class="w-full h-full object-cover"
                          alt="thumbnail">
@@ -231,11 +227,11 @@
                         <div class="flex items-center gap-2">
                             <div class="w-8 h-8 rounded-full flex shrink-0 overflow-hidden">
                                 <img src="
-                                @if(isset(auth()->user()->user_detail->image_url))
+                                @if(isset($product->user->user_detail->image_url))
                                     {{
-                                        ImageHelper::isThisImage(auth()->user()->user_detail->image_url)
-                                        ? auth()->user()->user_detail->image_url
-                                        : URL::signedRoute('profile.file', ['encoded' => ImageHelper::encodePath(auth()->user()->user_detail->image_url)])
+                                        ImageHelper::isThisImage($product->user->user_detail->image_url)
+                                        ? $product->user->user_detail->image_url
+                                        : URL::signedRoute('profile.file', ['encoded' => ImageHelper::encodePath($product->user->user_detail->image_url)])
                                     }}
                                 @else
                                     {{\Illuminate\Support\Facades\URL::to('/assets/photos/img.png')}}

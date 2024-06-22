@@ -334,35 +334,35 @@
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[22px]">
 {{--        {{dd(ImageHelper::isThisImage($dataHome['newProducts'][0]['image_product_url']))}}--}}
 
-        @foreach($dataHome['newProducts'] as $data)
+        @foreach($products as $product)
             <div class="product-card flex flex-col rounded-[18px] bg-[#181818] overflow-hidden">
-                <a href="{{ route("home.product.detail", [$data->id]) }}"
+                <a href="{{ route("home.product.detail", [$product->id]) }}"
                    class="thumbnail w-full h-[180px] flex shrink-0 overflow-hidden relative">
                     <img src="{{
-                                    ImageHelper::isThisImage($data->image_product_url)
-                                    ? $data->image_product_url
-                                    : URL::signedRoute('file.view', ['encoded' => ImageHelper::encodePath($data->image_product_url)])
+                                    ImageHelper::isThisImage($product->image_product_url)
+                                    ? $product->image_product_url
+                                    : URL::signedRoute('file.view', ['encoded' => ImageHelper::encodePath($product->image_product_url)])
                                      }}
     " class="w-full h-full object-cover" alt="thumbnail">
                     <p class="backdrop-blur bg-black/30 rounded-[4px] p-[4px_8px] absolute top-3 right-[14px] z-7">
-                        Rp {{number_format($data->price, 0, ',', '.')}}</p>
+                        Rp {{number_format($product->price, 0, ',', '.')}}</p>
                 </a>
                 <div class="p-[10px_14px_12px] h-full flex flex-col justify-between gap-[14px]">
                     <div class="flex flex-col gap-1">
-                        <a href={{ route("home.product.detail", [$data->id]) }} class=" font-semibold text-xs
-                           md:text-lg lg:text-lg line-clamp-2 hover:line-clamp-none">{{$data['title']}}</a>
+                        <a href={{ route("home.product.detail", [$product->id]) }} class=" font-semibold text-xs
+                           md:text-lg lg:text-lg line-clamp-2 hover:line-clamp-none">{{$product['title']}}</a>
                         <p
-                            class="bg-[#2A2A2A] text-[10px] md:text-xs lg:text-xs text-creativehub-grey rounded-[4px] p-[4px_6px] w-fit">{{strtoupper($data->category->name)}}</p>
+                            class="bg-[#2A2A2A] text-[10px] md:text-xs lg:text-xs text-creativehub-grey rounded-[4px] p-[4px_6px] w-fit">{{strtoupper($product->category->name)}}</p>
                     </div>
                     <div class="flex items-center gap-[6px]">
 
                         <div class="w-6 h-6 flex shrink-0 items-center justify-center rounded-full overflow-hidden">
                             <img src="
-                                @if(isset($data->user->user_detail->image_url))
+                                @if(isset($product->user->user_detail->image_url))
                                     {{
-                                        ImageHelper::isThisImage($data->user->user_detail->image_url)
-                                        ? $data->user->user_detail->image_url
-                                        : URL::signedRoute('profile.file', ['encoded' => ImageHelper::encodePath($data->user->user_detail->image_url)])
+                                        ImageHelper::isThisImage($product->user->user_detail->image_url)
+                                        ? $product->user->user_detail->image_url
+                                        : URL::signedRoute('profile.file', ['encoded' => ImageHelper::encodePath($product->user->user_detail->image_url)])
                                     }}
                                 @else
                                     {{\Illuminate\Support\Facades\URL::to('/assets/photos/img.png')}}
@@ -370,7 +370,7 @@
 "
                                  class="w-full h-full object-cover" alt="logo">
                         </div>
-                        <a href="" class="font-semibold text-xs text-creativehub-grey">{{$data->user->name}}</a>
+                        <a href="" class="font-semibold text-xs text-creativehub-grey">{{$product->user->name}}</a>
                     </div>
                 </div>
             </div>
@@ -423,18 +423,18 @@
 
 
                         {{-- Loop Here --}}
-                        @foreach($dataHome['reviews'] as $reviews)
+                        @foreach($reviews as $review)
                             <div
                                 class="swiper-slide group bg-img-transparent hover:bg-img-purple-to-orange p-[2px] rounded-2xl max-sm:max-w-sm max-sm:mx-auto transition-all duration-500 group:">
                                 <div
                                     class="p-6 bg-img-black-gradient group-active:bg-img-black transition-all duration-300 rounded-2xl">
                                     <div class="flex items-center gap-5 mb-5 sm:mb-9">
                                         <img src="
-                                                                        @if(isset($reviews->user->user_detail->image_url))
+                                                                        @if(isset($review->user->user_detail->image_url))
                                     {{
-                                        ImageHelper::isThisImage($reviews->user->user_detail->image_url)
-                                        ? $reviews->user->user_detail->image_url
-                                        : URL::signedRoute('profile.file', ['encoded' => ImageHelper::encodePath($reviews->user->user_detail->image_url)])
+                                        ImageHelper::isThisImage($review->user->user_detail->image_url)
+                                        ? $review->user->user_detail->image_url
+                                        : URL::signedRoute('profile.file', ['encoded' => ImageHelper::encodePath($review->user->user_detail->image_url)])
                                     }}
                                 @else
                                     {{\Illuminate\Support\Facades\URL::to('/assets/photos/img.png')}}
@@ -443,9 +443,9 @@
                                         " alt="avatar"
                                              class="w-12 h-12">
                                         <div class="grid gap-1">
-                                            <h5 class="font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#B05CB0] to-[#FCB16B] transition-all duration-500">{{ $reviews->user->name }}</h5>
+                                            <h5 class="font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#B05CB0] to-[#FCB16B] transition-all duration-500">{{ $review->user->name }}</h5>
                                             <span
-                                                class="text-sm leading-6 text-creativehub-light-grey hover:text-white">{{ $reviews->user->user_detail->title ?? "" }}</span>
+                                                class="text-sm leading-6 text-creativehub-light-grey hover:text-white">{{ $review->user->user_detail->title ?? "" }}</span>
                                         </div>
                                     </div>
                                     <div
@@ -454,7 +454,7 @@
                                         @for($i = 1; $i <= 5; $i++)
                                             {{-- Ini State bintang ya maniez --}}
                                             {{-- Ini ketika filled (bintang kuning) --}}
-                                            @if($reviews->star >= $i)
+                                            @if($review->star >= $i)
                                                 <svg class="w-5 h-5" viewBox="0 0 18 17" fill="none"
                                                      xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -476,7 +476,7 @@
 
                                     </div>
                                     <p class="text-sm text-creativehub-light-grey leading-6 transition-all duration-500 min-h-24  group-hover:text-white">
-                                        {{ $reviews->comments }}
+                                        {{ $review->comments }}
                                     </p>
                                 </div>
                             </div>

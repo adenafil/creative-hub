@@ -209,7 +209,7 @@
                                     {{
                                         ImageHelper::isThisImage($product->image_product_url)
                                         ? $product->image_product_url
-                                        : URL::signedRoute('profile.file', ['encoded' => ImageHelper::encodePath($product->image_product_url)])
+                                        : URL::signedRoute('file.view', ['encoded' => ImageHelper::encodePath($product->image_product_url)])
                                     }}
 
                     " class="w-full h-full object-cover"
@@ -329,6 +329,7 @@
 
                     <div class="flex gap-3">
                         <button type="button"
+
                                 class="flex gap-2 shrink-0 w-2/3 h-[48px] p-[12px_18px] justify-center items-center border border-dashed border-[#595959] rounded-lg hover:bg-[#2A2A2A] transition-all duration-300"
                                 onclick="document.getElementById('proof').click()">
                             <p>Choose File</p>
@@ -514,6 +515,7 @@
         var fileInput = document.querySelector('input[type=file]').files[0];
         var reader = new FileReader();
 
+        console.log("asas")
         reader.onloadend = function () {
             var img = preview.querySelector('.thumbnail-proof'); // Get the thumbnail image element
             img.src = reader.result; // Update src attribute with the uploaded file

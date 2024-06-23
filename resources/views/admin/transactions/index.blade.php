@@ -120,6 +120,8 @@
                                                         <div class="grid gap-4 mt-8 mb-4 grid-cols-2">
                                                             <div class="col-span-2">
                                                                 <label for="comment" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product Reviews</label>
+
+                                                                {{-- Check Here  --}}
                                                                 <textarea name="comment" id="comment" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write Your Review Here">{{$comments[$purchase->product_id] ?? "Write Your Review Here"}}
                                                                 </textarea>
                                                             </div>

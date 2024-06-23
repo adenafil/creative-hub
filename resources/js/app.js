@@ -38,6 +38,7 @@ function previewFile() {
     var fileInput = document.querySelector('input[type=file]').files[0];
     var reader = new FileReader();
 
+
     reader.onloadend = function () {
         var img = preview.querySelector('.thumbnail-proof'); // Get the thumbnail image element
         img.src = reader.result; // Update src attribute with the uploaded file

@@ -17,11 +17,10 @@ Route::controller(HomeController::class)->group(function () {
    Route::get('/products/{id}/checkout', 'checkout')->name('checkout');
    Route::get('//products/{id}/checkout/success', 'successCheckout')->name('success.checkout');
    Route::post('/products/{id}/checkout', 'doCheckout')->name('do.checkout');
-});
+    // Route untuk menambah cart di product details
+    Route::post('/products/cart/{id}')->name('add.cart');
 
-Route::get('/kntl/{id}', function ($id) {
-    return $id;
-})->name('kntl');
+});
 
 
 //Route::get('admin/dashboard', function () {
@@ -30,6 +29,7 @@ Route::get('/kntl/{id}', function ($id) {
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
+    // Route carts
 
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 
@@ -54,6 +54,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Route untuk cart tapi butuh register/login(auth)
     Route::get('/cart', [HomeController::class, 'cart'])->name('cart.index');
+    Route::post('/cart/sucess', [HomeController::class, 'doCart'])->name('do.cart.index');
+
+
+
 
 });
 

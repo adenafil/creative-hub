@@ -59,8 +59,31 @@ class HomeController extends Controller
         return \response()->view('home.success-checkout', [$id]);
     }
 
-    public function cart()
+    public function addToCart(Request $request, $id)
     {
-        return "cart index";
+        // Ambil data dari request
+        $data = $request->all();
+
+        // Lakukan sesuatu dengan data tersebut, seperti menyimpan ke database
+
+        // Return response
+        return response()->json(['message' => 'Data received successfully', 'data' => $data]);
+
+    }
+
+    public function cart(Request $request)
+    {
+        $data = [
+          0,
+            1,
+            2
+        ];
+
+        return \response()->view('home.cart', compact('data'));
+    }
+
+    public function doCart(Request $request)
+    {
+        dd($request);
     }
 }

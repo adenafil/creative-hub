@@ -70,18 +70,20 @@
                 class="self-center sm:text-xl md:text-2xl font-semibold whitespace-nowrap text-white">CreativeHub</span>
         </a>
         <div class="flex items-center md:order-2 space-x-3 md:space-x-2 rtl:space-x-reverse md:gap-2">
-            <a href="{{route('cart.index')}}"
-               class="flex gap-1.5 items-center border-creativehub-grey border rounded-md px-3 py-2 bg-transparent bg-clip bg-gradient-to-tr hover:from-[#FCB16B] hover:to-[#B05CB0] shadow-lg hover:shadow-pink-400/50 transition-all duration-500">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
-                    <path fill-rule="evenodd"
-                          d="M7.5 6v.75H5.513c-.96 0-1.764.724-1.865 1.679l-1.263 12A1.875 1.875 0 0 0 4.25 22.5h15.5a1.875 1.875 0 0 0 1.865-2.071l-1.263-12a1.875 1.875 0 0 0-1.865-1.679H16.5V6a4.5 4.5 0 1 0-9 0ZM12 3a3 3 0 0 0-3 3v.75h6V6a3 3 0 0 0-3-3Zm-3 8.25a3 3 0 1 0 6 0v-.75a.75.75 0 0 1 1.5 0v.75a4.5 4.5 0 1 1-9 0v-.75a.75.75 0 0 1 1.5 0v.75Z"
-                          clip-rule="evenodd"/>
-                </svg>
-                <span class="text-sm">9</span>
-            </a>
-            <!-- State profile ini muncul ketika user sudah login -->
-
             @if(auth()->check())
+                <a href="{{route('cart.index')}}"
+                   class="flex gap-1.5 items-center border-creativehub-grey border rounded-md px-3 py-2 bg-transparent bg-clip bg-gradient-to-tr hover:from-[#FCB16B] hover:to-[#B05CB0] shadow-lg hover:shadow-pink-400/50 transition-all duration-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
+                        <path fill-rule="evenodd"
+                              d="M7.5 6v.75H5.513c-.96 0-1.764.724-1.865 1.679l-1.263 12A1.875 1.875 0 0 0 4.25 22.5h15.5a1.875 1.875 0 0 0 1.865-2.071l-1.263-12a1.875 1.875 0 0 0-1.865-1.679H16.5V6a4.5 4.5 0 1 0-9 0ZM12 3a3 3 0 0 0-3 3v.75h6V6a3 3 0 0 0-3-3Zm-3 8.25a3 3 0 1 0 6 0v-.75a.75.75 0 0 1 1.5 0v.75a4.5 4.5 0 1 1-9 0v-.75a.75.75 0 0 1 1.5 0v.75Z"
+                              clip-rule="evenodd"/>
+                    </svg>
+                    <span class="text-sm">{{auth()->user()->addProductIntoCart->count() ?? 0}}</span>
+                </a>
+                <!-- State profile ini muncul ketika user sudah login -->
+
+
+
                 <a href="{{route('dashboard')}}" class="w-9 border border-solid border-white rounded-md">
                     <img src="
                                 @if(isset(auth()->user()->user_detail->image_url))

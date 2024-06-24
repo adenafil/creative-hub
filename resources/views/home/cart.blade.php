@@ -1,4 +1,6 @@
-@php use App\Helper\ImageHelper;use Illuminate\Support\Facades\URL; @endphp
+@php use App\Helper\ImageHelper;use Illuminate\Support\Facades\URL;
+ $i = 0;
+ @endphp
     <!doctype html>
 <html>
 <head>
@@ -61,229 +63,202 @@
 
 <body class="bg-creativehub-black font-poppins text-white">
 <form action="{{route('do.cart.index')}}" method="post" enctype="multipart/form-data">
-@csrf
+    @csrf
 
-<nav class="bg-white dark:bg-gray-800 fixed w-full z-20 bottom-0 start-0 border-b border-gray-200 dark:border-gray-600">
-    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <div class="flex items-center">
-            <input id="default-checkbox-parent" name="default-checkbox-parent" type="checkbox" value="isi" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-            <label for="default-checkbox-parent" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Select All</label>
-        </div>
-        <div class="flex items-center gap-4 sm:gap-8">
-            <div>
-                <h2 class="text-xs sm:text-sm">Total (2 Product): <span class="text-sm sm:text-xl font-bold text text-purple-500"> Rp 750,000</span></h2>
+    <nav class="bg-white dark:bg-gray-800 fixed w-full z-20 bottom-0 start-0 border-b border-gray-200 dark:border-gray-600">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <div class="flex items-center">
+                <input id="default-checkbox-parent" name="default-checkbox-parent" type="checkbox" value="isi" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="default-checkbox-parent" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Select All</label>
             </div>
-            <button type="submit"
-               class="bg-clip text-transparent bg-gradient-to-tr from-[#B05CB0] to-[#FCB16B] transition-all duration-1000 text-white px-6 py-3 rounded-[12px]  text-xs md:text-md lg:text-md font-semibold hover:from-[#FCB16B] hover:to-[#B05CB0] shadow-lg shadow-pink-500/50">
-                Checkout
-            </button>
+            <div class="flex items-center gap-4 sm:gap-8">
+                <div>
+                    <h2 class="text-xs sm:text-sm">Total (2 Product): <span class="text-sm sm:text-xl font-bold text text-purple-500"> Rp 750,000</span></h2>
+                </div>
+                <button type="submit"
+                        class="bg-clip text-transparent bg-gradient-to-tr from-[#B05CB0] to-[#FCB16B] transition-all duration-1000 text-white px-6 py-3 rounded-[12px]  text-xs md:text-md lg:text-md font-semibold hover:from-[#FCB16B] hover:to-[#B05CB0] shadow-lg shadow-pink-500/50">
+                    Checkout
+                </button>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
-<section id="cart-group" class="container max-w-[1200px] px-4 py-16 mx-auto mb-[102px] space-y-6">
+    <section id="cart-group" class="container max-w-[1200px] px-4 py-16 mx-auto mb-[102px] space-y-6">
 
-    {{-- Store Group Items (You can loop here) --}}
-    @for($i = 0; $i <= 2; $i++)
-        <div class="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-            <div class="top-tabmenu flex items-center gap-8 ps-4 border-b border-gray-200 rounded-t-lg bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:bg-gray-800">
-                <div class="store-profile flex items-center gap-4">
-                    <input id="default-checkbox-{{$i}}" name="default-checkbox[]" type="checkbox" value="isi" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                    <div class="flex items-center gap-[6px]">
-                        <div class="w-6 h-6 flex shrink-0 items-center justify-center rounded-full overflow-hidden">
-                            <img src="https://i.pinimg.com/236x/10/fd/72/10fd72124736cfa1b9840c5ee543b0cf.jpg"
-                                 class="w-full h-full object-cover" alt="logo">
+        {{-- Store Group Items (You can loop here) --}}
+        @foreach($carts as $i => $product)
+            <!-- Use the custom loop counter -->
+            Custom Counter: {{ $i }}
+
+
+            <div class="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                <div class="top-tabmenu flex items-center gap-8 ps-4 border-b border-gray-200 rounded-t-lg bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:bg-gray-800">
+                    <div class="store-profile flex items-center gap-4">
+                        <input id="default-checkbox-{{$i}}" name="default-checkbox[]" type="checkbox" value="isi" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <div class="flex items-center gap-[6px]">
+                            <div class="w-6 h-6 flex shrink-0 items-center justify-center rounded-full overflow-hidden">
+                                <img src="https://i.pinimg.com/236x/10/fd/72/10fd72124736cfa1b9840c5ee543b0cf.jpg"
+                                     class="w-full h-full object-cover" alt="logo">
+                            </div>
+                            <a href="#" class="font-semibold text-xs text-creativehub-grey">Tokopedei</a>
                         </div>
-                        <a href="#" class="font-semibold text-xs text-creativehub-grey">Tokopedei</a>
                     </div>
+
+                    <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 dark:text-gray-400 dark:bg-gray-800" id="defaultTab-{{$i}}" data-tabs-toggle="#defaultTabContent-{{$i}}" role="tablist">
+                        <li class="me-2">
+                            <button id="products-tab-{{$i}}" data-tabs-target="#products-{{$i}}" type="button" role="tab" aria-controls="products-{{$i}}" aria-selected="true" class="inline-block p-4 text-blue-600 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-blue-500">Products</button>
+                        </li>
+                        <li class="me-2">
+                            <button id="proof-tab-{{$i}}" data-tabs-target="#proof-menu-{{$i}}" type="button" role="tab" aria-controls="proof-menu-{{$i}}" aria-selected="false" class="inline-block p-4 hover:text-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-gray-300">Proof</button>
+                        </li>
+                    </ul>
                 </div>
 
-                <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 dark:text-gray-400 dark:bg-gray-800" id="defaultTab-{{$i}}" data-tabs-toggle="#defaultTabContent-{{$i}}" role="tablist">
-                    <li class="me-2">
-                        <button id="products-tab-{{$i}}" data-tabs-target="#products-{{$i}}" type="button" role="tab" aria-controls="products-{{$i}}" aria-selected="true" class="inline-block p-4 text-blue-600 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-blue-500">Products</button>
-                    </li>
-                    <li class="me-2">
-                        <button id="proof-tab-{{$i}}" data-tabs-target="#proof-menu-{{$i}}" type="button" role="tab" aria-controls="proof-menu-{{$i}}" aria-selected="false" class="inline-block p-4 hover:text-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-gray-300">Proof</button>
-                    </li>
-                </ul>
-            </div>
+                <div id="defaultTabContent-{{$i}}">
 
-            <div id="defaultTabContent-{{$i}}">
-                <div class="hidden bg-white rounded-lg dark:bg-gray-800" id="products-{{$i}}" role="tabpanel" aria-labelledby="products-tab-{{$i}}">
-                    <div class="border-t p-4 shadow-sm border-gray-700 md:p-6">
-                        <input id="default-checkbox-{{$i}}" name="default-checkbox[]" type="checkbox" value="isi" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <div class="space-y-4 md:flex md:items-center md:justify-around md:gap-6 md:space-y-0">
-                            <a href="#" class="shrink-0 md:order-1">
-                                <img class="h-24 w-auto rounded-md" src="../assets/thumbnails/img1.png" alt="imac image" />
-                            </a>
+                    <div class="hidden bg-white rounded-lg dark:bg-gray-800" id="products-{{$i}}" role="tabpanel" aria-labelledby="products-tab-{{$i}}">
 
-                            <div class="flex items-center justify-between md:order-3 md:justify-end">
-                                <div class="text-end md:order-4 md:w-32">
-                                    <p class="text-base font-bold text-white">Rp 199,999</p>
-                                </div>
-                            </div>
-
-                            <div class="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
-                                <a href="#" class="text-base font-medium hover:underline text-white">SaaS Website
-                                    Master Template: Streamline Your Digital Solution</a>
-                                <a href="#" class="flex items-center gap-2">
-                                    <div class="w-5 h-5 rounded-full overflow-hidden flex shrink-0">
-                                        <img src="../assets/logos/vekotora.svg" alt="icon">
-                                    </div>
-                                    <p class="font-light text-sm">Vektora Studio</p>
+                        @foreach($product as $value)
+                        <div class="border-t p-4 shadow-sm border-gray-700 md:p-6">
+                            <input id="default-checkbox-{{$i}}" name="default-checkbox[]" type="checkbox" value="isi" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <div class="space-y-4 md:flex md:items-center md:justify-around md:gap-6 md:space-y-0">
+                                <a href="#" class="shrink-0 md:order-1">
+                                    <img class="h-24 w-auto rounded-md" src="../assets/thumbnails/img1.png" alt="imac image" />
                                 </a>
 
-                                <div class="flex items-center gap-4">
+                                <div class="flex items-center justify-between md:order-3 md:justify-end">
+                                    <div class="text-end md:order-4 md:w-32">
+                                        <p class="text-base font-bold text-white">Rp {{$value->price}}</p>
+                                    </div>
+                                </div>
 
-                                    <button type="button" class="inline-flex items-center text-sm font-medium hover:underline text-red-500">
-                                        <svg class="me-1.5 h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6" />
-                                        </svg>
-                                        Remove
-                                    </button>
+                                <div class="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
+                                    <a href="#" class="text-base font-medium hover:underline text-white">{{$value->title}}</a>
+                                    <a href="#" class="flex items-center gap-2">
+                                        <div class="w-5 h-5 rounded-full overflow-hidden flex shrink-0">
+                                            <img src="../assets/logos/vekotora.svg" alt="icon">
+                                        </div>
+                                        <p class="font-light text-sm">{{$value->user->name}}</p>
+                                    </a>
+
+                                    <div class="flex items-center gap-4">
+
+                                        <button type="button" class="inline-flex items-center text-sm font-medium hover:underline text-red-500">
+                                            <svg class="me-1.5 h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6" />
+                                            </svg>
+                                            Remove
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        @endforeach
+
+
                     </div>
-                    <div class="border-t p-4 shadow-sm border-gray-700 md:p-6">
-                        <input id="default-checkbox-{{$i}}" name="default-checkbox[]" type="checkbox" value="isi" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <div class="space-y-4 md:flex md:items-center md:justify-around md:gap-6 md:space-y-0">
-                            <a href="#" class="shrink-0 md:order-1">
-                                <img class="h-24 w-auto rounded-md" src="../assets/thumbnails/img1.png" alt="imac image" />
-                            </a>
-
-                            <div class="flex items-center justify-between md:order-3 md:justify-end">
-                                <div class="text-end md:order-4 md:w-32">
-                                    <p class="text-base font-bold text-white">Rp 199,999</p>
-                                </div>
-                            </div>
-
-                            <div class="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
-                                <a href="#" class="text-base font-medium hover:underline text-white">SaaS Website
-                                    Master Template: Streamline Your Digital Solution</a>
-                                <a href="#" class="flex items-center gap-2">
-                                    <div class="w-5 h-5 rounded-full overflow-hidden flex shrink-0">
-                                        <img src="../assets/logos/vekotora.svg" alt="icon">
-                                    </div>
-                                    <p class="font-light text-sm">Vektora Studio</p>
-                                </a>
-
-                                <div class="flex items-center gap-4">
-
-                                    <button type="button" class="inline-flex items-center text-sm font-medium hover:underline text-red-500">
-                                        <svg class="me-1.5 h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6" />
-                                        </svg>
-                                        Remove
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="hidden p-4 bg-white rounded-lg md:p-8 dark:bg-gray-800" id="proof-menu-{{$i}}" role="tabpanel" aria-labelledby="proof-tab-{{$i}}">
-                    <div class="flex flex-col sm:flex-row p-[30px] gap-[60px] rounded-[20px] w-full h-fit border border-gray-700">
+                    <div class="hidden p-4 bg-white rounded-lg md:p-8 dark:bg-gray-800" id="proof-menu-{{$i}}" role="tabpanel" aria-labelledby="proof-tab-{{$i}}">
+                        <div class="flex flex-col sm:flex-row p-[30px] gap-[60px] rounded-[20px] w-full h-fit border border-gray-700">
 
 
-                        <div class="w-full flex flex-col gap-4">
-                            <p class="font-semibold text-xl">Transfer to:</p>
-                            <div class="flex flex-col gap-3">
-                                <div class="flex gap-3">
-                                    <div
-                                        class="flex items-center gap-1 p-[12px_20px] pl-4 w-full justify-between rounded-lg bg-[#181818] hover:ring-[1px] hover:ring-[#A0A0A0] focus:ring-[1px] focus:ring-[#A0A0A0] transition-all duration-300">
-                                        <div class="flex flex-col">
-                                            <label for="bank" class="text-xs text-creativehub-grey pl-1">Payment Method</label>
-                                            <select name="bank[]" id="bank-{{$i}}"
-                                                    class="mt-1 font-semibold bg-transparent appearance-none border-none outline-none px-1 invalid:text-[#595959] invalid:font-normal invalid:text-sm"
-                                                    required>
-                                                <option class="text-creativehub-black" value="Angga Bank">Dana</option>
-                                                <option class="text-creativehub-black" value="Angga Bank">OVO</option>
-                                                <option class="text-creativehub-black" value="Angga Bank">Gopay</option>
-                                                <option class="text-creativehub-black" value="Angga Bank">BTN</option>
-                                            </select>
-                                        </div>
-                                        <div class="w-6 h-6 flex shrink-0">
-                                            <img src="{{URL::to('/')}}/assets/icons/bank.svg" alt="icon">
+                            <div class="w-full flex flex-col gap-4">
+                                <p class="font-semibold text-xl">Transfer to:</p>
+                                <div class="flex flex-col gap-3">
+                                    <div class="flex gap-3">
+                                        <div
+                                            class="flex items-center gap-1 p-[12px_20px] pl-4 w-full justify-between rounded-lg bg-[#181818] hover:ring-[1px] hover:ring-[#A0A0A0] focus:ring-[1px] focus:ring-[#A0A0A0] transition-all duration-300">
+                                            <div class="flex flex-col">
+                                                <label for="bank" class="text-xs text-creativehub-grey pl-1">Payment Method</label>
+                                                <select name="bank[]" id="bank-{{$i}}"
+                                                        class="mt-1 font-semibold bg-transparent appearance-none border-none outline-none px-1 invalid:text-[#595959] invalid:font-normal invalid:text-sm"
+                                                        required>
+                                                    <option class="text-creativehub-black" value="Angga Bank">Dana</option>
+                                                    <option class="text-creativehub-black" value="Angga Bank">OVO</option>
+                                                    <option class="text-creativehub-black" value="Angga Bank">Gopay</option>
+                                                    <option class="text-creativehub-black" value="Angga Bank">BTN</option>
+                                                </select>
+                                            </div>
+                                            <div class="w-6 h-6 flex shrink-0">
+                                                <img src="{{URL::to('/')}}/assets/icons/bank.svg" alt="icon">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="flex">
+                                    <div class="flex">
+                                        <div
+                                            class="flex items-center gap-1 p-[12px_20px] pl-4 w-full justify-between rounded-lg bg-[#181818] hover:ring-[1px] hover:ring-[#A0A0A0] focus:ring-[1px] focus:ring-[#A0A0A0] transition-all duration-300">
+                                            <div class="flex flex-col w-full">
+                                                <label for="name" class="text-xs text-creativehub-grey pl-1">Account Name</label>
+                                                <div class="flex mt-1 items-center max-w-[149px]">
+                                                    <input readonly type="text" name="name[]" value="Tokopedei" id="name-{{$i}}"
+                                                           class="font-semibold bg-transparent appearance-none autofull-no-bg outline-none border-none px-1 placeholder:text-[#595959] placeholder:font-normal placeholder:text-sm w-full"
+                                                           placeholder="Type here" required>Value</input>
+                                                </div>
+                                            </div>
+                                            <div class="w-6 h-6 flex shrink-0">
+                                                <img src="{{URL::to('/')}}/assets/icons/user-square.svg" alt="icon">
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div
-                                        class="flex items-center gap-1 p-[12px_20px] pl-4 w-full justify-between rounded-lg bg-[#181818] hover:ring-[1px] hover:ring-[#A0A0A0] focus:ring-[1px] focus:ring-[#A0A0A0] transition-all duration-300">
+                                        class="flex items-center gap-1 p-[12px_20px] pl-4 justify-between rounded-lg bg-[#181818] hover:ring-[1px] hover:ring-[#A0A0A0] focus:ring-[1px] focus:ring-[#A0A0A0] transition-all duration-300">
                                         <div class="flex flex-col w-full">
-                                            <label for="name" class="text-xs text-creativehub-grey pl-1">Account Name</label>
-                                            <div class="flex mt-1 items-center max-w-[149px]">
-                                                <input readonly type="text" name="name[]" value="Tokopedei" id="name-{{$i}}"
-                                                       class="font-semibold bg-transparent appearance-none autofull-no-bg outline-none border-none px-1 placeholder:text-[#595959] placeholder:font-normal placeholder:text-sm w-full"
-                                                       placeholder="Type here" required>Value</input>
+                                            <label for="number" class="text-xs text-creativehub-grey pl-1">Account Number</label>
+                                            <div class="flex mt-1 items-center max-w-[322px]">
+                                                <input type="tel" name="number[]" readonly id="number-{{$i}}"
+                                                       class="mt-1 font-semibold bg-transparent appearance-none autofull-no-bg border-none outline-none px-1 placeholder:text-[#595959] placeholder:font-normal placeholder:text-sm w-full"
+                                                       placeholder="Type here" value="0921020913" pattern="[0-9 -]" required>Value</input>
                                             </div>
                                         </div>
                                         <div class="w-6 h-6 flex shrink-0">
-                                            <img src="{{URL::to('/')}}/assets/icons/user-square.svg" alt="icon">
+                                            <img src="{{URL::to('/')}}/assets/icons/card.svg" alt="icon">
                                         </div>
-                                    </div>
-                                </div>
-                                <div
-                                    class="flex items-center gap-1 p-[12px_20px] pl-4 justify-between rounded-lg bg-[#181818] hover:ring-[1px] hover:ring-[#A0A0A0] focus:ring-[1px] focus:ring-[#A0A0A0] transition-all duration-300">
-                                    <div class="flex flex-col w-full">
-                                        <label for="number" class="text-xs text-creativehub-grey pl-1">Account Number</label>
-                                        <div class="flex mt-1 items-center max-w-[322px]">
-                                            <input type="tel" name="number[]" readonly id="number-{{$i}}"
-                                                   class="mt-1 font-semibold bg-transparent appearance-none autofull-no-bg border-none outline-none px-1 placeholder:text-[#595959] placeholder:font-normal placeholder:text-sm w-full"
-                                                   placeholder="Type here" value="0921020913" pattern="[0-9 -]" required>Value</input>
-                                        </div>
-                                    </div>
-                                    <div class="w-6 h-6 flex shrink-0">
-                                        <img src="{{URL::to('/')}}/assets/icons/card.svg" alt="icon">
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="w-full flex flex-col gap-4">
-                            <p class="font-semibold text-xl">Confirm Payment</p>
-                            <div class="flex flex-col gap-3">
-                                <p class="text-xs text-[#2D68F8] p-[10px_22px] rounded-lg bg-[#2D68F805]">Please upload proof of
-                                    payment we will confirm it as soon as possible</p>
+                            <div class="w-full flex flex-col gap-4">
+                                <p class="font-semibold text-xl">Confirm Payment</p>
+                                <div class="flex flex-col gap-3">
+                                    <p class="text-xs text-[#2D68F8] p-[10px_22px] rounded-lg bg-[#2D68F805]">Please upload proof of
+                                        payment we will confirm it as soon as possible</p>
 
-                                @error('proof')
-                                <p class="text-xs text-[#ffffff] p-[10px_22px] rounded-lg bg-[#BA0F30]">{{$message}}</p>
-                                @enderror
+                                    @error('proof')
+                                    <p class="text-xs text-[#ffffff] p-[10px_22px] rounded-lg bg-[#BA0F30]">{{$message}}</p>
+                                    @enderror
 
-                                <div class="flex gap-3">
-                                    <button type="button"
-                                            class="flex gap-2 shrink-0 w-2/3 h-[48px] p-[12px_18px] justify-center items-center border border-dashed border-[#595959] rounded-lg hover:bg-[#2A2A2A] transition-all duration-300"
-                                            onclick="document.getElementById('proof-{{$data[$i]}}').click()
+                                    <div class="flex gap-3">
+                                        <button type="button"
+                                                class="flex gap-2 shrink-0 w-2/3 h-[48px] p-[12px_18px] justify-center items-center border border-dashed border-[#595959] rounded-lg hover:bg-[#2A2A2A] transition-all duration-300"
+                                                onclick="document.getElementById('proof-{{$i}}').click()
                                         ">
-                                        <p>Choose File</p>
-                                        <img src="{{URL::to('/')}}/assets/icons/document-upload.svg" alt="icon">
-                                    </button>
-                                    <input type="file" name="proof[]" id="proof-{{$data[$i]}}" class="hidden" onchange="previewFile()">
-                                    <div class="relative rounded-lg overflow-hidden bg-[#181818] w-full h-[48px]">
-                                        <div class="relative file-preview z-10 w-full h-full hidden">
-                                            <img src="{{URL::to('/')}}/assets/icons/check.svg"
-                                                 class="check-icon absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                                            <p>Choose File</p>
+                                            <img src="{{URL::to('/')}}/assets/icons/document-upload.svg" alt="icon">
+                                        </button>
+                                        <input type="file" name="proof[]" id="proof-{{$i}}" class="hidden" onchange="previewFile()">
+                                        <div class="relative rounded-lg overflow-hidden bg-[#181818] w-full h-[48px]">
+                                            <div class="relative file-preview z-10 w-full h-full hidden">
+                                                <img src="{{URL::to('/')}}/assets/icons/check.svg"
+                                                     class="check-icon absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                                                     alt="icon">
+                                                <img src="" class="thumbnail-proof w-full h-full object-cover" alt="thumbnail">
+                                            </div>
+                                            <img src="{{URL::to('/')}}/assets/icons/gallery.svg"
+                                                 class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
                                                  alt="icon">
-                                            <img src="" class="thumbnail-proof w-full h-full object-cover" alt="thumbnail">
                                         </div>
-                                        <img src="{{URL::to('/')}}/assets/icons/gallery.svg"
-                                             class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-                                             alt="icon">
                                     </div>
                                 </div>
+
+
                             </div>
-
-
                         </div>
                     </div>
+
                 </div>
-
             </div>
-        </div>
 
-    @endfor
+         @endforeach
 
-</section>
+    </section>
 </form>
 
 

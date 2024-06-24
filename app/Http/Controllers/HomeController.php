@@ -8,6 +8,7 @@ use App\Models\PaymentMethod;
 use App\Models\Product;
 use App\Models\Review;
 use App\Models\Transaction;
+use App\Models\User;
 use App\Models\UserPayment;
 use App\services\HomeService;
 use App\services\ProductService;
@@ -73,21 +74,23 @@ class HomeController extends Controller
     public function cart(Request $request)
     {
         $data = [
-          0,
-            1,
-            2
+            2 => 2.,
+            161 => 161,
+            146 => 146,
+            288 => 288,
+            1070 => 1070,
+            1071 => 1071,
+            1072 => 1072,
+            1073 => 1073,
         ];
 
-        return \response()->view('home.cart', compact('data'));
+        $carts = auth()->user()->addProductIntoCart->groupBy('seller_id');;
+
+        return \response()->view('home.cart', compact('carts', 'data'));
     }
 
     public function doCart(Request $request)
     {
         dd($request);
-    }
-
-    public function hi(Request $request)
-    {
-        return \response()->json(['success' => 'masuk pak eko', 'data' => $request->input('id-product')]);
     }
 }

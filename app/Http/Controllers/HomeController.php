@@ -64,8 +64,6 @@ class HomeController extends Controller
         // Ambil data dari request
         $data = $request->all();
 
-        // Lakukan sesuatu dengan data tersebut, seperti menyimpan ke database
-
         // Return response
         return response()->json(['message' => 'Data received successfully', 'data' => $data]);
 
@@ -85,5 +83,10 @@ class HomeController extends Controller
     public function doCart(Request $request)
     {
         dd($request);
+    }
+
+    public function hi(Request $request)
+    {
+        return \response()->json(['success' => 'masuk pak eko', 'data' => $request->input('id-product')]);
     }
 }

@@ -18,7 +18,7 @@ Route::controller(HomeController::class)->group(function () {
    Route::get('//products/{id}/checkout/success', 'successCheckout')->name('success.checkout');
    Route::post('/products/{id}/checkout', 'doCheckout')->name('do.checkout');
     // Route untuk menambah cart di product details
-    Route::post('/products/cart/{id}')->name('add.cart');
+    Route::post('/products/{id}/add-to-cart', 'addToCart')->name('add.cart');
 
 });
 

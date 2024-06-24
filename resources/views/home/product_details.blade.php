@@ -320,9 +320,10 @@
                     <a href="{{route('checkout', ["id" => $product->id])}}"
                        class="bg-[#2D68F8] text-center font-semibold p-[12px_20px] rounded-full hover:bg-[#083297] active:bg-[#062162] transition-all duration-300">Checkout</a>
                     <form id="addCart">
-                        <input type="text" name="name" id="name" placeholder="Name">
-                        <button href="{{route('checkout', ["id" => $product->id])}}"
-                                class="border border-[#2D68F8] text-center font-semibold p-[12px_20px] rounded-full hover:bg-[#083297] active:bg-[#062162] transition-all duration-300 cart" onclick="addCart()">Add to Cart</button>
+                        @csrf
+                        <input type="text" class="hidden" name="id-product" id="id-product" value="{{$product->id}}">
+                        <button
+                                class="border border-[#2D68F8] text-center font-semibold p-[12px_20px] rounded-full hover:bg-[#083297] active:bg-[#062162] transition-all duration-300 cart">Add to Cart</button>
                     </form>
 
                 @elseif(!auth()->check())
@@ -660,6 +661,8 @@
 @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 <script>
+
+
     // Search Function
     const searchInput = document.getElementById('searchInput');
     const resetButton = document.getElementById('resetButton');
@@ -676,22 +679,8 @@
         resetButton.classList.add('hidden');
     });
 
-    function addCart() {
-        const formData = new FormData(document.getElementById('addCart'));
-        const data = {
-            name: formData.get('name'),
-        };
 
-        axios.post('{{ route('add.cart', ['id', $product->id]) }}', data)
-            .then(response => {
-                console.log(response.data);
-                alert('Form submitted successfully');
-            })
-            .catch(error => {
-                console.error('There was an error!', error);
-                alert('Form submission failed');
-            });
-    }
+
 
 </script>
 </body>

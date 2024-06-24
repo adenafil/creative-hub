@@ -300,6 +300,18 @@
         });
     });
 
+    document.querySelector('body').addEventListener('click', () => {
+        axios.get('/hi')
+            .then(response => {
+                console.log(response.data);
+            })
+            .catch(error => {
+                console.error('There was an error!', error);
+            });
+
+    });
+
+
     function previewFile() {
         var previews = document.querySelectorAll('.file-preview');
         var fileInputs = document.querySelectorAll('input[type=file]');
@@ -330,6 +342,7 @@
         document.getElementById('name').value = accountName;
         document.getElementById('number').value = accountNumber;
     });
+
 
     // Trigger change event on page load to populate initial values
     document.getElementById('bank').dispatchEvent(new Event('change'));

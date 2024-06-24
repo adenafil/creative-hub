@@ -44,10 +44,10 @@ class Product extends Model
     public function productAddedIntoCart(): BelongsToMany
     {
         return $this->belongsToMany(
-            Cart::class,
+            User::class,
             'table_users_addcarts_products',
             'product_id',
-            'cart_id'
+            'user_id'
         );
     }
 }

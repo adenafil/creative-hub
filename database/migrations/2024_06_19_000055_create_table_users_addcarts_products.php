@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('table_users_addcarts_products', function (Blueprint $table) {
-            $table->unsignedBigInteger('cart_id')->nullable(false);
+            $table->unsignedBigInteger('user_id')->nullable(false);
             $table->unsignedBigInteger('product_id')->nullable(false);
-            $table->primary(['cart_id', 'product_id']);
-            $table->foreign('cart_id')->references('id')->on('carts');
+            $table->primary(['user_id', 'product_id']);
+            $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('product_id')->references('id')->on('products');
         });
     }

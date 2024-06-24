@@ -48,39 +48,39 @@ for ($i = 570; $i < 1069; $i++) {
     $index_data++;
 }
 
-$sql_for_carts_table = "
-    insert into carts(user_id)
-    values(?)
-";
-
-$temp_user_id_cart = 570;
-for ($i = 1; $i <= 500; $i++) {
-    $preparedStatement = $connection->prepare($sql_for_carts_table);
-    $preparedStatement->execute([
-        $temp_user_id_cart,
-    ]);
-    $temp_user_id_cart++;
-
-}
+//$sql_for_carts_table = "
+//    insert into carts(user_id)
+//    values(?)
+//";
+//
+//$temp_user_id_cart = 570;
+//for ($i = 1; $i <= 500; $i++) {
+//    $preparedStatement = $connection->prepare($sql_for_carts_table);
+//    $preparedStatement->execute([
+//        $temp_user_id_cart,
+//    ]);
+//    $temp_user_id_cart++;
+//
+//}
 
 // carts_product
 
 $sql_cart_products = "
-    insert into table_users_addcarts_products(cart_id, product_id)
+    insert into table_users_addcarts_products(user_id, product_id)
     values(?, ?)
 ";
 
 $temp_product_id = 1;
 
-$cart_id = 1;
+$cart_id = 570;
 for ($i = 1; $i <= 1000; $i++) {
     $preparedStatement = $connection->prepare($sql_cart_products);
     $preparedStatement->execute([
         $cart_id,
         $i,
     ]);
-    if ($cart_id == 500) {
-        $cart_id = 1;
+    if ($cart_id == 1069) {
+        $cart_id = 570;
     }
     $cart_id++;
 

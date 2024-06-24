@@ -70,7 +70,7 @@
                 class="self-center sm:text-xl md:text-2xl font-semibold whitespace-nowrap text-white">CreativeHub</span>
         </a>
         <div class="flex items-center md:order-2 space-x-3 md:space-x-2 rtl:space-x-reverse md:gap-2">
-            <a href="carts.html"
+            <a href="{{route('cart.index')}}"
                class="flex gap-1.5 items-center border-creativehub-grey border rounded-md px-3 py-2 bg-transparent bg-clip bg-gradient-to-tr hover:from-[#FCB16B] hover:to-[#B05CB0] shadow-lg hover:shadow-pink-400/50 transition-all duration-500">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
                     <path fill-rule="evenodd"

@@ -4,7 +4,6 @@ let cart = document.getElementById('addCart');
 
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('addCart').addEventListener('submit', function(event) {
-        event.preventDefault();
 
         const formData = new FormData(this);
 
@@ -14,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(response => {
                 console.log(response.data);
                 cart.remove();
-                alert('success adding up product to cart')
             })
             .catch(error => {
                 console.error('There was an error!', error);

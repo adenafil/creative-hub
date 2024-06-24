@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CheckoutRequest;
+use App\Models\Cart;
 use App\Models\PaymentMethod;
 use App\Models\Product;
 use App\Models\Review;
@@ -14,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Nonstandard\Uuid;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class HomeController extends Controller
 {
@@ -63,10 +65,9 @@ class HomeController extends Controller
     {
         // Ambil data dari request
         $data = $request->all();
-
-        // Return response
-        return response()->json(['message' => 'Data received successfully', 'data' => $data]);
-
+        toast('Berhasil Menmabah Product Ke Keranjang', 'success');
+        $cartUser = auth()->user()->addProductIntoCart()->attach($id);
+        return \redirect()->back();
     }
 
     public function cart(Request $request)

@@ -48,7 +48,7 @@ class ProductController extends Controller
 
         // Ambil data produk untuk halaman saat ini
         if ($request->query('simple-search')) {
-            $products = Product::query()->where('title', 'like', "%{$request->query('simple-search')}%")->paginate(4);
+            $products = Product::query()->where('seller_id', \auth()->user()->id)->where('title', 'like', "%{$request->query('simple-search')}%")->paginate(4);
         } else {
             $products = $this->productService->getProductByUser(Auth::id(), $offset, $perPage);
         }

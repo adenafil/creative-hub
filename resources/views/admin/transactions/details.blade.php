@@ -31,7 +31,7 @@
 
                     <h1 class="dark:text-white font-bold text-2xl sm:text-5xl pt-4">{{$purchase_detail->title}}</h1>
                     <div class="text-description text-creativehub-grey text-sm md:text-lg lg:text-lg leading-relaxed dark:text-white">
-                        <p>{{$purchase_detail->description}}</p>
+                        {!! $purchase_detail->description !!}
                     </div>
                 </div>
 
@@ -51,7 +51,7 @@
 
 
                     <div class="price-and-status flex gap-4 items-center">
-                        <p class="dark:text-white text-2xl">{{$purchase_detail->price}}</p>
+                        <p class="dark:text-white text-2xl">Rp. {{$purchase_detail->price}}</p>
                         <div class="status-order">
 
                             @if($purchase_detail->status == 'pending')
@@ -64,12 +64,15 @@
                             @elseif($purchase_detail->status == 'paid')
                                 {{-- Paid Status --}}
                                 <span class="bg-green-100 text-green-800 text-sm font-medium me-2 px-4 py-1.5 rounded-full dark:bg-green-900 dark:text-green-300">Paid</span>
-                                <div class="action-group flex mt-8">
-                                    <a href="{{route('download.asset', ['id' =>$purchase_detail->id])}}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Download</a>
-                                </div>
                             @endif
                         </div>
                     </div>
+                    @if($purchase_detail->status == 'paid')
+                        <div class="action-group flex">
+                            <a href="{{route('download.asset', ['id' =>$purchase_detail->id])}}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Download</a>
+                        </div>
+                    @endif
+
 
 
                     {{-- Ketika status pesanan sudah PAID baru muncul button download --}}
@@ -123,6 +126,61 @@
                 </div>
             @endif
 
+        </div>
+
+        <div class="py-12">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 flex flex-col gap-12">
+                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg px-4 py-12 sm:px-8 flex flex-col gap-8">
+                    <div>
+                        <h1 class="dark:text-white font-bold text-2xl sm:text-5xl pt-4">Rejected Form</h1>
+                        <p id="seller_reason" class="text-description text-creativehub-grey text-sm md:text-lg lg:text-lg leading-relaxed dark:text-white mt-2">Bukti pembayaranmu keliruu suuu!!!</p>
+                    </div>
+                    <div class="w-full flex flex-col gap-4">
+                        <p class="text-description text-creativehub-grey text-sm md:text-lg lg:text-lg leading-relaxed dark:text-white mt-2">Confirm Payment</p>
+                        <div class="flex flex-col gap-3">
+                            <p class="text-xs text-[#2D68F8] p-[10px_22px] rounded-lg bg-[#2D68F805]">Please upload proof of
+                                payment we will confirm it as soon as possible</p>
+
+                            @error('proof')
+                            <p class="text-xs text-[#ffffff] p-[10px_22px] rounded-lg bg-[#BA0F30]">{{$message}}</p>
+                            @enderror
+
+                            <div class="flex gap-3">
+                                <button type="button"
+
+                                        class="flex gap-2 shrink-0 w-2/3 h-[48px] p-[12px_18px] justify-center items-center border border-dashed border-[#595959] rounded-lg hover:bg-[#2A2A2A] transition-all duration-300"
+                                        onclick="document.getElementById('proof').click()">
+                                    <p class="text-gray-900 dark:text-white">Choose File</p>
+                                    <img src="{{URL::to('/')}}/assets/icons/document-upload.svg" alt="icon">
+                                </button>
+
+                                <input type="file" name="proof" id="proof" class="hidden" onchange="previewFile()">
+                                <div class="relative rounded-lg overflow-hidden bg-[#181818] w-full h-[48px]">
+                                    <div class="relative file-preview z-10 w-full h-full hidden">
+                                        <img src="{{URL::to('/')}}/assets/icons/check.svg"
+                                             class="check-icon absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                                             alt="icon">
+                                        <img src="" class="thumbnail-proof w-full h-full object-cover" alt="thumbnail">
+                                    </div>
+                                    <img src="{{URL::to('/')}}/assets/icons/gallery.svg"
+                                         class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                                         alt="icon">
+                                </div>
+                            </div>
+                        </div>
+
+                        @if(isset($product->id))
+                            <button type="submit"
+                                    class="rounded-full text-center bg-[#2D68F8] p-[8px_18px] font-semibold hover:bg-[#083297] active:bg-[#062162] transition-all duration-300">Update Proof</button>
+                        @else
+                            <a href="#"
+                               class="rounded-full text-center bg-[#2D68F8] p-[8px_18px] font-semibold hover:bg-[#083297] active:bg-[#062162] transition-all duration-300">Update Proof</a>
+                        @endif
+                    </div>
+
+                </div>
+
+            </div>
         </div>
     </div>
 

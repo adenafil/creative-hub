@@ -61,6 +61,37 @@
         .catch(error => {
             console.log(error);
         });
+
+    function previewFile() {
+        var preview = document.querySelector('.file-preview');
+        var fileInput = document.querySelector('input[type=file]').files[0];
+        var reader = new FileReader();
+
+        console.log("asas")
+        reader.onloadend = function () {
+            var img = preview.querySelector('.thumbnail-proof'); // Get the thumbnail image element
+            img.src = reader.result; // Update src attribute with the uploaded file
+            preview.classList.remove('hidden'); // Remove the 'hidden' class to display the preview
+        }
+
+        if (fileInput) {
+            reader.readAsDataURL(fileInput);
+        } else {
+            preview.classList.add('hidden'); // Hide preview if no file selected
+        }
+    }
+
+    document.getElementById('bank').addEventListener('change', function() {
+        var selectedOption = this.options[this.selectedIndex];
+        var accountName = selectedOption.getAttribute('data-account-name');
+        var accountNumber = selectedOption.getAttribute('data-account-number');
+
+        document.getElementById('name').value = accountName;
+        document.getElementById('number').value = accountNumber;
+    });
+
+    // Trigger change event on page load to populate initial values
+    document.getElementById('bank').dispatchEvent(new Event('change'));
 </script>
 
 <!-- Script tambahan dari views lain -->

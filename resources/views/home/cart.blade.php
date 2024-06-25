@@ -68,7 +68,7 @@
     <nav class="bg-white dark:bg-gray-800 fixed w-full z-20 bottom-0 start-0 border-b border-gray-200 dark:border-gray-600">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <div class="flex items-center">
-                <input id="default-checkbox-parent" name="default-checkbox-parent" type="checkbox" value="isi" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <input id="default-checkbox-parent" name="select-all" type="checkbox" value="false" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                 <label for="default-checkbox-parent" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Select All</label>
             </div>
             <div class="flex items-center gap-4 sm:gap-8">
@@ -88,13 +88,13 @@
         {{-- Store Group Items (You can loop here) --}}
         @foreach($carts as $i => $product)
             <!-- Use the custom loop counter -->
-            Custom Counter: {{ $i }}
+{{--            Custom Counter: {{ $i }}--}}
 
 
             <div class="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <div class="top-tabmenu flex items-center gap-8 ps-4 border-b border-gray-200 rounded-t-lg bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:bg-gray-800">
                     <div class="store-profile flex items-center gap-4">
-                        <input id="default-checkbox-{{$i}}" name="default-checkbox[]" type="checkbox" value="isi" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <input id="default-checkbox-{{$i}}" name="default-checkbox-parent[]" type="checkbox" value="false" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <div class="flex items-center gap-[6px]">
                             <div class="w-6 h-6 flex shrink-0 items-center justify-center rounded-full overflow-hidden">
                                 <img src="https://i.pinimg.com/236x/10/fd/72/10fd72124736cfa1b9840c5ee543b0cf.jpg"
@@ -116,11 +116,11 @@
 
                 <div id="defaultTabContent-{{$i}}">
 
-                    <div class="hidden bg-white rounded-lg dark:bg-gray-800" id="products-{{$i}}" role="tabpanel" aria-labelledby="products-tab-{{$i}}">
+                    <div class="hidden bg-white rounded-lg dark:bg-gray-800 products-card-container" id="products-{{$i}}" role="tabpanel" aria-labelledby="products-tab-{{$i}}">
 
                         @foreach($product as $value)
                         <div class="border-t p-4 shadow-sm border-gray-700 md:p-6">
-                            <input id="default-checkbox-{{$i}}" name="default-checkbox[]" type="checkbox" value="isi" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <input id="default-checkbox-{{$i}}" name="default-checkbox[]" type="checkbox" value="false" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                             <div class="space-y-4 md:flex md:items-center md:justify-around md:gap-6 md:space-y-0">
                                 <a href="#" class="shrink-0 md:order-1">
                                     <img class="h-24 w-auto rounded-md" src="../assets/thumbnails/img1.png" alt="imac image" />
@@ -133,7 +133,7 @@
                                 </div>
 
                                 <div class="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
-                                    <a href="#" class="text-base font-medium hover:underline text-white">{{$value->title}}</a>
+                                    <a href="#" class="text-base font-medium hover:underline text-white title-product">{{$value->title}}</a>
                                     <a href="#" class="flex items-center gap-2">
                                         <div class="w-5 h-5 rounded-full overflow-hidden flex shrink-0">
                                             <img src="../assets/logos/vekotora.svg" alt="icon">
@@ -264,26 +264,30 @@
 
 <script type="text/javascript">
 
+    // mencari element yang dicheckeds
+    const elements = document.querySelectorAll('.products-card-container');
+    let checkData = [];
+    elements.forEach(element => {
+        let data = element.querySelectorAll('.border-t')[0].querySelector('input').checked;
+        if (data) {
+
+        }
+    });
+
+
     document.addEventListener('DOMContentLoaded', function() {
         const parentCheckbox = document.getElementById('default-checkbox-parent');
         const checkboxes = document.querySelectorAll('input[name="default-checkbox[]"]');
+        const tokoCheckbox = document.querySelectorAll('.store-profile input');
 
         parentCheckbox.addEventListener('change', function() {
             checkboxes.forEach(checkbox => {
                 checkbox.checked = parentCheckbox.checked;
             });
-        });
-    });
-
-    document.querySelector('body').addEventListener('click', () => {
-        axios.get('/hi')
-            .then(response => {
-                console.log(response.data);
-            })
-            .catch(error => {
-                console.error('There was an error!', error);
+            tokoCheckbox.forEach(checkbox => {
+                checkbox.checked = parentCheckbox.checked;
             });
-
+        });
     });
 
 
@@ -321,6 +325,8 @@
 
     // Trigger change event on page load to populate initial values
     document.getElementById('bank').dispatchEvent(new Event('change'));
+
+
 
 </script>
 

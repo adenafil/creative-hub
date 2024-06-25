@@ -24,7 +24,7 @@
 
                     <h1 class="dark:text-white font-bold text-2xl sm:text-5xl pt-4">{{$product->title}}</h1>
                     <div class="text-description text-creativehub-grey text-sm md:text-lg lg:text-lg leading-relaxed dark:text-white">
-                        <p>{{$product->description}}</p>
+                        {!! $product->description !!}
                     </div>
                 </div>
 

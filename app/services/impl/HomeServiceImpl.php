@@ -64,7 +64,7 @@ class HomeServiceImpl implements HomeService
     {
         $product = Product::query()->where('id', $id)->first();
         $reviews = Review::query()->where('product_id', $id)->get();
-        $products = Product::query()->limit(4)->get();
+        $products = Product::query()->inRandomOrder()->limit(4)->get();
         $totalProduct = Product::query()->where('seller_id', $product->seller_id)->count();
 
         return compact('product', 'reviews', 'products', 'totalProduct');

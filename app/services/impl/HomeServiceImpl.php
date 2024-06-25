@@ -18,7 +18,9 @@ class HomeServiceImpl implements HomeService
         $products = Product::query()->latest()->limit($length)->get();
 //        dd($products[0]->user->user_detail);
         $reviews = Review::query()->latest()->limit($length - 3)->get();
-        return compact('products', 'reviews');
+        $category_product = "Icon Templates";
+
+        return compact('products', 'reviews', 'category_product');
     }
 
     function getDataDetailProduct(int $id): array

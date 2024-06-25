@@ -33,7 +33,6 @@ return array(
     'App\\Http\\Requests\\ReviewRequest' => $baseDir . '/app/Http/Requests/ReviewRequest.php',
     'App\\Http\\Requests\\UpdatePaymentMethodRequest' => $baseDir . '/app/Http/Requests/UpdatePaymentMethodRequest.php',
     'App\\Http\\Requests\\UpdateProductRequest' => $baseDir . '/app/Http/Requests/UpdateProductRequest.php',
-    'App\\Models\\Cart' => $baseDir . '/app/Models/Cart.php',
     'App\\Models\\Category' => $baseDir . '/app/Models/Category.php',
     'App\\Models\\PaymentMethod' => $baseDir . '/app/Models/PaymentMethod.php',
     'App\\Models\\Product' => $baseDir . '/app/Models/Product.php',

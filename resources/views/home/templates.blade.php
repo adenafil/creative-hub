@@ -72,7 +72,7 @@
 
     <!-- Pagination -->
     <section id="NewProduct" class="container max-w-[1200px] px-4 mx-auto mb-[102px] flex flex-col gap-8">
-    <h2 class="font-semibold text-[32px]">{{$category_product}}</h2>
+    <h2 class="font-semibold text-[32px]">Templates Category</h2>
     @include('home.components.card-products')
 
 

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Templates</title>
     <link href="{{ asset('/css/output.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
           rel="stylesheet"/>
@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet"/>
 </head>
- <style>
+<style>
     .swiper-rtl .swiper-button-next:after {
         content: '' !important;
     }
@@ -68,11 +68,93 @@
 @include('home.components.hero-home')
 
 <!-- Category Section -->
-@include('home.components.category')
+<section id="Category" class="container max-w-[1200px] px-4 mx-auto mb-[102px] flex flex-col gap-8 w-full">
+    <h2 class="font-semibold text-[32px]">Category</h2>
+    <div class="items-center gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        <a href=""
+           class="group category-card w-full h-fit p-[1px] rounded-2xl bg-img-transparent hover:bg-img-purple-to-orange transition-all duration-300">
+            <div
+                class="flex flex-col p-4 rounded-2xl bg-img-black-gradient group-active:bg-img-black transition-all duration-300">
+                <div class="w-[58px] h-[58px] flex shrink-0 items-center justify-center">
+                    <img src="../assets/icons/cart.svg" alt="icon">
+                </div>
+                <div class="px-[6px] flex flex-col text-left">
+                    <p class="font-bold text-sm">All Products</p>
+                    <p class="text-xs text-creativehub-grey">Everything in One Place</p>
+                </div>
+            </div>
+        </a>
+        <a href=""
+           class="group category-card w-full h-fit p-[1px] rounded-2xl bg-img-transparent hover:bg-img-purple-to-orange transition-all duration-300">
+            <div
+                class="flex flex-col p-4 rounded-2xl bg-img-black-gradient group-active:bg-img-black transition-all duration-300">
+                <div class="w-[58px] h-[58px] flex shrink-0 items-center justify-center">
+                    <img src="../assets/icons/laptop.svg" alt="icon">
+                </div>
+                <div class="px-[6px] flex flex-col text-left">
+                    <p class="font-bold text-sm">Templates</p>
+                    <p class="text-xs text-creativehub-grey">Designs Made Easy</p>
+                </div>
+            </div>
+        </a>
+        <a href=""
+           class="group category-card w-full h-fit p-[1px] rounded-2xl bg-img-transparent hover:bg-img-purple-to-orange transition-all duration-300">
+            <div
+                class="flex flex-col p-4 rounded-2xl bg-img-black-gradient group-active:bg-img-black transition-all duration-300">
+                <div class="w-[58px] h-[58px] flex shrink-0 items-center justify-center">
+                    <img src="../assets/icons/book.svg" alt="icon">
+                </div>
+                <div class="px-[6px] flex flex-col text-left">
+                    <p class="font-bold text-sm">Ebooks</p>
+                    <p class="text-xs text-creativehub-grey">Read and Learn</p>
+                </div>
+            </div>
+        </a>
+        <a href=""
+           class="group category-card w-full h-fit p-[1px] rounded-2xl bg-img-transparent hover:bg-img-purple-to-orange transition-all duration-300">
+            <div
+                class="flex flex-col p-4 rounded-2xl bg-img-black-gradient group-active:bg-img-black transition-all duration-300">
+                <div class="w-[58px] h-[58px] flex shrink-0 items-center justify-center">
+                    <img src="{{URL::to('/')}}/assets/icons/hat.svg" alt="icon">
+                </div>
+                <div class="px-[6px] flex flex-col text-left">
+                    <p class="font-bold text-sm">Icons</p>
+                    <p class="text-xs text-creativehub-grey">Expand Your Skills</p>
+                </div>
+            </div>
+        </a>
+        <a href=""
+           class="group category-card w-full h-fit p-[1px] rounded-2xl bg-img-transparent hover:bg-img-purple-to-orange transition-all duration-300">
+            <div
+                class="flex flex-col p-4 rounded-2xl bg-img-black-gradient group-active:bg-img-black transition-all duration-300">
+                <div class="w-[58px] h-[58px] flex shrink-0 items-center justify-center">
+                    <img src="../assets/icons/pen.svg" alt="icon">
+                </div>
+                <div class="px-[6px] flex flex-col text-left">
+                    <p class="font-bold text-sm">Fonts</p>
+                    <p class="text-xs text-creativehub-grey">Typography Selection</p>
+                </div>
+            </div>
+        </a>
+        <a href=""
+           class="group category-card w-full h-fit p-[1px] rounded-2xl bg-img-transparent hover:bg-img-purple-to-orange transition-all duration-300">
+            <div
+                class="flex flex-col p-4 rounded-2xl bg-img-black-gradient group-active:bg-img-black transition-all duration-300">
+                <div class="w-[58px] h-[58px] flex shrink-0 items-center justify-center">
+                    <img src="../assets/icons/check-3d.svg" alt="icon">
+                </div>
+                <div class="px-[6px] flex flex-col text-left">
+                    <p class="font-bold text-sm">UI Kits</p>
+                    <p class="text-xs text-creativehub-grey">Best of Design Resources</p>
+                </div>
+            </div>
+        </a>
+    </div>
+</section>
 
-    <!-- Pagination -->
-    <section id="NewProduct" class="container max-w-[1200px] px-4 mx-auto mb-[102px] flex flex-col gap-8">
-    <h2 class="font-semibold text-[32px]">{{$category_product}}</h2>
+<!-- New Product Sections -->
+<section id="NewProduct" class="container max-w-[1200px] px-4 mx-auto mb-[102px] flex flex-col gap-8">
+    <h2 class="font-semibold text-[32px]">New Product</h2>
     @include('home.components.card-products')
 
 
@@ -128,7 +210,7 @@
 @include('home.components.comments')
 
 <!-- Tools Section -->
-@include('home.components.tools-slider')
+
 
 <!-- <div class="w-[1129px] h-[368px] px-56 py-24 rounded-2xl border border-stone-900 flex-col justify-start items-start gap-2.5 inline-flex">
     <div class="flex-col justify-start items-center gap-8 flex">

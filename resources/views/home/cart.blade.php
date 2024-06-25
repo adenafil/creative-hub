@@ -62,18 +62,47 @@
 </style>
 
 <body class="bg-creativehub-black font-poppins text-white">
+
+<div id="toast-success" class="flex items-center w-full max-w-xs p-4 mt-4 mx-auto rounded-lg shadow text-gray-400 bg-gray-800" role="alert">
+    <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-lg bg-green-800 text-green-200">
+        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+        </svg>
+        <span class="sr-only">Check icon</span>
+    </div>
+    <div class="ms-3 text-sm font-normal">Lorem SUCCESS</div>
+</div>
+<div id="toast-error" class="flex items-center w-full max-w-xs p-4 mt-4 mx-auto rounded-lg shadow text-gray-400 bg-gray-800" role="alert">
+    <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-lg bg-red-800 text-red-200">
+        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 11.793a1 1 0 1 1-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 0 1-1.414-1.414L8.586 10 6.293 7.707a1 1 0 0 1 1.414-1.414L10 8.586l2.293-2.293a1 1 0 0 1 1.414 1.414L11.414 10l2.293 2.293Z"/>
+        </svg>
+        <span class="sr-only">Error icon</span>
+    </div>
+    <div class="ms-3 text-sm font-normal">Lorem ERROR</div>
+</div>
+<div id="toast-info" class="flex items-center w-full max-w-xs p-4 mt-4 mx-auto rounded-lg shadow text-gray-400 bg-gray-800" role="alert">
+    <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-lg bg-orange-700 text-orange-200">
+        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM10 15a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm1-4a1 1 0 0 1-2 0V6a1 1 0 0 1 2 0v5Z"/>
+        </svg>
+        <span class="sr-only">Warning icon</span>
+    </div>
+    <div class="ms-3 text-sm font-normal">Lorem Warning/Info</div>
+</div>
+
 <form action="{{route('do.cart.index')}}" method="post" enctype="multipart/form-data">
     @csrf
 
-    <nav class="bg-white dark:bg-gray-800 fixed w-full z-20 bottom-0 start-0 border-b border-gray-200 dark:border-gray-600">
+    <nav class="bg-gray-800 fixed w-full z-20 bottom-0 start-0 border-b border-gray-600">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <div class="flex items-center">
-                <input id="default-checkbox-parent" name="select-all" type="checkbox" value="false" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                <label for="default-checkbox-parent" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Select All</label>
+                <input id="default-checkbox-parent" name="select-all" type="checkbox" value="false" class="w-4 h-4 rounded focus:ring-blue-600 ring-offset-gray-800 focus:ring-2 bg-gray-700 border-gray-600">
+                <label for="default-checkbox-parent" class="ms-2 text-sm font-medium text-gray-300">Select All</label>
             </div>
             <div class="flex items-center gap-4 sm:gap-8">
                 <div>
-                    <h2 class="text-xs sm:text-sm">Total (2 Product): <span class="text-sm sm:text-xl font-bold text text-purple-500"> Rp 750,000</span></h2>
+                    <h2 class="text-xs sm:text-sm">Total (2 Product): <span class="text-sm sm:text-xl font-bold text text-[#C3729E]"> Rp 750,000</span></h2>
                 </div>
                 <button type="submit"
                         class="bg-clip text-transparent bg-gradient-to-tr from-[#B05CB0] to-[#FCB16B] transition-all duration-1000 text-white px-6 py-3 rounded-[12px]  text-xs md:text-md lg:text-md font-semibold hover:from-[#FCB16B] hover:to-[#B05CB0] shadow-lg shadow-pink-500/50">
@@ -91,10 +120,10 @@
 {{--            Custom Counter: {{ $i }}--}}
 
 
-            <div class="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                <div class="top-tabmenu flex items-center gap-8 ps-4 border-b border-gray-200 rounded-t-lg bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:bg-gray-800">
+            <div class="w-full border rounded-lg shadow bg-gray-800 border-gray-700">
+                <div class="top-tabmenu flex items-center gap-8 ps-4 border-b rounded-t-lg border-gray-700 text-gray-400 bg-gray-800">
                     <div class="store-profile flex items-center gap-4">
-                        <input id="default-checkbox-{{$i}}" name="default-checkbox-parent[]" type="checkbox" value="false" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <input id="default-checkbox-{{$i}}" name="default-checkbox-parent[]" type="checkbox" value="false" class="w-4 h-4 rounded focus:ring-blue-600 ring-offset-gray-800 focus:ring-2 bg-gray-700 border-gray-600">
                         <div class="flex items-center gap-[6px]">
                             <div class="w-6 h-6 flex shrink-0 items-center justify-center rounded-full overflow-hidden">
                                 <img src="https://i.pinimg.com/236x/10/fd/72/10fd72124736cfa1b9840c5ee543b0cf.jpg"
@@ -104,23 +133,23 @@
                         </div>
                     </div>
 
-                    <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 dark:text-gray-400 dark:bg-gray-800" id="defaultTab-{{$i}}" data-tabs-toggle="#defaultTabContent-{{$i}}" role="tablist">
+                    <ul class="flex flex-wrap text-sm font-medium text-center text-gray-400 bg-gray-800" id="defaultTab-{{$i}}" data-tabs-toggle="#defaultTabContent-{{$i}}" role="tablist">
                         <li class="me-2">
-                            <button id="products-tab-{{$i}}" data-tabs-target="#products-{{$i}}" type="button" role="tab" aria-controls="products-{{$i}}" aria-selected="true" class="inline-block p-4 text-blue-600 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-blue-500">Products</button>
+                            <button id="products-tab-{{$i}}" data-tabs-target="#products-{{$i}}" type="button" role="tab" aria-controls="products-{{$i}}" aria-selected="true" class="inline-block p-4 bg-gray-800 hover:bg-gray-700 text-blue-500">Products</button>
                         </li>
                         <li class="me-2">
-                            <button id="proof-tab-{{$i}}" data-tabs-target="#proof-menu-{{$i}}" type="button" role="tab" aria-controls="proof-menu-{{$i}}" aria-selected="false" class="inline-block p-4 hover:text-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-gray-300">Proof</button>
+                            <button id="proof-tab-{{$i}}" data-tabs-target="#proof-menu-{{$i}}" type="button" role="tab" aria-controls="proof-menu-{{$i}}" aria-selected="false" class="inline-block p-4 hover:bg-gray-700 hover:text-gray-300">Proof</button>
                         </li>
                     </ul>
                 </div>
 
                 <div id="defaultTabContent-{{$i}}">
 
-                    <div class="hidden bg-white rounded-lg dark:bg-gray-800 products-card-container" id="products-{{$i}}" role="tabpanel" aria-labelledby="products-tab-{{$i}}">
+                    <div class="hidden rounded-lg bg-gray-800 products-card-container" id="products-{{$i}}" role="tabpanel" aria-labelledby="products-tab-{{$i}}">
 
                         @foreach($product as $value)
                         <div class="border-t p-4 shadow-sm border-gray-700 md:p-6">
-                            <input id="default-checkbox-{{$i}}" name="default-checkbox[]" type="checkbox" value="false" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <input id="default-checkbox-{{$i}}" name="default-checkbox-parent[]" type="checkbox" value="false" class="w-4 h-4 rounded focus:ring-blue-600 ring-offset-gray-800 focus:ring-2 bg-gray-700 border-gray-600">
                             <div class="space-y-4 md:flex md:items-center md:justify-around md:gap-6 md:space-y-0">
                                 <a href="#" class="shrink-0 md:order-1">
                                     <img class="h-24 w-auto rounded-md" src="../assets/thumbnails/img1.png" alt="imac image" />
@@ -157,7 +186,7 @@
 
 
                     </div>
-                    <div class="hidden p-4 bg-white rounded-lg md:p-8 dark:bg-gray-800" id="proof-menu-{{$i}}" role="tabpanel" aria-labelledby="proof-tab-{{$i}}">
+                    <div class="hidden p-4 rounded-lg md:p-8 bg-gray-800" id="proof-menu-{{$i}}" role="tabpanel" aria-labelledby="proof-tab-{{$i}}">
                         <div class="flex flex-col sm:flex-row p-[30px] gap-[60px] rounded-[20px] w-full h-fit border border-gray-700">
 
 

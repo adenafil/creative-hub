@@ -546,7 +546,6 @@ class ComposerStaticInit7e8c3c14ff33b199b4a0838993eb8423
         'App\\Http\\Requests\\ReviewRequest' => __DIR__ . '/../..' . '/app/Http/Requests/ReviewRequest.php',
         'App\\Http\\Requests\\UpdatePaymentMethodRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UpdatePaymentMethodRequest.php',
         'App\\Http\\Requests\\UpdateProductRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UpdateProductRequest.php',
-        'App\\Models\\Cart' => __DIR__ . '/../..' . '/app/Models/Cart.php',
         'App\\Models\\Category' => __DIR__ . '/../..' . '/app/Models/Category.php',
         'App\\Models\\PaymentMethod' => __DIR__ . '/../..' . '/app/Models/PaymentMethod.php',
         'App\\Models\\Product' => __DIR__ . '/../..' . '/app/Models/Product.php',

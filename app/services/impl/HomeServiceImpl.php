@@ -55,7 +55,7 @@ class HomeServiceImpl implements HomeService
 
 
 //        dd($products[0]->user->user_detail);
-        $reviews = Review::query()->latest()->limit($length - 3)->get();
+        $reviews = Review::query()->inRandomOrder()->limit($length - 3)->get();
 
         return compact('products', 'reviews', 'category_product', 'totalProducts', 'perPage', 'currentPage', 'totalPages', 'window', 'firstItem', 'lastItem');
     }

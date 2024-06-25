@@ -29,7 +29,7 @@ class HomeController extends Controller
 
     public function index(Request $request): Response
     {
-        $dataHome = $this->homeService->getDataProductOnIndex( 8);
+        $dataHome = $this->homeService->getDataProductOnIndex( 8, $request);
 
         $category_product = "New Products";
         return \response()->view('home.index', $dataHome, 200);

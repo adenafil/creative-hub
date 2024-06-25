@@ -12,6 +12,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet"/>
 </head>
+<script>
+    function redirectToUrl(element) {
+        const url = element.getAttribute('data-url');
+        window.location.href = url;
+    }
+</script>
  <style>
     .swiper-rtl .swiper-button-next:after {
         content: '' !important;
@@ -76,55 +82,22 @@
     @include('home.components.card-products')
 
 
-    {{-- Ini PAGINATION --}}
+    {{-- ini card --}}
     <div class="flex justify-center items-center gap-y-2 flex-col mt-10">
 
-    <span class="text-sm text-gray-400">Showing <span class="font-semibold text-white">"$firstItem"</span> to <span
-            class="font-semibold text-white">"$lastItem"</span> of <span
-            class="font-semibold text-white">$totalProducts</span> Entries</span>
+    <span class="text-sm text-gray-400">Showing <span class="font-semibold text-white">"{{$firstItem}}"</span> to <span
+            class="font-semibold text-white">"{{$lastItem}}"</span> of <span
+            class="font-semibold text-white">{{$totalProducts}}</span> Entries</span>
 
-        <nav aria-label="Page navigation example">
-            <ul class="inline-flex -space-x-px text-sm">
-                {{-- Previous Page Link --}}
-                {{--                @if ($currentPage > 1)--}}
-                <li>
-                    <a href="#"
-                       class="flex items-center justify-center px-3 h-8 ms-0 leading-tight border border-e-0 rounded-s-lg bg-[#1B1B1B] border-gray-700 text-gray-400 hover:bg-gray-700 hover:text-white">Previous</a>
-                </li>
-                {{--                @endif--}}
+        {{--pagination--}}
+        @if(request()->query('category') != null)
+            @include('home.components.category-pagination')
+        @else
+            @include('home.components.index-pagination')
+        @endif
 
-                {{-- Pagination Elements --}}
-                {{--                @foreach ($window as $page)--}}
-                {{--                    @if (is_string($page))--}}
-                <li class="">
-                <span
-                    class="flex items-center justify-center px-3 h-8 leading-tight border bg-[#1B1B1B] border-gray-700 text-gray-400 hover:bg-gray-700 hover:text-white">"$page"</span>
-                </li>
-                {{--                    @elseif ($page == $currentPage)--}}
-                <li class="">
-                <span
-                    class="flex items-center justify-center px-3 h-8 border border-gray-700 bg-[#1B1B1B] text-white hover:bg-gray-700 hover:text-white">"$page"</span>
-                </li>
-                {{--                    @else--}}
-                <a href="#"
-                   class="flex items-center justify-center px-3 h-8 leading-tight border bg-[#1B1B1B] border-gray-700 text-gray-400 hover:bg-gray-700 hover:text-white">"$page"</a>
-                {{--                    @endif--}}
-                {{--                @endforeach--}}
 
-                {{-- Next Page Link --}}
-                {{--                @if ($currentPage < $totalPages)--}}
-                <li>
-                    <a href="#"
-                       class="flex items-center justify-center px-3 h-8 leading-tight border rounded-e-lg bg-[#1B1B1B] border-gray-700 text-gray-400 hover:bg-gray-700 hover:text-white">Next</a>
-                </li>
-                {{--                @endif--}}
-            </ul>
-        </nav>
-
-    </div>
-</section>
-
-<!-- Testimonial Section -->
+        <!-- Testimonial Section -->
 @include('home.components.comments')
 
 <!-- Tools Section -->

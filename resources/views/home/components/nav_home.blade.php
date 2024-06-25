@@ -70,7 +70,7 @@
                         <div class="p-4 pb-4">
                             <ul class="space-y-4" aria-labelledby="mega-menu-icons-dropdown-button">
                                 <li>
-                                    <a href="#" class="flex items-center text-white hover:text-pink-400 group">
+                                    <a href="{{route('home')}}" class="flex items-center text-white hover:text-pink-400 group">
                                         <span class="sr-only">All Products</span>
                                         <img
                                             src="https://raw.githubusercontent.com/fe-husni/creativehub-main/main/assets/icons/cart.svg"
@@ -79,7 +79,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="flex items-center text-white hover:text-pink-400 group">
+                                    <a href="{{route('home', ['category' => 3])}}" class="flex items-center text-white hover:text-pink-400 group">
                                         <span class="sr-only">Icons</span>
                                         <img
                                             src="https://raw.githubusercontent.com/fe-husni/creativehub-main/main/assets/icons/hat.svg"
@@ -88,7 +88,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="flex items-center text-white hover:text-pink-400 group">
+                                    <a href="{{route('home', ['category' => 4])}}" class="flex items-center text-white hover:text-pink-400 group">
                                         <span class="sr-only">Templates</span>
                                         <img
                                             src="https://raw.githubusercontent.com/fe-husni/creativehub-main/main/assets/icons/laptop.svg"
@@ -101,7 +101,7 @@
                         <div class="p-4 pb-4 text-gray-900 md:pb-4 dark:text-white">
                             <ul class="space-y-4">
                                 <li>
-                                    <a href="#" class="flex items-center text-white hover:text-pink-400 group">
+                                    <a href="{{route('home', ['category' => 2])}}" class="flex items-center text-white hover:text-pink-400 group">
                                         <span class="sr-only">Fonts</span>
                                         <img
                                             src="https://raw.githubusercontent.com/fe-husni/creativehub-main/main/assets/icons/pen.svg"
@@ -110,7 +110,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="flex items-center text-white hover:text-pink-400 group">
+                                    <a href="{{route('home', ['category' => 1])}}" class="flex items-center text-white hover:text-pink-400 group">
                                         <span class="sr-only">E-Books</span>
                                         <img
                                             src="https://raw.githubusercontent.com/fe-husni/creativehub-main/main/assets/icons/book.svg"
@@ -119,7 +119,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="flex items-center text-white hover:text-pink-400 group">
+                                    <a href="{{route('home', ['category' => 5])}}" class="flex items-center text-white hover:text-pink-400 group">
                                         <span class="sr-only">UI Kits</span>
                                         <img
                                             src="https://raw.githubusercontent.com/fe-husni/creativehub-main/main/assets/icons/check-3d.svg"

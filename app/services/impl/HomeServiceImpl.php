@@ -2,25 +2,62 @@
 
 namespace App\services\impl;
 
+use App\Helper\PaginationHelper;
+use App\Models\Category;
 use App\Models\PaymentMethod;
 use App\Models\Product;
 use App\Models\Review;
 use App\Models\Transaction;
 use App\Models\UserPayment;
 use App\services\HomeService;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Nonstandard\Uuid;
 
 class HomeServiceImpl implements HomeService
 {
-    function getDataProductOnIndex(int $length): array
+    function getDataProductOnIndex(int $length, Request $request): array
     {
-        $products = Product::query()->latest()->limit($length)->get();
+        $category = $request->query('category');
+        // Tentukan jumlah item per halaman
+        $perPage = 8;
+
+        // Ambil halaman saat ini dari query string, defaultnya 1
+        $currentPage = $request->input('page', 1);
+
+        // Hitung offset
+        $offset = ($currentPage - 1) * $perPage;
+
+        if ($category != null) {
+            $totalProducts = Product::query()->where('category_id', $category)->count();
+            $products = Product::query()->where('category_id', $category)->latest()->paginate($length);
+            $category_name = ucwords(Category::query('id', $category)->first()->name);
+            $category_product = $category_name  . " Categories";
+        } else {
+            // Hitung total produk
+            $totalProducts = Product::count();
+
+            $products = Product::query()->latest()->paginate($length);
+            $category_product = "All Products";
+
+        }
+
+        // Hitung jumlah halaman
+        $totalPages = ceil($totalProducts / $perPage);
+
+        // Hitung item yang sedang ditampilkan
+        $firstItem = $offset + 1;
+        $lastItem = min($offset + $perPage, $totalProducts);
+
+        // Buat elemen pagination seperti yang ada di metode elements()
+        $window =  PaginationHelper::paginationWindow($currentPage, $totalPages);
+
+
 //        dd($products[0]->user->user_detail);
         $reviews = Review::query()->latest()->limit($length - 3)->get();
-        $category_product = "Icon Templates";
 
-        return compact('products', 'reviews', 'category_product');
+        return compact('products', 'reviews', 'category_product', 'totalProducts', 'perPage', 'currentPage', 'totalPages', 'window', 'firstItem', 'lastItem');
     }
 
     function getDataDetailProduct(int $id): array

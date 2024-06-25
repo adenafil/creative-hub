@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\PaginationHelper;
 use App\Http\Requests\AddProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Category;
@@ -64,44 +65,10 @@ class ProductController extends Controller
         $lastItem = min($offset + $perPage, $totalProducts);
 
         // Buat elemen pagination seperti yang ada di metode elements()
-        $window = $this->paginationWindow($currentPage, $totalPages);
+        $window =  PaginationHelper::paginationWindow($currentPage, $totalPages);
 
         return view('admin.products.index', compact('products', 'totalProducts', 'perPage', 'currentPage', 'totalPages', 'window', 'firstItem', 'lastItem'));
     }
-
-    protected function paginationWindow($currentPage, $totalPages)
-    {
-        $onEachSide = 3; // Number of links on each side of the current page
-        $window = [];
-
-        // Previous and next ranges
-        $start = max($currentPage - $onEachSide, 1);
-        $end = min($currentPage + $onEachSide, $totalPages);
-
-        // Window for pagination
-        for ($i = $start; $i <= $end; $i++) {
-            $window[] = $i;
-        }
-
-        // Add ellipses and edges
-        $pagination = [];
-        if ($start > 1) {
-            $pagination[] = 1;
-            if ($start > 2) {
-                $pagination[] = '...';
-            }
-        }
-        $pagination = array_merge($pagination, $window);
-        if ($end < $totalPages) {
-            if ($end < $totalPages - 1) {
-                $pagination[] = '...';
-            }
-            $pagination[] = $totalPages;
-        }
-
-        return $pagination;
-    }
-
 
     public function create(Request $request)
     {

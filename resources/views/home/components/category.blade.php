@@ -1,7 +1,7 @@
 <section id="Category" class="container max-w-[1200px] px-4 mx-auto mb-[102px] flex flex-col gap-8 w-full">
     <h2 class="font-semibold text-[32px]">Category</h2>
     <div class="items-center gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-        <a href=""
+        <a href="{{route('home')}}"
            class="group category-card w-full h-fit p-[1px] rounded-2xl bg-img-transparent hover:bg-img-purple-to-orange transition-all duration-300">
             <div
                 class="flex flex-col p-4 rounded-2xl bg-img-black-gradient group-active:bg-img-black transition-all duration-300">
@@ -14,7 +14,7 @@
                 </div>
             </div>
         </a>
-        <a href=""
+        <a href="{{route('home', ['category' => 4])}}"
            class="group category-card w-full h-fit p-[1px] rounded-2xl bg-img-transparent hover:bg-img-purple-to-orange transition-all duration-300">
             <div
                 class="flex flex-col p-4 rounded-2xl bg-img-black-gradient group-active:bg-img-black transition-all duration-300">
@@ -27,7 +27,7 @@
                 </div>
             </div>
         </a>
-        <a href=""
+        <a href="{{route('home', ['category' => 1])}}"
            class="group category-card w-full h-fit p-[1px] rounded-2xl bg-img-transparent hover:bg-img-purple-to-orange transition-all duration-300">
             <div
                 class="flex flex-col p-4 rounded-2xl bg-img-black-gradient group-active:bg-img-black transition-all duration-300">
@@ -40,7 +40,7 @@
                 </div>
             </div>
         </a>
-        <a href=""
+        <a href="{{route('home', ['category' => 3])}}"
            class="group category-card w-full h-fit p-[1px] rounded-2xl bg-img-transparent hover:bg-img-purple-to-orange transition-all duration-300">
             <div
                 class="flex flex-col p-4 rounded-2xl bg-img-black-gradient group-active:bg-img-black transition-all duration-300">
@@ -53,7 +53,7 @@
                 </div>
             </div>
         </a>
-        <a href=""
+        <a href="{{route('home', ['category' => 2])}}"
            class="group category-card w-full h-fit p-[1px] rounded-2xl bg-img-transparent hover:bg-img-purple-to-orange transition-all duration-300">
             <div
                 class="flex flex-col p-4 rounded-2xl bg-img-black-gradient group-active:bg-img-black transition-all duration-300">
@@ -66,7 +66,7 @@
                 </div>
             </div>
         </a>
-        <a href=""
+        <a href="{{route('home', ['category' => 5])}}"
            class="group category-card w-full h-fit p-[1px] rounded-2xl bg-img-transparent hover:bg-img-purple-to-orange transition-all duration-300">
             <div
                 class="flex flex-col p-4 rounded-2xl bg-img-black-gradient group-active:bg-img-black transition-all duration-300">

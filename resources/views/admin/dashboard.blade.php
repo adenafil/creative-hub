@@ -17,7 +17,7 @@
                     </div>
                     <div class="flex flex-col">
                         <h1>Total Products</h1>
-                        <span class="text-blue-300 font-bold text-2xl">90</span>
+                        <span class="text-blue-300 font-bold text-2xl">{{$total_product ?? 0}}</span>
                     </div>
                 </div>
             </div><div class="wrapper card-group bg-white rounded-lg shadow dark:bg-gray-800 text-white py-6 px-4">
@@ -29,7 +29,7 @@
                     </div>
                     <div class="flex flex-col">
                         <h1>Total Order</h1>
-                        <span class="font-bold text-2xl text-teal-300">99999</span>
+                        <span class="font-bold text-2xl text-teal-300">{{$total_order ?? 0}}</span>
                     </div>
                 </div>
             </div><div class="wrapper card-group bg-white rounded-lg shadow dark:bg-gray-800 text-white py-6 px-4">
@@ -42,7 +42,7 @@
                     </div>
                     <div class="flex flex-col">
                         <h1>Total Revenue</h1>
-                        <span class="font-bold text-2xl text-yellow-300">Rp 12,250,000</span>
+                        <span class="font-bold text-2xl text-yellow-300">Rp {{number_format($total_revenue, 0, ',', '.') ?? 0 }}</span>
                     </div>
                 </div>
             </div><div class="wrapper card-group bg-white rounded-lg shadow dark:bg-gray-800 text-white py-6 px-4">
@@ -55,7 +55,7 @@
                     </div>
                     <div class="flex flex-col">
                         <h1>Total Cutomer</h1>
-                        <span class="font-bold text-2xl text-purple-300">35</span>
+                        <span class="font-bold text-2xl text-purple-300">{{$total_customer ?? 0}}</span>
                     </div>
                 </div>
             </div>
@@ -72,7 +72,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605" />
                 </svg>
 
-                <h1 class="text-2xl font-bold">10 Best selling products</h1>
+                <h1 class="text-2xl font-bold">5 Best selling products</h1>
             </div>
 
             <table id="productTable" class="stripe" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
@@ -91,24 +91,26 @@
 
 {{--                @endif--}}
 
-{{--                @foreach ($products as $product)--}}
-@for($i = 0; $i <= 3 ; $i++)
+                @foreach ($top_products as $product)
                     <tr>
-                        <td class="text-center">1</td>
+                        <td class="text-center">{{$loop->index + 1}}</td>
                         <td class="text-center">
                             <div class="img-wrapper flex justify-center">
                                 <img src="
-                                http://localhost:8000/file/product/eyJpdiI6IlJubWZtOWYvWVg3UkczMUpwcmwrVnc9PSIsInZhbHVlIjoieU9UZVVpMDJUMGdXVlNhcjBjR3NudUVhVDljc1czR3RQbHpoRHZXSGVzOVU5Q3RFVUhWTGFYaTZEc0I5TkwzNSIsIm1hYyI6IjE5NzI0MTVkOTkzMmRkNGQwMjg1OGM1ZThiNjE3YWQxZmRiZTczYWEwNTVkYmM5YmE4ZTlkNDVmZTgyMGJlMGYiLCJ0YWciOiIifQ==?signature=dbacfd163c574552c292313f13a38536f9a5a4b2d3452f3efb94483f308fdbc7
-                                "
+                                    {{
+                                    \App\Helper\ImageHelper::isThisImage($product->image_product_url)
+                                    ? $product->image_product_url
+                                    : URL::signedRoute('file.view', ['encoded' => \App\Helper\ImageHelper::encodePath($product->image_product_url)])
+                                                }}"
                                      class="w-16 h-full object-cover md:w-32 max-w-full max-h-full rounded-md" alt="">
                             </div>
                         </td>
-                        <td class="text-center">as</td>
-                        <td class="text-center">assas</td>
-                        <td class="text-center">Rp. 9090</td>
+                        <td class="text-center">{{$product->title}}</td>
+                        <td class="text-center">{{number_format($product->price, 0, ',', '.') }}</td>
+                        <td class="text-center">{{$product->total_transactions}}</td>
                     </tr>
 {{--                @endforeach--}}
-@endfor
+@endforeach
                 </tbody>
 
             </table>

@@ -1,4 +1,12 @@
-@php use App\Helper\ImageHelper;use Illuminate\Support\Facades\URL; @endphp
+@php use App\Helper\ImageHelper;use Illuminate\Support\Facades\URL;
+//    $category = request()->query('category');
+//    $category_data = \App\Models\Category::query()->where('id', $category)->first();
+//    $category_name = ucwords($category_data->name ?? null);
+//
+//    if (request()->query('search') != null) {
+//            $category_name = "Searching For " . request()->query('search');
+//    }
+@endphp
     <!doctype html>
 <html>
 <head>
@@ -78,15 +86,21 @@
 
     <!-- Pagination -->
     <section id="NewProduct" class="container max-w-[1200px] px-4 mx-auto mb-[102px] flex flex-col gap-8">
-    <h2 class="font-semibold text-[32px]">{{$category_product}}</h2>
+        @if(request()->query('search') !=null )
+            <h2 class="font-semibold text-[32px]">{{ucwords($category_name)}} </h2>
+        @elseif($category_name != null)
+            <h2 class="font-semibold text-[32px]">{{ucwords($category_name) . " Categories"}} </h2>
+        @else
+            <h2 class="font-semibold text-[32px]">All Products</h2>
+        @endif
     @include('home.components.card-products')
 
 
     {{-- ini card --}}
     <div class="flex justify-center items-center gap-y-2 flex-col mt-10">
 
-    <span class="text-sm text-gray-400">Showing <span class="font-semibold text-white">"{{$firstItem}}"</span> to <span
-            class="font-semibold text-white">"{{$lastItem}}"</span> of <span
+    <span class="text-sm text-gray-400">Showing <span class="font-semibold text-white">{{$firstItem}}</span> to <span
+            class="font-semibold text-white">{{$lastItem}}</span> of <span
             class="font-semibold text-white">{{$totalProducts}}</span> Entries</span>
 
         {{--pagination--}}

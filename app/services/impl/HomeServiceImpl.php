@@ -20,6 +20,7 @@ class HomeServiceImpl implements HomeService
     function getDataProductOnIndex(int $length, Request $request): array
     {
         $category = $request->query('category');
+        $search = $request->query('search');
         // Tentukan jumlah item per halaman
         $perPage = 8;
 
@@ -32,14 +33,19 @@ class HomeServiceImpl implements HomeService
         if ($category != null) {
             $totalProducts = Product::query()->where('category_id', $category)->count();
             $products = Product::query()->where('category_id', $category)->latest()->paginate($length);
-            $category_name = ucwords(Category::query('id', $category)->first()->name);
-            $category_product = $category_name  . " Categories";
-        } else {
+//            $category_name = ucwords(Category::query('id', $category)->first()->name);
+//            $category_product = $category_name  . " Categories";
+//            dd($category_name);
+        } elseif ($search != null) {
+            $totalProducts = Product::query()->where('title','like',  "%{$search}%")->count();
+            $products = Product::query()->where('title', 'like',  "%{$search}%")->latest()->paginate($length);
+        }
+        else {
             // Hitung total produk
             $totalProducts = Product::count();
 
             $products = Product::query()->latest()->paginate($length);
-            $category_product = "All Products";
+//            $category_product = "All Products";
 
         }
 
@@ -57,7 +63,16 @@ class HomeServiceImpl implements HomeService
 //        dd($products[0]->user->user_detail);
         $reviews = Review::query()->inRandomOrder()->limit($length - 3)->get();
 
-        return compact('products', 'reviews', 'category_product', 'totalProducts', 'perPage', 'currentPage', 'totalPages', 'window', 'firstItem', 'lastItem');
+        $category = request()->query('category');
+        $category_data = \App\Models\Category::query()->where('id', $category)->first();
+        $category_name = ucwords($category_data->name ?? null);
+
+        if (request()->query('search') != null) {
+            $category_name = "Searching For " . request()->query('search');
+        }
+
+
+        return compact('products', 'reviews', 'category_name', 'totalProducts', 'perPage', 'currentPage', 'totalPages', 'window', 'firstItem', 'lastItem');
     }
 
     function getDataDetailProduct(int $id): array

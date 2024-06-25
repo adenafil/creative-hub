@@ -34,7 +34,7 @@
                         <img src="{{URL::to('/')}}/assets/icons/search-normal.svg" alt="icon">
                     </button>
                     <input type="text" id="searchInput"
-                           class="bg-creativehub-darker-grey w-full pl-[36px] focus:outline-none border-none placeholder:text-[#595959] pr-9"
+                           name="search" class="bg-creativehub-darker-grey w-full pl-[36px] focus:outline-none border-none placeholder:text-[#595959] pr-9"
                            placeholder="Type anything to search..."/>
                     <input type="reset" id="resetButton"
                            class="close-button hidden w-[38px] h-[38px] flex shrink-0 bg-[url('https://raw.githubusercontent.com/fe-husni/creativehub-main/main/assets/icons/close.svg')] hover:bg-[url('https://raw.githubusercontent.com/fe-husni/creativehub-main/main/assets/icons/close-white.svg')] transition-all duration-300 appearance-none transform -translate-x-1/2 -translate-y-1/2 absolute top-1/2 -right-5"

@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'App\\Helper\\ImageHelper' => $baseDir . '/app/Helper/ImageHelper.php',
+    'App\\Helper\\PaginationHelper' => $baseDir . '/app/Helper/PaginationHelper.php',
     'App\\Http\\Controllers\\AdminController' => $baseDir . '/app/Http/Controllers/AdminController.php',
     'App\\Http\\Controllers\\Auth\\AuthenticatedSessionController' => $baseDir . '/app/Http/Controllers/Auth/AuthenticatedSessionController.php',
     'App\\Http\\Controllers\\Auth\\ConfirmablePasswordController' => $baseDir . '/app/Http/Controllers/Auth/ConfirmablePasswordController.php',

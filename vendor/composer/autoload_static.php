@@ -520,6 +520,7 @@ class ComposerStaticInit7e8c3c14ff33b199b4a0838993eb8423
 
     public static $classMap = array (
         'App\\Helper\\ImageHelper' => __DIR__ . '/../..' . '/app/Helper/ImageHelper.php',
+        'App\\Helper\\PaginationHelper' => __DIR__ . '/../..' . '/app/Helper/PaginationHelper.php',
         'App\\Http\\Controllers\\AdminController' => __DIR__ . '/../..' . '/app/Http/Controllers/AdminController.php',
         'App\\Http\\Controllers\\Auth\\AuthenticatedSessionController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/AuthenticatedSessionController.php',
         'App\\Http\\Controllers\\Auth\\ConfirmablePasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ConfirmablePasswordController.php',

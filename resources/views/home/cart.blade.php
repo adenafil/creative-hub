@@ -92,12 +92,13 @@
 </div>
 
 <form action="{{route('do.cart.index')}}" method="post" enctype="multipart/form-data">
+{{--<form id="checkout-form">--}}
     @csrf
 
     <nav class="bg-gray-800 fixed w-full z-20 bottom-0 start-0 border-b border-gray-600">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <div class="flex items-center">
-                <input id="default-checkbox-parent" name="select-all" type="checkbox" value="false" class="w-4 h-4 rounded focus:ring-blue-600 ring-offset-gray-800 focus:ring-2 bg-gray-700 border-gray-600">
+                <input id="default-checkbox-parent" name="select-all" type="checkbox" value="true" class="w-4 h-4 rounded focus:ring-blue-600 ring-offset-gray-800 focus:ring-2 bg-gray-700 border-gray-600">
                 <label for="default-checkbox-parent" class="ms-2 text-sm font-medium text-gray-300">Select All</label>
             </div>
             <div class="flex items-center gap-4 sm:gap-8">
@@ -123,7 +124,7 @@
             <div class="w-full border rounded-lg shadow bg-gray-800 border-gray-700">
                 <div class="top-tabmenu flex items-center gap-8 ps-4 border-b rounded-t-lg border-gray-700 text-gray-400 bg-gray-800">
                     <div class="store-profile flex items-center gap-4">
-                        <input id="default-checkbox-{{$i}}" name="default-checkbox-parent[]" type="checkbox" value="false" class="w-4 h-4 rounded focus:ring-blue-600 ring-offset-gray-800 focus:ring-2 bg-gray-700 border-gray-600">
+                        <input id="default-checkbox-{{$i}}" name="default-checkbox-parent[]" type="checkbox" value="{{$product[0]->seller_id}}" class="w-4 h-4 rounded focus:ring-blue-600 ring-offset-gray-800 focus:ring-2 bg-gray-700 border-gray-600">
                         <div class="flex items-center gap-[6px]">
                             <div class="w-6 h-6 flex shrink-0 items-center justify-center rounded-full overflow-hidden">
                                 <img src="https://i.pinimg.com/236x/10/fd/72/10fd72124736cfa1b9840c5ee543b0cf.jpg"
@@ -148,8 +149,9 @@
                     <div class="hidden rounded-lg bg-gray-800 products-card-container" id="products-{{$i}}" role="tabpanel" aria-labelledby="products-tab-{{$i}}">
 
                         @foreach($product as $value)
-                        <div class="border-t p-4 shadow-sm border-gray-700 md:p-6">
-                            <input id="default-checkbox-{{$i}}" name="default-checkbox-parent[]" type="checkbox" value="false" class="w-4 h-4 rounded focus:ring-blue-600 ring-offset-gray-800 focus:ring-2 bg-gray-700 border-gray-600">
+                        <div class="border-t p-4 shadow-sm border-gray-700 md:p-6 product-{{$loop->index}}">
+                            <p hidden="hidden">{{$value->id}}</p>
+                            <input id="default-checkbox-{{$i}}" name="default-checkbox[]" type="checkbox" value="{{$value->id}}" class="w-4 h-4 rounded focus:ring-blue-600 ring-offset-gray-800 focus:ring-2 bg-gray-700 border-gray-600">
                             <div class="space-y-4 md:flex md:items-center md:justify-around md:gap-6 md:space-y-0">
                                 <a href="#" class="shrink-0 md:order-1">
                                     <img class="h-24 w-auto rounded-md" src="../assets/thumbnails/img1.png" alt="imac image" />
@@ -289,34 +291,122 @@
 
     </section>
 </form>
+@include('sweetalert::alert')
 
 
 <script type="text/javascript">
 
-    // mencari element yang dicheckeds
-    const elements = document.querySelectorAll('.products-card-container');
-    let checkData = [];
-    elements.forEach(element => {
-        let data = element.querySelectorAll('.border-t')[0].querySelector('input').checked;
-        if (data) {
-
+    // Fungsi untuk mengekstrak angka dari ID
+    function extractNumberFromId(id) {
+        const regex = /^default-checkbox-(\d+)$/;
+        const match = id.match(regex);
+        if (match) {
+            return parseInt(match[1], 10);
+        } else {
+            return null;
         }
-    });
-
+    }
 
     document.addEventListener('DOMContentLoaded', function() {
-        const parentCheckbox = document.getElementById('default-checkbox-parent');
-        const checkboxes = document.querySelectorAll('input[name="default-checkbox[]"]');
-        const tokoCheckbox = document.querySelectorAll('.store-profile input');
+        const checkboxSelectAll = document.querySelector('input[name="select-all"]');
+        const checkboxTokoInput = document.querySelectorAll('input[name="default-checkbox-parent[]"]');
+        const checkboxesDibawahTokoInput = document.querySelectorAll('input[name="default-checkbox[]"]');
+        const totalCheckboxesDibawahTokoInput = checkboxesDibawahTokoInput.length;
+        const button = document.querySelector('button');
 
-        parentCheckbox.addEventListener('change', function() {
-            checkboxes.forEach(checkbox => {
-                checkbox.checked = parentCheckbox.checked;
+        checkboxSelectAll.addEventListener('change', (e) => {
+            checkboxTokoInput.forEach(checkbox => {
+                if (e.target.checked) {
+                    checkbox.classList.add("check-out-satu-toko");
+                    checkbox.disabled = true;
+                } else {
+                    checkbox.classList.remove('check-out-satu-toko');
+                    checkbox.disabled = false;
+                }
+                checkbox.checked = e.target.checked;
             });
-            tokoCheckbox.forEach(checkbox => {
-                checkbox.checked = parentCheckbox.checked;
+            checkboxesDibawahTokoInput.forEach(checkbox => {
+                if (e.target.checked) {
+                    checkbox.classList.add("check-out-per-product");
+                    checkbox.disabled = true;
+                } else {
+                    checkbox.classList.remove('check-out-per-product');
+                    checkbox.disabled = false;
+                }
+                checkbox.checked = e.target.checked;
+            });
+
+            if (e.target.checked) {
+                checkboxSelectAll.classList.add("check-out-semua");
+            } else {
+                checkboxSelectAll.classList.remove('check-out-semua');
+            }
+        });
+
+        checkboxTokoInput.forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                const id = extractNumberFromId(checkbox.getAttribute('id'));
+                const productsContainer = document.querySelector(`#defaultTabContent-${id}`).querySelector(`#products-${id}`).querySelectorAll('div.border-t');
+
+                if (!checkboxSelectAll.checked) {
+                    if (checkbox.checked) {
+                        checkbox.classList.add("check-out-per-product");
+                        productsContainer.forEach(checkboxBawah => {
+                            const input = checkboxBawah.querySelector('input');
+                            input.checked = true;
+                            input.disabled = true;
+                        });
+                    } else {
+                        checkbox.classList.remove('check-out-per-product');
+                        productsContainer.forEach(checkboxBawah => {
+                            const input = checkboxBawah.querySelector('input');
+                            input.checked = false;
+                            input.disabled = false;
+                        });
+                    }
+                }
             });
         });
+
+        let tempTotal = 0;
+        checkboxesDibawahTokoInput.forEach(checkbox => {
+            checkbox.addEventListener('change', (e) => {
+                const id = extractNumberFromId(checkbox.getAttribute('id'));
+                if (!checkboxSelectAll.checked) {
+                    if (e.target.checked) {
+                        checkbox.classList.add("check-out-per-product");
+                        tempTotal++;
+                    } else {
+                        checkbox.classList.remove('check-out-per-product');
+                        tempTotal--;
+                    }
+
+                    const total = document.querySelectorAll(`#default-checkbox-${id}`).length - 1;
+                    const checkboxes = document.querySelectorAll(`#default-checkbox-${id}.check-out-per-product`);
+
+                    if (checkboxes.length === total) {
+                        const parentCheckbox = document.querySelector(`#default-checkbox-${id}`);
+                        parentCheckbox.checked = true;
+                        checkboxes.forEach(activeBox => {
+                            activeBox.disabled = true;
+                        });
+                    }
+
+                    if (tempTotal === totalCheckboxesDibawahTokoInput) {
+                        checkboxSelectAll.checked = true;
+                    }
+                }
+            });
+        });
+
+        document.querySelector('form').addEventListener('submit', (e) => {
+            document.querySelectorAll('input').forEach(input => {
+                input.removeAttribute('disabled')
+
+                // remove file that selected
+                // input.disabled = true;
+            });
+        })
     });
 
 

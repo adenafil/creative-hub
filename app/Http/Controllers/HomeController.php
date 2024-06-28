@@ -35,13 +35,6 @@ class HomeController extends Controller
         return \response()->view('home.index', $dataHome, 200);
     }
 
-    public function templates(Request $request): Response
-    {
-        $dataHome = $this->homeService->getDataProductOnIndex( 8);
-        return \response()->view('home.templates', $dataHome, 200);
-    }
-
-
     public function products($id)
     {
         $data = $this->homeService->getDataDetailProduct($id);
@@ -82,24 +75,39 @@ class HomeController extends Controller
 
     public function cart(Request $request)
     {
-        $data = [
-            2 => 2.,
-            161 => 161,
-            146 => 146,
-            288 => 288,
-            1070 => 1070,
-            1071 => 1071,
-            1072 => 1072,
-            1073 => 1073,
-        ];
-
         $carts = auth()->user()->addProductIntoCart->groupBy('seller_id');;
 
-        return \response()->view('home.cart', compact('carts', 'data'));
+        return \response()->view('home.cart', compact('carts'));
     }
 
     public function doCart(Request $request)
     {
-        dd($request);
+        $totalProofs = null;
+        $sellerIds = $request['default-checkbox'] ? Product::whereIn('id', $request['default-checkbox'])
+            ->groupBy('seller_id')
+            ->pluck('seller_id')
+            ->count() : null
+        ;
+        if ($request['proof'] != null) {
+            $totalProofs = count($request['proof']);
+        }
+
+        if ($totalProofs == null && $sellerIds == null) {
+            toast('Anda Belum Mencheck Satupun Produk Dan Belum Upload Bukti Pembayaran', 'error');
+            return redirect()->back();
+        }
+
+        if ($totalProofs != $sellerIds) {
+            toast("Anda Belum Mengupload " . $sellerIds - $totalProofs . " Bukti Pembayaran", 'error');
+            return redirect()->back();
+        }
+
+        dd($request->all());
+
+        for ($i = 0; $i < count($request['default-checkbox']); $i++) {
+
+        }
+
+        return redirect()->back();
     }
 }

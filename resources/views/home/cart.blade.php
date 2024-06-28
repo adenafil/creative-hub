@@ -173,10 +173,11 @@
 
                     <div class="hidden rounded-lg bg-gray-800 products-card-container" id="products-{{$i}}"
                          role="tabpanel" aria-labelledby="products-tab-{{$i}}">
+                    {{--start index checking out--}}
+{{--                        <input name="start-from" hidden="hidden" value="{{$loop->index}}"></input>--}}
 
                         @foreach($product as $value)
                             <div class="border-t p-4 shadow-sm border-gray-700 md:p-6 product-{{$loop->index}}">
-                                <p hidden="hidden">{{$value->id}}</p>
                                 <input id="default-checkbox-{{$i}}" name="default-checkbox[]" type="checkbox"
                                        value="{{$value->id}}"
                                        class="w-4 h-4 rounded focus:ring-blue-600 ring-offset-gray-800 focus:ring-2 bg-gray-700 border-gray-600">
@@ -238,7 +239,7 @@
                                             <div class="flex flex-col">
                                                 <label for="bank" class="text-xs text-creativehub-grey pl-1">Payment
                                                     Method</label>
-                                                <input type="text" hidden="hidden" name="seller_id" value="{{$i}}">
+                                                <input type="text" hidden="hidden" name="seller_id[]" value="{{$i}}">
                                                 <select name="bank[]" id="bank-{{$i}}"
                                                         class="mt-1 font-semibold bg-transparent appearance-none border-none outline-none px-1 invalid:text-[#595959] invalid:font-normal invalid:text-sm"
                                                         required>

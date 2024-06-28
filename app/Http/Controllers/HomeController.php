@@ -101,11 +101,54 @@ class HomeController extends Controller
             return redirect()->back();
         }
 
-        dd($request->all());
+//        dd($request->all());
 
+        //$data = $request->only(['bank', 'name', 'number', 'proof']);
+        $payments = array();
+        $proof_index = array_key_first($request['proof']);
         for ($i = 0; $i < count($request['default-checkbox']); $i++) {
+            for ($j = 0; $j < count($request['default-checkbox']); $j++) {
+                $tempSellerId = Product::query()->where('id', $request['default-checkbox'][$i])->first()->seller_id;
+                $tempBank = PaymentMethod::query()->where('user_id', $tempSellerId)
+                    ->where('payment_account_recipient_name', $request['name'][$j])
+                    ->where('payment_account_name', $request['bank'][$j])
+                    ->where('payment_account_number', $request['number'][$j])
+                    ->first();
+
+                if ($tempBank != null)  {
+
+                    $cek = true;
+                    foreach ($payments as $payment) {
+                        if ($payment['name'] == $tempBank->payment_account_recipient_name && $payment['bank'] == $tempBank->payment_account_name && $payment['number'] == $tempBank->payment_account_number) {
+                            $cek = false;
+                        }
+                    }
+
+                    if ($cek) {
+                        $payments[] = [
+                            'bank' => $tempBank->payment_account_name,
+                            'name' => $tempBank->payment_account_recipient_name,
+                            'number' => $tempBank->payment_account_number,
+                            'proof' => $request['proof'][$proof_index],
+                            'seller_id' => $tempSellerId
+                        ];
+                    }
+                }
+
+            }
 
         }
+
+        for ($i = 0; $i < count($request['default-checkbox']); $i++) {
+            // cek apakah seller_id proofnya ada
+            foreach ($payments as $payment) {
+                if ($payment['seller_id'] == Product::query()->where('id', $request['default-checkbox'][$i])->first()->seller_id) {
+                    $this->homeService->checkout($payment, $request['default-checkbox'][$i]);
+                }
+            }
+        }
+
+        toast("Anda Sukses Melakukan Checkout", 'success');
 
         return redirect()->back();
     }

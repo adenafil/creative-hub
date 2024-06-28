@@ -76,7 +76,6 @@ class HomeController extends Controller
     public function cart(Request $request)
     {
         $carts = auth()->user()->addProductIntoCart->groupBy('seller_id');;
-
         return \response()->view('home.cart', compact('carts'));
     }
 

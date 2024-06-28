@@ -1,6 +1,6 @@
 @php use App\Helper\ImageHelper;use Illuminate\Support\Facades\URL;
  $i = 0;
- @endphp
+@endphp
     <!doctype html>
 <html>
 <head>
@@ -63,28 +63,40 @@
 
 <body class="bg-creativehub-black font-poppins text-white">
 
-<div id="toast-success" class="flex items-center w-full max-w-xs p-4 mt-4 mx-auto rounded-lg shadow text-gray-400 bg-gray-800" role="alert">
+<div id="toast-success"
+     class="flex items-center w-full max-w-xs p-4 mt-4 mx-auto rounded-lg shadow text-gray-400 bg-gray-800"
+     role="alert">
     <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-lg bg-green-800 text-green-200">
-        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+             viewBox="0 0 20 20">
+            <path
+                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
         </svg>
         <span class="sr-only">Check icon</span>
     </div>
     <div class="ms-3 text-sm font-normal">Lorem SUCCESS</div>
 </div>
-<div id="toast-error" class="flex items-center w-full max-w-xs p-4 mt-4 mx-auto rounded-lg shadow text-gray-400 bg-gray-800" role="alert">
+<div id="toast-error"
+     class="flex items-center w-full max-w-xs p-4 mt-4 mx-auto rounded-lg shadow text-gray-400 bg-gray-800"
+     role="alert">
     <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-lg bg-red-800 text-red-200">
-        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 11.793a1 1 0 1 1-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 0 1-1.414-1.414L8.586 10 6.293 7.707a1 1 0 0 1 1.414-1.414L10 8.586l2.293-2.293a1 1 0 0 1 1.414 1.414L11.414 10l2.293 2.293Z"/>
+        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+             viewBox="0 0 20 20">
+            <path
+                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 11.793a1 1 0 1 1-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 0 1-1.414-1.414L8.586 10 6.293 7.707a1 1 0 0 1 1.414-1.414L10 8.586l2.293-2.293a1 1 0 0 1 1.414 1.414L11.414 10l2.293 2.293Z"/>
         </svg>
         <span class="sr-only">Error icon</span>
     </div>
     <div class="ms-3 text-sm font-normal">Lorem ERROR</div>
 </div>
-<div id="toast-info" class="flex items-center w-full max-w-xs p-4 mt-4 mx-auto rounded-lg shadow text-gray-400 bg-gray-800" role="alert">
+<div id="toast-info"
+     class="flex items-center w-full max-w-xs p-4 mt-4 mx-auto rounded-lg shadow text-gray-400 bg-gray-800"
+     role="alert">
     <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-lg bg-orange-700 text-orange-200">
-        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM10 15a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm1-4a1 1 0 0 1-2 0V6a1 1 0 0 1 2 0v5Z"/>
+        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+             viewBox="0 0 20 20">
+            <path
+                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM10 15a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm1-4a1 1 0 0 1-2 0V6a1 1 0 0 1 2 0v5Z"/>
         </svg>
         <span class="sr-only">Warning icon</span>
     </div>
@@ -92,18 +104,21 @@
 </div>
 
 <form action="{{route('do.cart.index')}}" method="post" enctype="multipart/form-data">
-{{--<form id="checkout-form">--}}
+
+    {{--<form id="checkout-form">--}}
     @csrf
 
     <nav class="bg-gray-800 fixed w-full z-20 bottom-0 start-0 border-b border-gray-600">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <div class="flex items-center">
-                <input id="default-checkbox-parent" name="select-all" type="checkbox" value="true" class="w-4 h-4 rounded focus:ring-blue-600 ring-offset-gray-800 focus:ring-2 bg-gray-700 border-gray-600">
+                <input id="default-checkbox-parent" name="select-all" type="checkbox" value="true"
+                       class="w-4 h-4 rounded focus:ring-blue-600 ring-offset-gray-800 focus:ring-2 bg-gray-700 border-gray-600">
                 <label for="default-checkbox-parent" class="ms-2 text-sm font-medium text-gray-300">Select All</label>
             </div>
             <div class="flex items-center gap-4 sm:gap-8">
                 <div>
-                    <h2 class="text-xs sm:text-sm">Total (2 Product): <span class="text-sm sm:text-xl font-bold text text-[#C3729E]"> Rp 750,000</span></h2>
+                    <h2 class="text-xs sm:text-sm">Total (2 Product): <span
+                            class="text-sm sm:text-xl font-bold text text-[#C3729E]"> Rp 750,000</span></h2>
                 </div>
                 <button type="submit"
                         class="bg-clip text-transparent bg-gradient-to-tr from-[#B05CB0] to-[#FCB16B] transition-all duration-1000 text-white px-6 py-3 rounded-[12px]  text-xs md:text-md lg:text-md font-semibold hover:from-[#FCB16B] hover:to-[#B05CB0] shadow-lg shadow-pink-500/50">
@@ -118,13 +133,16 @@
         {{-- Store Group Items (You can loop here) --}}
         @foreach($carts as $i => $product)
             <!-- Use the custom loop counter -->
-{{--            Custom Counter: {{ $i }}--}}
+            {{--            Custom Counter: {{ $i }}--}}
 
 
             <div class="w-full border rounded-lg shadow bg-gray-800 border-gray-700">
-                <div class="top-tabmenu flex items-center gap-8 ps-4 border-b rounded-t-lg border-gray-700 text-gray-400 bg-gray-800">
+                <div
+                    class="top-tabmenu flex items-center gap-8 ps-4 border-b rounded-t-lg border-gray-700 text-gray-400 bg-gray-800">
                     <div class="store-profile flex items-center gap-4">
-                        <input id="default-checkbox-{{$i}}" name="default-checkbox-parent[]" type="checkbox" value="{{$product[0]->seller_id}}" class="w-4 h-4 rounded focus:ring-blue-600 ring-offset-gray-800 focus:ring-2 bg-gray-700 border-gray-600">
+                        <input id="default-checkbox-{{$i}}" name="default-checkbox-parent[]" type="checkbox"
+                               value="{{$product[0]->seller_id}}"
+                               class="w-4 h-4 rounded focus:ring-blue-600 ring-offset-gray-800 focus:ring-2 bg-gray-700 border-gray-600">
                         <div class="flex items-center gap-[6px]">
                             <div class="w-6 h-6 flex shrink-0 items-center justify-center rounded-full overflow-hidden">
                                 <img src="https://i.pinimg.com/236x/10/fd/72/10fd72124736cfa1b9840c5ee543b0cf.jpg"
@@ -134,79 +152,114 @@
                         </div>
                     </div>
 
-                    <ul class="flex flex-wrap text-sm font-medium text-center text-gray-400 bg-gray-800" id="defaultTab-{{$i}}" data-tabs-toggle="#defaultTabContent-{{$i}}" role="tablist">
+                    <ul class="flex flex-wrap text-sm font-medium text-center text-gray-400 bg-gray-800"
+                        id="defaultTab-{{$i}}" data-tabs-toggle="#defaultTabContent-{{$i}}" role="tablist">
                         <li class="me-2">
-                            <button id="products-tab-{{$i}}" data-tabs-target="#products-{{$i}}" type="button" role="tab" aria-controls="products-{{$i}}" aria-selected="true" class="inline-block p-4 bg-gray-800 hover:bg-gray-700 text-blue-500">Products</button>
+                            <button id="products-tab-{{$i}}" data-tabs-target="#products-{{$i}}" type="button"
+                                    role="tab" aria-controls="products-{{$i}}" aria-selected="true"
+                                    class="inline-block p-4 bg-gray-800 hover:bg-gray-700 text-blue-500">Products
+                            </button>
                         </li>
                         <li class="me-2">
-                            <button id="proof-tab-{{$i}}" data-tabs-target="#proof-menu-{{$i}}" type="button" role="tab" aria-controls="proof-menu-{{$i}}" aria-selected="false" class="inline-block p-4 hover:bg-gray-700 hover:text-gray-300">Proof</button>
+                            <button id="proof-tab-{{$i}}" data-tabs-target="#proof-menu-{{$i}}" type="button" role="tab"
+                                    aria-controls="proof-menu-{{$i}}" aria-selected="false"
+                                    class="inline-block p-4 hover:bg-gray-700 hover:text-gray-300">Proof
+                            </button>
                         </li>
                     </ul>
                 </div>
 
                 <div id="defaultTabContent-{{$i}}">
 
-                    <div class="hidden rounded-lg bg-gray-800 products-card-container" id="products-{{$i}}" role="tabpanel" aria-labelledby="products-tab-{{$i}}">
+                    <div class="hidden rounded-lg bg-gray-800 products-card-container" id="products-{{$i}}"
+                         role="tabpanel" aria-labelledby="products-tab-{{$i}}">
 
                         @foreach($product as $value)
-                        <div class="border-t p-4 shadow-sm border-gray-700 md:p-6 product-{{$loop->index}}">
-                            <p hidden="hidden">{{$value->id}}</p>
-                            <input id="default-checkbox-{{$i}}" name="default-checkbox[]" type="checkbox" value="{{$value->id}}" class="w-4 h-4 rounded focus:ring-blue-600 ring-offset-gray-800 focus:ring-2 bg-gray-700 border-gray-600">
-                            <div class="space-y-4 md:flex md:items-center md:justify-around md:gap-6 md:space-y-0">
-                                <a href="#" class="shrink-0 md:order-1">
-                                    <img class="h-24 w-auto rounded-md" src="../assets/thumbnails/img1.png" alt="imac image" />
-                                </a>
-
-                                <div class="flex items-center justify-between md:order-3 md:justify-end">
-                                    <div class="text-end md:order-4 md:w-32">
-                                        <p class="text-base font-bold text-white">Rp {{$value->price}}</p>
-                                    </div>
-                                </div>
-
-                                <div class="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
-                                    <a href="#" class="text-base font-medium hover:underline text-white title-product">{{$value->title}}</a>
-                                    <a href="#" class="flex items-center gap-2">
-                                        <div class="w-5 h-5 rounded-full overflow-hidden flex shrink-0">
-                                            <img src="../assets/logos/vekotora.svg" alt="icon">
-                                        </div>
-                                        <p class="font-light text-sm">{{$value->user->name}}</p>
+                            <div class="border-t p-4 shadow-sm border-gray-700 md:p-6 product-{{$loop->index}}">
+                                <p hidden="hidden">{{$value->id}}</p>
+                                <input id="default-checkbox-{{$i}}" name="default-checkbox[]" type="checkbox"
+                                       value="{{$value->id}}"
+                                       class="w-4 h-4 rounded focus:ring-blue-600 ring-offset-gray-800 focus:ring-2 bg-gray-700 border-gray-600">
+                                <div class="space-y-4 md:flex md:items-center md:justify-around md:gap-6 md:space-y-0">
+                                    <a href="#" class="shrink-0 md:order-1">
+                                        <img class="h-24 w-auto rounded-md" src="../assets/thumbnails/img1.png"
+                                             alt="imac image"/>
                                     </a>
 
-                                    <div class="flex items-center gap-4">
+                                    <div class="flex items-center justify-between md:order-3 md:justify-end">
+                                        <div class="text-end md:order-4 md:w-32">
+                                            <p class="text-base font-bold text-white">Rp {{$value->price}}</p>
+                                        </div>
+                                    </div>
 
-                                        <button type="button" class="inline-flex items-center text-sm font-medium hover:underline text-red-500">
-                                            <svg class="me-1.5 h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6" />
-                                            </svg>
-                                            Remove
-                                        </button>
+                                    <div class="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
+                                        <a href="#"
+                                           class="text-base font-medium hover:underline text-white title-product">{{$value->title}}</a>
+                                        <a href="#" class="flex items-center gap-2">
+                                            <div class="w-5 h-5 rounded-full overflow-hidden flex shrink-0">
+                                                <img src="../assets/logos/vekotora.svg" alt="icon">
+                                            </div>
+                                            <p class="font-light text-sm">{{$value->user->name}}</p>
+                                        </a>
+
+                                        <div class="flex items-center gap-4">
+
+                                            <button type="button"
+                                                    class="inline-flex items-center text-sm font-medium hover:underline text-red-500">
+                                                <svg class="me-1.5 h-5 w-5" aria-hidden="true"
+                                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                     fill="none" viewBox="0 0 24 24">
+                                                    <path stroke="currentColor" stroke-linecap="round"
+                                                          stroke-linejoin="round" stroke-width="2"
+                                                          d="M6 18 17.94 6M18 18 6.06 6"/>
+                                                </svg>
+                                                Remove
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         @endforeach
 
-
                     </div>
-                    <div class="hidden p-4 rounded-lg md:p-8 bg-gray-800" id="proof-menu-{{$i}}" role="tabpanel" aria-labelledby="proof-tab-{{$i}}">
-                        <div class="flex flex-col sm:flex-row p-[30px] gap-[60px] rounded-[20px] w-full h-fit border border-gray-700">
+                    <div class="hidden p-4 rounded-lg md:p-8 bg-gray-800" id="proof-menu-{{$i}}" role="tabpanel"
+                         aria-labelledby="proof-tab-{{$i}}">
+                        <div
+                            class="flex flex-col sm:flex-row p-[30px] gap-[60px] rounded-[20px] w-full h-fit border border-gray-700">
 
+                            {{-- payment method --}}
 
-                            <div class="w-full flex flex-col gap-4">
+                            <div class="w-full flex flex-col gap-4 payment-method-of-product">
                                 <p class="font-semibold text-xl">Transfer to:</p>
                                 <div class="flex flex-col gap-3">
                                     <div class="flex gap-3">
                                         <div
                                             class="flex items-center gap-1 p-[12px_20px] pl-4 w-full justify-between rounded-lg bg-[#181818] hover:ring-[1px] hover:ring-[#A0A0A0] focus:ring-[1px] focus:ring-[#A0A0A0] transition-all duration-300">
                                             <div class="flex flex-col">
-                                                <label for="bank" class="text-xs text-creativehub-grey pl-1">Payment Method</label>
+                                                <label for="bank" class="text-xs text-creativehub-grey pl-1">Payment
+                                                    Method</label>
+                                                <input type="text" hidden="hidden" name="seller_id" value="{{$i}}">
                                                 <select name="bank[]" id="bank-{{$i}}"
                                                         class="mt-1 font-semibold bg-transparent appearance-none border-none outline-none px-1 invalid:text-[#595959] invalid:font-normal invalid:text-sm"
                                                         required>
-                                                    <option class="text-creativehub-black" value="Angga Bank">Dana</option>
-                                                    <option class="text-creativehub-black" value="Angga Bank">OVO</option>
-                                                    <option class="text-creativehub-black" value="Angga Bank">Gopay</option>
-                                                    <option class="text-creativehub-black" value="Angga Bank">BTN</option>
+
+                                                    @if(\App\Models\PaymentMethod::query()->where('user_id', $i)->get() !== null)
+                                                        @foreach(\App\Models\PaymentMethod::query()->where('user_id', $i)->get() as $payment_method)
+                                                            <option
+                                                                class="text-creativehub-black"
+                                                                value="{{$payment_method->payment_account_name}}"
+                                                                data-account-name="{{$payment_method->payment_account_recipient_name}}"
+                                                                data-account-number="{{$payment_method->payment_account_number}}"
+                                                            >{{$payment_method->payment_account_name}}</option>
+
+                                                        @endforeach
+                                                    @endif
+
+
+                                                    {{--                                                    <option class="text-creativehub-black" value="Angga Bank">Dana</option>--}}
+                                                    {{--                                                    <option class="text-creativehub-black" value="Angga Bank">OVO</option>--}}
+                                                    {{--                                                    <option class="text-creativehub-black" value="Angga Bank">Gopay</option>--}}
+                                                    {{--                                                    <option class="text-creativehub-black" value="Angga Bank">BTN</option>--}}
                                                 </select>
                                             </div>
                                             <div class="w-6 h-6 flex shrink-0">
@@ -218,11 +271,13 @@
                                         <div
                                             class="flex items-center gap-1 p-[12px_20px] pl-4 w-full justify-between rounded-lg bg-[#181818] hover:ring-[1px] hover:ring-[#A0A0A0] focus:ring-[1px] focus:ring-[#A0A0A0] transition-all duration-300">
                                             <div class="flex flex-col w-full">
-                                                <label for="name" class="text-xs text-creativehub-grey pl-1">Account Name</label>
+                                                <label for="name" class="text-xs text-creativehub-grey pl-1">Account
+                                                    Name</label>
                                                 <div class="flex mt-1 items-center max-w-[149px]">
-                                                    <input readonly type="text" name="name[]" value="Tokopedei" id="name-{{$i}}"
+                                                    <input readonly type="text" name="name[]" value="{{\App\Models\PaymentMethod::query()->where('user_id', $i)->first()->payment_account_recipient_name ?? ""}}"
+                                                           id="name-{{$i}}"
                                                            class="font-semibold bg-transparent appearance-none autofull-no-bg outline-none border-none px-1 placeholder:text-[#595959] placeholder:font-normal placeholder:text-sm w-full"
-                                                           placeholder="Type here" required>Value</input>
+                                                           placeholder="Type here" required></input>
                                                 </div>
                                             </div>
                                             <div class="w-6 h-6 flex shrink-0">
@@ -233,11 +288,13 @@
                                     <div
                                         class="flex items-center gap-1 p-[12px_20px] pl-4 justify-between rounded-lg bg-[#181818] hover:ring-[1px] hover:ring-[#A0A0A0] focus:ring-[1px] focus:ring-[#A0A0A0] transition-all duration-300">
                                         <div class="flex flex-col w-full">
-                                            <label for="number" class="text-xs text-creativehub-grey pl-1">Account Number</label>
+                                            <label for="number" class="text-xs text-creativehub-grey pl-1">Account
+                                                Number</label>
                                             <div class="flex mt-1 items-center max-w-[322px]">
-                                                <input type="tel" name="number[]" readonly id="number-{{$i}}"
+                                                <input type="text" name="number[]" readonly id="number-{{$i}}"
                                                        class="mt-1 font-semibold bg-transparent appearance-none autofull-no-bg border-none outline-none px-1 placeholder:text-[#595959] placeholder:font-normal placeholder:text-sm w-full"
-                                                       placeholder="Type here" value="0921020913" pattern="[0-9 -]" required>Value</input>
+                                                       placeholder="Type here" value="{{\App\Models\PaymentMethod::query()->where('user_id', $i)->first()->payment_account_number ?? ""}}" pattern="[0-9 -]"
+                                                       required></input>
                                             </div>
                                         </div>
                                         <div class="w-6 h-6 flex shrink-0">
@@ -249,7 +306,8 @@
                             <div class="w-full flex flex-col gap-4">
                                 <p class="font-semibold text-xl">Confirm Payment</p>
                                 <div class="flex flex-col gap-3">
-                                    <p class="text-xs text-[#2D68F8] p-[10px_22px] rounded-lg bg-[#2D68F805]">Please upload proof of
+                                    <p class="text-xs text-[#2D68F8] p-[10px_22px] rounded-lg bg-[#2D68F805]">Please
+                                        upload proof of
                                         payment we will confirm it as soon as possible</p>
 
                                     @error('proof')
@@ -264,13 +322,15 @@
                                             <p>Choose File</p>
                                             <img src="{{URL::to('/')}}/assets/icons/document-upload.svg" alt="icon">
                                         </button>
-                                        <input type="file" name="proof[]" id="proof-{{$i}}" class="hidden" onchange="previewFile()">
+                                        <input type="file" name="proof[]" id="proof-{{$i}}" class="hidden"
+                                               onchange="previewFile()">
                                         <div class="relative rounded-lg overflow-hidden bg-[#181818] w-full h-[48px]">
                                             <div class="relative file-preview z-10 w-full h-full hidden">
                                                 <img src="{{URL::to('/')}}/assets/icons/check.svg"
                                                      class="check-icon absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
                                                      alt="icon">
-                                                <img src="" class="thumbnail-proof w-full h-full object-cover" alt="thumbnail">
+                                                <img src="" class="thumbnail-proof w-full h-full object-cover"
+                                                     alt="thumbnail">
                                             </div>
                                             <img src="{{URL::to('/')}}/assets/icons/gallery.svg"
                                                  class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
@@ -287,7 +347,7 @@
                 </div>
             </div>
 
-         @endforeach
+        @endforeach
 
     </section>
 </form>
@@ -307,7 +367,7 @@
         }
     }
 
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         const checkboxSelectAll = document.querySelector('input[name="select-all"]');
         const checkboxTokoInput = document.querySelectorAll('input[name="default-checkbox-parent[]"]');
         const checkboxesDibawahTokoInput = document.querySelectorAll('input[name="default-checkbox[]"]');
@@ -432,19 +492,33 @@
         }
     }
 
-    document.getElementById('bank').addEventListener('change', function() {
-        var selectedOption = this.options[this.selectedIndex];
-        var accountName = selectedOption.getAttribute('data-account-name');
-        var accountNumber = selectedOption.getAttribute('data-account-number');
+    document.querySelectorAll('select').forEach((payment, index) => {
+        payment.addEventListener('change', function () {
+            var selectedOption = this.options[this.selectedIndex];
+            var accountName = selectedOption.getAttribute('data-account-name');
+            var accountNumber = selectedOption.getAttribute('data-account-number');
 
-        document.getElementById('name').value = accountName;
-        document.getElementById('number').value = accountNumber;
+            document.querySelectorAll('.payment-method-of-product input[name="number[]"]')[index].value = accountNumber;
+            document.querySelectorAll('.payment-method-of-product input[name="name[]"]')[index].value = accountName;
+        })
     });
+
+    document.querySelectorAll('select').forEach(e => {
+        e.dispatchEvent(new Event('change'));
+    });
+
+    // document.getElementById('bank').addEventListener('change', function () {
+    //     var selectedOption = this.options[this.selectedIndex];
+    //     var accountName = selectedOption.getAttribute('data-account-name');
+    //     var accountNumber = selectedOption.getAttribute('data-account-number');
+    //
+    //     document.getElementById('name').value = accountName;
+    //     document.getElementById('number').value = accountNumber;
+    // });
 
 
     // Trigger change event on page load to populate initial values
-    document.getElementById('bank').dispatchEvent(new Event('change'));
-
+    // document.getElementById('bank').dispatchEvent(new Event('change'));
 
 
 </script>

@@ -272,8 +272,8 @@
                                             >{{$payment_method->payment_account_name}}</option>
 
                                         @endforeach
-
                                     @endif
+
 {{--                                    <option class="text-creativehub-black" value="Angga Bank">Dana</option>--}}
 {{--                                    <option class="text-creativehub-black" value="Angga Bank">OVO</option>--}}
 {{--                                    <option class="text-creativehub-black" value="Angga Bank">Gopay</option>--}}

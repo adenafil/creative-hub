@@ -17,9 +17,7 @@
                     </div>
 
                     <div class="img-wrapper md:w-3/4 lg:w-3/4 object-cover">
-                        <img src="https://cdn3d.iconscout.com/3d-pack/preview/games-35-139216.jpg"
-                             alt=""
-                        class="w-full h-full object-cover rounded-xl">
+                        <img src="{{ \App\Helper\ImageHelper::isThisImage($product->image_product_url) ? $product->image_product_url : URL::signedRoute('file.view', ['encoded' => \App\Helper\ImageHelper::encodePath($product->image_product_url)]) }}" class="w-full h-full object-cover rounded-xl" alt="">
                     </div>
 
                     <h1 class="dark:text-white font-bold text-2xl sm:text-5xl pt-4">{{$product->title}}</h1>

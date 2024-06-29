@@ -100,7 +100,7 @@ for ($i = 570; $i <= 1069; $i++) {
         $i,
         $payment_method_id,
         'https://i.pinimg.com/236x/ba/2b/31/ba2b31f1b19d988fe463d3f320b8b14a.jpg',
-        'paid'
+        'paid',
     ]);
     $payment_method_id++;
 }

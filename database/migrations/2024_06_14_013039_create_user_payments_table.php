@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('payment_method_id')->nullable(false);
             $table->string('payment_proof_url')->nullable(false);
             $table->string('status')->nullable(false);
-            $table->string('reason')->default(null);
+            $table->string('reason')->nullable(true);
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('payment_method_id')->references('id')->on('payment_methods');

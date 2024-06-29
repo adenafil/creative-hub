@@ -1,8 +1,12 @@
+@php
+    $isHomePage = Route::currentRouteName() === 'home';
+@endphp
+
 <!-- Navbar -->
 <nav id="navbar" class="w-full fixed top-0 bg-[#00000048] backdrop-blur-lg z-50">
     <div class="flex flex-wrap items-center justify-between max-w-screen-xl mx-auto p-4">
-        <a href="#" class="flex items-center space-x-2 rtl:space-x-reverse">
-            <img src="../assets/logos/logo-singgle.svg" class="h-6" alt="CreativeHub Logo"/>
+        <a href="/" class="flex items-center space-x-2 rtl:space-x-reverse">
+            <img src="{{URL::to('/')}}/assets/logos/logo-singgle.svg" class="h-6" alt="CreativeHub Logo"/>
             <span
                 class="self-center sm:text-xl md:text-2xl font-semibold whitespace-nowrap text-white">CreativeHub</span>
         </a>
@@ -51,8 +55,8 @@
         <div id="mega-menu-icons" class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1">
             <ul class="flex flex-col mt-4 font-medium md:flex-row md:mt-0 md:space-x-8 rtl:space-x-reverse">
                 <li>
-                    <a href="#"
-                       class="block py-2 px-3 font-bold from-[#B05CB0] to-[#FCB16B] bg-clip-text text-transparent bg-gradient-to-r border-b border-creativehub-dark-grey  md:border-0 md:p-0"
+                    <a href="/"
+                       class="block py-2 px-3 font-bold {{ $isHomePage ? 'from-[#B05CB0] to-[#FCB16B] bg-clip-text text-transparent bg-gradient-to-r border-b border-creativehub-dark-grey' : 'block py-2 px-3 font-medium text-gray-50 border-b border-creativehub-dark-grey md:w-auto md:border-0 hover:from-[#B05CB0] hover:to-[#FCB16B] hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r md:p-0' }} md:border-0 md:p-0"
                        aria-current="page">Home</a>
                 </li>
                 <li>

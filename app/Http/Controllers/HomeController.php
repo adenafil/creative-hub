@@ -68,7 +68,7 @@ class HomeController extends Controller
     {
         // Ambil data dari request
         $data = $request->all();
-        toast('Berhasil Menmabah Product Ke Keranjang', 'success');
+        toast('Berhasil Menambah Product Ke Keranjang', 'success');
         $cartUser = auth()->user()->addProductIntoCart()->attach($id);
         return \redirect()->back();
     }

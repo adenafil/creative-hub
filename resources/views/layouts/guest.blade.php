@@ -17,8 +17,10 @@
     <body class="font-sans text-gray-900 antialiased">
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
             <div>
-                <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+                <a href="/" class="flex items-center gap-2">
+                    <img src="../assets/logos/logo-singgle-dark.svg" class="h-11 dark:hidden" alt="CreativeHub Logo (Light Mode)"/>
+                    <img src="../assets/logos/logo-singgle.svg" class="h-11 hidden dark:block" alt="CreativeHub Logo (Dark Mode)"/>
+                    <span class="self-center sm:text-xl md:text-4xl font-bold whitespace-nowrap text-[#111827] dark:text-white">CreativeHub</span>
                 </a>
             </div>
 

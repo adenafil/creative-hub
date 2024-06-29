@@ -67,6 +67,10 @@ class ProductController extends Controller
         // Buat elemen pagination seperti yang ada di metode elements()
         $window =  PaginationHelper::paginationWindow($currentPage, $totalPages);
 
+        $title = 'Delete User!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
+
         return view('admin.products.index', compact('products', 'totalProducts', 'perPage', 'currentPage', 'totalPages', 'window', 'firstItem', 'lastItem'));
     }
 

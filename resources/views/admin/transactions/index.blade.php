@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Ini Index My Transactions') }}
+            {{ __('History For Your Transactions 🧾') }}
         </h2>
     </x-slot>
 
@@ -73,15 +73,48 @@
                             </td>
                             <td class="">
                                 <div class="btn-group flex items-center gap-2 justify-center">
+                                    {{-- Detail Button --}}
                                     <a href="{{ route('purchases.detail', ['id' => $purchase->product_id]) }}" class="flex h-fit">
-                                        <button type="button" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5">Detail</button>
+                                        <button type="button" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-2.5 py-2.5" data-tooltip-target="tooltip-detail" data-tooltip-placement="top" >
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m5.231 13.481L15 17.25m-4.5-15H5.625c-.621 0-1.125.504-1.125 1.125v16.5c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Zm3.75 11.625a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
+                                            </svg>
+                                        </button>
                                     </a>
 
+                                    {{-- Ini Tooltip nya --}}
+                                    <div id="tooltip-detail" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                        Detail
+                                        <div class="tooltip-arrow" data-popper-arrow></div>
+                                    </div>
+                                    {{-- END Detail Button --}}
+
+                                    {{-- Review Button --}}
                                     <!-- Btn Review ini muncul ketika product sudah diapprove -->
                                     <!-- Modal toggle -->
-                                    <button id="btn-review" data-modal-target="crud-modal-{{ $purchase->product_id }}" data-modal-toggle="crud-modal-{{ $purchase->product_id }}" data-product-id="{{ $purchase->product_id }}" class="btn-review focus:outline-none text-white bg-yellow-600 hover:bg-yellow-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5" type="button">
-                                        Reviews
+                                    <button id="btn-review" data-modal-target="crud-modal-{{ $purchase->product_id }}" data-modal-toggle="crud-modal-{{ $purchase->product_id }}" data-product-id="{{ $purchase->product_id }}" class="btn-review focus:outline-none text-white bg-yellow-600 hover:bg-yellow-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-2.5 py-2.5" type="button" data-tooltip-target="tooltip-review" data-tooltip-placement="top" >
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z" />
+                                        </svg>
                                     </button>
+                                    <div id="tooltip-review" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                        Review
+                                        <div class="tooltip-arrow" data-popper-arrow></div>
+                                    </div>
+                                    {{-- Review Button --}}
+
+                                    {{-- Download Invoice Button --}}
+                                    <a href="#" class="flex h-fit">
+                                        <button type="button" class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-2.5 py-2.5"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" data-tooltip-target="tooltip-download-invoice" data-tooltip-placement="top" >
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                                            </svg>
+                                        </button>
+                                    </a>
+                                    <div id="tooltip-download-invoice" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                        Download Invoice
+                                        <div class="tooltip-arrow" data-popper-arrow></div>
+                                    </div>
+                                    {{-- Download Invoice Button --}}
 
                                     <!-- Main modal -->
                                     <div id="crud-modal-{{ $purchase->product_id }}" tabindex="-1" aria-hidden="true" class="crud-modal  overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full hidden">

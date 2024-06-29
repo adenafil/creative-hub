@@ -63,52 +63,56 @@
 
 <body class="bg-creativehub-black font-poppins text-white">
 
-<div id="toast-success"
-     class="flex items-center w-full max-w-xs p-4 mt-4 mx-auto rounded-lg shadow text-gray-400 bg-gray-800"
-     role="alert">
-    <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-lg bg-green-800 text-green-200">
-        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-             viewBox="0 0 20 20">
-            <path
-                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
-        </svg>
-        <span class="sr-only">Check icon</span>
-    </div>
-    <div class="ms-3 text-sm font-normal">Lorem SUCCESS</div>
-</div>
-<div id="toast-error"
-     class="flex items-center w-full max-w-xs p-4 mt-4 mx-auto rounded-lg shadow text-gray-400 bg-gray-800"
-     role="alert">
-    <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-lg bg-red-800 text-red-200">
-        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-             viewBox="0 0 20 20">
-            <path
-                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 11.793a1 1 0 1 1-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 0 1-1.414-1.414L8.586 10 6.293 7.707a1 1 0 0 1 1.414-1.414L10 8.586l2.293-2.293a1 1 0 0 1 1.414 1.414L11.414 10l2.293 2.293Z"/>
-        </svg>
-        <span class="sr-only">Error icon</span>
-    </div>
-    <div class="ms-3 text-sm font-normal">Lorem ERROR</div>
-</div>
-<div id="toast-info"
-     class="flex items-center w-full max-w-xs p-4 mt-4 mx-auto rounded-lg shadow text-gray-400 bg-gray-800"
-     role="alert">
-    <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-lg bg-orange-700 text-orange-200">
-        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-             viewBox="0 0 20 20">
-            <path
-                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM10 15a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm1-4a1 1 0 0 1-2 0V6a1 1 0 0 1 2 0v5Z"/>
-        </svg>
-        <span class="sr-only">Warning icon</span>
-    </div>
-    <div class="ms-3 text-sm font-normal">Lorem Warning/Info</div>
-</div>
+{{--Comment ini TOAST yang pake flowbite bang--}}
+
+{{--<div id="toast-success"--}}
+{{--     class="flex items-center w-full max-w-xs p-4 mt-4 mx-auto rounded-lg shadow text-gray-400 bg-gray-800"--}}
+{{--     role="alert">--}}
+{{--    <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-lg bg-green-800 text-green-200">--}}
+{{--        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"--}}
+{{--             viewBox="0 0 20 20">--}}
+{{--            <path--}}
+{{--                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>--}}
+{{--        </svg>--}}
+{{--        <span class="sr-only">Check icon</span>--}}
+{{--    </div>--}}
+{{--    <div class="ms-3 text-sm font-normal">Lorem SUCCESS</div>--}}
+{{--</div>--}}
+{{--<div id="toast-error"--}}
+{{--     class="flex items-center w-full max-w-xs p-4 mt-4 mx-auto rounded-lg shadow text-gray-400 bg-gray-800"--}}
+{{--     role="alert">--}}
+{{--    <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-lg bg-red-800 text-red-200">--}}
+{{--        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"--}}
+{{--             viewBox="0 0 20 20">--}}
+{{--            <path--}}
+{{--                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 11.793a1 1 0 1 1-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 0 1-1.414-1.414L8.586 10 6.293 7.707a1 1 0 0 1 1.414-1.414L10 8.586l2.293-2.293a1 1 0 0 1 1.414 1.414L11.414 10l2.293 2.293Z"/>--}}
+{{--        </svg>--}}
+{{--        <span class="sr-only">Error icon</span>--}}
+{{--    </div>--}}
+{{--    <div class="ms-3 text-sm font-normal">Lorem ERROR</div>--}}
+{{--</div>--}}
+{{--<div id="toast-info"--}}
+{{--     class="flex items-center w-full max-w-xs p-4 mt-4 mx-auto rounded-lg shadow text-gray-400 bg-gray-800"--}}
+{{--     role="alert">--}}
+{{--    <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-lg bg-orange-700 text-orange-200">--}}
+{{--        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"--}}
+{{--             viewBox="0 0 20 20">--}}
+{{--            <path--}}
+{{--                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM10 15a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm1-4a1 1 0 0 1-2 0V6a1 1 0 0 1 2 0v5Z"/>--}}
+{{--        </svg>--}}
+{{--        <span class="sr-only">Warning icon</span>--}}
+{{--    </div>--}}
+{{--    <div class="ms-3 text-sm font-normal">Lorem Warning/Info</div>--}}
+{{--</div>--}}
+
+{{-- INI END - Comment ini TOAST yang pake flowbite bang--}}
 
 <form action="{{route('do.cart.index')}}" method="post" enctype="multipart/form-data">
 
     {{--<form id="checkout-form">--}}
     @csrf
 
-    <nav class="bg-gray-800 fixed w-full z-20 bottom-0 start-0 border-b border-gray-600">
+    <nav class="bg-[#181818] fixed w-full z-20 bottom-0 start-0 border-b border-gray-600 drop-shadow-2xl border-t border-[#ffffff20] drop-shadow-[0_-19px_13px_#181818]">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <div class="flex items-center">
                 <input id="default-checkbox-parent" name="select-all" type="checkbox" value="true"
@@ -118,7 +122,8 @@
             <div class="flex items-center gap-4 sm:gap-8">
                 <div>
                     <h2 class="text-xs sm:text-sm">Total (2 Product): <span
-                            class="text-sm sm:text-xl font-bold text text-[#C3729E]"> Rp 750,000</span></h2>
+                            class="ms-1 text-sm sm:text-xl font-bold from-[#B05CB0] to-[#FCB16B] bg-clip-text text-transparent bg-gradient-to-r">Rp 750,000</span>
+                    </h2>
                 </div>
                 <button type="submit"
                         class="bg-clip text-transparent bg-gradient-to-tr from-[#B05CB0] to-[#FCB16B] transition-all duration-1000 text-white px-6 py-3 rounded-[12px]  text-xs md:text-md lg:text-md font-semibold hover:from-[#FCB16B] hover:to-[#B05CB0] shadow-lg shadow-pink-500/50">
@@ -128,7 +133,14 @@
         </div>
     </nav>
 
-    <section id="cart-group" class="container max-w-[1200px] px-4 py-16 mx-auto mb-[102px] space-y-6">
+    <section id="cart-group" class="container max-w-[1200px] px-4 py-16 mx-auto mb-[102px] space-y-6 flex flex-col items-center">
+
+        <a href="/" class="inline-flex max-w-fit justify-between items-center py-1 px-1 pe-4 text-sm rounded-full bg-[#181818] hover:bg-[#2A2A2A] border border-[#ffffff10] shadow-lg ">
+            <span class="text-xs bg-clip text-transparent bg-gradient-to-tr from-[#B05CB0] to-[#FCB16B] transition-all duration-1000 text-white hover:from-[#FCB16B] hover:to-[#B05CB0] rounded-full text-white px-4 py-1.5 me-3 font-bold">Cart</span> <span class="text-sm">Browse more products maniez</span>
+            <svg class="w-2.5 h-2.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+            </svg>
+        </a>
 
         {{-- Store Group Items (You can loop here) --}}
         @foreach($carts as $i => $product)
@@ -136,9 +148,9 @@
             {{--            Custom Counter: {{ $i }}--}}
 
 
-            <div class="w-full border rounded-lg shadow bg-gray-800 border-gray-700">
+            <div class="w-full border rounded-lg shadow bg-[#181818] border-[#ffffff20]">
                 <div
-                    class="top-tabmenu flex items-center gap-8 ps-4 border-b rounded-t-lg border-gray-700 text-gray-400 bg-gray-800">
+                    class="top-tabmenu flex items-center gap-8 ps-4 border-b rounded-t-lg border-[#ffffff10] text-gray-400 bg-[#181818]">
                     <div class="store-profile flex items-center gap-4">
                         <input id="default-checkbox-{{$i}}" name="default-checkbox-parent[]" type="checkbox"
                                value="{{$product[0]->seller_id}}"
@@ -152,18 +164,18 @@
                         </div>
                     </div>
 
-                    <ul class="flex flex-wrap text-sm font-medium text-center text-gray-400 bg-gray-800"
+                    <ul class="flex flex-wrap text-sm font-medium text-center text-gray-400 bg-[#181818]"
                         id="defaultTab-{{$i}}" data-tabs-toggle="#defaultTabContent-{{$i}}" role="tablist">
                         <li class="me-2">
                             <button id="products-tab-{{$i}}" data-tabs-target="#products-{{$i}}" type="button"
                                     role="tab" aria-controls="products-{{$i}}" aria-selected="true"
-                                    class="inline-block p-4 bg-gray-800 hover:bg-gray-700 text-blue-500">Products
+                                    class="inline-block p-4 bg-[#181818] hover:bg-gray-700 from-[#B05CB0] to-[#FCB16B] bg-clip-text text-transparent bg-gradient-to-r">Products
                             </button>
                         </li>
                         <li class="me-2">
                             <button id="proof-tab-{{$i}}" data-tabs-target="#proof-menu-{{$i}}" type="button" role="tab"
                                     aria-controls="proof-menu-{{$i}}" aria-selected="false"
-                                    class="inline-block p-4 hover:bg-gray-700 hover:text-gray-300">Proof
+                                    class="inline-block p-4 hover:bg-gray-700 hover:text-gray-300 from-[#B05CB0] to-[#FCB16B] bg-clip-text text-transparent bg-gradient-to-r">Proof
                             </button>
                         </li>
                     </ul>
@@ -171,13 +183,13 @@
 
                 <div id="defaultTabContent-{{$i}}">
 
-                    <div class="hidden rounded-lg bg-gray-800 products-card-container" id="products-{{$i}}"
+                    <div class="hidden rounded-lg bg-[#181818] products-card-container" id="products-{{$i}}"
                          role="tabpanel" aria-labelledby="products-tab-{{$i}}">
                     {{--start index checking out--}}
 {{--                        <input name="start-from" hidden="hidden" value="{{$loop->index}}"></input>--}}
 
                         @foreach($product as $value)
-                            <div class="border-t p-4 shadow-sm border-gray-700 md:p-6 product-{{$loop->index}}">
+                            <div class="border-t p-4 shadow-sm border-[#ffffff10] md:p-6 product-{{$loop->index}}">
                                 <input id="default-checkbox-{{$i}}" name="default-checkbox[]" type="checkbox"
                                        value="{{$value->id}}"
                                        class="w-4 h-4 rounded focus:ring-blue-600 ring-offset-gray-800 focus:ring-2 bg-gray-700 border-gray-600">
@@ -223,10 +235,10 @@
                         @endforeach
 
                     </div>
-                    <div class="hidden p-4 rounded-lg md:p-8 bg-gray-800" id="proof-menu-{{$i}}" role="tabpanel"
+                    <div class="hidden p-4 rounded-lg md:p-8 bg-[#181818]" id="proof-menu-{{$i}}" role="tabpanel"
                          aria-labelledby="proof-tab-{{$i}}">
                         <div
-                            class="flex flex-col sm:flex-row p-[30px] gap-[60px] rounded-[20px] w-full h-fit border border-gray-700">
+                            class="flex flex-col sm:flex-row p-[30px] gap-[60px] rounded-[20px] w-full h-fit border border-[#ffffff10]">
 
                             {{-- payment method --}}
 
@@ -235,7 +247,7 @@
                                 <div class="flex flex-col gap-3">
                                     <div class="flex gap-3">
                                         <div
-                                            class="flex items-center gap-1 p-[12px_20px] pl-4 w-full justify-between rounded-lg bg-[#181818] hover:ring-[1px] hover:ring-[#A0A0A0] focus:ring-[1px] focus:ring-[#A0A0A0] transition-all duration-300">
+                                            class="flex items-center gap-1 p-[12px_20px] pl-4 w-full justify-between rounded-lg bg-[#121212] hover:ring-[1px] hover:ring-[#A0A0A0] focus:ring-[1px] focus:ring-[#A0A0A0] transition-all duration-300">
                                             <div class="flex flex-col">
                                                 <label for="bank" class="text-xs text-creativehub-grey pl-1">Payment
                                                     Method</label>
@@ -270,7 +282,7 @@
                                     </div>
                                     <div class="flex">
                                         <div
-                                            class="flex items-center gap-1 p-[12px_20px] pl-4 w-full justify-between rounded-lg bg-[#181818] hover:ring-[1px] hover:ring-[#A0A0A0] focus:ring-[1px] focus:ring-[#A0A0A0] transition-all duration-300">
+                                            class="flex items-center gap-1 p-[12px_20px] pl-4 w-full justify-between rounded-lg bg-[#121212] hover:ring-[1px] hover:ring-[#A0A0A0] focus:ring-[1px] focus:ring-[#A0A0A0] transition-all duration-300">
                                             <div class="flex flex-col w-full">
                                                 <label for="name" class="text-xs text-creativehub-grey pl-1">Account
                                                     Name</label>
@@ -287,7 +299,7 @@
                                         </div>
                                     </div>
                                     <div
-                                        class="flex items-center gap-1 p-[12px_20px] pl-4 justify-between rounded-lg bg-[#181818] hover:ring-[1px] hover:ring-[#A0A0A0] focus:ring-[1px] focus:ring-[#A0A0A0] transition-all duration-300">
+                                        class="flex items-center gap-1 p-[12px_20px] pl-4 justify-between rounded-lg bg-[#121212] hover:ring-[1px] hover:ring-[#A0A0A0] focus:ring-[1px] focus:ring-[#A0A0A0] transition-all duration-300">
                                         <div class="flex flex-col w-full">
                                             <label for="number" class="text-xs text-creativehub-grey pl-1">Account
                                                 Number</label>
@@ -325,7 +337,7 @@
                                         </button>
                                         <input type="file" name="proof[]" id="proof-{{$i}}" class="hidden"
                                                onchange="previewFile()">
-                                        <div class="relative rounded-lg overflow-hidden bg-[#181818] w-full h-[48px]">
+                                        <div class="relative rounded-lg overflow-hidden bg-[#121212] w-full h-[48px]">
                                             <div class="relative file-preview z-10 w-full h-full hidden">
                                                 <img src="{{URL::to('/')}}/assets/icons/check.svg"
                                                      class="check-icon absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"

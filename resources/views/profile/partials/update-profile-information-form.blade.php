@@ -96,7 +96,7 @@
 
         <div>
             <x-input-label for="bio" :value="__('Bio')"/>
-            <textarea id="bio" name="bio" rows="4" cols="50" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">{{$user->user_detail->bio ?? ''}}</textarea>
+            <textarea id="bio" name="bio" rows="4" cols="50" class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600">{{$user->user_detail->bio ?? ''}}</textarea>
             <x-input-error class="mt-2" :messages="$errors->get('bio')"/>
         </div>
 

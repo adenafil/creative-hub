@@ -6,10 +6,13 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200"/>
+                    <a href="/" class="flex items-center gap-2">
+                        <img src="{{URL::to('/')}}/assets/logos/logo-singgle-dark.svg" class="h-6 dark:hidden" alt="CreativeHub Logo (Light Mode)"/>
+                        <img src="{{URL::to('/')}}/assets/logos/logo-singgle.svg" class="h-6 hidden dark:block" alt="CreativeHub Logo (Dark Mode)"/>
+                        <span class="self-center sm:text-xl md:text-2xl font-semibold whitespace-nowrap text-[#111827] dark:text-white">CreativeHub</span>
                     </a>
                 </div>
+
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">

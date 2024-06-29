@@ -273,3 +273,5 @@
         </script>
     @endpush
 </x-app-layout>
+
+@include('sweetalert::alert')

@@ -205,7 +205,7 @@
             ->where('purchases.product_id', '=', $product->id)
             ->join('purchases', 'purchases.transaction_id', '=', 'transactions.id')
             ->select('purchases.*', 'transactions.*')
-            ->get()->count() == 0)
+            ->get()->count() == 0 &&  $product->seller_id != auth()->user()->id)
                     <a href="{{route('checkout', ["id" => $product->id])}}"
                        class="bg-[#2D68F8] text-center font-semibold p-[12px_20px] rounded-full hover:bg-[#083297] active:bg-[#062162] transition-all duration-300">Checkout</a>
                 @if(auth()->user()->addProductIntoCart->where('id', $product->id)->first() == null)

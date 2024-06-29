@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(HomeController::class)->group(function () {
    Route::get('/', 'index')->name('home');
-   Route::get('/templates', 'templates')->name('templates');
    Route::get('/products/{id}', 'products')->name('home.product.detail');
    Route::get('/products/{id}/checkout', 'checkout')->name('checkout');
    Route::get('//products/{id}/checkout/success', 'successCheckout')->name('success.checkout');

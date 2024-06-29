@@ -44,6 +44,11 @@ class HomeController extends Controller
     public function checkout($id)
     {
         $product = Product::query()->where('id', $id)->first();
+
+        if ($product->seller_id == auth()->user()->id) {
+            return redirect()->route('home.product.detail', ['id' => $id]);
+        }
+
         return \response()->view('home.checkout', compact('product'));
     }
 

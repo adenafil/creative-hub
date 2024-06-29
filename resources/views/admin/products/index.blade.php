@@ -34,11 +34,20 @@
             <!--Card-->
             <div id='recipients' class="px-4 py-8 mt-6 lg:mt-0 rounded shadow bg-white dark:text-white dark:bg-[#1F2937] flex flex-col items-start sm:items-end">
 
-                <a href="{{route('create.product')}}">
-                    <x-primary-button @class('mr-0 sm:mr-10')>
-                        {{ __('Add Product') }}
-                    </x-primary-button>
-                </a>
+                @if(\App\Models\PaymentMethod::query()->where('user_id', auth()->user()->id)->get()->count() != null)
+                    <a href="{{route('create.product')}}">
+                        <x-primary-button @class('mr-0 sm:mr-10')>
+                            {{ __('Add Product') }}
+                        </x-primary-button>
+                    </a>
+                @else
+                    <a href="{{url('/profile#payment_method')}}">
+                        <x-primary-button @class('mr-0 sm:mr-10')>
+                            {{ __('Add Product') }}
+                        </x-primary-button>
+                    </a>
+
+                @endif
 
                 <table id="productTable" class="stripe hover" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
                     <thead>

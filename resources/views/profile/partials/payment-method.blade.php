@@ -1,4 +1,4 @@
-<section>
+<section id="payment_method">
     <header>
         <div class="flex items-center">
             <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100 mr-2">
@@ -19,6 +19,11 @@
         <p class="mt-1 text-sm text-gray-600 dark:text-gray-400 max-w-xl">
             {{ __("Manage your payment method here, be sure to check the details of your payment information to avoid any errors during the transaction.") }}
         </p>
+
+        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400 max-w-xl payment-method-null" hidden="hidden">
+            {{ __("Before You Create Product, Please Add Your Payment Mehtod First!!") }}
+        </p>
+
     </header>
 
     <form method="post" action="{{route('profile.payment.method.update')}}" class="mt-6 space-y-6">
@@ -26,7 +31,9 @@
         @method('patch')
         {{-- Available Payment Field --}}
         <div>
-            <x-input-label for="payment-method" :value="__('Available Payment Method')" />
+            @if(auth()->user()->payment_methods != null)
+                <x-input-label for="payment-method" :value="__('Available Payment Method')" />
+            @endif
             <div id="payment-wrapper" class="payment-wrapper mt-4 flex gap-4 overflow-x-scroll no-scrollbar">
 
                 <!-- Card Component 1 -->

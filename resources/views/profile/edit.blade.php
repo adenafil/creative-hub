@@ -32,4 +32,11 @@
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+        const payment_method = window.location.hash.substr(1)
+        if (payment_method !== '') {
+            document.querySelector('.payment-method-null').removeAttribute('hidden');
+        }
+    </script>
 </x-app-layout>

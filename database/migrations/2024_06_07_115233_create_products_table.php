@@ -18,8 +18,9 @@ return new class extends Migration
             $table->unsignedBigInteger("seller_id")->nullable(false);
             $table->text("description");
             $table->string('asset_product_url');
-            $table->integer("price");
+            $table->bigInteger("price");
             $table->unsignedBigInteger("category_id")->nullable(false);
+            $table->softDeletes();
             $table->timestamps();
             $table->foreign("seller_id")->on("users")->references("id");
             $table->foreign("category_id")->on("categories")->references("id");

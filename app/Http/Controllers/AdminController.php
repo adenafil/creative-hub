@@ -32,7 +32,8 @@ class AdminController extends Controller
             ->where('up.status', 'PAID')
             ->select(DB::raw('count(distinct up.user_id) as total_customers'))
             ->first()->total_customers;
-        $top_products = Product::select('products.id', 'products.image_product_url', 'products.title', 'products.price', DB::raw('COUNT(*) as total_transactions'))
+        $top_products = Product::withTrashed()
+            ->select('products.id', 'products.image_product_url', 'products.title', 'products.price', DB::raw('COUNT(*) as total_transactions'))
             ->join('purchases', 'products.id', '=', 'purchases.product_id')
             ->where('products.seller_id', auth()->user()->id)
             ->groupBy('products.id', 'products.title', 'products.image_product_url', 'products.price')

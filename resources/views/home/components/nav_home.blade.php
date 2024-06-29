@@ -29,9 +29,9 @@
                     <img src="
                                 @if(isset(auth()->user()->user_detail->image_url))
                                     {{
-                                        ImageHelper::isThisImage(auth()->user()->user_detail->image_url)
+                                        \App\Helper\ImageHelper::isThisImage(auth()->user()->user_detail->image_url)
                                         ? auth()->user()->user_detail->image_url
-                                        : URL::signedRoute('profile.file', ['encoded' => ImageHelper::encodePath(auth()->user()->user_detail->image_url)])
+                                        : URL::signedRoute('profile.file', ['encoded' => \App\Helper\ImageHelper::encodePath(auth()->user()->user_detail->image_url)])
                                     }}
                                 @else
                                     {{\Illuminate\Support\Facades\URL::to('/assets/photos/img.png')}}

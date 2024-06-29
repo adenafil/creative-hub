@@ -386,6 +386,8 @@
         const checkboxesDibawahTokoInput = document.querySelectorAll('input[name="default-checkbox[]"]');
         const totalCheckboxesDibawahTokoInput = checkboxesDibawahTokoInput.length;
         const button = document.querySelector('button');
+        let counterTokoPerProduct = 0;
+        let counterTokoInput = 0;
 
         checkboxSelectAll.addEventListener('change', (e) => {
             checkboxTokoInput.forEach(checkbox => {
@@ -407,6 +409,9 @@
                     checkbox.disabled = false;
                 }
                 checkbox.checked = e.target.checked;
+                counterTokoInput = 0;
+                counterTokoPerProduct = 0;
+
             });
 
             if (e.target.checked) {
@@ -417,41 +422,85 @@
         });
 
         checkboxTokoInput.forEach(checkbox => {
+
             checkbox.addEventListener('change', () => {
                 const id = extractNumberFromId(checkbox.getAttribute('id'));
                 const productsContainer = document.querySelector(`#defaultTabContent-${id}`).querySelector(`#products-${id}`).querySelectorAll('div.border-t');
 
+                let isAllChecked = true;
+                let isUlang = true;
+                productsContainer.forEach(product => {
+                    if (!product.checked && isUlang) {
+                        isAllChecked = false;
+                        isUlang = false;
+                    }
+                });
                 if (!checkboxSelectAll.checked) {
                     if (checkbox.checked) {
-                        checkbox.classList.add("check-out-per-product");
+                        checkbox.classList.add("check-out-satu-toko");
                         productsContainer.forEach(checkboxBawah => {
                             const input = checkboxBawah.querySelector('input');
                             input.checked = true;
+                            input.classList.add("check-out-per-product");
                             input.disabled = true;
                         });
+                        counterTokoInput++;
+                        counterTokoPerProduct += productsContainer.length;
+                        console.log("naik counterTokoInput" + counterTokoInput);
                     } else {
-                        checkbox.classList.remove('check-out-per-product');
+                        checkbox.classList.remove('check-out-satu-toko');
                         productsContainer.forEach(checkboxBawah => {
                             const input = checkboxBawah.querySelector('input');
                             input.checked = false;
+                            input.classList.remove("check-out-per-product");
                             input.disabled = false;
                         });
+                        console.log(productsContainer[0]);
+                        if (counterTokoInput <= productsContainer.length ) {
+                            counterTokoInput--;
+                            counterTokoPerProduct--;
+                            console.log("turun counterTokoInput" + counterTokoInput);
+                        }
                     }
                 }
+
+
+                if (counterTokoInput === checkboxTokoInput.length) {
+                    checkboxSelectAll.checked = true;
+                    checkboxSelectAll.classList.add("check-out-semua");
+                    checkboxTokoInput.forEach(activeBox => {
+                        activeBox.disabled = true;
+                    })
+                    counterTokoInput = 0;
+                    counterTokoPerProduct = 0;
+                    console.log("dua dua jadi kosong");
+                }
+
+                if (isAllChecked) {
+                    counterTokoPerProduct = productsContainer.length;
+                    counterTokoInput =  counterTokoInput - productsContainer.length;
+                    counterTokoPerProduct = productsContainer.length - counterTokoPerProduct;
+
+                }
             });
+
         });
 
-        let tempTotal = 0;
+
         checkboxesDibawahTokoInput.forEach(checkbox => {
             checkbox.addEventListener('change', (e) => {
                 const id = extractNumberFromId(checkbox.getAttribute('id'));
                 if (!checkboxSelectAll.checked) {
+                    if (counterTokoPerProduct === checkboxesDibawahTokoInput.length) {
+                        counterTokoPerProduct = 0;
+                        console.log("jadi kosong => " + counterTokoPerProduc);
+                    }
                     if (e.target.checked) {
                         checkbox.classList.add("check-out-per-product");
-                        tempTotal++;
+                        counterTokoPerProduct++;
                     } else {
                         checkbox.classList.remove('check-out-per-product');
-                        tempTotal--;
+                        counterTokoPerProduct--;
                     }
 
                     const total = document.querySelectorAll(`#default-checkbox-${id}`).length - 1;
@@ -459,16 +508,30 @@
 
                     if (checkboxes.length === total) {
                         const parentCheckbox = document.querySelector(`#default-checkbox-${id}`);
+                        console.log("parent checkbox " + parentCheckbox);
                         parentCheckbox.checked = true;
+                        parentCheckbox.classList.add("check-out-satu-toko");
+                        parentCheckbox.disaabled = true;
                         checkboxes.forEach(activeBox => {
                             activeBox.disabled = true;
                         });
+                        counterTokoInput++;
                     }
 
-                    if (tempTotal === totalCheckboxesDibawahTokoInput) {
+                    // logic checkout semua
+                    console.log("counterTokoPerProduct " + counterTokoPerProduct);
+                    if (counterTokoPerProduct === totalCheckboxesDibawahTokoInput) {
                         checkboxSelectAll.checked = true;
+                        const parentCheckBox = document.querySelectorAll('.check-out-satu-toko');
+
+                        checkboxSelectAll.classList.add("check-out-semua");
+                        parentCheckBox.forEach(activeBox => {
+                            activeBox.disabled = true;
+                        })
                     }
                 }
+
+
             });
         });
 
@@ -480,6 +543,7 @@
                 // input.disabled = true;
             });
         })
+
     });
 
 

@@ -33,7 +33,7 @@ class ProfileController extends Controller
         \Illuminate\Support\Facades\Log::debug('Tesdfsdst log message');
         Log::debug('Request data: ', $request->all());
 
-        $data = $request->only(['username', 'user_avatar', 'email', 'bio', 'title']);
+        $data = $request->only(['username', 'name', 'user_avatar', 'email', 'bio', 'title']);
         $user = Auth::user();
 
         Log::info('Authenticated user: ', ['id' => $user->id, 'email' => $user->email]);
@@ -55,28 +55,43 @@ class ProfileController extends Controller
         }
 
         try {
-            Log::debug('Updating user with data: ', $data);
-            $user->update([
+            $rowUp = \auth()->user()
+            ->update([
+                'name' => $data['name'],
                 'username' => $data['username'],
                 'email' => $data['email']
             ]);
+            Log::debug("Updating user with data: $rowUp");
         } catch (Exception $e) {
             Log::debug('Failed to update user: ' . $e->getMessage());
             return back()->withErrors(['user' => 'Failed to update user: ' . $e->getMessage()]);
         }
 
-        $userDetails = $user->user_detail;
-        if ($userDetails) {
+        $userDetail = \auth()->user()->user_detail;
+        if ($userDetail) {
             if (isset($data['user_avatar'])) {
-                $userDetails->image_url = Auth::user()->id . "/" . $avatarName;
+                $userDetail->image_url = Auth::user()->id . "/" . $avatarName;
                 Log::debug('Updating user details with image_url: ' . $avatarName);
             }
 
-            $userDetails->title = $data['title'];
-            $userDetails->bio = $data['bio'];
-            $userDetails->save();
-            $userDetails->save();
+            $userDetail->title = $data['title'];
+            $userDetail->bio = $data['bio'];
+            $userDetail->save();
 
+            Log::debug('update user details: ' . $userDetail);
+        } else {
+            $userDetail = new UserDetail();
+
+            if (isset($data['user_avatar'])) {
+                $userDetail->image_url = Auth::user()->id . "/" . $avatarName;
+                Log::debug('Updating user details with image_url: ' . $avatarName);
+            }
+
+            $userDetail->user_id = \auth()->user()->id;
+            $userDetail->title = $data['title'];
+            $userDetail->bio = $data['bio'];
+            $userDetail->save();
+            Log::debug('update user details: ' . $userDetail);
         }
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');

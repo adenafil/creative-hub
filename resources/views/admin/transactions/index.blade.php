@@ -61,7 +61,7 @@
                             </td>
                             <td class="text-center">{{ $purchase->title }}</td>
                             <td class="text-center">{{ $purchase->name }}</td>
-                            <td class="text-center">{{ $purchase->price }}</td>
+                            <td class="text-center">Rp{{number_format($purchase->price, 0, ',', '.') }}}}</td>
                             <td class="text-center">
                                 @if ($purchase->status == 'pending')
                                     <span class="bg-yellow-100 text-yellow-800 text-sm font-medium me-2 px-4 py-1.5 rounded-full dark:bg-yellow-900 dark:text-yellow-300">Pending</span>

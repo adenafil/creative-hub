@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('payment_proof_url')->nullable(false);
             $table->string('status')->nullable(false);
             $table->string('reason')->nullable(true);
+            $table->timestamp('upload_at')->nullable(true);
+            $table->integer('count_upload')->nullable(true)->default(0);
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('payment_method_id')->references('id')->on('payment_methods');

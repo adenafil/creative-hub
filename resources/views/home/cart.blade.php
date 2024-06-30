@@ -157,12 +157,15 @@
                         <div class="flex items-center gap-[6px]">
                             <div class="w-6 h-6 flex shrink-0 items-center justify-center rounded-full overflow-hidden">
                                 <img src="
+                                @if(isset($product[0]->user->user_detail->image_url))
                                 {{
                             ImageHelper::isThisImage($product[0]->user->user_detail->image_url)
                         ? $product[0]->user->user_detail->image_url
                         : URL::signedRoute('profile.file', ['encoded' => ImageHelper::encodePath($product[0]->user->user_detail->image_url)])
-
 }}
+                              @else
+                                                                  {{\Illuminate\Support\Facades\URL::to('/assets/photos/img.png')}}
+                              @endif
                                 "  class="w-full h-full object-cover" alt="logo">
                             </div>
                             <a href="#" class="font-semibold text-xs text-creativehub-grey">{{\App\Models\User::query()->where('id', $product[0]->seller_id)->first()->username}}</a>

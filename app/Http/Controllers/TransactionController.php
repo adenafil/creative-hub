@@ -2,16 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\PaginationHelper;
 use App\Http\Requests\ReviewRequest;
 use App\Models\Product;
 use App\Models\Purchase;
 use App\Models\Review;
 use App\Models\Transaction;
+use App\Models\UserPayment;
 use http\Client\Curl\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Ramsey\Uuid\Nonstandard\Uuid;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class TransactionController extends Controller
@@ -62,7 +66,7 @@ class TransactionController extends Controller
         $lastItem = min($offset + $perPage, $totalPurchases);
 
         // Buat elemen pagination seperti yang ada di metode elements()
-        $window = $this->paginationWindow($currentPage, $totalPages);
+        $window = PaginationHelper::paginationWindow($currentPage, $totalPages);
 
 
         $comments = [];
@@ -76,38 +80,6 @@ class TransactionController extends Controller
         return \response()->view('admin.transactions.index', compact('purchases', 'totalPurchases', 'perPage', 'currentPage', 'totalPages', 'window', 'firstItem', 'lastItem', 'comments'));
     }
 
-    protected function paginationWindow($currentPage, $totalPages)
-    {
-        $onEachSide = 3; // Number of links on each side of the current page
-        $window = [];
-
-        // Previous and next ranges
-        $start = max($currentPage - $onEachSide, 1);
-        $end = min($currentPage + $onEachSide, $totalPages);
-
-        // Window for pagination
-        for ($i = $start; $i <= $end; $i++) {
-            $window[] = $i;
-        }
-
-        // Add ellipses and edges
-        $pagination = [];
-        if ($start > 1) {
-            $pagination[] = 1;
-            if ($start > 2) {
-                $pagination[] = '...';
-            }
-        }
-        $pagination = array_merge($pagination, $window);
-        if ($end < $totalPages) {
-            if ($end < $totalPages - 1) {
-                $pagination[] = '...';
-            }
-            $pagination[] = $totalPages;
-        }
-
-        return $pagination;
-    }
 
 
     public function detail($id): Response
@@ -120,7 +92,22 @@ class TransactionController extends Controller
             ->join('categories as c', 'c.id', '=', 'p2.category_id')
             ->where('p.product_id', $id)
             ->where('transactions.user_id', \auth()->user()->id)
-            ->select('c.name', 'p2.title', 'p2.image_product_url', 'p2.description', 'up.payment_proof_url', 'p2.price', 'up.status', 'p2.asset_product_url', 'p2.id')
+            ->select(
+                'c.name',
+                'p2.title',
+                'p2.image_product_url',
+                'p2.description',
+                'up.payment_proof_url',
+                'p2.price',
+                'up.status',
+                'p2.asset_product_url',
+                'p2.id',
+                'up.reason',
+                'up.updated_at',
+                'up.id as upid',
+                'up.count_upload as total_up',
+                'up.upload_at'
+            )
             ->first();
 
         $review = Review::query()->where('user_id', \auth()->user()->id)->where('product_id', $id)->first();
@@ -147,6 +134,29 @@ class TransactionController extends Controller
 
         return redirect()->route('purchases.index');
 
+    }
+
+    public function uploadProve(Request $request, $id, $upid)
+    {
+        $userPayment = UserPayment::query()->where('id', $upid)->first();
+        if ($request['proof'] != null) {
+            $proofFile = $request['proof'];
+
+            $proofName = Uuid::uuid5(Uuid::NAMESPACE_DNS, time() . "proof_") . '.' . $proofFile->getClientOriginalExtension();
+
+            $proofFile->storeAs("/products/proof_payment/" . auth()->user()->id, $proofName , 'local');
+            $userPayment->payment_proof_url = auth()->user()->id . "/" . $proofName;
+            $userPayment->upload_at = DB::raw('CURRENT_TIMESTAMP');
+            if ($userPayment->count_upload == null) {
+                $userPayment->count_upload = 1;
+            } else {
+                $userPayment->count_upload = $userPayment->count_upload + 1;
+            }
+            $userPayment->save();
+            toast('Kamu Berhasil Mengupload Bukti', 'success');
+        }
+
+        return redirect()->route('purchases.detail', ['id' => $id]);
     }
 
     public function doDownload(Request $request)

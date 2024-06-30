@@ -128,61 +128,74 @@
 
         </div>
 
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 flex flex-col gap-12">
-                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg px-4 py-12 sm:px-8 flex flex-col gap-8">
-                    <div>
-                        <h1 class="dark:text-white font-bold text-2xl sm:text-5xl pt-4">Rejected Form</h1>
-                        <p id="seller_reason" class="text-description text-creativehub-grey text-sm md:text-lg lg:text-lg leading-relaxed dark:text-white mt-2">Bukti pembayaranmu keliruu suuu!!!</p>
-                    </div>
-                    <div class="w-full flex flex-col gap-4">
-                        <p class="text-description text-creativehub-grey text-sm md:text-lg lg:text-lg leading-relaxed dark:text-white mt-2">Confirm Payment</p>
-                        <div class="flex flex-col gap-3">
-                            <p class="text-xs text-[#2D68F8] p-[10px_22px] rounded-lg bg-[#2D68F805]">Please upload proof of
-                                payment we will confirm it as soon as possible</p>
+        @if($purchase_detail->status == "disapprove")
+            <form method="post" action="{{route('purchases.upload.prove', ['id' => $purchase_detail->id, 'upid' => $purchase_detail->upid])}}" enctype="multipart/form-data">
+                @csrf
+                @method('put')
+            <div class="py-12">
+                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 flex flex-col gap-12">
+                    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg px-4 py-12 sm:px-8 flex flex-col gap-8">
+                        <div>
+                            <h1 class="dark:text-white font-bold text-2xl sm:text-5xl pt-4">Rejected Form</h1>
+                            <p id="seller_reason" class="text-description text-creativehub-grey text-sm md:text-lg lg:text-lg leading-relaxed dark:text-white mt-2">
+                                reason : {{$purchase_detail->reason}} ({{$purchase_detail->updated_at}})</p>
+                            <p class="text-description text-creativehub-grey text-sm md:text-lg lg:text-lg leading-relaxed dark:text-white mt-2">
+                                upload at : {{$purchase_detail->upload_at ?? "belum upload"}}</p>
+                            <p class="text-description text-creativehub-grey text-sm md:text-lg lg:text-lg leading-relaxed dark:text-white mt-2">
+                                total upload : {{$purchase_detail->total_up ?? "belum upload"}}</p>
 
-                            @error('proof')
-                            <p class="text-xs text-[#ffffff] p-[10px_22px] rounded-lg bg-[#BA0F30]">{{$message}}</p>
-                            @enderror
+                        </div>
+                        <div class="w-full flex flex-col gap-4">
+                            <p class="text-description text-creativehub-grey text-sm md:text-lg lg:text-lg leading-relaxed dark:text-white mt-2">Confirm Payment</p>
+                            <div class="flex flex-col gap-3">
+                                <p class="text-xs text-[#2D68F8] p-[10px_22px] rounded-lg bg-[#2D68F805]">Please upload proof of
+                                    payment we will confirm it as soon as possible</p>
 
-                            <div class="flex gap-3">
-                                <button type="button"
+                                @error('proof')
+                                <p class="text-xs text-[#ffffff] p-[10px_22px] rounded-lg bg-[#BA0F30]">{{$message}}</p>
+                                @enderror
 
-                                        class="flex gap-2 shrink-0 w-2/3 h-[48px] p-[12px_18px] justify-center items-center border border-dashed border-[#595959] rounded-lg hover:bg-[#2A2A2A] transition-all duration-300"
-                                        onclick="document.getElementById('proof').click()">
-                                    <p class="text-gray-900 dark:text-white">Choose File</p>
-                                    <img src="{{URL::to('/')}}/assets/icons/document-upload.svg" alt="icon">
-                                </button>
+                                <div class="flex gap-3">
+                                    <button type="button"
 
-                                <input type="file" name="proof" id="proof" class="hidden" onchange="previewFile()">
-                                <div class="relative rounded-lg overflow-hidden bg-[#181818] w-full h-[48px]">
-                                    <div class="relative file-preview z-10 w-full h-full hidden">
-                                        <img src="{{URL::to('/')}}/assets/icons/check.svg"
-                                             class="check-icon absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                                            class="flex gap-2 shrink-0 w-2/3 h-[48px] p-[12px_18px] justify-center items-center border border-dashed border-[#595959] rounded-lg hover:bg-[#2A2A2A] transition-all duration-300"
+                                            onclick="document.getElementById('proof').click()">
+                                        <p class="text-gray-900 dark:text-white">Choose File</p>
+                                        <img src="{{URL::to('/')}}/assets/icons/document-upload.svg" alt="icon">
+                                    </button>
+
+                                    <input type="file" name="proof" id="proof" class="hidden" onchange="previewFile()">
+                                    <div class="relative rounded-lg overflow-hidden bg-[#181818] w-full h-[48px]">
+                                        <div class="relative file-preview z-10 w-full h-full hidden">
+                                            <img src="{{URL::to('/')}}/assets/icons/check.svg"
+                                                 class="check-icon absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                                                 alt="icon">
+                                            <img src="" class="thumbnail-proof w-full h-full object-cover" alt="thumbnail">
+                                        </div>
+                                        <img src="{{URL::to('/')}}/assets/icons/gallery.svg"
+                                             class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
                                              alt="icon">
-                                        <img src="" class="thumbnail-proof w-full h-full object-cover" alt="thumbnail">
                                     </div>
-                                    <img src="{{URL::to('/')}}/assets/icons/gallery.svg"
-                                         class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-                                         alt="icon">
                                 </div>
                             </div>
+
+
+                            @if($purchase_detail->id != null)
+                                <button type="submit"
+                                        class="rounded-full text-center bg-[#2D68F8] p-[8px_18px] font-semibold hover:bg-[#083297] active:bg-[#062162] transition-all duration-300">Update Proof</button>
+                            @else
+                                <a href="#"
+                                   class="rounded-full text-center bg-[#2D68F8] p-[8px_18px] font-semibold hover:bg-[#083297] active:bg-[#062162] transition-all duration-300">Update Proof</a>
+                            @endif
                         </div>
 
-                        @if(isset($product->id))
-                            <button type="submit"
-                                    class="rounded-full text-center bg-[#2D68F8] p-[8px_18px] font-semibold hover:bg-[#083297] active:bg-[#062162] transition-all duration-300">Update Proof</button>
-                        @else
-                            <a href="#"
-                               class="rounded-full text-center bg-[#2D68F8] p-[8px_18px] font-semibold hover:bg-[#083297] active:bg-[#062162] transition-all duration-300">Update Proof</a>
-                        @endif
                     </div>
 
                 </div>
-
             </div>
-        </div>
+            </form>
+        @endif
     </div>
-
+    @include('sweetalert::alert')
 
 </x-app-layout>

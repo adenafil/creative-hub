@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\PaginationHelper;
 use App\Http\Requests\ApproveOrDisapproveRequest;
 use App\Models\Product;
 use App\Models\Review;
@@ -58,44 +59,10 @@ class ProductOrderController extends Controller
         $lastItem = min($offset + $perPage, $totalData);
 
         // Buat elemen pagination seperti yang ada di metode elements()
-        $window = $this->paginationWindow($currentPage, $totalPages);
+        $window = PaginationHelper::paginationWindow($currentPage, $totalPages);
 
         return \response()->view('admin.product_orders.index', compact('data', 'totalData', 'perPage', 'currentPage', 'totalPages', 'window', 'firstItem', 'lastItem'));
     }
-
-    protected function paginationWindow($currentPage, $totalPages)
-    {
-        $onEachSide = 3; // Number of links on each side of the current page
-        $window = [];
-
-        // Previous and next ranges
-        $start = max($currentPage - $onEachSide, 1);
-        $end = min($currentPage + $onEachSide, $totalPages);
-
-        // Window for pagination
-        for ($i = $start; $i <= $end; $i++) {
-            $window[] = $i;
-        }
-
-        // Add ellipses and edges
-        $pagination = [];
-        if ($start > 1) {
-            $pagination[] = 1;
-            if ($start > 2) {
-                $pagination[] = '...';
-            }
-        }
-        $pagination = array_merge($pagination, $window);
-        if ($end < $totalPages) {
-            if ($end < $totalPages - 1) {
-                $pagination[] = '...';
-            }
-            $pagination[] = $totalPages;
-        }
-
-        return $pagination;
-    }
-
 
     public function detail(Request $request, $id): Response
     {
@@ -108,23 +75,22 @@ class ProductOrderController extends Controller
     {
         $isApproved = $request->input('approve');
         $paymentId = $request->query('id_payments');
-
-        if ($isApproved) {
+        if ($isApproved == "true") {
             $userPayment = UserPayment::query()->where('id', $paymentId)->first();
             $userPayment->status = 'paid';
             $userPayment->save();
             return redirect()->route('product.order.index');
         }
 
-        if ($isApproved != true) {
+        if ($isApproved == "false") {
             $userPayment = UserPayment::query()->where('id', $paymentId)->first();
-            $userPayment->status = 'disapproved';
+            $userPayment->status = 'disapprove';
             $userPayment->reason = $request->input('reason');
             $userPayment->save();
             return redirect()->route('product.order.index');
         }
 
 
-        return redirect()->route('product.approve.or.disapprove');
+        return redirect()->route('product.approve.or.disapprove', ['id' => $id]);
     }
 }

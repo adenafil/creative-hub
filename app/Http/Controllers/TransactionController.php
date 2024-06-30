@@ -175,8 +175,11 @@ class TransactionController extends Controller
     public function doDownload(Request $request)
     {
         $product = Product::query()->where('id', $request->input('id'))->first();
-
-        return \response()->download(storage_path("/app/product/assets/" . "$product->asset_product_url"));
+        if (isset(\auth()->user()->purchases->where('product_id', $request->query('id'))->first()->product_id)) {
+            return \response()->download(storage_path("/app/product/assets/" . "$product->asset_product_url"));
+        } else {
+            return redirect()->route('home.product.detail', ['id' => $request->query('id')]);
+        }
     }
 
 }

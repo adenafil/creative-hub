@@ -156,6 +156,7 @@ class HomeController extends Controller
             foreach ($payments as $payment) {
                 if ($payment['seller_id'] == Product::query()->where('id', $request['default-checkbox'][$i])->first()->seller_id) {
                     $this->homeService->checkout($payment, $request['default-checkbox'][$i]);
+                    auth()->user()->addProductIntoCart()->detach($request['default-checkbox'][$i]);
                 }
             }
         }

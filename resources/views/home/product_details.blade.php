@@ -201,19 +201,22 @@
 {{--                {{dd(auth()->user()->purchases)}}--}}
 
                 @if(auth()->check() && \App\Models\Transaction::query()->where('user_id', auth()->user()->id)
-            ->where('transactions.user_id', '=', auth()->user()->id)
-            ->where('purchases.product_id', '=', $product->id)
-            ->join('purchases', 'purchases.transaction_id', '=', 'transactions.id')
-            ->select('purchases.*', 'transactions.*')
-            ->get()->count() == 0 &&  $product->seller_id != auth()->user()->id)
-                    <a href="{{route('checkout', ["id" => $product->id])}}"
-                       class="bg-[#2D68F8] text-center font-semibold p-[12px_20px] rounded-full hover:bg-[#083297] active:bg-[#062162] transition-all duration-300">Checkout</a>
-                @if(auth()->user()->addProductIntoCart->where('id', $product->id)->first() == null)
-                        <form action="{{route('add.cart', ["id" => $product->id])}}" method="POST">
-                            @csrf
-                            <button class="border border-[#2D68F8] text-center font-semibold p-[12px_20px] rounded-full hover:bg-[#083297] active:bg-[#062162] transition-all duration-300 cart w-full">Add to Cart</button>
-                        </form>
-                    @endif
+                    ->where('transactions.user_id', '=', auth()->user()->id)
+                    ->where('purchases.product_id', '=', $product->id)
+                    ->join('purchases', 'purchases.transaction_id', '=', 'transactions.id')
+                    ->select('purchases.*', 'transactions.*')
+                    ->get()->count() == 0 &&  $product->seller_id != auth()->user()->id)
+
+                             @if(auth()->user()->addProductIntoCart->where('id', $product->id)->first() == null)
+                                 <a href="{{route('checkout', ["id" => $product->id])}}"
+                                 class="bg-[#2D68F8] text-center font-semibold p-[12px_20px] rounded-full hover:bg-[#083297] active:bg-[#062162] transition-all duration-300">Checkout</a>
+                                  <form action="{{route('add.cart', ["id" => $product->id])}}" method="POST">
+                                      @csrf
+                                      <button class="border border-[#2D68F8] text-center font-semibold p-[12px_20px] rounded-full hover:bg-[#083297] active:bg-[#062162] transition-all duration-300 cart w-full">Add to Cart</button>
+                                 </form>
+                            @else
+                                 <a href="{{route('cart.index')}}" class="bg-[#2D68F8] text-center font-semibold p-[12px_20px] rounded-full hover:bg-[#083297] active:bg-[#062162] transition-all duration-300">Go to Cart</a>
+                                @endif
 
 
                 @elseif(!auth()->check())
@@ -225,7 +228,7 @@
                     <a href="{{route('purchases.index')}}"
                        class="bg-[#2D68F8] text-center font-semibold p-[12px_20px] rounded-full hover:bg-[#083297] active:bg-[#062162] transition-all duration-300">Go to Products</a>
                 @elseif(
-    auth()->check() && \App\Models\Transaction::query()->where('user_id', auth()->user()->id)
+            auth()->check() && \App\Models\Transaction::query()->where('user_id', auth()->user()->id)
             ->where('transactions.user_id', '=', auth()->user()->id)
             ->where('purchases.product_id', '=', $product->id)
             ->join('purchases', 'purchases.transaction_id', '=', 'transactions.id')
@@ -237,6 +240,7 @@
                 @endif
             </div>
         </div>
+
         <div class="w-full p-[30px] bg-[#181818] rounded-[20px] flex flex-col gap-4 h-fit">
             <div class="flex justify-between items-center">
                 <div class="flex gap-3 items-center">

@@ -147,7 +147,6 @@
             <!-- Use the custom loop counter -->
             {{--            Custom Counter: {{ $i }}--}}
 
-
             <div class="w-full border rounded-lg shadow bg-[#181818] border-[#ffffff20] seller-{{$product[0]->seller_id}}">
                 <div
                     class="top-tabmenu flex items-center gap-8 ps-4 border-b rounded-t-lg border-[#ffffff10] text-gray-400 bg-[#181818]">
@@ -157,10 +156,16 @@
                                class="w-4 h-4 rounded focus:ring-blue-600 ring-offset-gray-800 focus:ring-2 bg-gray-700 border-gray-600">
                         <div class="flex items-center gap-[6px]">
                             <div class="w-6 h-6 flex shrink-0 items-center justify-center rounded-full overflow-hidden">
-                                <img src="https://i.pinimg.com/236x/10/fd/72/10fd72124736cfa1b9840c5ee543b0cf.jpg"
-                                     class="w-full h-full object-cover" alt="logo">
+                                <img src="
+                                {{
+                            ImageHelper::isThisImage($product[0]->user->user_detail->image_url)
+                        ? $product[0]->user->user_detail->image_url
+                        : URL::signedRoute('profile.file', ['encoded' => ImageHelper::encodePath($product[0]->user->user_detail->image_url)])
+
+}}
+                                "  class="w-full h-full object-cover" alt="logo">
                             </div>
-                            <a href="#" class="font-semibold text-xs text-creativehub-grey">Tokopedei</a>
+                            <a href="#" class="font-semibold text-xs text-creativehub-grey">{{\App\Models\User::query()->where('id', $product[0]->seller_id)->first()->username}}</a>
                         </div>
                     </div>
 
@@ -195,7 +200,13 @@
                                        class="w-4 h-4 rounded focus:ring-blue-600 ring-offset-gray-800 focus:ring-2 bg-gray-700 border-gray-600">
                                 <div class="space-y-4 md:flex md:items-center md:justify-around md:gap-6 md:space-y-0">
                                     <a href="#" class="shrink-0 md:order-1">
-                                        <img class="h-24 w-auto rounded-md" src="../assets/thumbnails/img1.png"
+                                        <img class="h-24 w-auto rounded-md" src="
+                                                                                    {{
+                        ImageHelper::isThisImage($value->image_product_url)
+                        ? $value->image_product_url
+                        : URL::signedRoute('file.view', ['encoded' => ImageHelper::encodePath($value->image_product_url)])
+                        }}
+                                        "
                                              alt="imac image"/>
                                     </a>
 

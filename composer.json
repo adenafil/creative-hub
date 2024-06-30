@@ -9,6 +9,7 @@
         "laravel/breeze": "v2.0.5",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
+        "laraveldaily/laravel-invoices": "4.0",
         "ramsey/uuid": "^4.7",
         "realrashid/sweet-alert": "^7.2"
     },

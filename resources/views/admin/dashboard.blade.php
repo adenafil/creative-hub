@@ -106,7 +106,7 @@
                             </div>
                         </td>
                         <td class="text-center">{{$product->title}}</td>
-                        <td class="text-center">{{number_format($product->price, 0, ',', '.') }}</td>
+                        <td class="text-center">Rp {{number_format($product->price, 0, ',', '.') }}</td>
                         <td class="text-center">{{$product->total_transactions}}</td>
                     </tr>
 {{--                @endforeach--}}

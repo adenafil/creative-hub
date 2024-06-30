@@ -84,6 +84,13 @@ class HomeController extends Controller
         return \response()->view('home.cart', compact('carts'));
     }
 
+    public function deleteOneCart($id)
+    {
+//        $seller_id = auth()->user()->addProductIntoCart->detach;
+        $data = auth()->user()->addProductIntoCart()->detach($id);
+        return response()->json(['success' =>   $data == true ]);
+    }
+
     public function doCart(Request $request)
     {
         $totalProofs = null;

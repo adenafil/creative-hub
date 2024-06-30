@@ -148,7 +148,7 @@
             {{--            Custom Counter: {{ $i }}--}}
 
 
-            <div class="w-full border rounded-lg shadow bg-[#181818] border-[#ffffff20]">
+            <div class="w-full border rounded-lg shadow bg-[#181818] border-[#ffffff20] seller-{{$product[0]->seller_id}}">
                 <div
                     class="top-tabmenu flex items-center gap-8 ps-4 border-b rounded-t-lg border-[#ffffff10] text-gray-400 bg-[#181818]">
                     <div class="store-profile flex items-center gap-4">
@@ -201,7 +201,7 @@
 
                                     <div class="flex items-center justify-between md:order-3 md:justify-end">
                                         <div class="text-end md:order-4 md:w-32">
-                                            <p class="text-base font-bold text-white">Rp {{$value->price}}</p>
+                                            <p class="text-base font-bold text-white">Rp {{number_format($value->price, 0, ',', '.')}}</p>
                                         </div>
                                     </div>
 
@@ -217,8 +217,8 @@
 
                                         <div class="flex items-center gap-4">
 
-                                            <button type="button"
-                                                    class="inline-flex items-center text-sm font-medium hover:underline text-red-500">
+                                            <a href="" data-product-id="{{$value->id}}"
+                                                    class="inline-flex items-center text-sm font-medium hover:underline text-red-500 delete-cart-products">
                                                 <svg class="me-1.5 h-5 w-5" aria-hidden="true"
                                                      xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                      fill="none" viewBox="0 0 24 24">
@@ -226,8 +226,10 @@
                                                           stroke-linejoin="round" stroke-width="2"
                                                           d="M6 18 17.94 6M18 18 6.06 6"/>
                                                 </svg>
+                                                <meta name="csrf-token" content="{{ csrf_token() }}">
+                                                <p class="delete-product-id" hidden="hidden">{{$value->id}}</p>
                                                 Remove
-                                            </button>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>

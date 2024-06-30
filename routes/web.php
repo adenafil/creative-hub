@@ -54,6 +54,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Route untuk cart tapi butuh register/login(auth)
     Route::get('/cart', [HomeController::class, 'cart'])->name('cart.index');
     Route::post('/cart/sucess', [HomeController::class, 'doCart'])->name('do.cart.index');
+    Route::delete('/cart/delete/{id}', [HomeController::class, 'deleteOneCart'])->name('do.delete.cart');
 
 
 

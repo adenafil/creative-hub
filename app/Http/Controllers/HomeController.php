@@ -121,14 +121,14 @@ class HomeController extends Controller
         for ($i = 0; $i < count($request['default-checkbox']); $i++) {
             for ($j = 0; $j < count($request['default-checkbox']); $j++) {
                 $tempSellerId = Product::query()->where('id', $request['default-checkbox'][$i])->first()->seller_id;
-                $tempBank = PaymentMethod::query()->where('user_id', $tempSellerId)
-                    ->where('payment_account_recipient_name', $request['name'][$j])
-                    ->where('payment_account_name', $request['bank'][$j])
-                    ->where('payment_account_number', $request['number'][$j])
-                    ->first();
-
+                for ($k = 0; $k < count($request['number']); $k++) {
+                    $tempBank = PaymentMethod::query()->where('user_id', $tempSellerId)
+                        ->where('payment_account_recipient_name', $request['name'][$k])
+                        ->where('payment_account_name', $request['bank'][$k])
+                        ->where('payment_account_number', $request['number'][$k])
+                        ->first();
+                }
                 if ($tempBank != null)  {
-
                     $cek = true;
                     foreach ($payments as $payment) {
                         if ($payment['name'] == $tempBank->payment_account_recipient_name && $payment['bank'] == $tempBank->payment_account_name && $payment['number'] == $tempBank->payment_account_number) {
@@ -157,6 +157,7 @@ class HomeController extends Controller
                 if ($payment['seller_id'] == Product::query()->where('id', $request['default-checkbox'][$i])->first()->seller_id) {
                     $this->homeService->checkout($payment, $request['default-checkbox'][$i]);
                     auth()->user()->addProductIntoCart()->detach($request['default-checkbox'][$i]);
+
                 }
             }
         }

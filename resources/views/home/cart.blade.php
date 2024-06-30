@@ -121,8 +121,8 @@
             </div>
             <div class="flex items-center gap-4 sm:gap-8">
                 <div>
-                    <h2 class="text-xs sm:text-sm">Total (2 Product): <span
-                            class="ms-1 text-sm sm:text-xl font-bold from-[#B05CB0] to-[#FCB16B] bg-clip-text text-transparent bg-gradient-to-r">Rp 750,000</span>
+                    <h2 class="text-xs sm:text-sm">Total (<span>0</span> Product): <span
+                            class="ms-1 text-sm sm:text-xl font-bold from-[#B05CB0] to-[#FCB16B] bg-clip-text text-transparent bg-gradient-to-r">Rp 0</span>
                     </h2>
                 </div>
                 <button type="submit"
@@ -181,7 +181,7 @@
                     </ul>
                 </div>
 
-                <div id="defaultTabContent-{{$i}}">
+                <div id="defaultTabContent-{{$product[0]->seller_id}}">
 
                     <div class="hidden rounded-lg bg-[#181818] products-card-container" id="products-{{$i}}"
                          role="tabpanel" aria-labelledby="products-tab-{{$i}}">
@@ -201,7 +201,7 @@
 
                                     <div class="flex items-center justify-between md:order-3 md:justify-end">
                                         <div class="text-end md:order-4 md:w-32">
-                                            <p class="text-base font-bold text-white">Rp {{number_format($value->price, 0, ',', '.')}}</p>
+                                            <p class="text-base font-bold text-white price-product">Rp {{number_format($value->price, 0, ',', '.')}}</p>
                                         </div>
                                     </div>
 
@@ -371,6 +371,12 @@
 
 <script type="text/javascript">
 
+    // change float to rp format
+    function formatRupiah(number) {
+        // Ubah angka menjadi string dan tambahkan pemisah ribuan menggunakan regex
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    }
+
     // Fungsi untuk mengekstrak angka dari ID
     function extractNumberFromId(id) {
         const regex = /^default-checkbox-(\d+)$/;
@@ -382,6 +388,22 @@
         }
     }
 
+    // conver price
+    function convertRupiahToNumber(rupiah) {
+        // Hapus 'Rp' dan spasi
+        let numberString = rupiah.replace(/Rp\s?|,/g, '');
+
+        // Ganti pemisah ribuan dengan kosong dan pemisah desimal dengan titik
+        numberString = numberString.replace(/\./g, '').replace(/,/g, '.');
+
+        // Konversi menjadi angka
+        const number = parseFloat(numberString);
+
+        return number;
+    }
+
+
+    console.log(convertRupiahToNumber(document.querySelector('.price-product').innerText ));
     document.addEventListener('DOMContentLoaded', function () {
         const checkboxSelectAll = document.querySelector('input[name="select-all"]');
         const checkboxTokoInput = document.querySelectorAll('input[name="default-checkbox-parent[]"]');
@@ -405,21 +427,31 @@
             checkboxesDibawahTokoInput.forEach(checkbox => {
                 if (e.target.checked) {
                     checkbox.classList.add("check-out-per-product");
+                    counterTokoPerProduct++;
                     checkbox.disabled = true;
                 } else {
                     checkbox.classList.remove('check-out-per-product');
                     checkbox.disabled = false;
                 }
                 checkbox.checked = e.target.checked;
-                counterTokoInput = 0;
-                counterTokoPerProduct = 0;
 
             });
 
             if (e.target.checked) {
                 checkboxSelectAll.classList.add("check-out-semua");
+                document.querySelector('span').innerText = counterTokoPerProduct;
+                // logic price count
+                let totalPrice = 0;
+                document.querySelectorAll('.price-product').forEach(price => {
+                    totalPrice += convertRupiahToNumber(price.innerText);
+                });
+                document.querySelectorAll('span')[1].innerText = formatRupiah(totalPrice);
             } else {
                 checkboxSelectAll.classList.remove('check-out-semua');
+                counterTokoInput = 0;
+                counterTokoPerProduct = 0;
+                document.querySelector('span').innerText = counterTokoPerProduct;
+                document.querySelectorAll('span')[1].innerText = 0;
             }
         });
 
@@ -428,7 +460,6 @@
             checkbox.addEventListener('change', () => {
                 const id = extractNumberFromId(checkbox.getAttribute('id'));
                 const productsContainer = document.querySelector(`#defaultTabContent-${id}`).querySelector(`#products-${id}`).querySelectorAll('div.border-t');
-
                 let isAllChecked = true;
                 let isUlang = true;
                 productsContainer.forEach(product => {
@@ -438,7 +469,27 @@
                     }
                 });
                 if (!checkboxSelectAll.checked) {
+                    let nodeMoneies = null;
                     if (checkbox.checked) {
+                        // counterTokoPerProduct  = document.querySelector(`#defaultTabContent-${id}`).querySelector(`#products-${id}`).querySelectorAll('div.border-t input').length - counterTokoPerProduct;
+                        const allBoxes = document.querySelector(`#defaultTabContent-${id}`).querySelector(`#products-${id}`).querySelectorAll(`div.border-t`);
+                        console.log(allBoxes);
+                        const filteredBoxes = Array.from(allBoxes).filter(element => !element.querySelector('input').classList.contains('check-out-per-product'));
+                        filteredBoxes.forEach(box => {
+                            counterTokoPerProduct++
+                            console.log("naik toko bawah " + counterTokoPerProduct);
+                            console.log(filteredBoxes);
+
+                        })
+
+                        // logic price
+                        filteredBoxes.forEach(element => {
+                                    // console.log(element.querySelector('.price-product'));
+                                    const checkPrice = convertRupiahToNumber(element.querySelector('.price-product').innerText);
+                                    const priceNav = convertRupiahToNumber(document.querySelectorAll('span')[1].innerText);
+                                    document.querySelectorAll('span')[1].innerText = formatRupiah(priceNav + checkPrice);
+                        });
+
                         checkbox.classList.add("check-out-satu-toko");
                         productsContainer.forEach(checkboxBawah => {
                             const input = checkboxBawah.querySelector('input');
@@ -446,10 +497,26 @@
                             input.classList.add("check-out-per-product");
                             input.disabled = true;
                         });
+                        // price logic when checked
                         counterTokoInput++;
-                        counterTokoPerProduct += productsContainer.length;
+                        console.log("bawah length " + counterTokoPerProduct);
+                        console.log("length " + document.querySelector(`#defaultTabContent-${id}`).querySelector(`#products-${id}`).querySelectorAll(`div.border-t input[disabled]`).length);
+
                         console.log("naik counterTokoInput" + counterTokoInput);
+                        // logic count total
+                        console.log(document.querySelector('span').innerText);
+                        console.log(productsContainer.length);
+                        document.querySelector('span').innerText = counterTokoPerProduct;
                     } else {
+
+                        // price logic when unchecked
+                        checkbox.parentElement.parentElement.parentElement.querySelectorAll('.price-product')
+                            .forEach(price => {
+                                const checkPrice = convertRupiahToNumber(price.innerText);
+                                const priceNav = convertRupiahToNumber(document.querySelectorAll('span')[1].innerText);
+                                document.querySelectorAll('span')[1].innerText = formatRupiah(priceNav - checkPrice);
+                            })
+
                         checkbox.classList.remove('check-out-satu-toko');
                         productsContainer.forEach(checkboxBawah => {
                             const input = checkboxBawah.querySelector('input');
@@ -460,8 +527,9 @@
                         console.log(productsContainer[0]);
                         if (counterTokoInput <= productsContainer.length ) {
                             counterTokoInput--;
-                            counterTokoPerProduct--;
+                            counterTokoPerProduct -= productsContainer.length;
                             console.log("turun counterTokoInput" + counterTokoInput);
+                            document.querySelector('span').innerText = counterTokoPerProduct;
                         }
                     }
                 }
@@ -491,18 +559,28 @@
 
         checkboxesDibawahTokoInput.forEach(checkbox => {
             checkbox.addEventListener('change', (e) => {
+
                 const id = extractNumberFromId(checkbox.getAttribute('id'));
                 if (!checkboxSelectAll.checked) {
                     if (counterTokoPerProduct === checkboxesDibawahTokoInput.length) {
                         counterTokoPerProduct = 0;
-                        console.log("jadi kosong => " + counterTokoPerProduc);
+                        console.log("jadi kosong => " + counterTokoPerProduct);
                     }
                     if (e.target.checked) {
                         checkbox.classList.add("check-out-per-product");
+                        const price = convertRupiahToNumber(document.querySelectorAll('span')[1].innerText);
+                        const checkPrice = convertRupiahToNumber(checkbox.parentElement.querySelector('.price-product').innerText);
+                        document.querySelectorAll('span')[1].innerText = formatRupiah(price + checkPrice);
                         counterTokoPerProduct++;
+                        document.querySelector('span').innerText = counterTokoPerProduct;
                     } else {
+                        const price = convertRupiahToNumber(document.querySelectorAll('span')[1].innerText);
+                        const checkPrice = convertRupiahToNumber(checkbox.parentElement.querySelector('.price-product').innerText);
+                        document.querySelectorAll('span')[1].innerText = formatRupiah(price - checkPrice);
                         checkbox.classList.remove('check-out-per-product');
                         counterTokoPerProduct--;
+                        document.querySelector('span').innerText = counterTokoPerProduct;
+
                     }
 
                     const total = document.querySelectorAll(`#default-checkbox-${id}`).length - 1;

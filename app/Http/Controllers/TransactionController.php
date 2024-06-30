@@ -124,12 +124,25 @@ class TransactionController extends Controller
     {
         $data = $request->only(['default-radio', 'comment']);
 
-        $review = new Review();
-        $review->star = $data['default-radio'];
-        $review->comments = $data['comment'];
-        $review->user_id = \auth()->user()->id;
-        $review->product_id = $id;
-        $review->save();
+        $prevReview = Review::query()->where('product_id', $id)->where('user_id', \auth()->user()->id)->first();
+
+        if ($prevReview != null && $prevReview->created_at == $prevReview->updated_at) {
+            $prevReview->star = $data['default-radio'];
+            $prevReview->comments = $data['comment'];
+            $prevReview->save();
+            toast('Comment Berhasil Diupdate', 'success');
+        } else if ($prevReview == null) {
+            $review = new Review();
+            $review->star = $data['default-radio'];
+            $review->comments = $data['comment'];
+            $review->user_id = \auth()->user()->id;
+            $review->product_id = $id;
+            $review->save();
+            toast('Comment Berhasil Ditambahkan', 'success');
+        } else {
+            toast('Comment Hanya Boleh 2 kali', 'error');
+        }
+
 
 
         return redirect()->route('purchases.index');

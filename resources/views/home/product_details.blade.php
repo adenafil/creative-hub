@@ -225,7 +225,7 @@
                     <button href="{{route('checkout', ["id" => $product->id])}}"
                        class="border border-[#2D68F8] text-center font-semibold p-[12px_20px] rounded-full hover:bg-[#083297] active:bg-[#062162] transition-all duration-300 cart">Add to Cart</button>
                 @elseif(auth()->user()->id == $product->seller_id)
-                    <a href="{{route('purchases.index')}}"
+                    <a href="{{route('product.index')}}"
                        class="bg-[#2D68F8] text-center font-semibold p-[12px_20px] rounded-full hover:bg-[#083297] active:bg-[#062162] transition-all duration-300">Go to Products</a>
                 @elseif(
             auth()->check() && \App\Models\Transaction::query()->where('user_id', auth()->user()->id)

@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     const deletesLink = document.querySelectorAll('.delete-cart-products');
+    const csrfTokenMeta = document.querySelector('meta[name="csrf-token"]');
     document.querySelectorAll('.delete-cart-products').forEach(e => {
         e.addEventListener('click', event => {
             event.preventDefault();
@@ -42,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             axios.delete(url, {
                 headers: {
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    'X-CSRF-TOKEN': csrfTokenMeta ? csrfTokenMeta.getAttribute('content') : null
                 }
             })
                 .then(function (response) {

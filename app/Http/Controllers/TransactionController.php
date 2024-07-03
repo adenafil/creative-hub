@@ -88,7 +88,7 @@ class TransactionController extends Controller
 
 
 
-    public function detail($id): Response
+    public function detail($id)
     {
 
         $purchase_detail = Transaction::query()
@@ -97,6 +97,7 @@ class TransactionController extends Controller
             ->join('products as p2', 'p2.id', '=', 'p.product_id')
             ->join('categories as c', 'c.id', '=', 'p2.category_id')
             ->where('p.product_id', $id)
+            ->where('up.user_id', \auth()->user()->id)
             ->where('transactions.user_id', \auth()->user()->id)
             ->select(
                 'c.name',
@@ -115,6 +116,10 @@ class TransactionController extends Controller
                 'up.upload_at'
             )
             ->first();
+
+        if ($purchase_detail == null) {
+            return redirect()->route('purchases.index');
+        }
 
         $review = Review::query()->where('user_id', \auth()->user()->id)->where('product_id', $id)->first();
 

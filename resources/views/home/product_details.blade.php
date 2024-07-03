@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{{ asset('/css/output.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
           rel="stylesheet" />
     <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/output.css'])
 </head>
 <style>
     .swiper-rtl .swiper-button-next:after {
@@ -302,11 +302,16 @@
                     <div class="flex items-center gap-[6px]">
                         <div class="w-6 h-6 flex shrink-0 items-center justify-center rounded-full overflow-hidden">
                             <img src="
+                            @if(isset(auth()->user()->user_detail->image_url))
                                                                         {{
                         ImageHelper::isThisImage($data->user->user_detail->image_url)
                         ? $data->user->user_detail->image_url
                         : URL::signedRoute('profile.file', ['encoded' => ImageHelper::encodePath($data->user->user_detail->image_url)])
                         }}
+                                 @else
+                                    {{\Illuminate\Support\Facades\URL::to('/assets/photos/img.png')}}
+                                @endif
+
                             " class="w-full h-full object-cover" alt="logo">
                         </div>
                         <a href="" class="font-semibold text-xs text-creativehub-grey">{{$data->user->name}}</a>
@@ -433,7 +438,7 @@
 <!-- Swiper.js CDN -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <!-- Main.js Script -->
-@vite(['resources/css/app.css', 'resources/js/app.js'])
+@vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/output.css'])
 
 <script>
 

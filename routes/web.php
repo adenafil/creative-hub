@@ -51,6 +51,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/admin/purchases/details/{id}', [TransactionController::class, 'detail'])->name('purchases.detail');
     Route::put('/admin/purchases/details/upload/{id}/payments/{upid}', [TransactionController::class, 'uploadProve'])->name('purchases.upload.prove');
     Route::get('/download', [TransactionController::class, 'doDownload'])->name('download.asset');
+    Route::get('/download/invoices', [TransactionController::class, 'doInvoices'])->name('download.invoices');
 
     // Route untuk cart tapi butuh register/login(auth)
     Route::get('/cart', [HomeController::class, 'cart'])->name('cart.index');

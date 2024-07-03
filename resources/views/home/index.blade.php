@@ -13,12 +13,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    <link href="{{ asset('/css/output.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
           rel="stylesheet"/>
     <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet"/>
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/output.css'])
 </head>
 <script>
     function redirectToUrl(element) {
@@ -143,7 +143,7 @@
 <!-- Swiper.js CDN -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <!-- Main.js Script -->
-@vite(['resources/css/app.css', 'resources/js/app.js', 'resource/css/output.css'])
+@vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/output.css'])
 
 <script>
     // Search Function

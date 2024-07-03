@@ -238,7 +238,7 @@
 <!-- Swiper.js CDN -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <!-- Main.js Script -->
-@vite(['resources/css/app.css', 'resources/js/app.js', 'resource/css/output.css'])
+@vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/output.css'])
 
 <script>
     // Search Function

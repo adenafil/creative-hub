@@ -128,7 +128,18 @@
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
             <div class="px-4 flex items-center">
                 <div class="img-profile w-8 h-8 mr-2">
-                    <img src="https://pics.craiyon.com/2023-09-21/6bbd9836c65b452c8b96147f9414e2cd.webp" alt=""
+{{--                    image nyororo kidul --}}
+                    <img src="
+                                                @if(isset(auth()->user()->user_detail->image_url))
+                                                                        {{
+                        ImageHelper::isThisImage(auth()->user()->user_detail->image_url)
+                        ? auth()->user()->user_detail->image_url
+                        : URL::signedRoute('profile.file', ['encoded' => ImageHelper::encodePath(auth()->user()->user_detail->image_url)])
+                        }}
+                                 @else
+                                    {{\Illuminate\Support\Facades\URL::to('/assets/photos/img.png')}}
+                                @endif
+                    " alt=""
                          class="rounded-full object-cover">
                 </div>
                 <div class="user-details">

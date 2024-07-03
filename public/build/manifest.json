@@ -1,0 +1,18 @@
+{
+  "resources/css/app.css": {
+    "file": "assets/app-CI78vqxr.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/css/output.css": {
+    "file": "assets/output-hrUmlZIB.css",
+    "src": "resources/css/output.css",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-Dq9CKSFa.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  }
+}

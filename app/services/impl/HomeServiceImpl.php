@@ -119,11 +119,18 @@ class HomeServiceImpl implements HomeService
             $userPayment->status = 'pending';
             $userPayment->reason = '';
             $userPayment->save();
-
-            $transaction = $userPayment->transactions()->create([
-                'user_id' => auth()->user()->id,
-                'user_payment_id' => $userPayment->id,
-            ]);
+            if ($data['serial_no_transactions'] != null) {
+                $transaction = $userPayment->transactions()->create([
+                    'user_id' => auth()->user()->id,
+                    'user_payment_id' => $userPayment->id,
+                    'serial_no_transactions' => $data['serial_no_transactions'],
+                ]);
+            } else if ($data['serial_no_transactions'] == null) {
+                $transaction = $userPayment->transactions()->create([
+                    'user_id' => auth()->user()->id,
+                    'user_payment_id' => $userPayment->id,
+                ]);
+            }
             $transaction->buyProducts()->attach($id);
 
             if ($user_transaction->count() != 0) {

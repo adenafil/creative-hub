@@ -17,7 +17,9 @@ class Transaction extends Model
     public $timestamps = false;
 
     protected $fillable = [
-      'user_id'
+        'user_id',
+        'user_payment_id',
+        'serial_no_transactions'
     ];
 
     public function user(): BelongsTo

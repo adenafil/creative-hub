@@ -15,6 +15,7 @@ use App\services\ProductService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Ramsey\Uuid\Nonstandard\Uuid;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -93,6 +94,7 @@ class HomeController extends Controller
 
     public function doCart(Request $request)
     {
+        $serial_no_transaction = Uuid::uuid5(Uuid::NAMESPACE_DNS, time())->toString();
         $totalProofs = null;
         $sellerIds = $request['default-checkbox'] ? Product::whereIn('id', $request['default-checkbox'])
             ->groupBy('seller_id')
@@ -118,43 +120,51 @@ class HomeController extends Controller
         //$data = $request->only(['bank', 'name', 'number', 'proof']);
         $payments = array();
         $proof_index = array_key_first($request['proof']);
+
         for ($i = 0; $i < count($request['default-checkbox']); $i++) {
-            for ($j = 0; $j < count($request['default-checkbox']); $j++) {
-                $tempSellerId = Product::query()->where('id', $request['default-checkbox'][$i])->first()->seller_id;
-                for ($k = 0; $k < count($request['number']); $k++) {
-                    $tempBank = PaymentMethod::query()->where('user_id', $tempSellerId)
-                        ->where('payment_account_recipient_name', $request['name'][$k])
-                        ->where('payment_account_name', $request['bank'][$k])
-                        ->where('payment_account_number', $request['number'][$k])
-                        ->first();
-                }
-                if ($tempBank != null)  {
-                    $cek = true;
+            $tempSellerId = Product::query()->where('id', $request['default-checkbox'][$i])->first()->seller_id;
+
+            for ($k = 0; $k < count($request['number']); $k++) {
+                $tempBank = PaymentMethod::query()->where('user_id', $tempSellerId)
+                    ->where('payment_account_recipient_name', $request['name'][$k])
+                    ->where('payment_account_name', $request['bank'][$k])
+                    ->where('payment_account_number', $request['number'][$k])
+                    ->first();
+
+                if ($tempBank != null) {
+                    $exists = false;
+
                     foreach ($payments as $payment) {
-                        if ($payment['name'] == $tempBank->payment_account_recipient_name && $payment['bank'] == $tempBank->payment_account_name && $payment['number'] == $tempBank->payment_account_number) {
-                            $cek = false;
+                        if ($payment['name'] == $tempBank->payment_account_recipient_name &&
+                            $payment['bank'] == $tempBank->payment_account_name &&
+                            $payment['number'] == $tempBank->payment_account_number) {
+                            $exists = true;
+                            break;
                         }
                     }
 
-                    if ($cek) {
+                    if (!$exists) {
                         $payments[] = [
                             'bank' => $tempBank->payment_account_name,
                             'name' => $tempBank->payment_account_recipient_name,
                             'number' => $tempBank->payment_account_number,
                             'proof' => $request['proof'][$proof_index],
-                            'seller_id' => $tempSellerId
+                            'seller_id' => $tempSellerId,
+                            'serial_no_transactions' => $serial_no_transaction
                         ];
                     }
                 }
-
             }
-
         }
 
+        Log::debug("payments : " . json_encode($payments));
         for ($i = 0; $i < count($request['default-checkbox']); $i++) {
             // cek apakah seller_id proofnya ada
             foreach ($payments as $payment) {
+                Log::debug("Checkout to the cart " . $payment['seller_id'] . "with index " . $i);
+                Log::debug("logic " . $payment['seller_id'] . "==" . Product::query()->where('id', $request['default-checkbox'][$i])->first()->seller_id);
                 if ($payment['seller_id'] == Product::query()->where('id', $request['default-checkbox'][$i])->first()->seller_id) {
+                    Log::debug("Checkout to the cart " . $payment['seller_id']);
                     $this->homeService->checkout($payment, $request['default-checkbox'][$i]);
                     auth()->user()->addProductIntoCart()->detach($request['default-checkbox'][$i]);
                 }

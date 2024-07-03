@@ -61,7 +61,7 @@
                             </td>
                             <td class="text-center">{{ $purchase->title }}</td>
                             <td class="text-center">{{ $purchase->name }}</td>
-                            <td class="text-center">Rp{{number_format($purchase->price, 0, ',', '.') }}}}</td>
+                            <td class="text-center">Rp {{number_format($purchase->price, 0, ',', '.') }}</td>
                             <td class="text-center">
                                 @if ($purchase->status == 'pending')
                                     <span class="bg-yellow-100 text-yellow-800 text-sm font-medium me-2 px-4 py-1.5 rounded-full dark:bg-yellow-900 dark:text-yellow-300">Pending</span>
@@ -104,21 +104,23 @@
                                             Review
                                             <div class="tooltip-arrow" data-popper-arrow></div>
                                         </div>
-                                    @endif
-                                    {{-- Review Button --}}
+                                        {{-- Review Button --}}
 
-                                    {{-- Download Invoice Button --}}
-                                    <a href="{{route('download.invoices')}}" class="flex h-fit">
-                                        <button type="button" class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-2.5 py-2.5"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" data-tooltip-target="tooltip-download-invoice-{{$purchase->product_id}}" data-tooltip-placement="top" >
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-                                            </svg>
-                                        </button>
-                                    </a>
-                                    <div id="tooltip-download-invoice-{{$purchase->product_id}}" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                                        Download Invoice
-                                        <div class="tooltip-arrow" data-popper-arrow></div>
-                                    </div>
-                                    {{-- Download Invoice Button --}}
+                                        {{-- Download Invoice Button --}}
+                                        <a href="{{ url()->route('download.invoices') }}?id={{\App\Helper\InvoicesHelper::encryptData(json_encode($purchase), auth()->user()->id)}}" class="flex h-fit">
+                                            <button type="button" class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-2.5 py-2.5"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" data-tooltip-target="tooltip-download-invoice-{{$purchase->product_id}}" data-tooltip-placement="top" >
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                                                </svg>
+                                            </button>
+                                        </a>
+                                        <div id="tooltip-download-invoice-{{$purchase->product_id}}" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                            Download Invoice
+                                            <div class="tooltip-arrow" data-popper-arrow></div>
+                                        </div>
+                                        {{-- Download Invoice Button --}}
+
+                                    @endif
+
 
                                     <!-- Main modal -->
                                     <div id="crud-modal-{{ $purchase->product_id }}" tabindex="-1" aria-hidden="true" class="crud-modal  overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full hidden">

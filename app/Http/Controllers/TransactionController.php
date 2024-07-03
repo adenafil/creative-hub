@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\InvoicesHelper;
 use App\Helper\PaginationHelper;
 use App\Http\Requests\ReviewRequest;
 use App\Models\Product;
@@ -9,6 +10,7 @@ use App\Models\Purchase;
 use App\Models\Review;
 use App\Models\Transaction;
 use App\Models\UserPayment;
+use Carbon\Carbon;
 use http\Client\Curl\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -17,6 +19,10 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Ramsey\Uuid\Nonstandard\Uuid;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use LaravelDaily\Invoices\Invoice;
+use LaravelDaily\Invoices\Classes\Party;
+use LaravelDaily\Invoices\Classes\InvoiceItem;
+
 
 class TransactionController extends Controller
 {
@@ -182,9 +188,99 @@ class TransactionController extends Controller
         }
     }
 
-    public function doInvoices()
+    public function doInvoices(Request $request)
     {
+        $dataQuery = json_decode(InvoicesHelper::decryptData($request->query('id'), \auth()->user()->id, true));
+        $user_client = \auth()->user();
+        $seller = \App\Models\User::query()->where('id', $dataQuery->seller_id)->first();
+        //getting serial number
+        $serialNoTransactions = Transaction::select('transactions.serial_no_transactions')
+            ->join('user_payments', 'user_payments.id', '=', 'transactions.user_payment_id')
+            ->join('purchases', 'purchases.transaction_id', '=', 'transactions.id')
+            ->join('products', 'products.id', '=', 'purchases.product_id')
+            ->where('transactions.user_id', $user_client->id)
+            ->where('products.seller_id', $dataQuery->seller_id)
+            ->where('products.id', $dataQuery->product_id)
+            ->first()->serial_no_transactions;
 
+
+        $client = new Party([
+            'name'          => $user_client->name,
+            'custom_fields' => [
+                'user id' => $user_client->id,
+                'email' => $user_client->email,
+            ],
+        ]);
+
+        $customer = new Party([
+            'name'          => $seller->name,
+            'custom_fields' => [
+                'user id' => $seller->id,
+                'email' => $seller->email,
+            ],
+        ]);
+
+        // logic getting products
+
+        $items = [
+        ];
+
+        $transactions = Transaction::select('products.*', 'transactions.created_at')
+            ->join('user_payments', 'user_payments.id', '=', 'transactions.user_payment_id')
+            ->join('purchases', 'purchases.transaction_id', '=', 'transactions.id')
+            ->join('products', 'products.id', '=', 'purchases.product_id')
+            ->where('transactions.user_id', $user_client->id)
+            ->where('user_payments.status', "PAID")
+            ->where('products.seller_id', $dataQuery->seller_id)
+            ->where('transactions.serial_no_transactions', $serialNoTransactions)
+            ->get();
+
+
+        foreach ($transactions as $transaction) {
+            $items[] =
+                InvoiceItem::make($transaction->title)
+                    ->pricePerUnit($transaction->price);
+        }
+//        dd($items);
+
+
+//        dd($transactions);
+
+        $notes = [
+            'Thank you for shopping at CreativeHub!',
+            'Your every purchase supports creators to continue creating and inspiring.',
+            'Enjoy your digital products, and feel free to contact our customer support team with any questions or assistance.',
+        ];
+        $notes = implode("<br>", $notes);
+
+        $invoice = Invoice::make('receipt')
+            ->series($serialNoTransactions)
+            // ability to include translated invoice status
+            // in case it was paid
+            ->status(__('invoices::invoice.paid'))
+            ->sequence($dataQuery->seller_id)
+            ->serialNumberFormat('{SEQUENCE}/{SERIES}')
+            ->seller($client)
+            ->buyer($customer)
+            ->date(Carbon::parse($transactions[0]->created_at))
+            ->dateFormat('m/d/Y')
+            ->payUntilDays(14)
+            ->currencySymbol('Rp ')
+            ->currencyCode('IDR')
+            ->currencyFormat('{SYMBOL}{VALUE}')
+            ->currencyThousandsSeparator('.')
+            ->currencyDecimalPoint(',')
+            ->filename($client->name . ' ' . $customer->name)
+            ->addItems($items)
+            ->notes($notes)
+            ->logo(public_path('vendor/invoices/logo-dark.png'))
+            // You can additionally save generated invoice to configured disk
+            ->save('public');
+
+        $link = $invoice->url();
+
+//        \response()->view('vendor.invoices.templates.default');
+        return $invoice->stream();
     }
 
 }

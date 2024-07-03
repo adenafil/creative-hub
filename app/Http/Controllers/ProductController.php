@@ -109,18 +109,20 @@ class ProductController extends Controller
 
         return redirect()->route('product.index', ['page' => Session::get('product_index_page')])->with('success', 'Product has been created');
     }
-    public function download(): \Symfony\Component\HttpFoundation\BinaryFileResponse
-    {
-//        return \response()->download(storage_path('/app/product/assets/' . "namanya"));
-        return BinaryFileResponse::HTTP_OK;
-    }
 
-    public function edit($id): Response
+    public function edit($id)
     {
-        $product = Product::query()->where("id", $id)->get(); // Mengambil data produk berdasarkan ID
+        $product = Product::query()->where("id", $id)
+            ->where("seller_id", \auth()->user()->id)
+            ->first(); // Mengambil data produk berdasarkan ID
 //        dd($product[0]);
         $categories = Category::pluck('name', 'id'); // Assuming 'name' is the column for category names
-        return \response()->view('admin.products.edit', ["product" => $product[0], 'categories' => $categories]);
+
+        if ($product == null) {
+            return \redirect()->route('product.index');
+        }
+
+        return \response()->view('admin.products.edit', ["product" => $product, 'categories' => $categories]);
     }
 
     public function doEdit(UpdateProductRequest $request, $id): RedirectResponse

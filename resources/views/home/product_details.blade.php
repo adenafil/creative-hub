@@ -302,7 +302,7 @@
                     <div class="flex items-center gap-[6px]">
                         <div class="w-6 h-6 flex shrink-0 items-center justify-center rounded-full overflow-hidden">
                             <img src="
-                            @if(isset(auth()->user()->user_detail->image_url))
+                            @if(isset($data->user->user_detail->image_url))
                                                                         {{
                         ImageHelper::isThisImage($data->user->user_detail->image_url)
                         ? $data->user->user_detail->image_url

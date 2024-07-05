@@ -6,7 +6,9 @@ use App\Helper\ImageHelper;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Response;
 
 class FileController extends Controller
@@ -15,15 +17,19 @@ class FileController extends Controller
     {
         try {
             $decoded = ImageHelper::decodePath($encoded);
+            Log::debug("decode " . $decoded);
             $path = storage_path("app/product/pictures/{$decoded}");
+            Log::debug("path " . $decoded);
 
             if (!File::exists($path)) {
+                Log::debug("file tidak ada " . $path);
                 return \response("File not found at path: $path", 404);
             }
 
             $file = File::get($path);
             $type = File::mimeType($path);
 
+            Log::debug("type $type");
             $response = Response::make($file, 200);
             $response->header("Content-Type", $type);
 

@@ -2,7 +2,7 @@
 
 namespace App\Helper;
 
-class InvoicesHelper
+class SecurityHelper
 {
     public static function encryptData($data, $key) {
         $method = 'AES-256-CBC';

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Helper\InvoicesHelper;
+use App\Helper\SecurityHelper;
 use App\Helper\PaginationHelper;
 use App\Http\Requests\ReviewRequest;
 use App\Models\Product;
@@ -195,7 +195,7 @@ class TransactionController extends Controller
 
     public function doInvoices(Request $request)
     {
-        $dataQuery = json_decode(InvoicesHelper::decryptData($request->query('id'), \auth()->user()->id, true));
+        $dataQuery = json_decode(SecurityHelper::decryptData($request->query('id'), \auth()->user()->id, true));
         $user_client = \auth()->user();
         $seller = \App\Models\User::query()->where('id', $dataQuery->seller_id)->first();
         //getting serial number

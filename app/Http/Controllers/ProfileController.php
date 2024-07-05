@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\PaymentMethod;
 use App\Models\User;
 use App\Models\UserDetail;
 use Illuminate\Http\RedirectResponse;
@@ -116,5 +117,11 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    public function deletePayamentMethod($id)
+    {
+        PaymentMethod::query()->where('user_id', \auth()->user()->id)->where('id', $id)->delete();
+        return response()->json(['success' =>   $id == true ]);
     }
 }

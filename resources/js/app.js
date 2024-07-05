@@ -1,5 +1,6 @@
 import './bootstrap';
-import './addCart.js';
+import './deleteCart.js';
+import './removePaymentMethod.js';
 import Alpine from 'alpinejs';
 
 

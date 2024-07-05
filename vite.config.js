@@ -13,7 +13,7 @@ export default defineConfig({
         }),
     ],
     server: {
-        host: '192.168.1.5',
+        host: '192.168.1.198',
         // https: false,
     },
 });

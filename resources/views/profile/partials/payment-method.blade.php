@@ -63,7 +63,8 @@
                             </h4>
                         </div>
 
-                        <a href="#" class="ms-4 text-xs font-bold bg-white py-2 px-4 rounded-md hover:bg-gray-800 hover:text-white transition-all ease-in duration-300">
+                        <a href="" data-id-payment-method="{{$payment_method->id}}" class="ms-4 text-xs font-bold bg-white py-2 px-4 rounded-md hover:bg-gray-800 hover:text-white transition-all ease-in duration-300">
+                            <meta name="csrf-token" content="{{ csrf_token() }}">
                             Remove
                         </a>
                     </div>

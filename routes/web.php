@@ -58,9 +58,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/cart/sucess', [HomeController::class, 'doCart'])->name('do.cart.index');
     Route::delete('/cart/delete/{id}', [HomeController::class, 'deleteOneCart'])->name('do.delete.cart');
 
-
-
-
 });
 
 
@@ -68,8 +65,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
-    Route::patch('/payment-method', [PaymentMethodController::class, 'update'])->name('profile.payment.method.update');
+    Route::delete('/profile/payment-method/delete/{id}', [ProfileController::class, 'deletePayamentMethod'])->name('profile.payment.method.delete');
+    Route::patch('/profile/payment-method/add', [PaymentMethodController::class, 'update'])->name('profile.payment.method.update');
 });
 
 

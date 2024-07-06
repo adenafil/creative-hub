@@ -366,7 +366,7 @@
         @endif
 
         <p>
-            {{ __('invoices::invoice.amount_in_words') }}: {{ $invoice->getTotalAmountInWords() }}
+            Amount in words: Two million three hundred forty-three thousand four hundred thirty-four IDR and zero ct.
         </p>
         <p>
 {{--            pay until--}}

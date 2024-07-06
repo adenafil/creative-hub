@@ -6,14 +6,6 @@
         </h2>
     </x-slot>
 
-{{--    @if($errors->any())--}}
-{{--        <div class="py-12 bg-amber-50">--}}
-{{--            <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">--}}
-{{--                hi {{$errors}}--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    @endif--}}
-
         <div class="py-12">
         <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg px-10 py-12">

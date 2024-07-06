@@ -50,7 +50,7 @@ class HomeController extends Controller
             return redirect()->route('home.product.detail', ['id' => $id]);
         }
         if (isset(auth()->user()->purchases->where('product_id', $id)->first()->product_id)) {
-            return redirect()->route('product.order.detail', ['id' => $id]);
+            return redirect()->route('home.product.detail', ['id' => $id]);
         }
 
         return \response()->view('home.checkout', compact('product'));

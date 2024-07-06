@@ -214,7 +214,6 @@ class TransactionController extends Controller
         $client = new Party([
             'name'          => $user_client->name,
             'custom_fields' => [
-                'user id' => $user_client->id,
                 'email' => $user_client->email,
             ],
         ]);
@@ -222,7 +221,6 @@ class TransactionController extends Controller
         $customer = new Party([
             'name'          => $seller->name,
             'custom_fields' => [
-                'user id' => $seller->id,
                 'email' => $seller->email,
             ],
         ]);

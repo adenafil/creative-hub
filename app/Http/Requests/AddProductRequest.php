@@ -22,8 +22,8 @@ class AddProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'cover' => 'required|file|mimes:jpeg,png,jpg',
-            'path_file' => 'required|file|mimes:zip',
+            'cover' => 'required|file|mimes:jpeg,png,jpg|max:1024',
+            'path_file' => 'required|file|mimes:zip|max:1024',
             'name' => 'required|string',
             'price' => 'required|numeric|min:0',
             'category_id' => 'required|string|in:ebook,font,icon,template,ui kit', // Ensure these match your category names

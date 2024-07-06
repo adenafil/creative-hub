@@ -1,3 +1,6 @@
+@php
+    use App\Helper\SecurityHelper;
+@endphp
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -142,8 +145,7 @@
                                        )->first()->status == "paid")
 
                                     {{-- Download Invoice Button --}}
-                                    <a href="{{ url()->route('download.invoices') }}?id={{\App\Helper\SecurityHelper::encryptData(json_encode($purchase), auth()->user()->id)}}"
-                                       class="flex h-fit">
+                                        <a href="{{ url()->route('download.invoices') }}?id={{ rawurlencode((SecurityHelper::encryptData($purchase, 1))) }}" class="flex h-fit">
                                         <button type="button"
                                                 class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-2.5 py-2.5">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"

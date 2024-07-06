@@ -15,6 +15,7 @@ use http\Client\Curl\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Ramsey\Uuid\Nonstandard\Uuid;
@@ -195,8 +196,9 @@ class TransactionController extends Controller
 
     public function doInvoices(Request $request)
     {
-        $dataQuery = json_decode(SecurityHelper::decryptData($request->query('id'), \auth()->user()->id, true));
+        $dataQuery = json_decode(SecurityHelper::decryptData($request->query('id'), 1));
         $user_client = \auth()->user();
+//        dd(SecurityHelper::decryptData($request->query('id'), 1));
         $seller = \App\Models\User::query()->where('id', $dataQuery->seller_id)->first();
         //getting serial number
         $serialNoTransactions = Transaction::select('transactions.serial_no_transactions')
@@ -259,7 +261,7 @@ class TransactionController extends Controller
         $notes = implode("<br>", $notes);
 
         $invoice = Invoice::make('receipt')
-            ->series($serialNoTransactions)
+            ->series($serialNoTransactions ?? Uuid::uuid5(Uuid::NAMESPACE_DNS, time())->toString())
             // ability to include translated invoice status
             // in case it was paid
             ->status(__('invoices::invoice.paid'))

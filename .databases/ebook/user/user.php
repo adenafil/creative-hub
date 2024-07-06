@@ -61,7 +61,7 @@ for ($i = 0; $i < count($data); $i++) {
         $data[$i]['penjual'],
         $username,
         $email,
-        $username,
+        password_hash($username, PASSWORD_BCRYPT),
     ]);
 
     }

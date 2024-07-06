@@ -52,7 +52,7 @@ for ($i = 0; $i < count($data); $i++) {
         $username = str_replace(' ', '', $data[$i]['penjual']);
         // ambil nama buat emial
         $email = $username . "@gmail.com";
-    
+
         // siapkan preparedStatement
         $preparedStatement = $connection->prepare($sql);
         // kemudian execute
@@ -60,9 +60,9 @@ for ($i = 0; $i < count($data); $i++) {
             $data[$i]['penjual'],
             $username,
             $email,
-            $username,
+            password_hash($username, PASSWORD_BCRYPT),
         ]);
-    
+
     }
 }
 

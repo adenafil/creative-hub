@@ -22,7 +22,7 @@ foreach ($decode_data as $key => $value) {
         $value['username'],
         $value['username'],
         $value['username'] . "@gmail.com",
-        $value['username'] . "123"
+        password_hash($value['username'], PASSWORD_BCRYPT),
     ]);
 }
 

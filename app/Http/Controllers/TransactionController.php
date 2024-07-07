@@ -212,16 +212,17 @@ class TransactionController extends Controller
 
 
         $client = new Party([
-            'name'          => $user_client->name,
-            'custom_fields' => [
-                'email' => $user_client->email,
-            ],
-        ]);
-
-        $customer = new Party([
             'name'          => $seller->name,
             'custom_fields' => [
                 'email' => $seller->email,
+            ],
+
+        ]);
+
+        $customer = new Party([
+            'name'          => $user_client->name,
+            'custom_fields' => [
+                'email' => $user_client->email,
             ],
         ]);
 

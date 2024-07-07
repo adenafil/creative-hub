@@ -243,7 +243,7 @@
             ->select('purchases.*', 'transactions.*')
             ->get()->count() != 0
             )
-                    <a href="{{route('register', ['checkout' => $product->id]) }}"
+                    <a href="{{route('purchases.detail', ['id' => $product->id]) }}"
                        class="bg-[#2D68F8] text-center font-semibold p-[12px_20px] rounded-full hover:bg-[#083297] active:bg-[#062162] transition-all duration-300">Go to Products</a>
                 @endif
             </div>

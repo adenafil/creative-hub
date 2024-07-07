@@ -5,12 +5,10 @@ require_once __DIR__ . '../../helper/getAllUsername.php';
 
 $username = getUsername();
 
-// ambil data json
+// Ambil data json
 $json = file_get_contents(__DIR__ . "../../data/number_bank.json");
-// di decode dan juga menggunakna associative array
+// Decode dan gunakan associative array
 $data = json_decode($json, true);
-
-// var_dump($data[0]);
 
 $banks = [
     'dana',
@@ -21,8 +19,24 @@ $banks = [
     'mandiri',
     'bni',
     'bca',
+    'BTC',
+    'SIDOLAR',
+    'SIDOMPUL',
+    'SIMANTAP',
+    'X-Ray',
+    'SingBox',
+    'Meta',
+    'Hansen'
 ];
 
+$random = [
+    123,
+    456,
+    923,
+    232,
+    231,
+    111,
+];
 
 $sql = "
     insert into payment_methods(payment_account_recipient_name, payment_account_name, payment_account_number, user_id)
@@ -30,11 +44,21 @@ $sql = "
 ";
 
 foreach ($username as $key => $one) {
-    // var_dump($data[$key]['payment_account_number']);
-    $connection = getConnection();
-    $preparedStatement = $connection->prepare($sql);
-    $preparedStatement->execute([
-        $one[1], $banks[rand(0, 7)], $data[$key]['payment_account_number'], $one[0]
-    ]);
+    try {
+        $connection = getConnection();
+        $preparedStatement = $connection->prepare($sql);
+        $preparedStatement->execute([
+            $one[1],
+            $banks[rand(0, count($banks) - 1)],
+            $data[$key]['payment_account_number'] . $random[rand(0, count($random) - 1)],
+            $one[0]
+        ]);
+        // Tutup koneksi setiap kali setelah digunakan
+        $preparedStatement = null;
+        $connection = null;
+    } catch (PDOException $e) {
+        // Jika terjadi error, tangkap dan tampilkan pesan error
+        echo "Error: " . $e->getMessage();
+    }
 }
-
+?>

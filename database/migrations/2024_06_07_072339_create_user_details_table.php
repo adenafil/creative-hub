@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('bio')->nullable(true);
             $table->string('title')->nullable(true);
             $table->string('image_url')->nullable(true);
+            $table->string("status_user")->nullable(true)->default("regular");
             $table->timestamps();
             $table->foreign('user_id')->on('users')->references('id');
         });

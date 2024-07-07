@@ -4,7 +4,7 @@ function getConnection(): PDO
 {
     $host = "localhost";
     $port = 3306;
-    $database = "creative_hub";
+    $database = "creativehub";
     $username = "root";
     $password = "";
 

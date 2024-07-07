@@ -96,6 +96,7 @@
                 </table>
             </div>
 
+
             <div class="flex justify-center items-center gap-y-2 flex-col mt-10">
 
                 <span class="text-sm text-gray-700 dark:text-gray-400">Showing <span class="font-semibold text-gray-900 dark:text-white">{{$firstItem}}</span> to <span class="font-semibold text-gray-900 dark:text-white">{{$lastItem}}</span> of <span class="font-semibold text-gray-900 dark:text-white">{{$totalData}}</span> Entries</span>
@@ -105,7 +106,7 @@
                         {{-- Previous Page Link --}}
                         @if ($currentPage > 1)
                             <li>
-                                <a href="{{ url()->current() }}?page={{ $currentPage - 1 }}" class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</a>
+                                <a href="{{ url()->current() }}?page={{ $currentPage - 1 }}" class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">&laquo;</a>
                             </li>
                         @endif
 
@@ -127,7 +128,7 @@
                         {{-- Next Page Link --}}
                         @if ($currentPage < $totalPages)
                             <li>
-                                <a href="{{ url()->current() }}?page={{ $currentPage + 1 }}" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</a>
+                                <a href="{{ url()->current() }}?page={{ $currentPage + 1 }}" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">&raquo;</a>
                             </li>
                         @endif
                     </ul>

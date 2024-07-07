@@ -4,7 +4,7 @@
         @if ($currentPage > 1)
             <li>
                 <a href="{{ url()->current() }}?category={{request()->query('category')}}&page={{ $currentPage - 1 }}"
-                   class="flex items-center justify-center px-3 h-8 ms-0 leading-tight border border-e-0 rounded-s-lg bg-[#1B1B1B] border-gray-700 text-gray-400 hover:bg-gray-700 hover:text-white">Previous</a>
+                   class="flex items-center justify-center px-3 h-8 ms-0 leading-tight border border-e-0 rounded-s-lg bg-[#1B1B1B] border-gray-700 text-gray-400 hover:bg-gray-700 hover:text-white">&laquo;</a>
             </li>
         @endif
 
@@ -30,7 +30,7 @@
         @if ($currentPage < $totalPages)
             <li>
                 <a href="{{url()->current() }}?category={{request()->query('category')}}&page={{ $currentPage + 1 }}"
-                   class="flex items-center justify-center px-3 h-8 leading-tight border rounded-e-lg bg-[#1B1B1B] border-gray-700 text-gray-400 hover:bg-gray-700 hover:text-white">Next</a>
+                   class="flex items-center justify-center px-3 h-8 leading-tight border rounded-e-lg bg-[#1B1B1B] border-gray-700 text-gray-400 hover:bg-gray-700 hover:text-white">&raquo;</a>
             </li>
         @endif
     </ul>

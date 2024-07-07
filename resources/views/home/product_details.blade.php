@@ -53,9 +53,17 @@
         color: rgb(79 70 229 / var(--tw-text-opacity));
     }
 
+    #product-description {
+        overflow-wrap: anywhere;
+    }
     #product-description li{
         list-style: circle;
     }
+
+    #product-description img{
+        border-radius: 8px;
+    }
+
 </style>
 
 <body class="bg-creativehub-black font-poppins text-white">
@@ -99,11 +107,11 @@
         </div>
     </div>
 
-    <div class="flex gap-8 bg-creativehub-dark-footer py-8 px-16 mt-10 rounded-[20px]">
+    <div class="flex gap-8 bg-creativehub-dark-footer py-8 px-4 sm:px-16 mt-10 rounded-[20px]">
         <div class="flex flex-col">
             <h1 class="font-semibold text-[16px] md:text-xl lg:text-xl">Descrtiption</h1>
             <p class="text-creativehub-grey text-sm md:text-lg lg:text-lg leading-relaxed">
-                <div id="product-description" class="text-creativehub-grey text-sm md:text-lg lg:text-lg leading-relaxed mt-6 mb-8">
+                <div id="product-description" class="text-creativehub-grey text-sm md:text-lg lg:text-lg leading-relaxed mt-6 mb-8 px-2">
                     {!! $product->description !!}
                 </div>
             </p>

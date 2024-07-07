@@ -6,7 +6,7 @@ class PaginationHelper
 {
     public static function paginationWindow($currentPage, $totalPages)
     {
-        $onEachSide = 3; // Number of links on each side of the current page
+        $onEachSide = 2; // Number of links on each side of the current page
         $window = [];
 
         // Previous and next ranges

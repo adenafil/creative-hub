@@ -40,7 +40,7 @@
                     </div>
 
                     <div class="price-and-status flex gap-4 items-center">
-                        <p class="dark:text-white text-2xl">Rp{{number_format($product->price, 0, ',', '.')}}</p>
+                        <p class="dark:text-white text-2xl">Rp {{number_format($product->price, 0, ',', '.')}}</p>
                         <div class="status-order">
                             @if($product->status == 'pending')
                                 {{-- Pending Status --}}

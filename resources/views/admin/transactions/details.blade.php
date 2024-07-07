@@ -51,7 +51,7 @@
 
 
                     <div class="price-and-status flex gap-4 items-center">
-                        <p class="dark:text-white text-2xl">Rp. {{$purchase_detail->price}}</p>
+                        <p class="dark:text-white text-2xl">Rp {{number_format($purchase_detail->price, 0, ',', '.') }}</p>
                         <div class="status-order">
 
                             @if($purchase_detail->status == 'pending')

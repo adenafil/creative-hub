@@ -82,7 +82,7 @@
                             </td>
                             <td class="text-center">{{ $product->title }}</td>
                             <td class="text-center">{{strtoupper($product->category->name)}}</td>
-                            <td class="text-center">Rp. {{ number_format($product->price, 0, ',', '.') }}</td>
+                            <td class="text-center">Rp {{ number_format($product->price, 0, ',', '.') }}</td>
                             <td class="">
                                 <div class="btn-group flex items-center gap-2 justify-center">
                                     <a href="{{route('product.edit', $product->id)}}" class="flex h-fit">

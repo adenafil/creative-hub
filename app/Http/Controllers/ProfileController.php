@@ -121,7 +121,12 @@ class ProfileController extends Controller
 
     public function deletePayamentMethod($id)
     {
-        PaymentMethod::query()->where('user_id', \auth()->user()->id)->where('id', $id)->delete();
-        return response()->json(['success' =>   $id == true ]);
+        if (PaymentMethod::query()->where('user_id', \auth()->user()->id)->count() == 1) {
+            return response()->json(['success' => false, 'message' => 'Failed to delete payment method.'], 400);
+        } else {
+            PaymentMethod::query()->where('user_id', \auth()->user()->id)->where('id', $id)->delete();
+            return response()->json(['success' => true, 'message' => 'Payment method deleted successfully.']);
+        }
+
     }
 }

@@ -30,6 +30,7 @@ class Purchase extends Model
             ->join('products', 'products.id', '=', 'purchases.product_id')
             ->join('categories', 'products.category_id', '=', 'categories.id')
             ->join('user_payments', 't.user_payment_id', '=', 'user_payments.id')
+            ->latest('user_payments.updated_at')
             ->select('purchases.*', 't.*', 'products.*', 'categories.name', 'user_payments.*')
             ;
     }

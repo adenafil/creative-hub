@@ -87,6 +87,8 @@ class HomeServiceImpl implements HomeService
 
     function checkout($data, $id)
     {
+        DB::beginTransaction();
+
         # check transaction already exist or not
         $user_transaction = Transaction::query()->where('user_id', auth()->user()->id)
             ->where('transactions.user_id', '=', auth()->user()->id)
@@ -94,9 +96,8 @@ class HomeServiceImpl implements HomeService
             ->join('purchases', 'purchases.transaction_id', '=', 'transactions.id')
             ->select('purchases.*', 'transactions.*')
             ->get();
-        ;
 
-        DB::beginTransaction();
+
 
         $userPayment = new UserPayment();
 
@@ -107,7 +108,7 @@ class HomeServiceImpl implements HomeService
             ->where('payment_account_recipient_name', $data['name'])
             ->first();
 
-        if ($data['proof'] != null) {
+        if ($data['proof'] != null && is_null($user_transaction->first())) {
             $proofFile = $data['proof'];
 
             $proofName = Uuid::uuid5(Uuid::NAMESPACE_DNS, time() . "proof_") . '.' . $proofFile->getClientOriginalExtension();
@@ -140,9 +141,9 @@ class HomeServiceImpl implements HomeService
             }
 
             DB::commit();
+            return true;
 
         }
-
-        return true;
+        return false;
     }
 }

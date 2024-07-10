@@ -26,7 +26,6 @@ class ProductOrderController extends Controller
                 ->where('products.title', 'like', "%{$search}%")
                 ->select('products.image_product_url', 'products.title', 'categories.name', 'products.price', 'user_payments.status', 'products.id')
                 ->paginate(4);
-            ;
         } else {
             $data = UserPayment::query()
                 ->join('transactions', 'transactions.user_payment_id', '=', 'user_payments.id')
@@ -34,6 +33,7 @@ class ProductOrderController extends Controller
                 ->join('products', 'products.id', '=', 'purchases.product_id')
                 ->join('categories', 'products.category_id', '=', 'categories.id')
                 ->where('products.seller_id', '=', auth()->user()->id)
+                ->latest('user_payments.updated_at')
                 ->select('products.image_product_url', 'products.title', 'categories.name', 'products.price', 'user_payments.status', 'user_payments.id as id_up', 'products.id', 'products.description', 'user_payments.payment_proof_url')
                 ->paginate(4);
             ;

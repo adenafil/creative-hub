@@ -8,14 +8,13 @@ use App\Models\Transaction;
 use App\Models\UserPayment;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use PHPUnit\Framework\Attributes\Test;
 use Ramsey\Uuid\Nonstandard\Uuid;
 use Tests\TestCase;
 
 class TestSoalNoTiga extends TestCase
 {
-    /**
-     * A basic feature test example.
-     */
+    #[Test]
     public function testRunning(): void
     {
 

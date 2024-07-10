@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'App\\Helper\\ImageHelper' => $baseDir . '/app/Helper/ImageHelper.php',
     'App\\Helper\\PaginationHelper' => $baseDir . '/app/Helper/PaginationHelper.php',
+    'App\\Helper\\SecurityHelper' => $baseDir . '/app/Helper/SecurityHelper.php',
     'App\\Http\\Controllers\\AdminController' => $baseDir . '/app/Http/Controllers/AdminController.php',
     'App\\Http\\Controllers\\Auth\\AuthenticatedSessionController' => $baseDir . '/app/Http/Controllers/Auth/AuthenticatedSessionController.php',
     'App\\Http\\Controllers\\Auth\\ConfirmablePasswordController' => $baseDir . '/app/Http/Controllers/Auth/ConfirmablePasswordController.php',
@@ -6129,6 +6130,7 @@ return array(
     'Tests\\Feature\\TestCartTable' => $baseDir . '/tests/Feature/TestCartTable.php',
     'Tests\\Feature\\TestImage' => $baseDir . '/tests/Feature/TestImage.php',
     'Tests\\Feature\\TestReview' => $baseDir . '/tests/Feature/TestReview.php',
+    'Tests\\Feature\\TestSoalNoTiga' => $baseDir . '/tests/Feature/TestSoalNoTiga.php',
     'Tests\\Feature\\UserDetailTest' => $baseDir . '/tests/Feature/UserDetailTest.php',
     'Tests\\Feature\\UserTest' => $baseDir . '/tests/Feature/UserTest.php',
     'Tests\\TestCase' => $baseDir . '/tests/TestCase.php',

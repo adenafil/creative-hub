@@ -556,6 +556,7 @@ class ComposerStaticInit7e8c3c14ff33b199b4a0838993eb8423
     public static $classMap = array (
         'App\\Helper\\ImageHelper' => __DIR__ . '/../..' . '/app/Helper/ImageHelper.php',
         'App\\Helper\\PaginationHelper' => __DIR__ . '/../..' . '/app/Helper/PaginationHelper.php',
+        'App\\Helper\\SecurityHelper' => __DIR__ . '/../..' . '/app/Helper/SecurityHelper.php',
         'App\\Http\\Controllers\\AdminController' => __DIR__ . '/../..' . '/app/Http/Controllers/AdminController.php',
         'App\\Http\\Controllers\\Auth\\AuthenticatedSessionController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/AuthenticatedSessionController.php',
         'App\\Http\\Controllers\\Auth\\ConfirmablePasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ConfirmablePasswordController.php',
@@ -6677,6 +6678,7 @@ class ComposerStaticInit7e8c3c14ff33b199b4a0838993eb8423
         'Tests\\Feature\\TestCartTable' => __DIR__ . '/../..' . '/tests/Feature/TestCartTable.php',
         'Tests\\Feature\\TestImage' => __DIR__ . '/../..' . '/tests/Feature/TestImage.php',
         'Tests\\Feature\\TestReview' => __DIR__ . '/../..' . '/tests/Feature/TestReview.php',
+        'Tests\\Feature\\TestSoalNoTiga' => __DIR__ . '/../..' . '/tests/Feature/TestSoalNoTiga.php',
         'Tests\\Feature\\UserDetailTest' => __DIR__ . '/../..' . '/tests/Feature/UserDetailTest.php',
         'Tests\\Feature\\UserTest' => __DIR__ . '/../..' . '/tests/Feature/UserTest.php',
         'Tests\\TestCase' => __DIR__ . '/../..' . '/tests/TestCase.php',

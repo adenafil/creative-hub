@@ -12,22 +12,22 @@
                     <h2 class="mb-6 text-sm font-semibold uppercase text-white">Browse</h2>
                     <ul class="text-gray-500 dark:text-gray-400 font-normal">
                         <li class="mb-2">
-                            <a href="" class="hover:underline">All Products</a>
+                            <a href="{{route('home')}}" class="hover:underline">All Products</a>
                         </li>
                         <li class="mb-2">
-                            <a href="" class="hover:underline">Templates</a>
+                            <a href="{{route('home', ['category' => 4])}}" class="hover:underline">Templates</a>
                         </li>
                         <li class="mb-2">
-                            <a href="" class="hover:underline">E-Books</a>
+                            <a href="{{route('home', ['category' => 1])}}" class="hover:underline">E-Books</a>
                         </li>
                         <li class="mb-2">
-                            <a href="" class="hover:underline">Icons</a>
+                            <a href="{{route('home', ['category' => 3])}}" class="hover:underline">Icons</a>
                         </li>
                         <li class="mb-2">
-                            <a href="" class="hover:underline">Fonts</a>
+                            <a href="{{route('home', ['category' => 2])}}" class="hover:underline">Fonts</a>
                         </li>
                         <li class="mb-2">
-                            <a href="" class="hover:underline">UI Kits</a>
+                            <a href="{{route('home', ['category' => 5])}}" class="hover:underline">UI Kits</a>
                         </li>
                     </ul>
                 </div>

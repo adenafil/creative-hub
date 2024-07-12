@@ -51,7 +51,7 @@ class ProductServiceImpl implements ProductService
 
     function getProductByUser(int $userId)
     {
-        return Product::where('seller_id', $userId)->paginate(4);
+        return Product::where('seller_id', $userId)->latest('products.created_at')->paginate(4);
     }
 
     public function updateProduct(array $data, $id): bool

@@ -188,6 +188,9 @@ class TransactionController extends Controller
     {
         $product = Product::query()->where('id', $request->input('id'))->first();
         if (isset(\auth()->user()->purchases->where('product_id', $request->query('id'))->first()->product_id)) {
+            if ($product->asset_product_url == "https://drive.google.com/uc?export=download&id=1u7MKeRda7Zk4VotZKnF0dqvQtSLIMPW0") {
+                return redirect()->away("https://drive.google.com/uc?export=download&id=1u7MKeRda7Zk4VotZKnF0dqvQtSLIMPW0");
+            }
             return \response()->download(storage_path("/app/product/assets/" . "$product->asset_product_url"));
         } else {
             return redirect()->route('home.product.detail', ['id' => $request->query('id')]);

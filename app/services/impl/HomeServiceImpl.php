@@ -68,7 +68,11 @@ class HomeServiceImpl implements HomeService
         $category_name = ucwords($category_data->name ?? null);
 
         if (request()->query('search') != null) {
-            $category_name = "Searching For " . request()->query('search');
+            if ($totalProducts == 0) {
+                $category_name = "Product Not Found";
+            } else {
+                $category_name = "Searching For " . request()->query('search');
+            }
         }
 
 

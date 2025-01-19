@@ -88,7 +88,11 @@
     <!-- Pagination -->
     <section id="NewProduct" class="container max-w-[1200px] px-4 mx-auto mb-[102px] flex flex-col gap-8">
         @if(request()->query('search') !=null )
-            <h2 class="font-semibold text-[32px]">{{ucwords($category_name)}} </h2>
+            @if($category_name == "Product Not Found")
+                <h2 class="font-semibold text-[32px] text-center">{{ucwords($category_name)}} </h2>
+            @else
+                <h2 class="font-semibold text-[32px]">{{ucwords($category_name)}} </h2>
+            @endif
         @elseif($category_name != null)
             <h2 class="font-semibold text-[32px]">{{ucwords($category_name) . " Categories"}} </h2>
         @else

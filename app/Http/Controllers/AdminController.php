@@ -42,6 +42,7 @@ class AdminController extends Controller
             ->get();
 
 
+            // ade
 
         return \response()->view('admin.dashboard', compact('total_product', 'total_order', 'total_revenue', 'total_customer', 'top_products'));
     }
